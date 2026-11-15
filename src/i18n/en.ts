@@ -147,6 +147,19 @@ export const en = {
       'Female teachers for sisters and girls',
     ],
     cta: 'Meet a teacher in a free trial',
+    profiles: {
+      title: 'Meet some of our teachers',
+      lead: 'Every student is matched with a teacher who suits their age, level and goals.',
+      male: 'Male teachers',
+      female: 'Female teachers',
+      femaleNote: 'For sisters and girls',
+      example: 'Example profile',
+      teaches: 'Teaches',
+      languages: 'Languages',
+      experience: (years: string) => `${years} years of teaching`,
+      languageNames: { bn: 'Bangla', en: 'English', ar: 'Arabic' } as Record<string, string>,
+      separator: ', ',
+    },
   },
 
   how: {

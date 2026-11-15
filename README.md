@@ -2,10 +2,26 @@
 
 The website of Darul Arqam, an online Quran academy: live one-on-one classes for families in the United States, taught by imams and huffaz from Bangladesh.
 
-It is a static site built with [Astro](https://astro.build). There is no server and no database; a build produces plain HTML, CSS and a little JavaScript.
+It is a static site: plain HTML, CSS and a little JavaScript, with no server and no database.
 
 - English lives at `/`, Bangla at `/bn/`.
-- Sections: introduction, the story of the name, programs, who we teach, teachers, how it works, tuition, questions, and the free-trial request form.
+- Sections: introduction, the story of the name, programs, who we teach, teachers and their profiles, how it works, tuition, questions, and the free-trial request form.
+
+## The HTML files
+
+The finished site is in the [`html/`](html) folder, ready to use as it is:
+
+| File | What it is |
+| --- | --- |
+| `html/index.html` | The English page |
+| `html/bn/index.html` | The Bangla page |
+| `html/404.html` | The "page not found" page |
+| `html/assets/style.css` | The stylesheet |
+| `html/assets/*.woff2` | The fonts |
+
+Double-click `html/index.html` to view the site in a browser, or upload everything inside `html/` to a web host. The pages use relative links, so they work from disk, from the root of a domain, or from any sub-folder.
+
+The files in `html/` are generated from the sources in `src/` with [Astro](https://astro.build). Change the sources and build again, rather than editing the generated files, or the next build will overwrite your edits.
 
 ## Run it
 
@@ -19,19 +35,18 @@ npm install
 npm run dev
 ```
 
-The site opens at <http://localhost:4321>. To produce the files for hosting:
+The site opens at <http://localhost:4321> and updates as you edit. To regenerate the HTML files:
 
 ```bash
 npm run build
 ```
-
-The finished site is written to `dist/`.
 
 ## Where things are
 
 | To change | Edit |
 | --- | --- |
 | Contact details, form destination, tuition prices, site address | `src/config/site.ts` |
+| Teacher profiles | `src/config/teachers.ts` |
 | English wording | `src/i18n/en.ts` |
 | Bangla wording | `src/i18n/bn.ts` |
 | Arabic texts (hadith, ayat, program emblems) | `src/i18n/index.ts` |
@@ -48,6 +63,8 @@ The two language files have the same shape. When you add or reword something in 
 - **`plans`** holds placeholder prices (40, 55 and 85 US dollars a month).
 - **`url`** is empty. Set it to the public address of the site so that canonical links, language alternates and the social-sharing image are written into the pages.
 - **`formEndpoint`** is empty. See the next section.
+
+`src/config/teachers.ts` holds the teacher profiles. **All six are invented examples**, there to show the layout, and each card carries an "Example profile" tag. Replace them with your real teachers; the file explains how, including how to add a photo. Delete every entry to hide the profiles altogether.
 
 The wording also states a few things about how the academy works. Check that each is true, and reword it in both language files if not:
 
@@ -72,9 +89,9 @@ A hidden field catches most automated spam. If you use a form service, turn on i
 
 ## Hosting
 
-Upload the contents of `dist/` to any host that serves static files: Netlify, Cloudflare Pages, Vercel, GitHub Pages, an S3 bucket, or a folder under IIS, nginx or Apache. Point the host's "not found" page at `404.html`.
+Upload the contents of `html/` to any host that serves static files: a folder under IIS, nginx or Apache, or Netlify, Cloudflare Pages, Vercel, GitHub Pages or an S3 bucket. On a host that builds the site for you, set the output folder to `html`.
 
-If the site is served from a sub-folder rather than the root of a domain, set `base` in `astro.config.mjs` to that folder.
+Point the host's "not found" page at `404.html`. That one page uses links from the root of the domain, because a server may show it for an address at any depth; if the site lives in a sub-folder, set `base` in `astro.config.mjs` to that folder and build again.
 
 ## Design notes
 

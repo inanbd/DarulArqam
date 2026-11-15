@@ -1,5 +1,6 @@
 ---
 import Star from './Star.astro';
+import TeacherProfiles from './TeacherProfiles.astro';
 import { getDict, type Lang } from '../i18n';
 
 interface Props {
@@ -37,6 +38,8 @@ const t = getDict(lang);
       </ul>
     </aside>
   </div>
+
+  <TeacherProfiles lang={lang} />
 </section>
 
 <style>
