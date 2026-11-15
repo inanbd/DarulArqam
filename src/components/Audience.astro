@@ -1,0 +1,114 @@
+---
+import Star from './Star.astro';
+import { getDict, type Lang } from '../i18n';
+import { counter } from '../lib/format';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section class="section section--dark audience" id="learners">
+  <div class="pattern pattern--fade-up"></div>
+  <div class="container">
+    <header class="heading heading--center" data-reveal>
+      <p class="eyebrow">{t.audience.eyebrow}</p>
+      <h2 class="title">{t.audience.title}</h2>
+    </header>
+
+    <ul class="audience__grid">
+      {
+        t.audience.items.map((item, index) => (
+          <li class="niche" data-reveal style={`--reveal-order: ${index}`}>
+            <span class="niche__crest">
+              <Star size={30} variant="double" />
+            </span>
+            <span class="niche__number">{counter(index, lang)}</span>
+            <h3 class="niche__title">{item.title}</h3>
+            <p class="niche__text">{item.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .audience {
+    isolation: isolate;
+    background: linear-gradient(180deg, var(--emerald-900), var(--emerald-950));
+  }
+
+  .audience .pattern {
+    z-index: -1;
+    --pattern-opacity: 0.1;
+  }
+
+  .audience .title {
+    color: #fffdf6;
+  }
+
+  .audience__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    margin-top: clamp(3rem, 6vw, 4.75rem);
+  }
+
+  /* Each card is a niche: a rounded arch with a second gold line set inside it. */
+  .niche {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4.75rem clamp(1.5rem, 2.6vw, 2.4rem) 2.75rem;
+    border: 1px solid rgba(216, 187, 126, 0.55);
+    border-radius: 14rem 14rem 1rem 1rem;
+    background: linear-gradient(180deg, rgba(29, 109, 85, 0.5) 0%, rgba(13, 65, 50, 0.35) 100%);
+    text-align: center;
+  }
+
+  .niche::before {
+    content: '';
+    position: absolute;
+    inset: 0.6rem;
+    border: 1px solid rgba(216, 187, 126, 0.22);
+    border-radius: 13.4rem 13.4rem 0.6rem 0.6rem;
+    pointer-events: none;
+  }
+
+  .niche__crest {
+    color: var(--gold-400);
+  }
+
+  .niche__number {
+    margin-top: 1.2rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--gold-400);
+  }
+
+  .niche__title {
+    margin-top: 0.3rem;
+    font-size: calc(2.2rem * var(--display-scale));
+    color: #fffdf6;
+  }
+
+  .niche__text {
+    margin-top: 0.9rem;
+    color: var(--on-dark-soft);
+  }
+
+  @media (max-width: 56rem) {
+    .audience__grid {
+      grid-template-columns: 1fr;
+      max-width: 26rem;
+      margin-inline: auto;
+    }
+  }
+</style>

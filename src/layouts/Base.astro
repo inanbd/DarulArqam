@@ -1,0 +1,105 @@
+---
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource-variable/jost/wght.css';
+import '@fontsource/amiri/400.css';
+import '@fontsource/amiri/700.css';
+import '@fontsource/hind-siliguri/400.css';
+import '@fontsource/hind-siliguri/500.css';
+import '@fontsource/hind-siliguri/600.css';
+import '@fontsource-variable/noto-serif-bengali/wght.css';
+import '../styles/global.css';
+
+import { site } from '../config/site';
+import { getDict, type Lang } from '../i18n';
+import { href } from '../lib/format';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Pages that should stay out of search results (the 404 page). */
+  noindex?: boolean;
+}
+
+const { lang, noindex = false } = Astro.props;
+const t = getDict(lang);
+const title = Astro.props.title ?? t.meta.title;
+const description = Astro.props.description ?? t.meta.description;
+
+const absolute = (path: string) => `${site.url}${href(path)}`;
+const hasUrl = site.url.length > 0;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: site.name,
+  alternateName: [site.nameBn, site.nameAr],
+  description: t.meta.description,
+  areaServed: 'US',
+  ...(hasUrl ? { url: absolute(t.path), logo: absolute('/favicon.svg') } : {}),
+};
+---
+
+<!doctype html>
+<html lang={lang} class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#083025" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href={href('/favicon.svg')} />
+
+    {
+      hasUrl && !noindex && (
+        <>
+          <link rel="canonical" href={absolute(t.path)} />
+          <link rel="alternate" hreflang="en" href={absolute('/')} />
+          <link rel="alternate" hreflang="bn" href={absolute('/bn/')} />
+          <link rel="alternate" hreflang="x-default" href={absolute('/')} />
+          <meta property="og:url" content={absolute(t.path)} />
+          <meta property="og:image" content={absolute('/og.png')} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </>
+      )
+    }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang === 'bn' ? 'bn_BD' : 'en_US'} />
+
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+    <script is:inline>
+      document.documentElement.classList.replace('no-js', 'js');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.nav.skip}</a>
+    <slot />
+
+    <script>
+      // Reveal sections as they scroll into view.
+      const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+        );
+        items.forEach((item) => observer.observe(item));
+      } else {
+        items.forEach((item) => item.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

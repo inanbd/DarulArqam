@@ -1,0 +1,282 @@
+---
+import Star from './Star.astro';
+import { site } from '../config/site';
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section class="section tuition" id="tuition">
+  <div class="container">
+    <header class="heading heading--center" data-reveal>
+      <p class="eyebrow">{t.tuition.eyebrow}</p>
+      <h2 class="title">{t.tuition.title}</h2>
+      <p class="lead">{t.tuition.lead}</p>
+    </header>
+
+    <ul class="plans">
+      {
+        site.plans.map((plan, index) => {
+          const copy = t.tuition.plans[plan.id];
+          return (
+            <li class:list={['plan', { 'plan--featured': plan.featured }]} data-reveal style={`--reveal-order: ${index}`}>
+              {plan.featured && <span class="plan__flag">{t.tuition.featured}</span>}
+              <h3 class="plan__name">{copy.name}</h3>
+              <p class="plan__frequency">{t.tuition.perWeek(num(plan.classesPerWeek, lang))}</p>
+              <p class="plan__price">
+                <span class="plan__amount">
+                  <span class="plan__currency">$</span>
+                  {num(plan.monthlyUsd, lang)}
+                </span>
+                <span class="plan__period">{t.tuition.perMonth}</span>
+              </p>
+              <p class="plan__text">{copy.text}</p>
+              <p class="plan__count">{t.tuition.perMonthClasses(num(plan.classesPerMonth, lang))}</p>
+              <a class:list={['btn', 'btn--block', plan.featured ? 'btn--gold' : 'btn--outline']} href="#trial">
+                {t.tuition.choose}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class="included" data-reveal>
+      <h3 class="included__title">{t.tuition.includedTitle}</h3>
+      <ul class="included__list">
+        {
+          t.tuition.included.map((item) => (
+            <li>
+              <Star size={12} class="included__star" />
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="included__note">{t.tuition.note}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    margin-top: clamp(3rem, 6vw, 4.75rem);
+  }
+
+  .plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(2rem, 3.2vw, 2.75rem) clamp(1.5rem, 2.6vw, 2.25rem);
+    background: #fffdf8;
+    border: 1px solid var(--sand);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .plan--featured {
+    background: linear-gradient(180deg, var(--emerald-800), var(--emerald-950));
+    border-color: var(--gold-500);
+    color: var(--on-dark);
+    box-shadow: 0 34px 60px -34px rgba(5, 33, 26, 0.75);
+  }
+
+  .plan__flag {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.35rem 1.1rem;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #dfc58c, #c39d55);
+    color: var(--emerald-950);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  :global(html[lang='bn']) .plan__flag {
+    font-size: 0.88rem;
+    letter-spacing: 0.01em;
+  }
+
+  .plan__name {
+    font-size: calc(2.1rem * var(--display-scale));
+    color: var(--emerald-800);
+  }
+
+  .plan--featured .plan__name {
+    color: #fffdf6;
+  }
+
+  .plan__frequency {
+    margin-top: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-ink);
+  }
+
+  .plan--featured .plan__frequency {
+    color: var(--gold-400);
+  }
+
+  :global(html[lang='bn']) .plan__frequency {
+    font-size: 0.98rem;
+    letter-spacing: 0.01em;
+  }
+
+  .plan__price {
+    display: grid;
+    justify-items: center;
+    margin-top: 1.5rem;
+    padding-block: 1.4rem;
+    border-block: 1px solid var(--sand);
+  }
+
+  .plan--featured .plan__price {
+    border-color: rgba(216, 187, 126, 0.25);
+  }
+
+  .plan__amount {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.15rem;
+    font-family: var(--font-display);
+    font-size: calc(4.4rem * (var(--display-scale) + 0.08));
+    font-weight: 500;
+    line-height: 1;
+    color: var(--emerald-800);
+  }
+
+  .plan--featured .plan__amount {
+    color: var(--gold-300);
+  }
+
+  .plan__currency {
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+  }
+
+  .plan__period {
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .plan--featured .plan__period {
+    color: var(--on-dark-soft);
+  }
+
+  .plan__text {
+    margin-top: 1.4rem;
+    color: var(--ink-soft);
+  }
+
+  .plan--featured .plan__text {
+    color: var(--on-dark);
+  }
+
+  .plan__count {
+    margin-top: 0.5rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.93rem;
+    color: var(--gold-ink);
+  }
+
+  .plan--featured .plan__count {
+    color: var(--gold-400);
+  }
+
+  .plan .btn {
+    margin-top: auto;
+  }
+
+  /* ----- Included with every plan ----- */
+
+  .included {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding: clamp(1.75rem, 3.5vw, 2.75rem);
+    background: var(--parchment);
+    border: 1px solid var(--sand);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .included__title {
+    font-size: calc(1.7rem * var(--display-scale));
+    color: var(--emerald-800);
+  }
+
+  .included__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 2.25rem;
+    margin-top: 1.4rem;
+  }
+
+  .included__list li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    line-height: 1.4;
+  }
+
+  .included__list :global(.included__star) {
+    flex-shrink: 0;
+    color: var(--gold-500);
+  }
+
+  .included__note {
+    margin-top: 1.5rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--sand-deep);
+    font-family: var(--font-display);
+    font-size: calc(1.3rem * (var(--display-scale) + 0.04));
+    font-style: italic;
+    color: var(--gold-ink);
+  }
+
+  :global(html[lang='bn']) .included__note {
+    font-style: normal;
+  }
+
+  @media (max-width: 56rem) {
+    .plans {
+      grid-template-columns: 1fr;
+      max-width: 26rem;
+      margin-inline: auto;
+      gap: 2rem;
+    }
+
+    /* A centred block of left-aligned lines reads better than ragged centring. */
+    .included__list {
+      display: grid;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .included__list li {
+      align-items: flex-start;
+    }
+
+    .included__list :global(.included__star) {
+      margin-top: 0.3rem;
+    }
+  }
+</style>

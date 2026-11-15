@@ -1,0 +1,196 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../config/site';
+import { arabic, getDict, type Lang } from '../i18n';
+import { href, num } from '../lib/format';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const { email, whatsappNumber, whatsappDisplay } = site.contact;
+const year = num(new Date().getFullYear(), lang);
+---
+
+<footer class="footer on-dark">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a class="footer__logo" href={href(t.path)}>
+        <span class="footer__mark"><Logo size={52} /></span>
+        <span>
+          <span class="footer__name">{t.brand.name}</span>
+          <span class="footer__tagline">{t.brand.tagline}</span>
+        </span>
+      </a>
+      <p class="footer__about">{t.footer.about}</p>
+      <p class="footer__arabic" lang="ar" dir="rtl">{arabic.name}</p>
+    </div>
+
+    <nav class="footer__column" aria-label={t.footer.explore}>
+      <h2 class="footer__heading">{t.footer.explore}</h2>
+      <ul>
+        {
+          t.nav.links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+        <li><a href="#trial">{t.nav.cta}</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer__column">
+      <h2 class="footer__heading">{t.footer.contact}</h2>
+      <ul>
+        {
+          whatsappNumber && (
+            <li>
+              <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener">
+                {t.trial.whatsapp}: {whatsappDisplay}
+              </a>
+            </li>
+          )
+        }
+        {
+          email && (
+            <li>
+              <a href={`mailto:${email}`}>{email}</a>
+            </li>
+          )
+        }
+        <li>
+          <a href={href(t.alt.path)} lang={t.alt.lang} hreflang={t.alt.lang}>{t.alt.label}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__base">
+    <p>© {year} {t.brand.name}. {t.footer.rights}</p>
+    <p>{t.footer.reach}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--emerald-950);
+    color: var(--on-dark-soft);
+    border-top: 1px solid rgba(216, 187, 126, 0.18);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.7fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    padding-block: clamp(3.5rem, 7vw, 5.5rem);
+  }
+
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: var(--on-dark);
+  }
+
+  .footer__mark {
+    color: var(--gold-400);
+  }
+
+  .footer__name {
+    display: block;
+    font-family: var(--font-display);
+    font-size: calc(1.9rem * (var(--display-scale) + 0.1));
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .footer__tagline {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+
+  :global(html[lang='bn']) .footer__tagline {
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+
+  .footer__about {
+    max-width: 26rem;
+    margin-top: 1.4rem;
+  }
+
+  .footer__arabic {
+    margin-top: 1.25rem;
+    font-size: 1.9rem;
+    color: var(--gold-400);
+    text-align: left;
+    opacity: 0.9;
+  }
+
+  .footer__heading {
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+
+  :global(html[lang='bn']) .footer__heading {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+
+  .footer__column ul {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 1.25rem;
+  }
+
+  .footer__column a {
+    color: var(--on-dark);
+    opacity: 0.85;
+    overflow-wrap: anywhere;
+    transition:
+      opacity 0.2s var(--ease),
+      color 0.2s var(--ease);
+  }
+
+  .footer__column a:hover {
+    opacity: 1;
+    color: var(--gold-300);
+  }
+
+  .footer__base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-block: 1.5rem 2rem;
+    border-top: 1px solid rgba(216, 187, 126, 0.14);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 52rem) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

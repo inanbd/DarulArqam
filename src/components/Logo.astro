@@ -1,0 +1,16 @@
+---
+import { khatam } from '../lib/geometry';
+
+interface Props {
+  size?: number;
+}
+
+const { size = 44 } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false" fill="none">
+  <polygon points={khatam(24, 24, 22.5)} stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" />
+  <polygon points={khatam(24, 24, 18.4)} stroke="currentColor" stroke-width="0.6" stroke-linejoin="round" opacity="0.55" />
+  <!-- The doorway: Dar al-Arqam, "the house of al-Arqam" -->
+  <path d="M18.4 33.2V23.6c0-4.6 2.7-7 5.6-9.6 2.9 2.6 5.6 5 5.6 9.6v9.6z" fill="currentColor" />
+</svg>

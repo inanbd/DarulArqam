@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import About from './About.astro';
+import AyahBand from './AyahBand.astro';
+import Programs from './Programs.astro';
+import Audience from './Audience.astro';
+import Teachers from './Teachers.astro';
+import HowItWorks from './HowItWorks.astro';
+import Tuition from './Tuition.astro';
+import Faq from './Faq.astro';
+import Trial from './Trial.astro';
+import Footer from './Footer.astro';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Base lang={lang}>
+  <Header lang={lang} />
+  <main id="main">
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <AyahBand lang={lang} />
+    <Programs lang={lang} />
+    <Audience lang={lang} />
+    <Teachers lang={lang} />
+    <HowItWorks lang={lang} />
+    <Tuition lang={lang} />
+    <Faq lang={lang} />
+    <Trial lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Base>

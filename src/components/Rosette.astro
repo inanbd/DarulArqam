@@ -1,0 +1,23 @@
+---
+import { polygon, khatam } from '../lib/geometry';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Squares turned in steps of 22.5 degrees weave a sixteen-pointed rosette.
+const squares = [0, 22.5, 45, 67.5].map((rotation) => polygon(200, 200, 176, 4, rotation));
+const inner = [0, 22.5, 45, 67.5].map((rotation) => polygon(200, 200, 118, 4, rotation));
+---
+
+<svg class={className} viewBox="0 0 400 400" aria-hidden="true" focusable="false" fill="none" stroke="currentColor">
+  <circle cx="200" cy="200" r="197" stroke-width="0.8" />
+  <circle cx="200" cy="200" r="186" stroke-width="0.5" stroke-dasharray="1 6" stroke-linecap="round" />
+  <g stroke-width="0.8">{squares.map((points) => <polygon points={points} />)}</g>
+  <g stroke-width="0.6" opacity="0.8">{inner.map((points) => <polygon points={points} />)}</g>
+  <circle cx="200" cy="200" r="118" stroke-width="0.6" />
+  <polygon points={khatam(200, 200, 84)} stroke-width="0.8" />
+  <circle cx="200" cy="200" r="64" stroke-width="0.5" />
+</svg>

@@ -1,0 +1,188 @@
+---
+import Rosette from './Rosette.astro';
+import Star from './Star.astro';
+import { arabic, getDict, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section class="section about" id="about">
+  <div class="container about__grid">
+    <figure class="medallion" data-reveal>
+      <Rosette class="medallion__rosette" />
+      <div class="medallion__core">
+        <p class="medallion__name" lang="ar" dir="rtl">{arabic.name}</p>
+      </div>
+      <figcaption class="medallion__caption">{t.about.medallionCaption}</figcaption>
+    </figure>
+
+    <div class="about__copy" data-reveal style="--reveal-order: 1">
+      <p class="eyebrow">{t.about.eyebrow}</p>
+      <h2 class="title">{t.about.title}</h2>
+      {t.about.paragraphs.map((paragraph) => <p class="about__text">{paragraph}</p>)}
+    </div>
+  </div>
+
+  <div class="container">
+    <ul class="values">
+      {
+        t.about.values.map((value, index) => (
+          <li class="value" data-reveal style={`--reveal-order: ${index}`}>
+            <Star size={14} class="value__star" />
+            <h3 class="value__name">
+              {value.name}
+              <span class="value__gloss">{value.gloss}</span>
+            </h3>
+            <p class="value__text">{value.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(2.5rem, 7vw, 6rem);
+  }
+
+  .about__text {
+    margin-top: 1.4rem;
+    color: var(--ink-soft);
+  }
+
+  .about__text:first-of-type {
+    margin-top: 1.75rem;
+    font-size: 1.12rem;
+    color: var(--ink);
+  }
+
+  /* ----- Medallion ----- */
+
+  .medallion {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: min(100%, 26rem);
+    margin-inline: auto;
+  }
+
+  .medallion :global(.medallion__rosette) {
+    width: 100%;
+    color: var(--gold-600);
+  }
+
+  .medallion__core {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .medallion__name {
+    display: grid;
+    place-items: center;
+    width: 31%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--emerald-800);
+    color: var(--gold-300);
+    font-size: clamp(1.3rem, 2.4vw + 0.6rem, 2rem);
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    box-shadow:
+      0 0 0 6px var(--ivory),
+      0 0 0 7px var(--gold-500),
+      0 24px 40px -20px rgba(5, 33, 26, 0.6);
+  }
+
+  .medallion__caption {
+    margin-top: 1.4rem;
+    font-size: 0.76rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-ink);
+    text-align: center;
+  }
+
+  :global(html[lang='bn']) .medallion__caption {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ----- Values ----- */
+
+  .values {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+    padding-top: clamp(2.25rem, 4vw, 3.25rem);
+    border-top: 1px solid var(--sand);
+  }
+
+  .value :global(.value__star) {
+    color: var(--gold-500);
+  }
+
+  .value__name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.75rem;
+    margin-top: 0.9rem;
+    font-size: calc(1.85rem * var(--display-scale));
+    font-style: italic;
+    color: var(--emerald-800);
+  }
+
+  :global(html[lang='bn']) .value__name {
+    font-style: normal;
+  }
+
+  .value__gloss {
+    font-family: var(--font-body);
+    font-size: 0.76rem;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-ink);
+  }
+
+  :global(html[lang='bn']) .value__gloss {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+
+  .value__text {
+    margin-top: 0.6rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 56rem) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .medallion {
+      width: min(78%, 21rem);
+    }
+
+    .values {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

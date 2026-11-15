@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import { arabic, getDict } from '../i18n';
+import { href } from '../lib/format';
+
+const t = getDict('en');
+---
+
+<Base lang="en" title={`${t.notFound.title} — ${t.brand.name}`} noindex>
+  <main id="main" class="lost on-dark">
+    <div class="pattern pattern--fade-center"></div>
+    <div class="lost__inner">
+      <span class="lost__mark"><Logo size={72} /></span>
+      <p class="lost__arabic" lang="ar" dir="rtl">{arabic.name}</p>
+      <h1>{t.notFound.title}</h1>
+      <p>{t.notFound.text}</p>
+      <a class="btn btn--gold" href={href('/')}>{t.notFound.home}</a>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .lost {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: 3rem var(--gutter);
+    background: linear-gradient(180deg, var(--emerald-900), var(--emerald-950));
+    color: var(--on-dark);
+    text-align: center;
+  }
+
+  .lost .pattern {
+    z-index: -1;
+  }
+
+  .lost__inner {
+    display: grid;
+    justify-items: center;
+    gap: 1.1rem;
+    max-width: 34rem;
+  }
+
+  .lost__mark,
+  .lost__arabic {
+    color: var(--gold-400);
+  }
+
+  .lost__arabic {
+    font-size: 1.8rem;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    color: #fffdf6;
+  }
+
+  p {
+    color: var(--on-dark-soft);
+  }
+
+  .btn {
+    margin-top: 1rem;
+  }
+</style>

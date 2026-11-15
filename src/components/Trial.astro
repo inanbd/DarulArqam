@@ -1,0 +1,531 @@
+---
+import Star from './Star.astro';
+import { site } from '../config/site';
+import { arabic, getDict, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const f = t.trial.form;
+const { email, whatsappNumber, whatsappDisplay } = site.contact;
+
+// Everything the form script needs, handed over as data attributes.
+const messages = {
+  sending: f.sending,
+  submit: f.submit,
+  successTitle: f.successTitle,
+  success: f.success,
+  whatsappTitle: f.whatsappTitle,
+  whatsappNote: f.whatsappNote,
+  whatsappAgain: f.whatsappAgain,
+  emailNote: f.emailNote,
+  error: f.error,
+  greeting: f.greeting,
+  subject: f.subject,
+};
+---
+
+<section class="section section--dark trial" id="trial">
+  <div class="pattern pattern--fade-left"></div>
+  <div class="container trial__grid">
+    <div class="trial__copy" data-reveal>
+      <p class="eyebrow">{t.trial.eyebrow}</p>
+      <h2 class="title">{t.trial.title}</h2>
+      <p class="lead">{t.trial.lead}</p>
+
+      {
+        (whatsappNumber || email) && (
+          <div class="trial__contact">
+            <h3 class="trial__contact-title">{t.trial.contactTitle}</h3>
+            <ul>
+              {whatsappNumber && (
+                <li>
+                  <span>{t.trial.whatsapp}</span>
+                  <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener">
+                    {whatsappDisplay}
+                  </a>
+                </li>
+              )}
+              {email && (
+                <li>
+                  <span>{t.trial.email}</span>
+                  <a href={`mailto:${email}`}>{email}</a>
+                </li>
+              )}
+            </ul>
+          </div>
+        )
+      }
+
+      <blockquote class="trial__dua">
+        <p class="trial__dua-arabic" lang="ar" dir="rtl">{arabic.dua}</p>
+        <p class="trial__dua-text">
+          {t.trial.dua.text}
+          <cite>{t.trial.dua.reference}</cite>
+        </p>
+      </blockquote>
+    </div>
+
+    <div class="trial__card" data-reveal style="--reveal-order: 1">
+      <form
+        class="form"
+        method="post"
+        action={site.formEndpoint || undefined}
+        data-trial-form
+        data-endpoint={site.formEndpoint}
+        data-whatsapp={whatsappNumber}
+        data-email={email}
+        data-messages={JSON.stringify(messages)}
+      >
+        <div class="field">
+          <label for="trial-name">{f.name}</label>
+          <input id="trial-name" name="name" type="text" autocomplete="name" required data-label={f.name} />
+        </div>
+
+        <div class="field">
+          <label for="trial-email">{f.email}</label>
+          <input id="trial-email" name="email" type="email" autocomplete="email" required data-label={f.email} />
+        </div>
+
+        <div class="field">
+          <label for="trial-phone">{f.phone} <span class="field__optional">({f.optional})</span></label>
+          <input id="trial-phone" name="phone" type="tel" autocomplete="tel" data-label={f.phone} />
+        </div>
+
+        <div class="field">
+          <label for="trial-learner">{f.learner}</label>
+          <select id="trial-learner" name="learner" data-label={f.learnerShort}>
+            {f.learnerOptions.map((option) => <option>{option}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="trial-age">{f.age} <span class="field__optional">({f.optional})</span></label>
+          <input id="trial-age" name="age" type="text" inputmode="numeric" maxlength="20" data-label={f.age} />
+        </div>
+
+        <div class="field">
+          <label for="trial-program">{f.program}</label>
+          <select id="trial-program" name="program" data-label={f.program}>
+            <option>{f.programUnsure}</option>
+            {t.programs.items.map((program) => <option>{program.name}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="trial-teacher">{f.teacher}</label>
+          <select id="trial-teacher" name="teacher" data-label={f.teacher}>
+            {f.teacherOptions.map((option) => <option>{option}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="trial-timezone">{f.timezone}</label>
+          <select id="trial-timezone" name="timezone" data-label={f.timezone} data-timezone>
+            {f.timezones.map((zone) => <option value={zone.value}>{zone.label}</option>)}
+          </select>
+        </div>
+
+        <div class="field field--wide">
+          <label for="trial-message">{f.message} <span class="field__optional">({f.optional})</span></label>
+          <textarea id="trial-message" name="message" rows="3" data-label={f.messageShort}></textarea>
+        </div>
+
+        <!-- Left empty by people; filled in by spam bots. -->
+        <div class="form__trap" aria-hidden="true">
+          <label for="trial-website">Website</label>
+          <input id="trial-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="field field--wide form__footer">
+          <button class="btn btn--gold btn--block" type="submit" data-submit>{f.submit}</button>
+          <p class="form__error" role="alert" hidden data-error>{f.error}</p>
+          <p class="form__privacy">{f.privacy}</p>
+        </div>
+      </form>
+
+      <div class="form__done" role="status" tabindex="-1" hidden data-done>
+        <span class="form__done-star"><Star size={34} variant="double" /></span>
+        <h3 data-done-title></h3>
+        <p data-done-text></p>
+        <a class="btn btn--emerald" target="_blank" rel="noopener" hidden data-done-link></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-trial-form]');
+
+  if (form) {
+    const done = form.parentElement!.querySelector<HTMLElement>('[data-done]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const error = form.querySelector<HTMLElement>('[data-error]')!;
+    const text = JSON.parse(form.dataset.messages ?? '{}') as Record<string, string>;
+    const { endpoint = '', whatsapp = '', email = '' } = form.dataset;
+
+    // Pre-select the visitor's US time zone.
+    const zoneSelect = form.querySelector<HTMLSelectElement>('[data-timezone]');
+    try {
+      const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      // Compare against January, when no daylight saving applies, to read the standard offset.
+      const winter = new Date(new Date().getFullYear(), 0, 15, 12);
+      const hours = -winter.getTimezoneOffset() / 60;
+      const byOffset: Record<string, string> = {
+        '-5': 'Eastern (ET)',
+        '-6': 'Central (CT)',
+        '-7': 'Mountain (MT)',
+        '-8': 'Pacific (PT)',
+        '-9': 'Alaska (AKT)',
+        '-10': 'Hawaii (HT)',
+      };
+      const inAmericas = /^(America|US|Pacific\/Honolulu)/.test(zone);
+      if (zoneSelect) zoneSelect.value = (inAmericas && byOffset[String(hours)]) || 'Other';
+    } catch {
+      // Keep the first option.
+    }
+
+    /** The answers as "Label: value" lines, skipping anything left blank. */
+    const summary = () => {
+      const lines: string[] = [];
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[data-label]').forEach((field) => {
+        const value =
+          field instanceof HTMLSelectElement ? (field.selectedOptions[0]?.textContent ?? '').trim() : field.value.trim();
+        if (value) lines.push(`${field.dataset.label}: ${value}`);
+      });
+      return `${text.greeting}\n\n${lines.join('\n')}`;
+    };
+
+    const finish = (title: string, note: string, link?: { href: string; label: string }) => {
+      done.querySelector('[data-done-title]')!.textContent = title;
+      done.querySelector('[data-done-text]')!.textContent = note;
+      const anchor = done.querySelector<HTMLAnchorElement>('[data-done-link]')!;
+      if (link) {
+        anchor.href = link.href;
+        anchor.textContent = link.label;
+        anchor.hidden = false;
+      }
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      error.hidden = true;
+
+      const data = new FormData(form);
+      if (data.get('website')) return; // A bot filled the hidden field.
+      data.delete('website');
+
+      // No form service configured: hand the request to WhatsApp, or to email.
+      if (!endpoint) {
+        const message = summary();
+        if (whatsapp) {
+          const link = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+          window.open(link, '_blank', 'noopener');
+          finish(text.whatsappTitle, text.whatsappNote, { href: link, label: text.whatsappAgain });
+        } else if (email) {
+          window.location.href = `mailto:${email}?subject=${encodeURIComponent(text.subject)}&body=${encodeURIComponent(message)}`;
+          finish(text.whatsappTitle, text.emailNote);
+        } else {
+          error.hidden = false;
+        }
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = text.sending;
+      try {
+        data.append('_subject', text.subject);
+        const response = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error(`Form service answered ${response.status}`);
+        finish(text.successTitle, text.success);
+      } catch {
+        error.hidden = false;
+        submit.disabled = false;
+        submit.textContent = text.submit;
+      }
+    });
+  }
+</script>
+
+<style>
+  .trial {
+    isolation: isolate;
+    background:
+      radial-gradient(90% 80% at 10% 0%, #10513f 0%, transparent 60%),
+      linear-gradient(180deg, var(--emerald-900), var(--emerald-950));
+  }
+
+  .trial .pattern {
+    z-index: -1;
+    --pattern-opacity: 0.1;
+    transform: scaleX(-1);
+  }
+
+  .trial__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: start;
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+  }
+
+  .trial .title {
+    color: #fffdf6;
+  }
+
+  .trial .lead {
+    margin-top: 1.25rem;
+  }
+
+  .trial__contact {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgba(216, 187, 126, 0.22);
+  }
+
+  .trial__contact-title {
+    font-size: calc(1.5rem * (var(--display-scale) + 0.04));
+    font-weight: 600;
+    color: #fffdf6;
+  }
+
+  .trial__contact ul {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .trial__contact li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 1rem;
+  }
+
+  .trial__contact span {
+    min-width: 6.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+
+  :global(html[lang='bn']) .trial__contact span {
+    font-size: 0.92rem;
+    letter-spacing: 0.01em;
+  }
+
+  .trial__contact a {
+    color: var(--on-dark);
+    border-bottom: 1px solid rgba(216, 187, 126, 0.45);
+    transition: border-color 0.2s var(--ease);
+    overflow-wrap: anywhere;
+  }
+
+  .trial__contact a:hover {
+    border-color: var(--gold-300);
+  }
+
+  .trial__dua {
+    margin: 2.75rem 0 0;
+  }
+
+  .trial__dua-arabic {
+    font-size: 2.3rem;
+    color: var(--gold-300);
+    text-align: left;
+    line-height: 1.7;
+  }
+
+  .trial__dua-text {
+    margin-top: 0.25rem;
+    font-family: var(--font-display);
+    font-size: calc(1.3rem * (var(--display-scale) + 0.04));
+    font-style: italic;
+    color: var(--on-dark);
+  }
+
+  :global(html[lang='bn']) .trial__dua-text {
+    font-style: normal;
+  }
+
+  .trial__dua-text cite {
+    display: block;
+    margin-top: 0.35rem;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-style: normal;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+
+  :global(html[lang='bn']) .trial__dua-text cite {
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+  }
+
+  /* ----- Form card ----- */
+
+  .trial__card {
+    padding: clamp(1.5rem, 3.5vw, 2.75rem);
+    background: var(--ivory);
+    border: 1px solid var(--gold-500);
+    border-radius: var(--radius);
+    color: var(--ink);
+    box-shadow: 0 50px 80px -40px rgba(0, 0, 0, 0.75);
+  }
+
+  .form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem 1.25rem;
+  }
+
+  .form[hidden] {
+    display: none;
+  }
+
+  .field {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+
+  .field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--emerald-800);
+  }
+
+  .field__optional {
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--sand-deep);
+    border-radius: 0.6rem;
+    background: #fffefa;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition:
+      border-color 0.2s var(--ease),
+      box-shadow 0.2s var(--ease);
+  }
+
+  .field select {
+    appearance: none;
+    padding-right: 2.4rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%237a5d1f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.95rem center;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 5.5rem;
+  }
+
+  .field input:hover,
+  .field select:hover,
+  .field textarea:hover {
+    border-color: var(--gold-500);
+  }
+
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: none;
+    border-color: var(--emerald-700);
+    box-shadow: 0 0 0 3px rgba(29, 109, 85, 0.2);
+  }
+
+  .form__trap {
+    position: absolute;
+    left: -200vw;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form__footer {
+    margin-top: 0.4rem;
+    gap: 0.9rem;
+  }
+
+  .form__privacy {
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  .form__error {
+    padding: 0.8rem 1rem;
+    border: 1px solid #c98b7c;
+    border-radius: 0.6rem;
+    background: #fbeee9;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: #7a2a17;
+  }
+
+  .form__done {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    padding-block: clamp(2rem, 6vw, 4rem);
+    text-align: center;
+    outline: none;
+  }
+
+  .form__done[hidden] {
+    display: none;
+  }
+
+  .form__done-star {
+    color: var(--gold-500);
+  }
+
+  .form__done h3 {
+    font-size: calc(2.2rem * var(--display-scale));
+    color: var(--emerald-800);
+  }
+
+  .form__done p {
+    max-width: 26rem;
+    color: var(--ink-soft);
+  }
+
+  .form__done .btn {
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 60rem) {
+    .trial__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .form {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
