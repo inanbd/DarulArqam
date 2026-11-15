@@ -1341,6 +1341,13 @@ html[lang="bn"] .ayah__label[data-astro-cid-qvbgleoi] {
   .page-hero__disc--saffron[data-astro-cid-75ysl5lo] {
     display: none;
   }
+
+  .page-hero__disc--teal[data-astro-cid-75ysl5lo] {
+    right: -6rem;
+    top: -7rem;
+    width: 16rem;
+    height: 16rem;
+  }
 }
 .pillars[data-astro-cid-qjj4u7yg] {
   display: grid;
@@ -2554,7 +2561,7 @@ html[lang="bn"] .plan__flag[data-astro-cid-i7nfoaoc] {
 }
 
 .plan__amount[data-astro-cid-i7nfoaoc] {
-  font-size: 4rem;
+  font-size: calc(4rem * var(--display-scale));
   font-weight: 700;
   line-height: 1;
 }

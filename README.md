@@ -2,6 +2,22 @@
 
 The website of Darul Arqam, an online Quran academy: live one-on-one classes for families in the United States, taught by imams and huffaz from Bangladesh.
 
+This repository holds **two designs** of the site, with the same content, so that one can be chosen:
+
+| | Design 1, classic | Design 2, modern |
+| --- | --- | --- |
+| Layout | One long page | Seven separate pages |
+| Look | Deep emerald, antique gold and ivory; pointed arches and a star lattice | Lapis blue, turquoise and saffron on warm paper; round forms |
+| Sources | This folder (`src/`) | [`version-2/`](version-2) |
+| HTML files | [`html/`](html) | [`version-2/html/`](version-2/html) |
+| Guide | This file | [`version-2/README.md`](version-2/README.md) |
+
+Open [`designs.html`](designs.html) in a browser to see both side by side and click through each one.
+
+The two designs are separate projects that share nothing. Contact details, prices and teacher profiles are therefore kept in each one's own `src/config/` folder; once a design is chosen, delete the other. The rest of this file describes design 1.
+
+## Design 1
+
 It is a static site: plain HTML, CSS and a little JavaScript, with no server and no database.
 
 - English lives at `/`, Bangla at `/bn/`.
