@@ -1,0 +1,94 @@
+---
+import Icon from './Icon.astro';
+import { getDict, type Lang } from '../i18n';
+
+/** Who we teach: children, adults, sisters and girls. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const icons = ['child', 'book', 'people'] as const;
+---
+
+<ul class="learners">
+  {
+    t.audience.items.map((item, index) => (
+      <li class="learner card" data-reveal style={`--reveal-order: ${index}`}>
+        <span class="learner__icon">
+          <Icon name={icons[index % icons.length]} size={28} />
+        </span>
+        <h3 class="learner__title">{item.title}</h3>
+        <p class="learner__text">{item.text}</p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .learners {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+  }
+
+  .learner {
+    position: relative;
+    overflow: hidden;
+    padding: 2.25rem 1.75rem 2rem;
+  }
+
+  /* A coloured band along the top tells the three apart. */
+  .learner::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 6px;
+    background: var(--teal-500);
+  }
+
+  .learner:nth-child(2)::before {
+    background: var(--saffron-500);
+  }
+
+  .learner:nth-child(3)::before {
+    background: var(--lapis);
+  }
+
+  .learner__icon {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--teal-100);
+    color: var(--teal-700);
+  }
+
+  .learner:nth-child(2) .learner__icon {
+    background: var(--saffron-100);
+    color: var(--saffron-ink);
+  }
+
+  .learner:nth-child(3) .learner__icon {
+    background: #dfe7fa;
+    color: var(--lapis);
+  }
+
+  .learner__title {
+    margin-top: 1.25rem;
+    font-size: calc(1.55rem * var(--display-scale));
+  }
+
+  .learner__text {
+    margin-top: 0.6rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 56rem) {
+    .learners {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

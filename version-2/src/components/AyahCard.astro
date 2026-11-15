@@ -1,0 +1,140 @@
+---
+import Shamsa from './Shamsa.astro';
+import { arabic, getDict, type Lang } from '../i18n';
+import type { PageId } from '../lib/routes';
+
+/** The Quranic verse chosen for a page, with its meaning and reference. */
+interface Props {
+  lang: Lang;
+  page: PageId;
+}
+
+const { lang, page } = Astro.props;
+const t = getDict(lang);
+const verse = t.pages[page].verse;
+const text = arabic.verses[page];
+// Longer verses are set smaller so the card keeps its shape.
+const length = text.length > 120 ? 'long' : text.length > 60 ? 'medium' : 'short';
+---
+
+<figure class:list={['ayah', `ayah--${length}`]}>
+  <span class="pattern pattern--corner"></span>
+  <span class="ayah__frame" aria-hidden="true"></span>
+  <p class="ayah__label">
+    <Shamsa size={14} />
+    {t.common.verseLabel}
+  </p>
+  <blockquote class="ayah__quote">
+    <p class="ayah__arabic" lang="ar" dir="rtl">{text}</p>
+    <p class="ayah__text">{verse.text}</p>
+  </blockquote>
+  <figcaption class="ayah__reference">{verse.reference}</figcaption>
+</figure>
+
+<style>
+  .ayah {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    justify-items: center;
+    gap: 1.4rem;
+    padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3.5vw, 2.75rem);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(90% 70% at 100% 0%, rgba(34, 71, 164, 0.75), transparent 70%),
+      linear-gradient(160deg, var(--navy-800), var(--navy-950));
+    color: var(--on-dark);
+    text-align: center;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .ayah .pattern {
+    z-index: -1;
+    --pattern-color: #8fb0ff;
+    --pattern-opacity: 0.35;
+  }
+
+  /* A thin saffron line set inside the card, like the ruled frame of a manuscript page. */
+  .ayah__frame {
+    position: absolute;
+    inset: 0.7rem;
+    z-index: -1;
+    border: 1px solid rgba(243, 192, 99, 0.35);
+    border-radius: calc(var(--radius-lg) - 0.6rem);
+    pointer-events: none;
+  }
+
+  .ayah__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--saffron-400);
+  }
+
+  :global(html[lang='bn']) .ayah__label {
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+  }
+
+  .ayah__quote {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+  }
+
+  .ayah__arabic {
+    font-size: clamp(2rem, 2.2vw + 1.3rem, 2.9rem);
+    font-weight: 500;
+    line-height: 1.9;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  .ayah--medium .ayah__arabic {
+    font-size: clamp(1.7rem, 1.6vw + 1.2rem, 2.3rem);
+  }
+
+  .ayah--long .ayah__arabic {
+    font-size: clamp(1.3rem, 0.8vw + 1.05rem, 1.6rem);
+    line-height: 2.1;
+  }
+
+  .ayah__text {
+    max-width: 30rem;
+    margin-inline: auto;
+    font-family: var(--font-display);
+    font-size: calc(1.3rem * var(--display-scale));
+    line-height: calc(var(--display-leading) + 0.3);
+    color: var(--on-dark);
+    text-wrap: balance;
+  }
+
+  .ayah--long .ayah__text {
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    line-height: var(--body-leading);
+    color: var(--on-dark-soft);
+  }
+
+  .ayah__reference {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--saffron-400);
+  }
+
+  .ayah__reference::before,
+  .ayah__reference::after {
+    content: '';
+    width: 1.75rem;
+    height: 1px;
+    background: rgba(243, 192, 99, 0.6);
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import Page from '../layouts/Page.astro';
+import PageHero from '../components/PageHero.astro';
+import Plans from '../components/Plans.astro';
+import Shamsa from '../components/Shamsa.astro';
+import Steps from '../components/Steps.astro';
+import TimeBand from '../components/TimeBand.astro';
+import { getDict, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<Page lang={lang} page="tuition">
+  <PageHero lang={lang} page="tuition" />
+
+  <section class="section">
+    <div class="container">
+      <Plans lang={lang} />
+    </div>
+  </section>
+
+  <section class="section section--sand" id="how">
+    <div class="container">
+      <header class="heading" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{t.how.eyebrow}</p>
+        <h2 class="title">{t.how.title}</h2>
+      </header>
+      <div class="block">
+        <Steps lang={lang} />
+      </div>
+      <div class="block">
+        <TimeBand lang={lang} />
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .block {
+    margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
+  }
+</style>

@@ -1,0 +1,431 @@
+---
+import Page from '../layouts/Page.astro';
+import AyahCard from '../components/AyahCard.astro';
+import HadithBand from '../components/HadithBand.astro';
+import Icon from '../components/Icon.astro';
+import Learners from '../components/Learners.astro';
+import Pillars from '../components/Pillars.astro';
+import ProgramTeasers from '../components/ProgramTeasers.astro';
+import Shamsa from '../components/Shamsa.astro';
+import Steps from '../components/Steps.astro';
+import TeacherCard from '../components/TeacherCard.astro';
+import TimeBand from '../components/TimeBand.astro';
+import { site } from '../config/site';
+import { teachers } from '../config/teachers';
+import { arabic, getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+import { pageHref } from '../lib/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+
+// Two male and two female teachers for the home page.
+const featured = [
+  ...teachers.filter((teacher) => teacher.gender === 'male').slice(0, 2),
+  ...teachers.filter((teacher) => teacher.gender === 'female').slice(0, 2),
+];
+const lowestPrice = Math.min(...site.plans.map((plan) => plan.monthlyUsd));
+---
+
+<Page lang={lang} page="home">
+  <section class="hero">
+    <span class="pattern pattern--fade-down"></span>
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="hero__bismillah" lang="ar" dir="rtl">{arabic.bismillah}</p>
+        <p class="chip">
+          <Shamsa size={13} />
+          {t.hero.eyebrow}
+        </p>
+        <h1 class="hero__title">
+          {t.hero.title.before}<span class="hero__accent">{t.hero.title.accent}</span>{t.hero.title.after}
+        </h1>
+        <p class="hero__lead">{t.hero.lead}</p>
+        <div class="hero__actions">
+          <a class="btn btn--saffron" href={pageHref(lang, 'trial')}>
+            {t.hero.primary}
+            <Icon name="arrow" size={18} />
+          </a>
+          <a class="btn btn--outline" href={pageHref(lang, 'programs')}>{t.hero.secondary}</a>
+        </div>
+        <ul class="hero__points">
+          {
+            t.hero.points.map((point) => (
+              <li>
+                <Icon name="check" size={16} />
+                {point}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="hero__art">
+        <span class="hero__disc hero__disc--teal" aria-hidden="true"></span>
+        <span class="hero__disc hero__disc--saffron" aria-hidden="true"></span>
+        <AyahCard lang={lang} page="home" />
+        <p class="hero__note hero__note--top card">
+          <span class="icon-tile"><Icon name="video" size={20} /></span>
+          {t.pillars[0].title}
+        </p>
+        <p class="hero__note hero__note--bottom card">
+          <span class="icon-tile icon-tile--saffron"><Icon name="people" size={20} /></span>
+          {t.hero.points[1]}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section home-pillars">
+    <div class="container">
+      <Pillars lang={lang} />
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container">
+      <div class="heading-row" data-reveal>
+        <header class="heading">
+          <p class="kicker"><Shamsa size={14} />{t.programs.eyebrow}</p>
+          <h2 class="title">{t.programs.title}</h2>
+          <p class="lead">{t.programs.lead}</p>
+        </header>
+        <a class="link" href={pageHref(lang, 'programs')}>
+          {t.common.allPrograms}
+          <Icon name="arrow" size={17} />
+        </a>
+      </div>
+      <div class="block">
+        <ProgramTeasers lang={lang} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <header class="heading heading--center" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{t.audience.eyebrow}</p>
+        <h2 class="title">{t.audience.title}</h2>
+      </header>
+      <div class="block">
+        <Learners lang={lang} />
+      </div>
+    </div>
+  </section>
+
+  <HadithBand lang={lang} />
+
+  <section class="section">
+    <div class="container home-teachers">
+      <div class="home-teachers__copy" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{t.teachers.eyebrow}</p>
+        <h2 class="title">{t.teachers.title}</h2>
+        <p class="home-teachers__text">{t.teachers.paragraphs[1]}</p>
+        <ul class="ticks home-teachers__list">
+          {t.teachers.standards.slice(0, 3).map((standard) => <li>{standard}</li>)}
+        </ul>
+        <a class="btn btn--navy" href={pageHref(lang, 'teachers')}>
+          {t.common.allTeachers}
+          <Icon name="arrow" size={18} />
+        </a>
+      </div>
+      <ul class="home-teachers__grid">
+        {
+          featured.map((teacher, index) => (
+            <li data-reveal style={`--reveal-order: ${index}`}>
+              <TeacherCard lang={lang} teacher={teacher} compact />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container">
+      <div class="heading-row" data-reveal>
+        <header class="heading">
+          <p class="kicker"><Shamsa size={14} />{t.how.eyebrow}</p>
+          <h2 class="title">{t.how.title}</h2>
+        </header>
+        <a class="link" href={pageHref(lang, 'tuition')}>
+          {t.common.seeTuition}
+          <Icon name="arrow" size={17} />
+        </a>
+      </div>
+      <div class="block">
+        <Steps lang={lang} />
+      </div>
+      <div class="block">
+        <TimeBand lang={lang} />
+      </div>
+      <p class="home-price" data-reveal>
+        <span class="chip">
+          <Icon name="spark" size={16} />
+          {t.common.plansFrom(`$${num(lowestPrice, lang)}`)}
+        </span>
+        <a class="link" href={pageHref(lang, 'faq')}>
+          {t.common.allQuestions}
+          <Icon name="arrow" size={17} />
+        </a>
+      </p>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .block {
+    margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
+  }
+
+  /* ----- Hero ----- */
+
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(4rem, 8vw, 6.5rem);
+    background: linear-gradient(180deg, var(--sand-100), var(--paper));
+  }
+
+  .hero .pattern {
+    z-index: -2;
+    --pattern-opacity: 0.14;
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .hero__bismillah {
+    margin-bottom: 1.1rem;
+    font-size: 1.45rem;
+    line-height: 1.7;
+    color: var(--teal-700);
+    text-align: left;
+  }
+
+  .hero__title {
+    margin-top: 1.3rem;
+    font-size: calc(clamp(2.3rem, 2.9vw + 1.1rem, 3.7rem) * var(--display-scale));
+    font-weight: 700;
+    line-height: calc(var(--display-leading) - 0.04);
+  }
+
+  /* The accent phrase sits on a saffron brush stroke. */
+  .hero__accent {
+    color: var(--teal-700);
+    background: linear-gradient(transparent 68%, var(--saffron-100) 68%, var(--saffron-100) 94%, transparent 94%);
+  }
+
+  .hero__lead {
+    margin-top: 1.4rem;
+    max-width: 36rem;
+    font-size: 1.17rem;
+    color: var(--ink-soft);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+
+  .hero__points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.6rem;
+    margin-top: 1.9rem;
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: var(--navy-900);
+  }
+
+  .hero__points li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero__points :global(svg) {
+    padding: 2px;
+    border-radius: 50%;
+    background: var(--teal-100);
+    color: var(--teal-700);
+    stroke-width: 3;
+  }
+
+  /* ----- Hero art: the verse card, with two discs behind and two notes in front ----- */
+
+  .hero__art {
+    position: relative;
+    padding: 2.25rem 1.5rem;
+  }
+
+  .hero__disc {
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+  }
+
+  .hero__disc--teal {
+    right: -4.5rem;
+    top: -3rem;
+    width: 19rem;
+    height: 19rem;
+    background: var(--teal-200);
+  }
+
+  .hero__disc--saffron {
+    left: -2rem;
+    bottom: -1rem;
+    width: 11rem;
+    height: 11rem;
+    background: var(--saffron-400);
+  }
+
+  .hero__art :global(.ayah) {
+    padding-block: clamp(3rem, 6vw, 4.75rem);
+  }
+
+  .hero__note {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1.1rem 0.6rem 0.6rem;
+    border-radius: 1.1rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--navy-900);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .hero__note .icon-tile {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.8rem;
+  }
+
+  .hero__note--top {
+    top: 0.25rem;
+    left: -0.75rem;
+  }
+
+  .hero__note--bottom {
+    right: -0.5rem;
+    bottom: 0.25rem;
+  }
+
+  /* ----- Sections ----- */
+
+  .home-pillars {
+    padding-top: 0;
+  }
+
+  .home-teachers {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .home-teachers__text {
+    margin-top: 1.25rem;
+    color: var(--ink-soft);
+  }
+
+  .home-teachers__list {
+    margin-top: 1.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .home-teachers__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.9rem, 2vw, 1.25rem);
+  }
+
+  /* Offset the second column, so the four cards read as a cluster. */
+  .home-teachers__grid li:nth-child(even) {
+    transform: translateY(1.5rem);
+  }
+
+  :global(.js) .home-teachers__grid li:nth-child(even)[data-reveal] {
+    transform: translateY(2.5rem);
+  }
+
+  :global(.js) .home-teachers__grid li:nth-child(even)[data-reveal].is-visible {
+    transform: translateY(1.5rem);
+  }
+
+  .home-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-top: 2rem;
+  }
+
+  .home-price .chip {
+    padding: 0.55rem 1.1rem;
+    background: var(--saffron-100);
+    font-size: 0.98rem;
+    color: var(--saffron-ink);
+  }
+
+  @media (max-width: 62rem) {
+    .hero__grid,
+    .home-teachers {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__art {
+      max-width: 34rem;
+      margin-inline: auto;
+      width: 100%;
+    }
+
+    .home-teachers__grid li:nth-child(even),
+    :global(.js) .home-teachers__grid li:nth-child(even)[data-reveal],
+    :global(.js) .home-teachers__grid li:nth-child(even)[data-reveal].is-visible {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .hero__actions .btn {
+      flex: 1 1 100%;
+    }
+
+    .hero__points {
+      flex-direction: column;
+    }
+
+    .hero__art {
+      padding-inline: 0.5rem;
+    }
+
+    .hero__note--top {
+      left: 0;
+    }
+
+    .hero__note--bottom {
+      right: 0;
+    }
+
+    .home-teachers__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

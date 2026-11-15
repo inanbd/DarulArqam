@@ -1,0 +1,22 @@
+---
+import { star } from '../lib/geometry';
+
+interface Props {
+  size?: number;
+}
+
+const { size = 46 } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <polygon points={star(24, 24, 23.5, 19, 12)} fill="#eaa93b" />
+  <circle cx="24" cy="24" r="16.5" fill="#0b1a3b" />
+  <!-- An open book -->
+  <path
+    d="M24 19.2C21.8 17.7 19.1 17.3 16.4 17.6V28.2C19.1 27.9 21.8 28.3 24 29.8C26.2 28.3 28.9 27.9 31.6 28.2V17.6C28.9 17.3 26.2 17.7 24 19.2Z"
+    fill="none"
+    stroke="#fff"
+    stroke-width="1.5"
+    stroke-linejoin="round"></path>
+  <path d="M24 19.2V29.8" stroke="#fff" stroke-width="1.5"></path>
+</svg>

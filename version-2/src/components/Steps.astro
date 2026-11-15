@@ -1,0 +1,93 @@
+---
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+
+/** How it works, as a numbered sequence. `count` limits how many steps are shown. */
+interface Props {
+  lang: Lang;
+  count?: number;
+  from?: number;
+}
+
+const { lang, count, from = 0 } = Astro.props;
+const t = getDict(lang);
+const steps = t.how.steps.slice(from, count ? from + count : undefined);
+---
+
+<ol class="steps" style={`--columns: ${steps.length}`}>
+  {
+    steps.map((step, index) => (
+      <li class="step" data-reveal style={`--reveal-order: ${index}`}>
+        <span class="step__number">{num(from + index + 1, lang)}</span>
+        <h3 class="step__title">{step.title}</h3>
+        <p class="step__text">{step.text}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(var(--columns, 4), minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    counter-reset: step;
+  }
+
+  .step {
+    position: relative;
+  }
+
+  /* A dashed line runs from each number to the next. */
+  .step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    top: 1.6rem;
+    left: 4rem;
+    right: calc(clamp(1.25rem, 2.5vw, 2rem) * -1 + 0.75rem);
+    border-top: 2px dashed var(--sand-300);
+  }
+
+  .step__number {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    background: var(--navy-900);
+    color: var(--saffron-400);
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    box-shadow: 0 0 0 5px var(--saffron-100);
+  }
+
+  .step__title {
+    margin-top: 1.25rem;
+    font-size: calc(1.3rem * var(--display-scale));
+  }
+
+  .step__text {
+    margin-top: 0.45rem;
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 58rem) {
+    .steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 2.25rem;
+    }
+
+    .step:not(:last-child)::before {
+      display: none;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

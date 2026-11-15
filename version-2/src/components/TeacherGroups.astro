@@ -1,0 +1,89 @@
+---
+import TeacherCard from './TeacherCard.astro';
+import { teachers } from '../config/teachers';
+import { getDict, type Lang } from '../i18n';
+
+/** All teacher profiles, in two groups: male teachers, then female teachers. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const p = t.teachers.profiles;
+
+const groups = [
+  { id: 'male', label: p.male, note: '', people: teachers.filter((teacher) => teacher.gender === 'male') },
+  { id: 'female', label: p.female, note: p.femaleNote, people: teachers.filter((teacher) => teacher.gender === 'female') },
+].filter((group) => group.people.length > 0);
+---
+
+{
+  groups.map((group) => (
+    <section class="group" aria-labelledby={`teachers-${group.id}`}>
+      <header class="group__head" data-reveal>
+        <h2 class="group__title" id={`teachers-${group.id}`}>
+          {group.label}
+        </h2>
+        {group.note && <span class="chip">{group.note}</span>}
+      </header>
+      <ul class="group__grid">
+        {group.people.map((teacher, index) => (
+          <li data-reveal style={`--reveal-order: ${index}`}>
+            <TeacherCard lang={lang} teacher={teacher} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))
+}
+
+<style>
+  .group + .group {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .group__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--sand-200);
+  }
+
+  .group__title {
+    position: relative;
+    font-size: calc(1.8rem * var(--display-scale));
+  }
+
+  /* A turquoise stroke under the title, sitting on the rule below it. */
+  .group__title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(-1rem - 2px);
+    height: 2px;
+    background: var(--teal-500);
+  }
+
+  .group__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  @media (max-width: 62rem) {
+    .group__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .group__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

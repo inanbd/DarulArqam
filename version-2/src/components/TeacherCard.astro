@@ -1,0 +1,224 @@
+---
+import Icon from './Icon.astro';
+import type { Teacher } from '../config/teachers';
+import { getDict, type Lang } from '../i18n';
+import { asset, num } from '../lib/format';
+
+/** One teacher. `compact` leaves out the biography and details, for the home page. */
+interface Props {
+  lang: Lang;
+  teacher: Teacher;
+  compact?: boolean;
+}
+
+const { lang, teacher, compact = false } = Astro.props;
+const t = getDict(lang);
+const p = t.teachers.profiles;
+const text = teacher.text[lang];
+const programNames = Object.fromEntries(t.programs.items.map((program) => [program.id, program.name]));
+---
+
+<article class:list={['teacher', 'card', { 'teacher--compact': compact }]}>
+  <header class="teacher__head">
+    <span class:list={['teacher__portrait', `teacher__portrait--${teacher.gender}`]}>
+      {
+        teacher.photo ? (
+          <img src={asset(teacher.photo)} alt="" width="160" height="160" loading="lazy" decoding="async" />
+        ) : (
+          <span class="teacher__emblem" lang="ar" dir="rtl" aria-hidden="true">
+            {teacher.emblem}
+          </span>
+        )
+      }
+    </span>
+    <div>
+      {teacher.example && <p class="teacher__example">{p.example}</p>}
+      <h3 class="teacher__name">{text.name}</h3>
+      <p class="teacher__title">{text.title}</p>
+    </div>
+  </header>
+
+  {
+    !compact && (
+      <>
+        <p class="teacher__bio">{text.bio}</p>
+        <ul class="teacher__qualifications">
+          {text.qualifications.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <dl class="teacher__facts">
+          <div>
+            <dt>
+              <Icon name="clock" size={17} />
+              <span class="sr-only">{p.experience('')}</span>
+            </dt>
+            <dd>{p.experience(num(teacher.years, lang))}</dd>
+          </div>
+          <div>
+            <dt>
+              <Icon name="book" size={17} />
+              <span class="sr-only">{p.teaches}</span>
+            </dt>
+            <dd>{teacher.programs.map((id) => programNames[id] ?? id).join(p.separator)}</dd>
+          </div>
+          <div>
+            <dt>
+              <Icon name="globe" size={17} />
+              <span class="sr-only">{p.languages}</span>
+            </dt>
+            <dd>{teacher.languages.map((code) => p.languageNames[code] ?? code).join(p.separator)}</dd>
+          </div>
+        </dl>
+      </>
+    )
+  }
+</article>
+
+<style>
+  .teacher {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.6rem 1.5rem 1.5rem;
+    transition:
+      box-shadow 0.3s var(--ease),
+      border-color 0.3s var(--ease);
+  }
+
+  .teacher:hover {
+    border-color: var(--teal-200);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .teacher__head {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+  }
+
+  /* A round medallion holding a photo, or the teacher's Arabic title. */
+  .teacher__portrait {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 5.25rem;
+    height: 5.25rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, var(--navy-700), var(--navy-950));
+    box-shadow:
+      0 0 0 4px #fff,
+      0 0 0 6px var(--saffron-500);
+    overflow: hidden;
+  }
+
+  .teacher__portrait--female {
+    background: radial-gradient(circle at 30% 25%, var(--teal-600), var(--teal-800));
+  }
+
+  .teacher__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .teacher__emblem {
+    font-family: var(--font-kufi);
+    font-size: 1.3rem;
+    line-height: 1.4;
+    color: #fff;
+  }
+
+  .teacher__example {
+    display: inline-block;
+    margin-bottom: 0.4rem;
+    padding: 0.1rem 0.6rem;
+    border: 1px dashed var(--sand-300);
+    border-radius: 999px;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  :global(html[lang='bn']) .teacher__example {
+    font-size: 0.8rem;
+    letter-spacing: 0;
+  }
+
+  .teacher__name {
+    font-size: calc(1.3rem * var(--display-scale));
+    line-height: calc(var(--display-leading) + 0.1);
+  }
+
+  .teacher__title {
+    margin-top: 0.2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--teal-700);
+  }
+
+  .teacher__bio {
+    margin-top: 1.25rem;
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+  }
+
+  .teacher__qualifications {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .teacher__qualifications li {
+    padding: 0.28rem 0.75rem;
+    border-radius: 999px;
+    background: var(--saffron-100);
+    font-size: 0.84rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--saffron-ink);
+  }
+
+  .teacher__facts {
+    display: grid;
+    gap: 0.55rem;
+    margin: auto 0 0;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--sand-200);
+  }
+
+  .teacher__facts div {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .teacher__facts dt {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    color: var(--teal-600);
+  }
+
+  .teacher__facts dd {
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  .teacher--compact {
+    padding: 1.25rem;
+  }
+
+  .teacher--compact .teacher__portrait {
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+
+  .teacher--compact .teacher__emblem {
+    font-size: 1.05rem;
+  }
+</style>

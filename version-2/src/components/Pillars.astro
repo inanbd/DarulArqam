@@ -1,0 +1,61 @@
+---
+import Icon from './Icon.astro';
+import { getDict, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const icons = ['video', 'scholar', 'people', 'clock'] as const;
+---
+
+<ul class="pillars">
+  {
+    t.pillars.map((pillar, index) => (
+      <li class="pillar card" data-reveal style={`--reveal-order: ${index}`}>
+        <span class:list={['icon-tile', { 'icon-tile--saffron': index % 2 === 1 }]}>
+          <Icon name={icons[index % icons.length]} size={24} />
+        </span>
+        <h3 class="pillar__title">{pillar.title}</h3>
+        <p class="pillar__text">{pillar.text}</p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .pillar {
+    padding: 1.6rem 1.5rem 1.75rem;
+  }
+
+  .pillar__title {
+    margin-top: 1.1rem;
+    font-size: calc(1.3rem * var(--display-scale));
+  }
+
+  .pillar__text {
+    margin-top: 0.45rem;
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 62rem) {
+    .pillars {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .pillars {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

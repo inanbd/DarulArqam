@@ -1,0 +1,30 @@
+---
+import { getDict, type Lang } from '../i18n';
+
+/** What every teacher brings. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<aside class="standards card">
+  <h3 class="standards__title">{t.teachers.standardsTitle}</h3>
+  <ul class="ticks">
+    {t.teachers.standards.map((standard) => <li>{standard}</li>)}
+  </ul>
+</aside>
+
+<style>
+  .standards {
+    padding: clamp(1.75rem, 3.5vw, 2.5rem);
+    border-left: 6px solid var(--saffron-500);
+  }
+
+  .standards__title {
+    margin-bottom: 1.25rem;
+    font-size: calc(1.5rem * var(--display-scale));
+  }
+</style>

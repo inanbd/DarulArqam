@@ -1,0 +1,141 @@
+---
+import Icon from './Icon.astro';
+import { arabic, getDict, type Lang } from '../i18n';
+import { pageHref } from '../lib/routes';
+import { programIcons } from '../lib/programs';
+
+/** The four programs as compact cards that lead to the Programs page. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<ul class="teasers">
+  {
+    t.programs.items.map((program, index) => (
+      <li class="teaser card" data-reveal style={`--reveal-order: ${index}`}>
+        <div class="teaser__top">
+          <span class="icon-tile icon-tile--navy">
+            <Icon name={programIcons[program.id]} size={24} />
+          </span>
+          <span class="teaser__emblem" lang="ar" dir="rtl" aria-hidden="true">
+            {arabic.programs[program.id]}
+          </span>
+        </div>
+        <h3 class="teaser__name">{program.name}</h3>
+        <p class="teaser__tagline">{program.tagline}</p>
+        <p class="teaser__audience">
+          <span>{t.programs.forLabel}</span>
+          {program.audience}
+        </p>
+        <a class="link teaser__link" href={pageHref(lang, 'programs', `#${program.id}`)}>
+          {t.common.learnMore}
+          <span class="sr-only">: {program.name}</span>
+          <Icon name="arrow" size={17} />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .teasers {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .teaser {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem 1.5rem 1.5rem;
+    transition:
+      transform 0.3s var(--ease),
+      box-shadow 0.3s var(--ease),
+      border-color 0.3s var(--ease),
+      opacity 0.7s var(--ease);
+  }
+
+  .teaser:hover {
+    transform: translateY(-4px);
+    border-color: var(--teal-200);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .teaser__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .teaser__emblem {
+    font-family: var(--font-kufi);
+    font-size: 1.7rem;
+    line-height: 1.4;
+    color: var(--teal-500);
+  }
+
+  .teaser__name {
+    margin-top: 1.2rem;
+    font-size: calc(1.45rem * var(--display-scale));
+  }
+
+  .teaser__tagline {
+    margin-top: 0.35rem;
+    color: var(--ink-soft);
+  }
+
+  .teaser__audience {
+    display: grid;
+    gap: 0.1rem;
+    margin-top: 1.1rem;
+    margin-bottom: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--sand-300);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--navy-900);
+  }
+
+  .teaser__audience span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--saffron-ink);
+  }
+
+  :global(html[lang='bn']) .teaser__audience span {
+    font-size: 0.88rem;
+    letter-spacing: 0;
+  }
+
+  .teaser__link {
+    margin-top: auto;
+  }
+
+  /* The whole card is the link target. */
+  .teaser__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+  }
+
+  @media (max-width: 66rem) {
+    .teasers {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .teasers {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

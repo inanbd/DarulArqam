@@ -1,0 +1,116 @@
+---
+import { getDict, type Lang } from '../i18n';
+
+/** Questions and answers. `count` limits how many are shown. */
+interface Props {
+  lang: Lang;
+  count?: number;
+}
+
+const { lang, count } = Astro.props;
+const t = getDict(lang);
+const items = count ? t.faq.items.slice(0, count) : t.faq.items;
+---
+
+<div class="faq">
+  {
+    items.map((item, index) => (
+      <details class="faq__item card" open={index === 0} data-reveal style={`--reveal-order: ${Math.min(index, 4)}`}>
+        <summary>
+          <span>{item.q}</span>
+          <span class="faq__icon" aria-hidden="true" />
+        </summary>
+        <p>{item.a}</p>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .faq {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .faq__item {
+    padding: 0 1.5rem;
+    transition:
+      border-color 0.25s var(--ease),
+      box-shadow 0.25s var(--ease),
+      opacity 0.7s var(--ease),
+      transform 0.7s var(--ease);
+  }
+
+  .faq__item[open] {
+    border-color: var(--teal-200);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding-block: 1.25rem;
+    font-family: var(--font-display);
+    font-size: calc(1.25rem * var(--display-scale));
+    font-weight: 600;
+    line-height: calc(var(--display-leading) + 0.15);
+    color: var(--navy-900);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 0.7rem;
+    background: var(--teal-100);
+    transition:
+      background-color 0.25s var(--ease),
+      transform 0.25s var(--ease);
+  }
+
+  .faq__icon::before,
+  .faq__icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.8rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--teal-800);
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s var(--ease);
+  }
+
+  .faq__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .faq__item[open] .faq__icon {
+    background: var(--saffron-500);
+  }
+
+  .faq__item[open] .faq__icon::before,
+  .faq__item[open] .faq__icon::after {
+    background: var(--navy-950);
+  }
+
+  .faq__item[open] .faq__icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .faq__item p {
+    max-width: 44rem;
+    padding-bottom: 1.5rem;
+    color: var(--ink-soft);
+  }
+</style>

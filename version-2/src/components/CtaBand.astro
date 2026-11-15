@@ -1,0 +1,89 @@
+---
+import Icon from './Icon.astro';
+import Shamsa from './Shamsa.astro';
+import { getDict, type Lang } from '../i18n';
+import { pageHref } from '../lib/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section class="cta">
+  <div class="container">
+    <div class="cta__panel on-dark" data-reveal>
+      <span class="pattern pattern--fade-side"></span>
+      <Shamsa variant="ring" size={260} class="cta__mark" />
+      <div class="cta__copy">
+        <h2 class="cta__title">{t.common.cta.title}</h2>
+        <p class="cta__text">{t.common.cta.text}</p>
+      </div>
+      <a class="btn btn--saffron" href={pageHref(lang, 'trial')}>
+        {t.common.cta.button}
+        <Icon name="arrow" size={18} />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-block: 0 var(--section);
+  }
+
+  .cta__panel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.75rem 3rem;
+    padding: clamp(2rem, 5vw, 3.75rem);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(120deg, var(--teal-800), var(--teal-600));
+    color: #fff;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .cta__panel .pattern {
+    z-index: -1;
+    --pattern-color: #fff;
+    --pattern-opacity: 0.16;
+  }
+
+  .cta__panel :global(.cta__mark) {
+    position: absolute;
+    z-index: -1;
+    right: -3.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: none;
+    color: rgba(255, 255, 255, 0.14);
+  }
+
+  .cta__copy {
+    max-width: 38rem;
+  }
+
+  .cta__title {
+    font-size: calc(clamp(1.8rem, 2.2vw + 1rem, 2.6rem) * var(--display-scale));
+    color: #fff;
+  }
+
+  .cta__text {
+    margin-top: 0.6rem;
+    font-size: 1.12rem;
+    color: #d9f1ee;
+  }
+
+  @media (max-width: 40rem) {
+    .cta__panel .btn {
+      width: 100%;
+    }
+  }
+</style>

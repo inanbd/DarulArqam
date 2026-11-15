@@ -1,0 +1,29 @@
+---
+import { star } from '../lib/geometry';
+
+/**
+ * A shamsa: the sunburst medallion of illuminated Quran manuscripts.
+ * 'solid' is a filled twelve-pointed star, 'ring' adds an open centre.
+ */
+interface Props {
+  size?: number;
+  variant?: 'solid' | 'ring';
+  class?: string;
+}
+
+const { size = 14, variant = 'solid', class: className } = Astro.props;
+---
+
+<svg class={className} width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  {
+    variant === 'solid' ? (
+      <polygon points={star(24, 24, 23, 17.5, 12)} fill="currentColor" />
+    ) : (
+      <>
+        <polygon points={star(24, 24, 23, 18.5, 12)} fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+        <circle cx="24" cy="24" r="12.5" fill="none" stroke="currentColor" stroke-width="1.2" />
+        <polygon points={star(24, 24, 7, 4.2, 6)} fill="currentColor" />
+      </>
+    )
+  }
+</svg>

@@ -1,0 +1,203 @@
+---
+import Page from '../layouts/Page.astro';
+import PageHero from '../components/PageHero.astro';
+import Pillars from '../components/Pillars.astro';
+import Shamsa from '../components/Shamsa.astro';
+import TimeBand from '../components/TimeBand.astro';
+import { arabic, getDict, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<Page lang={lang} page="about">
+  <PageHero lang={lang} page="about" />
+
+  <section class="section">
+    <div class="container story">
+      <figure class="medallion" data-reveal>
+        <div class="medallion__disc">
+          <span class="pattern"></span>
+          <span class="medallion__ring" aria-hidden="true"></span>
+          <p class="medallion__name" lang="ar" dir="rtl">{arabic.name}</p>
+        </div>
+        <figcaption class="medallion__caption">{t.about.medallionCaption}</figcaption>
+      </figure>
+
+      <div class="story__copy" data-reveal style="--reveal-order: 1">
+        <p class="kicker"><Shamsa size={14} />{t.about.eyebrow}</p>
+        <h2 class="title">{t.about.title}</h2>
+        {t.about.paragraphs.map((paragraph) => <p class="story__text">{paragraph}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container">
+      <header class="heading heading--center" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{t.common.valuesTitle}</p>
+      </header>
+      <ul class="values">
+        {
+          t.about.values.map((value, index) => (
+            <li class="value card" data-reveal style={`--reveal-order: ${index}`}>
+              <span class="value__gloss">{value.gloss}</span>
+              <h3 class="value__name">{value.name}</h3>
+              <p class="value__text">{value.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <header class="heading" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{t.brand.tagline}</p>
+        <h2 class="title">{t.common.different}</h2>
+      </header>
+      <div class="block">
+        <Pillars lang={lang} />
+      </div>
+      <div class="block">
+        <TimeBand lang={lang} />
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .block {
+    margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
+  }
+
+  .story {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(2.5rem, 7vw, 6rem);
+  }
+
+  .story__text {
+    margin-top: 1.25rem;
+    color: var(--ink-soft);
+  }
+
+  .story__text:first-of-type {
+    margin-top: 1.5rem;
+    font-size: 1.14rem;
+    color: var(--ink);
+  }
+
+  /* ----- Medallion ----- */
+
+  .medallion {
+    width: min(100%, 24rem);
+    margin-inline: auto;
+  }
+
+  .medallion__disc {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(70% 70% at 70% 20%, rgba(34, 71, 164, 0.85), transparent 70%),
+      linear-gradient(160deg, var(--navy-800), var(--navy-950));
+    box-shadow:
+      0 0 0 10px var(--paper),
+      0 0 0 12px var(--saffron-500),
+      0 0 0 26px var(--teal-100),
+      var(--shadow-lift);
+  }
+
+  .medallion__disc .pattern {
+    z-index: -1;
+    --pattern-color: #8fb0ff;
+    --pattern-opacity: 0.3;
+  }
+
+  .medallion__ring {
+    position: absolute;
+    inset: 1.1rem;
+    border: 1px solid rgba(243, 192, 99, 0.45);
+    border-radius: 50%;
+  }
+
+  .medallion__name {
+    font-family: var(--font-kufi);
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    font-weight: 600;
+    line-height: 1.4;
+    color: #fff;
+  }
+
+  .medallion__caption {
+    margin-top: 2.75rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  /* ----- Values ----- */
+
+  .values {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+    margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+
+  .value {
+    padding: 2rem 1.75rem;
+    text-align: center;
+  }
+
+  .value__gloss {
+    display: inline-block;
+    padding: 0.25rem 0.85rem;
+    border-radius: 999px;
+    background: var(--teal-100);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-800);
+  }
+
+  :global(html[lang='bn']) .value__gloss {
+    font-size: 0.94rem;
+    letter-spacing: 0;
+  }
+
+  .value__name {
+    margin-top: 1rem;
+    font-size: calc(2.1rem * var(--display-scale));
+    color: var(--navy-900);
+  }
+
+  .value__text {
+    margin-top: 0.6rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 56rem) {
+    .story,
+    .values {
+      grid-template-columns: 1fr;
+    }
+
+    .medallion {
+      width: min(72%, 19rem);
+    }
+  }
+</style>

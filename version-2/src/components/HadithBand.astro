@@ -1,0 +1,74 @@
+---
+import Shamsa from './Shamsa.astro';
+import { arabic, getDict, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section class="hadith section section--tint">
+  <blockquote class="container hadith__inner" data-reveal>
+    <p class="kicker">
+      <Shamsa size={14} />
+      {t.common.hadithLabel}
+    </p>
+    <p class="hadith__arabic" lang="ar" dir="rtl">{arabic.hadith}</p>
+    <p class="hadith__text">{t.hero.hadith.text}</p>
+    <footer class="hadith__source">
+      <cite>{t.hero.hadith.source}</cite>
+      <span>{t.hero.hadith.reference}</span>
+    </footer>
+  </blockquote>
+</section>
+
+<style>
+  .hadith__inner {
+    display: grid;
+    justify-items: center;
+    gap: 1.25rem;
+    margin-block: 0;
+    text-align: center;
+  }
+
+  .hadith__arabic {
+    font-size: clamp(2rem, 3vw + 1rem, 3.2rem);
+    font-weight: 500;
+    line-height: 1.9;
+    color: var(--navy-900);
+    text-wrap: balance;
+  }
+
+  .hadith__text {
+    max-width: 38rem;
+    font-family: var(--font-display);
+    font-size: calc(clamp(1.3rem, 1vw + 1.05rem, 1.7rem) * var(--display-scale));
+    line-height: calc(var(--display-leading) + 0.25);
+    color: var(--teal-800);
+    text-wrap: balance;
+  }
+
+  .hadith__source {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+
+  .hadith__source cite {
+    font-style: normal;
+    color: var(--navy-900);
+  }
+
+  .hadith__source span::before {
+    content: '·';
+    margin-right: 0.9rem;
+    color: var(--saffron-600);
+  }
+</style>

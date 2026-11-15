@@ -1,0 +1,229 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../config/site';
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+import { pageHref } from '../lib/routes';
+
+/** The tuition plans, and what every plan includes. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<ul class="plans">
+  {
+    site.plans.map((plan, index) => {
+      const copy = t.tuition.plans[plan.id];
+      return (
+        <li class:list={['plan', 'card', { 'plan--featured': plan.featured }]} data-reveal style={`--reveal-order: ${index}`}>
+          {plan.featured && <span class="plan__flag">{t.tuition.featured}</span>}
+          <h2 class="plan__name">{copy.name}</h2>
+          <p class="plan__frequency">{t.tuition.perWeek(num(plan.classesPerWeek, lang))}</p>
+          <p class="plan__price">
+            <span class="plan__currency">$</span>
+            <span class="plan__amount">{num(plan.monthlyUsd, lang)}</span>
+            <span class="plan__period">{t.tuition.perMonth}</span>
+          </p>
+          <p class="plan__text">{copy.text}</p>
+          <p class="plan__count">
+            <Icon name="calendar" size={18} />
+            {t.tuition.perMonthClasses(num(plan.classesPerMonth, lang))}
+          </p>
+          <a class:list={['btn', 'btn--block', plan.featured ? 'btn--saffron' : 'btn--outline']} href={pageHref(lang, 'trial')}>
+            {t.tuition.choose}
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>
+
+<div class="included card" data-reveal>
+  <h2 class="included__title">{t.tuition.includedTitle}</h2>
+  <ul class="ticks included__list">
+    {t.tuition.included.map((item) => <li>{item}</li>)}
+  </ul>
+  <p class="included__note">{t.tuition.note}</p>
+</div>
+
+<style>
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(1rem, 2.5vw, 1.75rem);
+  }
+
+  .plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  .plan--featured {
+    border-color: var(--navy-900);
+    background:
+      radial-gradient(90% 60% at 100% 0%, rgba(34, 71, 164, 0.8), transparent 70%),
+      linear-gradient(160deg, var(--navy-800), var(--navy-950));
+    color: var(--on-dark);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .plan__flag {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    background: var(--saffron-500);
+    color: var(--navy-950);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  :global(html[lang='bn']) .plan__flag {
+    font-size: 0.86rem;
+    letter-spacing: 0;
+  }
+
+  .plan__name {
+    font-size: calc(1.7rem * var(--display-scale));
+  }
+
+  .plan--featured .plan__name {
+    color: #fff;
+  }
+
+  .plan__frequency {
+    margin-top: 0.15rem;
+    font-weight: 600;
+    color: var(--teal-700);
+  }
+
+  .plan--featured .plan__frequency {
+    color: var(--saffron-400);
+  }
+
+  .plan__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+    margin-top: 1.5rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--sand-200);
+    font-family: var(--font-display);
+    color: var(--navy-900);
+  }
+
+  .plan--featured .plan__price {
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #fff;
+  }
+
+  .plan__currency {
+    align-self: flex-start;
+    margin-top: 0.55rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .plan__amount {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .plan__period {
+    margin-left: 0.4rem;
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+  }
+
+  .plan--featured .plan__period {
+    color: var(--on-dark-soft);
+  }
+
+  .plan__text {
+    margin-top: 1.4rem;
+    color: var(--ink-soft);
+  }
+
+  .plan--featured .plan__text {
+    color: var(--on-dark);
+  }
+
+  .plan__count {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.9rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: var(--navy-900);
+  }
+
+  .plan__count :global(svg) {
+    color: var(--teal-600);
+  }
+
+  .plan--featured .plan__count {
+    color: #fff;
+  }
+
+  .plan--featured .plan__count :global(svg) {
+    color: var(--saffron-400);
+  }
+
+  .plan .btn {
+    margin-top: auto;
+  }
+
+  /* ----- Included with every plan ----- */
+
+  .included {
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    padding: clamp(1.75rem, 3.5vw, 2.75rem);
+    background: var(--teal-50);
+    border-color: var(--teal-200);
+    box-shadow: none;
+  }
+
+  .included__title {
+    font-size: calc(1.6rem * var(--display-scale));
+  }
+
+  .included__list {
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0.85rem 2rem;
+    margin-top: 1.25rem;
+  }
+
+  .included__list li::before {
+    background-color: #fff;
+  }
+
+  .included__note {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px dashed var(--teal-200);
+    font-weight: 600;
+    color: var(--teal-800);
+  }
+
+  @media (max-width: 58rem) {
+    .plans {
+      grid-template-columns: 1fr;
+      max-width: 28rem;
+      margin-inline: auto;
+    }
+  }
+</style>

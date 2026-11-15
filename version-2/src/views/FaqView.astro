@@ -1,0 +1,50 @@
+---
+import Page from '../layouts/Page.astro';
+import ContactCard from '../components/ContactCard.astro';
+import FaqList from '../components/FaqList.astro';
+import PageHero from '../components/PageHero.astro';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Page lang={lang} page="faq">
+  <PageHero lang={lang} page="faq" />
+
+  <section class="section">
+    <div class="container columns">
+      <FaqList lang={lang} />
+      <div class="columns__aside" data-reveal>
+        <ContactCard lang={lang} />
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .columns__aside {
+    position: sticky;
+    top: 6.5rem;
+  }
+
+  @media (max-width: 58rem) {
+    .columns {
+      grid-template-columns: 1fr;
+    }
+
+    .columns__aside {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+import Page from '../layouts/Page.astro';
+import ContactCard from '../components/ContactCard.astro';
+import PageHero from '../components/PageHero.astro';
+import TrialForm from '../components/TrialForm.astro';
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+// After the request comes the trial class, the schedule and the lessons.
+const next = t.how.steps.slice(1);
+---
+
+<Page lang={lang} page="trial">
+  <PageHero lang={lang} page="trial" />
+
+  <section class="section">
+    <div class="container columns">
+      <div data-reveal>
+        <TrialForm lang={lang} />
+      </div>
+
+      <div class="columns__aside" data-reveal style="--reveal-order: 1">
+        <aside class="next card">
+          <h2 class="next__title">{t.common.nextTitle}</h2>
+          <ol>
+            {
+              next.map((step, index) => (
+                <li>
+                  <span class="next__number">{num(index + 1, lang)}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.text}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </aside>
+        <ContactCard lang={lang} />
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .columns__aside {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .next {
+    padding: 1.75rem;
+    background: var(--teal-50);
+    border-color: var(--teal-200);
+    box-shadow: none;
+  }
+
+  .next__title {
+    font-size: calc(1.4rem * var(--display-scale));
+  }
+
+  .next ol {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .next li {
+    display: flex;
+    gap: 0.9rem;
+  }
+
+  .next__number {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    background: var(--navy-900);
+    color: var(--saffron-400);
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .next h3 {
+    font-size: calc(1.1rem * var(--display-scale));
+  }
+
+  .next p {
+    margin-top: 0.2rem;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 60rem) {
+    .columns {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
