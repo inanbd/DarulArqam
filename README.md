@@ -7,7 +7,7 @@ This repository holds **three designs** of the site, with the same content, so t
 | | Design 1, classic | Design 2, modern | Design 3, the book |
 | --- | --- | --- | --- |
 | Layout | A long home page, with a page for each program | Twelve separate pages | A book of 64 pages that opens and turns as you scroll |
-| Look | The academy's logo and colours: emerald, soft gold and off-white; pointed arches and a star lattice | Lapis blue, turquoise and saffron on warm paper; round forms | Burgundy leather, gold leaf and cream paper; illuminated verse plates |
+| Look | The academy's logo and colours: emerald, soft gold and off-white; pointed arches and a star lattice | The academy's logo and colours, on off-white; round forms and cards | Burgundy leather, gold leaf and cream paper; illuminated verse plates |
 | Sources | This folder (`src/`) | [`version-2/`](version-2) | [`version-3/`](version-3) |
 | HTML files | [`html/`](html) | [`version-2/html/`](version-2/html) | [`version-3/html/`](version-3/html) |
 | Guide | This file | [`version-2/README.md`](version-2/README.md) | [`version-3/README.md`](version-3/README.md) |

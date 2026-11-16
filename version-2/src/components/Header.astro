@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
+import Wordmark from './Wordmark.astro';
 import Shamsa from './Shamsa.astro';
 import { site } from '../config/site';
 import { getDict, published, type Lang } from '../i18n';
@@ -49,9 +50,9 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
 <header class="site-header" data-header>
   <div class="container site-header__inner">
     <a class="brand" href={pageHref(lang, 'home')} aria-label={`${t.brand.name} — ${t.brand.tagline}`}>
-      <Logo size={48} />
+      <Logo size={52} variant="color" />
       <span class="brand__text">
-        <span class="brand__name">{t.brand.name}</span>
+        <span class="brand__name"><Wordmark height={20} /></span>
         <span class="brand__tagline">{t.brand.tagline}</span>
       </span>
     </a>
@@ -185,7 +186,7 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(255, 253, 248, 0.92);
+    background: rgba(247, 248, 244, 0.92);
     border-bottom: 1px solid transparent;
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
@@ -197,7 +198,7 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
   .site-header.is-scrolled,
   .site-header.is-open {
     border-bottom-color: var(--sand-200);
-    box-shadow: 0 14px 30px -26px rgba(15, 27, 56, 0.6);
+    box-shadow: 0 14px 30px -26px rgba(23, 41, 35, 0.6);
   }
 
   .site-header.is-open {
@@ -228,7 +229,7 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
     font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--navy-900);
+    color: var(--teal-600);
   }
 
   .brand__tagline {
@@ -391,7 +392,7 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
       padding: 0.75rem var(--gutter) 1.75rem;
       background: var(--paper);
       border-bottom: 1px solid var(--sand-200);
-      box-shadow: 0 30px 40px -30px rgba(15, 27, 56, 0.5);
+      box-shadow: 0 30px 40px -30px rgba(23, 41, 35, 0.5);
       max-height: calc(100dvh - 4.5rem);
       overflow-y: auto;
     }

@@ -98,46 +98,46 @@
 }
 /* ------------------------------------------------------------------
    Darul Arqam, second design: design tokens, base styles, shared pieces.
-   Lapis blue, turquoise and saffron on warm paper, with round forms.
+   The colours of the academy's logo sheet (emerald greens, soft gold, off-white), with round forms.
    Section-specific styles live beside each component.
 ------------------------------------------------------------------- */
 
 :root {
   /* Lapis and night blue */
-  --navy-950: #071126;
-  --navy-900: #0b1a3b;
-  --navy-800: #122658;
-  --navy-700: #1a3478;
-  --lapis: #2247a4;
+  --navy-950: #042a21;
+  --navy-900: #063d30; /* Deep Emerald */
+  --navy-800: #075040;
+  --navy-700: #08664b;
+  --lapis: #172923; /* Dark Text, as the third accent */
 
   /* Turquoise */
-  --teal-800: #085a60;
-  --teal-700: #0b7078;
-  --teal-600: #0f8a8c;
-  --teal-500: #1aa6a0;
-  --teal-200: #b9e6e0;
-  --teal-100: #dbf2ee;
-  --teal-50: #eef9f6;
+  --teal-800: #06523f;
+  --teal-700: #08664b;
+  --teal-600: #087c59; /* Islamic Green */
+  --teal-500: #0f9a70;
+  --teal-200: #b5dccb;
+  --teal-100: #d9ede4;
+  --teal-50: #edf5f0;
 
   /* Saffron */
-  --saffron-600: #d18f1c;
-  --saffron-500: #eaa93b;
-  --saffron-400: #f3c063;
-  --saffron-100: #fbedcf;
-  --saffron-ink: #8a5a06; /* saffron that stays readable as small text on paper */
+  --saffron-600: #b8964a;
+  --saffron-500: #d6b66d; /* Soft Gold */
+  --saffron-400: #dfc689;
+  --saffron-100: #f4ead0;
+  --saffron-ink: #7a5d1f; /* saffron that stays readable as small text on paper */
 
   /* Paper */
-  --paper: #fffdf8;
-  --sand-50: #fbf7ee;
-  --sand-100: #f6eedd;
-  --sand-200: #ece0c6;
-  --sand-300: #dccba6;
+  --paper: #f7f8f4; /* Off White */
+  --sand-50: #f1f3ec;
+  --sand-100: #e9ece3;
+  --sand-200: #dde1d4;
+  --sand-300: #c8cfbf;
 
   /* Text */
-  --ink: #0f1b38;
-  --ink-soft: #4a5775;
-  --on-dark: #f4f6fb;
-  --on-dark-soft: #b4c0dc;
+  --ink: #172923; /* Dark Text */
+  --ink-soft: #4d5c54;
+  --on-dark: #f7f8f4;
+  --on-dark-soft: #b3c7bd;
 
   --font-display: 'El Messiri Variable', 'Anek Bangla Variable', 'Noto Naskh Arabic Variable', system-ui, sans-serif;
   --font-body: 'Figtree Variable', 'Noto Sans Bengali Variable', 'Noto Naskh Arabic Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -157,8 +157,8 @@
   --radius-sm: 0.75rem;
   --radius: 1.25rem;
   --radius-lg: 2rem;
-  --shadow-card: 0 1px 2px rgba(15, 27, 56, 0.04), 0 12px 32px -18px rgba(15, 27, 56, 0.22);
-  --shadow-lift: 0 2px 4px rgba(15, 27, 56, 0.05), 0 28px 50px -24px rgba(15, 27, 56, 0.35);
+  --shadow-card: 0 1px 2px rgba(23, 41, 35, 0.04), 0 12px 32px -18px rgba(23, 41, 35, 0.22);
+  --shadow-lift: 0 2px 4px rgba(23, 41, 35, 0.05), 0 28px 50px -24px rgba(23, 41, 35, 0.35);
   --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
 
   /* A lattice of overlapping circles, used as a mask so it can take any colour. */
@@ -432,7 +432,7 @@ html[lang='bn'] .kicker {
 .btn--saffron {
   background: var(--saffron-500);
   color: var(--navy-950);
-  box-shadow: 0 10px 24px -12px rgba(209, 143, 28, 0.9);
+  box-shadow: 0 10px 24px -12px rgba(184, 150, 74, 0.9);
 }
 
 .btn--saffron:hover {
@@ -442,7 +442,7 @@ html[lang='bn'] .kicker {
 .btn--navy {
   background: var(--navy-900);
   color: #fff;
-  box-shadow: 0 10px 24px -14px rgba(11, 26, 59, 0.9);
+  box-shadow: 0 10px 24px -14px rgba(6, 61, 48, 0.9);
 }
 
 .btn--navy:hover {
@@ -938,6 +938,24 @@ html[lang='bn'] .ticks li::before {
   color: var(--saffron-ink);
   white-space: nowrap;
 }
+.logo[data-astro-cid-f7espo7c] {
+  width: auto;
+}
+
+.logo--color[data-astro-cid-f7espo7c] .logo__green[data-astro-cid-f7espo7c] {
+  fill: #087c59;
+}
+
+.logo--color[data-astro-cid-f7espo7c] .logo__gold[data-astro-cid-f7espo7c] {
+  fill: #deaf67;
+}
+
+.logo--light[data-astro-cid-f7espo7c] path[data-astro-cid-f7espo7c] {
+  fill: currentColor;
+}
+.wordmark[data-astro-cid-qisgtjgl] {
+  width: auto;
+}
 .footer[data-astro-cid-jo6i4kqk] {
   position: relative;
   isolation: isolate;
@@ -947,7 +965,7 @@ html[lang='bn'] .ticks li::before {
 
 .footer[data-astro-cid-jo6i4kqk] .pattern[data-astro-cid-jo6i4kqk] {
   z-index: -1;
-  --pattern-color: #6d8ee0;
+  --pattern-color: #5fb394;
   --pattern-opacity: .2;
 }
 
@@ -959,6 +977,7 @@ html[lang='bn'] .ticks li::before {
 }
 
 .footer__logo[data-astro-cid-jo6i4kqk] {
+  color: var(--on-dark);
   display: inline-flex;
   align-items: center;
   gap: .9rem;
@@ -1050,7 +1069,7 @@ html[lang="bn"] .footer__heading[data-astro-cid-jo6i4kqk] {
   justify-content: space-between;
   gap: .5rem 2rem;
   padding-block: 1.5rem 2rem;
-  border-top: 1px solid #b4c0dc2e;
+  border-top: 1px solid #b3c7bd2e;
   font-size: .9rem;
 }
 
@@ -1129,7 +1148,7 @@ html[lang="bn"] .footer__heading[data-astro-cid-jo6i4kqk] {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #fffdf8eb;
+  background: #f7f8f4eb;
   border-bottom: 1px solid #0000;
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
@@ -1139,7 +1158,7 @@ html[lang="bn"] .footer__heading[data-astro-cid-jo6i4kqk] {
 
 .site-header[data-astro-cid-nen7h5rs].is-scrolled, .site-header[data-astro-cid-nen7h5rs].is-open {
   border-bottom-color: var(--sand-200);
-  box-shadow: 0 14px 30px -26px #0f1b3899;
+  box-shadow: 0 14px 30px -26px #17292399;
 }
 
 .site-header[data-astro-cid-nen7h5rs].is-open {
@@ -1170,7 +1189,7 @@ html[lang="bn"] .footer__heading[data-astro-cid-jo6i4kqk] {
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--navy-900);
+  color: var(--teal-600);
 }
 
 .brand__tagline[data-astro-cid-nen7h5rs] {
@@ -1328,7 +1347,7 @@ html[lang="bn"] .brand__tagline[data-astro-cid-nen7h5rs] {
     padding: .75rem var(--gutter) 1.75rem;
     background: var(--paper);
     border-bottom: 1px solid var(--sand-200);
-    box-shadow: 0 30px 40px -30px #0f1b3880;
+    box-shadow: 0 30px 40px -30px #17292380;
     max-height: calc(100dvh - 4.5rem);
     overflow-y: auto;
   }
@@ -1504,7 +1523,7 @@ h1[data-astro-cid-ibpinaeu] {
 .cta__text[data-astro-cid-hwvj6ntz] {
   margin-top: .6rem;
   font-size: 1.12rem;
-  color: #d9f1ee;
+  color: #dcefe6;
 }
 
 @media (width <= 40rem) {
@@ -1521,7 +1540,7 @@ h1[data-astro-cid-ibpinaeu] {
   gap: 1.4rem;
   padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3.5vw, 2.75rem);
   border-radius: var(--radius-lg);
-  background: radial-gradient(90% 70% at 100% 0%, #2247a4bf, transparent 70%),
+  background: radial-gradient(90% 70% at 100% 0%, #087c59bf, transparent 70%),
       linear-gradient(160deg, var(--navy-800), var(--navy-950));
   color: var(--on-dark);
   text-align: center;
@@ -1530,7 +1549,7 @@ h1[data-astro-cid-ibpinaeu] {
 
 .ayah[data-astro-cid-qvbgleoi] .pattern[data-astro-cid-qvbgleoi] {
   z-index: -1;
-  --pattern-color: #8fb0ff;
+  --pattern-color: #8fd8b8;
   --pattern-opacity: .35;
 }
 
@@ -1538,7 +1557,7 @@ h1[data-astro-cid-ibpinaeu] {
   position: absolute;
   inset: .7rem;
   z-index: -1;
-  border: 1px solid #f3c06359;
+  border: 1px solid #d6b66d59;
   border-radius: calc(var(--radius-lg) - .6rem);
   pointer-events: none;
 }
@@ -1612,7 +1631,7 @@ html[lang="bn"] .ayah__label[data-astro-cid-qvbgleoi] {
   content: "";
   width: 1.75rem;
   height: 1px;
-  background: #f3c06399;
+  background: #d6b66d99;
 }
 .page-hero[data-astro-cid-75ysl5lo] {
   position: relative;
@@ -1743,7 +1762,7 @@ html[lang="bn"] .ayah__label[data-astro-cid-qvbgleoi] {
   gap: clamp(1.75rem, 4vw, 3.5rem);
   padding: clamp(1.75rem, 4vw, 3.25rem);
   border-radius: var(--radius-lg);
-  background: radial-gradient(80% 90% at 100% 0%, #2247a4b3, transparent 70%),
+  background: radial-gradient(80% 90% at 100% 0%, #087c59b3, transparent 70%),
       linear-gradient(140deg, var(--navy-800), var(--navy-950));
   color: var(--on-dark);
   box-shadow: var(--shadow-lift);
@@ -1751,7 +1770,7 @@ html[lang="bn"] .ayah__label[data-astro-cid-qvbgleoi] {
 
 .timeband[data-astro-cid-lo7mdono] .pattern[data-astro-cid-lo7mdono] {
   z-index: -1;
-  --pattern-color: #8fb0ff;
+  --pattern-color: #8fd8b8;
   --pattern-opacity: .3;
 }
 
@@ -1795,8 +1814,8 @@ html[lang="bn"] .ayah__label[data-astro-cid-qvbgleoi] {
 }
 
 .clock--dhaka[data-astro-cid-lo7mdono] {
-  border-color: #f3c06380;
-  background: #f3c0631a;
+  border-color: #d6b66d80;
+  background: #d6b66d1a;
 }
 
 .clock__label[data-astro-cid-lo7mdono] {
@@ -1873,7 +1892,7 @@ html[lang="bn"] .clock__label[data-astro-cid-lo7mdono] {
   place-items: center;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(70% 70% at 70% 20%, #2247a4d9, transparent 70%),
+  background: radial-gradient(70% 70% at 70% 20%, #087c59d9, transparent 70%),
       linear-gradient(160deg, var(--navy-800), var(--navy-950));
   box-shadow: 0 0 0 10px var(--paper),
       0 0 0 12px var(--saffron-500),
@@ -1883,14 +1902,14 @@ html[lang="bn"] .clock__label[data-astro-cid-lo7mdono] {
 
 .medallion__disc[data-astro-cid-efz3t45k] .pattern[data-astro-cid-efz3t45k] {
   z-index: -1;
-  --pattern-color: #8fb0ff;
+  --pattern-color: #8fd8b8;
   --pattern-opacity: .3;
 }
 
 .medallion__ring[data-astro-cid-efz3t45k] {
   position: absolute;
   inset: 1.1rem;
-  border: 1px solid #f3c06373;
+  border: 1px solid #d6b66d73;
   border-radius: 50%;
 }
 
@@ -2095,8 +2114,8 @@ html[lang="bn"] .clock__label[data-astro-cid-lo7mdono] {
 }
 
 .principle[data-astro-cid-bzmcxrvn]:nth-child(3) {
-  background: #e8eefb;
-  border-color: #b9c9ee;
+  background: #e3efe8;
+  border-color: #b5dccb;
 }
 
 .principle[data-astro-cid-bzmcxrvn]:nth-child(4) {
@@ -2709,7 +2728,7 @@ html[lang="bn"] .contact__label[data-astro-cid-qox7tg37] {
   outline: none;
   border-color: var(--teal-600);
   background-color: #fff;
-  box-shadow: 0 0 0 4px #1aa6a033;
+  box-shadow: 0 0 0 4px #0f9a7033;
 }
 
 .form__trap[data-astro-cid-uczwokaa] {
@@ -2859,7 +2878,7 @@ html[lang="bn"] .contact__label[data-astro-cid-qox7tg37] {
   font-family: var(--font-kufi);
   font-size: 6.5rem;
   line-height: 1.4;
-  color: #d18f1c33;
+  color: #b8964a33;
   pointer-events: none;
 }
 
@@ -2926,7 +2945,7 @@ html[lang="bn"] .contact__label[data-astro-cid-qox7tg37] {
 
 .track--dark[data-astro-cid-n7hmk57k] {
   border-color: var(--navy-900);
-  background: radial-gradient(90% 60% at 100% 0%, #2247a4cc, transparent 70%),
+  background: radial-gradient(90% 60% at 100% 0%, #087c59cc, transparent 70%),
       linear-gradient(160deg, var(--navy-800), var(--navy-950));
   color: var(--on-dark);
 }
@@ -2991,7 +3010,7 @@ html[lang="bn"] .contact__label[data-astro-cid-qox7tg37] {
 
 .cycle__part[data-astro-cid-n7hmk57k]:nth-child(3) .cycle__ring[data-astro-cid-n7hmk57k] {
   border-color: var(--lapis);
-  box-shadow: 0 0 0 .6rem #dfe7fa,
+  box-shadow: 0 0 0 .6rem #dcebe3,
       var(--shadow-card);
 }
 
@@ -3175,7 +3194,7 @@ html[lang="bn"] .contact__label[data-astro-cid-qox7tg37] {
 }
 
 .learner[data-astro-cid-td55ciea]:nth-child(3) .learner__icon[data-astro-cid-td55ciea] {
-  background: #dfe7fa;
+  background: #dcebe3;
   color: var(--lapis);
 }
 
@@ -3643,7 +3662,7 @@ html[lang="bn"] .teacher__example[data-astro-cid-2xaauxp5] {
 
 .plan--featured[data-astro-cid-i7nfoaoc] {
   border-color: var(--navy-900);
-  background: radial-gradient(90% 60% at 100% 0%, #2247a4cc, transparent 70%),
+  background: radial-gradient(90% 60% at 100% 0%, #087c59cc, transparent 70%),
       linear-gradient(160deg, var(--navy-800), var(--navy-950));
   color: var(--on-dark);
   box-shadow: var(--shadow-lift);

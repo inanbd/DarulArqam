@@ -42,7 +42,7 @@ const length = text.length > 120 ? 'long' : text.length > 60 ? 'medium' : 'short
     padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3.5vw, 2.75rem);
     border-radius: var(--radius-lg);
     background:
-      radial-gradient(90% 70% at 100% 0%, rgba(34, 71, 164, 0.75), transparent 70%),
+      radial-gradient(90% 70% at 100% 0%, rgba(8, 124, 89, 0.75), transparent 70%),
       linear-gradient(160deg, var(--navy-800), var(--navy-950));
     color: var(--on-dark);
     text-align: center;
@@ -51,7 +51,7 @@ const length = text.length > 120 ? 'long' : text.length > 60 ? 'medium' : 'short
 
   .ayah .pattern {
     z-index: -1;
-    --pattern-color: #8fb0ff;
+    --pattern-color: #8fd8b8;
     --pattern-opacity: 0.35;
   }
 
@@ -60,7 +60,7 @@ const length = text.length > 120 ? 'long' : text.length > 60 ? 'medium' : 'short
     position: absolute;
     inset: 0.7rem;
     z-index: -1;
-    border: 1px solid rgba(243, 192, 99, 0.35);
+    border: 1px solid rgba(214, 182, 109, 0.35);
     border-radius: calc(var(--radius-lg) - 0.6rem);
     pointer-events: none;
   }
@@ -135,6 +135,6 @@ const length = text.length > 120 ? 'long' : text.length > 60 ? 'medium' : 'short
     content: '';
     width: 1.75rem;
     height: 1px;
-    background: rgba(243, 192, 99, 0.6);
+    background: rgba(214, 182, 109, 0.6);
   }
 </style>

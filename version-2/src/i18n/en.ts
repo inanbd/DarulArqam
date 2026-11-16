@@ -11,7 +11,7 @@ export const en = {
       'Live one-on-one Qur’an classes for children, adults and sisters in the USA, taught by qualified imams and huffaz from Bangladesh. Qur’an reading, Tajweed, Hifz and Islamic studies. Book a free trial class.',
   },
 
-  brand: { name: 'Darul Arqam', tagline: 'Online Qur’an Academy' },
+  brand: { name: 'Darul Arqam', tagline: 'Islamic Institute' },
 
   nav: {
     label: 'Main',
