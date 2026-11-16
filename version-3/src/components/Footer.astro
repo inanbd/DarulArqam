@@ -2,7 +2,7 @@
 import Star from './Star.astro';
 import { site } from '../config/site';
 import { arabic, getDict, type Lang } from '../i18n';
-import { asset, num } from '../lib/format';
+import { num } from '../lib/format';
 
 interface Props {
   lang: Lang;
@@ -10,7 +10,6 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getDict(lang);
-const other = t.alt.lang as Lang;
 const { email, whatsappNumber, whatsappDisplay } = site.contact;
 const year = num(new Date().getFullYear(), lang);
 ---
@@ -38,9 +37,6 @@ const year = num(new Date().getFullYear(), lang);
           </li>
         )
       }
-      <li>
-        <a href={asset(other === 'bn' ? '/bn/index.html' : '/index.html')} lang={other} hreflang={other}>{t.alt.label}</a>
-      </li>
     </ul>
     <p class="footer__base">
       © {year} {t.brand.name}. {t.footer.rights}

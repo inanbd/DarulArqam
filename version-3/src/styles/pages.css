@@ -1174,3 +1174,185 @@ html[lang='bn'] .question__q {
 .book__flow .page--half .page__body {
   justify-content: center;
 }
+
+/* ========== Pieces for the curriculum pages ========== */
+
+/* The vision, set large like a pull quote. */
+.statement {
+  margin-top: 0.4em;
+  font-size: 1.32em;
+  font-style: italic;
+  line-height: 1.32;
+  color: var(--leather-700);
+}
+
+.entries--tight {
+  gap: 0.7em;
+}
+
+.entry__title a {
+  border-bottom: 1px solid var(--gold-500);
+  transition: color 0.2s var(--ease);
+}
+
+.entry__title a:hover {
+  color: var(--rubric);
+}
+
+/* An Arabic word, or an age range, in place of the star at the head of an entry. */
+.entry__emblem {
+  min-width: 2.4em;
+  font-family: var(--font-ruqaa);
+  font-size: 1.5em;
+  line-height: 1.4;
+  color: var(--gold-500);
+  text-align: center;
+}
+
+.entry__emblem--small {
+  min-width: 2.7em;
+  font-size: 1.15em;
+}
+
+.entry__ages {
+  min-width: 3.4em;
+  font-size: 1.45em;
+  font-weight: 500;
+  line-height: 1.25;
+  font-variant-numeric: lining-nums;
+  color: var(--rubric);
+}
+
+.ticks--tight {
+  gap: 0.4em;
+}
+
+.contents--tight {
+  gap: 0.2em;
+  margin-top: 0.9em;
+}
+
+.contents--tight a,
+.contents__row {
+  font-size: 1em;
+}
+
+/* A row of the contents that leads nowhere: a semester and its level. */
+.contents__row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  padding-block: 0.15em;
+}
+
+.contents__row::after {
+  content: '';
+  order: 2;
+  flex: 1;
+  border-bottom: 1px dotted var(--gold-500);
+  transform: translateY(-0.25em);
+}
+
+.contents__row .contents__number {
+  font-size: 0.66em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* A plain numbered list, as in an index. */
+.numbered {
+  margin-top: 0.8em;
+  counter-reset: item;
+}
+
+.numbered li {
+  display: flex;
+  gap: 0.7em;
+  padding-block: 0.3em;
+  border-bottom: 1px solid var(--paper-edge);
+  line-height: 1.3;
+  counter-increment: item;
+}
+
+.numbered li::before {
+  content: counter(item, decimal-leading-zero);
+  font-family: var(--font-caps);
+  font-size: 0.72em;
+  font-weight: 600;
+  line-height: 1.8;
+  color: var(--rubric);
+}
+
+.numbered--2 {
+  columns: 2;
+  column-gap: 1.6em;
+}
+
+.numbered--2 li {
+  break-inside: avoid;
+}
+
+/* A run of names separated by middle dots. */
+.inline-list {
+  margin-top: 0.6em;
+  line-height: 1.75;
+  color: var(--leather-700);
+}
+
+/* Term and description, one pair to a line. */
+.rows {
+  display: grid;
+  gap: 0.55em;
+  margin: 0.9em 0 0;
+}
+
+.rows div {
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--paper-edge);
+}
+
+.rows dt {
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--leather-700);
+}
+
+.rows dd {
+  font-size: 0.92em;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* How work is graded: each part as a bar of its weight. */
+.weights {
+  display: grid;
+  gap: 0.75em;
+  margin: 1.1em 0 0;
+}
+
+.weights div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.2em 1em;
+  align-items: baseline;
+}
+
+.weights div::after {
+  content: '';
+  grid-column: 1 / -1;
+  height: 0.5em;
+  width: calc(var(--weight) * 2.5%);
+  background: linear-gradient(90deg, var(--leather-600), var(--gold-500));
+}
+
+.weights dt {
+  line-height: 1.3;
+}
+
+.weights dd {
+  font-size: 1.15em;
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
+  color: var(--rubric);
+}

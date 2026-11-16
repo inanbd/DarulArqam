@@ -3,18 +3,20 @@ import PageShell from './PageShell.astro';
 import Plate from './Plate.astro';
 import Rosette from './Rosette.astro';
 import Star from './Star.astro';
+import { alimiyah, deeniyat, framework, hifz, nazirah, programs } from '../content/academy';
 import { site } from '../config/site';
 import { teachers } from '../config/teachers';
 import { arabic, getDict, type Lang } from '../i18n';
-import { chapters } from '../lib/chapters';
+import { chapters, firstPage } from '../lib/chapters';
 import { asset, counter, num } from '../lib/format';
 
 /**
- * The thirty-two pages of the book, in reading order.
+ * The sixty-four pages of the book, in reading order.
  *
  * Each chapter opens with its verse on a left-hand page and has an even number
  * of pages. If you add or remove a page, renumber the ones after it and update
- * `src/lib/chapters.ts`.
+ * `src/lib/chapters.ts`. A page has a fixed size, so each one says only a little;
+ * the full curriculum is in `src/content/academy.ts`.
  */
 interface Props {
   lang: Lang;
@@ -22,30 +24,27 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getDict(lang);
+const c = t.common;
 const p = t.teachers.profiles;
+
+/** The first sentence of a paragraph, for pages that have room for no more. */
+const first = (text: string) => text.split(/(?<=\.)\s/)[0];
 
 const men = teachers.filter((teacher) => teacher.gender === 'male');
 const women = teachers.filter((teacher) => teacher.gender === 'female');
-const [reading, tajweed, hifz, studies] = t.programs.items;
-const programPages = [
-  { program: reading, number: 13 },
-  { program: tajweed, number: 14 },
-  { program: hifz, number: 15 },
-  { program: studies, number: 16 },
-];
 const teacherPages = [
-  { people: men, number: 20, title: p.male, note: '' },
-  { people: women, number: 21, title: p.female, note: p.femaleNote },
+  { people: men, number: 52, title: p.male, note: '' },
+  { people: women, number: 53, title: p.female, note: p.femaleNote },
 ];
-const questionPages = [
-  { items: t.faq.items.slice(0, 2), number: 28, first: true, last: false },
-  { items: t.faq.items.slice(2, 5), number: 29, first: false, last: false },
-  { items: t.faq.items.slice(5), number: 30, first: false, last: true },
-];
+// Nine of the questions, three to a page. The site's other designs carry them all.
+const questions = t.faq.items.slice(0, 9);
+const questionPages = [0, 1, 2].map((index) => ({ items: questions.slice(index * 3, index * 3 + 3), number: 60 + index }));
+const programChapter = { nazirah: 'nazirah', hifz: 'hifz', alimiyah: 'alimiyah' } as const;
 const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.whatsappNumber}` : '';
+const { junior, youth, adult, policies } = alimiyah;
 ---
 
-<!-- ================= Home ================= -->
+<!-- ================= Home: 1–6 ================= -->
 
 <PageShell lang={lang} number={1} chapter="home" kind="plate">
   <Plate lang={lang} chapter="home" />
@@ -58,26 +57,18 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
   </h1>
   <p class="page__lead">{t.hero.lead}</p>
   <ul class="points" data-optional>
-    {
-      t.hero.points.map((point) => (
-        <li>
-          <Star />
-          {point}
-        </li>
-      ))
-    }
+    {t.hero.points.map((point) => <li><Star />{point}</li>)}
   </ul>
   <p class="page__actions">
     <a class="btn btn--leather" href="#trial">{t.hero.primary}</a>
-    <a class="btn btn--line" href="#p-11" data-goto>{t.hero.secondary}</a>
+    <a class="btn btn--line" href={`#p-${firstPage('programs')}`} data-goto>{t.hero.secondary}</a>
   </p>
 </PageShell>
 
 <PageShell lang={lang} number={3} chapter="home">
   <p class="rubric">{t.brand.name}</p>
   <h2 class="page__title">{t.book.contents}</h2>
-  <div class="fleuron" aria-hidden="true"><Star variant="double" /></div>
-  <nav class="contents" aria-label={t.book.contents}>
+  <nav class="contents contents--tight" aria-label={t.book.contents}>
     {
       chapters.map((chapter) => (
         <a href={`#p-${chapter.first}`} data-goto>
@@ -92,7 +83,7 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
 
 <PageShell lang={lang} number={4} chapter="home">
   <p class="rubric">{t.brand.tagline}</p>
-  <h2 class="page__title">{t.common.different}</h2>
+  <h2 class="page__title">{c.different}</h2>
   <ul class="entries">
     {
       t.pillars.map((pillar) => (
@@ -115,10 +106,7 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
     {
       t.audience.items.map((item, index) => (
         <li class="entry">
-          <span class="entry__mark entry__mark--number">
-            <Star variant="line" />
-            <span>{num(index + 1, lang)}</span>
-          </span>
+          <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{num(index + 1, lang)}</span></span>
           <div>
             <h3 class="entry__title">{item.title}</h3>
             <p class="entry__text">{item.text}</p>
@@ -127,6 +115,7 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
       ))
     }
   </ul>
+  <p class="page__aside" data-optional>{t.audience.note}</p>
 </PageShell>
 
 <PageShell lang={lang} number={6} chapter="home">
@@ -148,7 +137,7 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
   <p class="zones" data-optional>{t.how.time.zones}</p>
 </PageShell>
 
-<!-- ================= About ================= -->
+<!-- ================= About: 7–12 ================= -->
 
 <PageShell lang={lang} number={7} chapter="about" kind="plate">
   <Plate lang={lang} chapter="about" />
@@ -173,18 +162,24 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
 </PageShell>
 
 <PageShell lang={lang} number={10} chapter="about">
-  <p class="rubric">{t.pages.about.nav}</p>
-  <h2 class="page__title">{t.common.valuesTitle}</h2>
-  <ul class="entries">
+  <p class="rubric">{c.vision}</p>
+  <p class="statement">{framework.vision}</p>
+  <h2 class="subhead">{c.mission}</h2>
+  <ul class="ticks">
+    {framework.mission.map((item) => <li>{item}</li>)}
+  </ul>
+</PageShell>
+
+<PageShell lang={lang} number={11} chapter="about">
+  <p class="rubric">{c.values}</p>
+  <h2 class="page__title">{t.book.values}</h2>
+  <ul class="entries entries--tight">
     {
-      t.about.values.map((value) => (
+      framework.values.map((value, index) => (
         <li class="entry">
-          <span class="entry__mark"><Star variant="double" /></span>
+          <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{num(index + 1, lang)}</span></span>
           <div>
-            <h3 class="value__name">
-              {value.name}
-              <small>{value.gloss}</small>
-            </h3>
+            <h3 class="entry__title">{value.name}</h3>
             <p class="entry__text">{value.text}</p>
           </div>
         </li>
@@ -193,61 +188,453 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
   </ul>
 </PageShell>
 
-<!-- ================= Programs ================= -->
+<PageShell lang={lang} number={12} chapter="about">
+  <p class="rubric">{t.pages.about.nav}</p>
+  <h2 class="page__title">{c.community}</h2>
+  <div class="fleuron" aria-hidden="true" data-optional><Star variant="double" /></div>
+  {framework.community.map((paragraph, index) => <p class:list={['page__text', { 'page__text--opening': index === 0 }]}>{paragraph}</p>)}
+</PageShell>
 
-<PageShell lang={lang} number={11} chapter="programs" kind="plate">
+<!-- ================= Programs: 13–16 ================= -->
+
+<PageShell lang={lang} number={13} chapter="programs" kind="plate">
   <Plate lang={lang} chapter="programs" />
 </PageShell>
 
-<PageShell lang={lang} number={12} chapter="programs">
+<PageShell lang={lang} number={14} chapter="programs">
   <p class="rubric">{t.programs.eyebrow}</p>
   <h2 class="page__title">{t.programs.title}</h2>
-  <p class="page__lead">{t.programs.lead}</p>
-  <nav class="contents" aria-label={t.programs.eyebrow}>
+  <ul class="entries">
     {
-      programPages.map(({ program, number }) => (
-        <a href={`#p-${number}`} data-goto>
-          <span>{program.name}</span>
-          <span class="contents__number">{num(number, lang)}</span>
-        </a>
+      programs.map((program) => (
+        <li class="entry">
+          <span class="entry__emblem" lang="ar" dir="rtl" aria-hidden="true">{program.emblem}</span>
+          <div>
+            <h3 class="entry__title">
+              <a href={`#p-${firstPage(programChapter[program.id as keyof typeof programChapter])}`} data-goto>{program.name}</a>
+            </h3>
+            <p class="entry__text">{program.summary}</p>
+            <p class="entry__note">{program.format} · {program.ages}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</PageShell>
+
+<PageShell lang={lang} number={15} chapter="programs">
+  <p class="rubric">{deeniyat.gloss}</p>
+  <h2 class="page__title">{c.deeniyatBand.title}</h2>
+  <p class="page__text">{c.deeniyatBand.text}</p>
+  <ol class="numbered numbered--2">
+    {deeniyat.subjects.map((subject) => <li>{subject.name}</li>)}
+  </ol>
+  <p class="page__actions" style="justify-content: center">
+    <a class="btn btn--line" href={`#p-${firstPage('deeniyat')}`} data-goto>{c.deeniyatBand.link}</a>
+  </p>
+</PageShell>
+
+<PageShell lang={lang} number={16} chapter="programs">
+  <p class="rubric">{c.findProgram}</p>
+  <h2 class="page__title">{t.book.begin}</h2>
+  <ul class="entries">
+    {
+      alimiyah.divisions.map((division) => (
+        <li class="entry">
+          <span class="entry__ages">{num(division.ages, lang)}</span>
+          <div>
+            <h3 class="entry__title">{division.name}</h3>
+            <p class="entry__text">{programs[0].short} · {programs[1].short} · {division.focus}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="page__aside" data-optional>{c.findProgramLead.replace(' As a guide:', '')}</p>
+</PageShell>
+
+<!-- ================= Nazirah: 17–22 ================= -->
+
+<PageShell lang={lang} number={17} chapter="nazirah" kind="plate">
+  <Plate lang={lang} chapter="nazirah" />
+</PageShell>
+
+<PageShell lang={lang} number={18} chapter="nazirah">
+  <p class="rubric">{c.oneOnOne} · {programs[0].ages}</p>
+  <h2 class="page__title">{t.pages.nazirah.heading}</h2>
+  <p class="page__text page__text--opening">{nazirah.overview[0]}</p>
+  <h3 class="subhead">{programs[0].lead.replace(':', '')}</h3>
+  <ul class="ticks">
+    {programs[0].points.map((point) => <li>{point}</li>)}
+  </ul>
+</PageShell>
+
+{
+  [
+    { stages: nazirah.stages.slice(0, 3), number: 19 },
+    { stages: nazirah.stages.slice(3), number: 20 },
+  ].map(({ stages, number }) => (
+    <PageShell lang={lang} number={number} chapter="nazirah">
+      <p class="rubric">{c.stages}</p>
+      <ol class="entries">
+        {stages.map((stage) => (
+          <li class="entry">
+            <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{num(stage.number, lang)}</span></span>
+            <div>
+              <h3 class="entry__title">{stage.title}</h3>
+              <p class="entry__text">{stage.outcome}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      {number === 20 && (
+        <>
+          <h3 class="subhead">{c.alongside}</h3>
+          <p class="inline-list">{nazirah.extras.map((extra) => extra.title).join(' · ')}</p>
+        </>
+      )}
+    </PageShell>
+  ))
+}
+
+<PageShell lang={lang} number={21} chapter="nazirah">
+  <p class="rubric">{c.stage} {num(3, lang)}</p>
+  <h2 class="page__title">{nazirah.stages[2].title}</h2>
+  <dl class="rows">
+    {
+      nazirah.stages[2].units.map((unit) => (
+        <div>
+          <dt>{unit.title}</dt>
+          <dd>{unit.topics.slice(0, 4).join(', ')}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</PageShell>
+
+<PageShell lang={lang} number={22} chapter="nazirah">
+  <p class="rubric">{c.outcomes}</p>
+  <ul class="ticks ticks--tight">
+    {nazirah.outcomes.map((outcome) => <li>{outcome}</li>)}
+  </ul>
+  <p class="page__aside" data-optional>{nazirah.certification.note}</p>
+</PageShell>
+
+<!-- ================= Hifz: 23–28 ================= -->
+
+<PageShell lang={lang} number={23} chapter="hifz" kind="plate">
+  <Plate lang={lang} chapter="hifz" />
+</PageShell>
+
+<PageShell lang={lang} number={24} chapter="hifz">
+  <p class="rubric">{c.oneOnOne} · {c.tracks}</p>
+  <h2 class="page__title">{t.pages.hifz.heading}</h2>
+  <p class="page__text">{hifz.overview[0]}</p>
+  <ul class="entries">
+    {
+      hifz.tracks.map((track) => (
+        <li class="entry">
+          <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{track.letter}</span></span>
+          <div>
+            <h3 class="entry__title">{track.name}</h3>
+            <p class="entry__note">{track.scope}</p>
+            <p class="entry__text" data-optional>{track.points.slice(1, 4).join(' · ')}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</PageShell>
+
+<PageShell lang={lang} number={25} chapter="hifz">
+  <p class="rubric">{c.method}</p>
+  <h2 class="page__title">{c.cycle}</h2>
+  <ol class="entries">
+    {
+      hifz.cycle.map((part, index) => (
+        <li class="entry">
+          <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{num(index + 1, lang)}</span></span>
+          <div>
+            <h3 class="value__name">{part.term}<small>{part.name}</small></h3>
+            <p class="entry__text">{part.items.slice(0, 3).join(' · ')}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="page__aside" data-optional>{c.cycleLead}</p>
+</PageShell>
+
+<PageShell lang={lang} number={26} chapter="hifz">
+  <p class="rubric">{c.track} A · {hifz.tracks[0].name}</p>
+  <h2 class="page__title">Four stages to the whole Qur’an</h2>
+  <ol class="entries entries--tight">
+    {
+      hifz.stages.map((stage) => (
+        <li class="entry">
+          <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{num(stage.number, lang)}</span></span>
+          <div>
+            <h3 class="entry__title">{stage.title}</h3>
+            <p class="entry__text">{stage.items.slice(0, 3).join(' · ')}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</PageShell>
+
+<PageShell lang={lang} number={27} chapter="hifz">
+  <p class="rubric">{c.track} B · {hifz.tracks[1].name}</p>
+  <h2 class="page__title">{c.essentialSurahs}</h2>
+  <p class="inline-list">{hifz.selected.essential.join(' · ')}</p>
+  <h3 class="subhead">{c.longerSurahs}</h3>
+  <p class="inline-list">{hifz.selected.longer.join(' · ')}</p>
+  <p class="page__aside">{hifz.selected.portions}</p>
+</PageShell>
+
+<PageShell lang={lang} number={28} chapter="hifz">
+  <p class="rubric">{c.outcomes}</p>
+  <ul class="ticks">
+    {hifz.outcomes.map((outcome) => <li>{outcome}</li>)}
+  </ul>
+  <h3 class="subhead">{c.reports}</h3>
+  <p class="inline-list">{hifz.assessment.reporting.slice(0, 5).join(' · ')}</p>
+</PageShell>
+
+<!-- ================= Alimiyah: 29–38 ================= -->
+
+<PageShell lang={lang} number={29} chapter="alimiyah" kind="plate">
+  <Plate lang={lang} chapter="alimiyah" />
+</PageShell>
+
+<PageShell lang={lang} number={30} chapter="alimiyah">
+  <p class="rubric">{c.groupClasses}</p>
+  <h2 class="page__title">{t.pages.alimiyah.heading}</h2>
+  <p class="page__text">{alimiyah.philosophy[0]}</p>
+  <ul class="entries entries--tight">
+    {
+      alimiyah.divisions.map((division) => (
+        <li class="entry">
+          <span class="entry__ages">{num(division.ages, lang)}</span>
+          <div>
+            <h3 class="entry__title">{division.name}</h3>
+            <p class="entry__note">{division.structure}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</PageShell>
+
+<PageShell lang={lang} number={31} chapter="alimiyah">
+  <p class="rubric">{c.subjects}</p>
+  <ol class="numbered">
+    {alimiyah.subjects.map((subject) => <li>{subject}</li>)}
+  </ol>
+</PageShell>
+
+<PageShell lang={lang} number={32} chapter="alimiyah">
+  <p class="rubric">{c.ages} {num(alimiyah.divisions[0].ages, lang)}</p>
+  <h2 class="page__title">{alimiyah.divisions[0].name}</h2>
+  <p class="page__text">{first(junior.overview)}</p>
+  <ol class="entries entries--tight">
+    {
+      junior.stages.map((stage) => (
+        <li class="entry">
+          <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{stage.letter}</span></span>
+          <div>
+            <h3 class="entry__title">{stage.name}</h3>
+            <p class="entry__note">{c.ages} {num(stage.ages, lang)}</p>
+            <p class="entry__text" data-optional>{stage.focus}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</PageShell>
+
+<PageShell lang={lang} number={33} chapter="alimiyah">
+  <p class="rubric">{alimiyah.divisions[0].name}</p>
+  <dl class="rows">
+    {
+      junior.distribution.slice(0, 8).map((row) => (
+        <div>
+          <dt>{row.subject}</dt>
+          <dd>{row.areas}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</PageShell>
+
+<PageShell lang={lang} number={34} chapter="alimiyah">
+  <p class="rubric">{c.ages} {num(alimiyah.divisions[1].ages, lang)}</p>
+  <h2 class="page__title">{alimiyah.divisions[1].name}</h2>
+  <p class="page__text">{first(youth.overview)}</p>
+  <nav class="contents contents--tight" aria-label={c.pathway}>
+    {
+      youth.semesters.map((semester) => (
+        <span class="contents__row">
+          <span>{num(semester.number, lang)}. {semester.title}</span>
+          <span class="contents__number">{semester.level}</span>
+        </span>
       ))
     }
   </nav>
 </PageShell>
 
-{
-  programPages.map(({ program, number }, index) => (
-    <PageShell lang={lang} number={number} chapter="programs">
-      <div class="program__top">
-        <span class="program__number">{counter(index, lang)}</span>
-        <span class="program__emblem" lang="ar" dir="rtl" aria-hidden="true">
-          {arabic.programs[program.id]}
+<PageShell lang={lang} number={35} chapter="alimiyah">
+  <p class="rubric">{c.finalProject}</p>
+  <ul class="ticks ticks--tight">
+    {youth.project.options.map((option) => <li>{option}</li>)}
+  </ul>
+  <p class="page__aside">{youth.project.note}</p>
+</PageShell>
+
+<PageShell lang={lang} number={36} chapter="alimiyah">
+  <p class="rubric">{c.ages} {num(alimiyah.divisions[2].ages, lang)}</p>
+  <h2 class="page__title">{alimiyah.divisions[2].name}</h2>
+  <p class="page__text">{first(adult.overview[0])}</p>
+  <nav class="contents contents--tight" aria-label={c.pathway}>
+    {
+      adult.semesters.map((semester) => (
+        <span class="contents__row">
+          <span>{num(semester.number, lang)}. {semester.title}</span>
+          <span class="contents__number">{semester.level}</span>
         </span>
-      </div>
-      <h2 class="page__title">{program.name}</h2>
-      <p class="program__tagline">{program.tagline}</p>
-      <p class="page__text">{program.text}</p>
-      <h3 class="subhead">{t.common.whatYouLearn}</h3>
-      <ul class="ticks">
-        {program.points.map((point) => (
-          <li>{point}</li>
+      ))
+    }
+  </nav>
+</PageShell>
+
+<PageShell lang={lang} number={37} chapter="alimiyah">
+  <p class="rubric">{c.assessment}</p>
+  <h2 class="page__title">{c.grading}</h2>
+  <dl class="weights">
+    {
+      policies.grading.rows.map((row) => (
+        <div style={`--weight: ${row.weight}`}>
+          <dt>{row.component}</dt>
+          <dd>{num(row.weight, lang)}%</dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p class="page__aside" data-optional>{policies.grading.intro}</p>
+</PageShell>
+
+<PageShell lang={lang} number={38} chapter="alimiyah">
+  <p class="rubric">{c.certification}</p>
+  {alimiyah.certification.policy.map((paragraph) => <p class="page__text">{paragraph}</p>)}
+  <h3 class="subhead">{c.language}</h3>
+  <p class="page__text" style="margin-top: 0.4em">{first(policies.language)}</p>
+</PageShell>
+
+<!-- ================= Deeniyat: 39–42 ================= -->
+
+<PageShell lang={lang} number={39} chapter="deeniyat" kind="plate">
+  <Plate lang={lang} chapter="deeniyat" />
+</PageShell>
+
+{
+  [
+    { subjects: deeniyat.subjects.slice(0, 4), number: 40 },
+    { subjects: deeniyat.subjects.slice(4), number: 41 },
+  ].map(({ subjects, number }) => (
+    <PageShell lang={lang} number={number} chapter="deeniyat">
+      <p class="rubric">{number === 40 ? t.pages.deeniyat.heading : deeniyat.gloss}</p>
+      <ul class="entries entries--tight">
+        {subjects.map((subject) => (
+          <li class="entry">
+            <span class="entry__emblem entry__emblem--small" lang="ar" dir="rtl" aria-hidden="true">{subject.emblem}</span>
+            <div>
+              <h3 class="value__name">{subject.name}<small>{subject.gloss}</small></h3>
+              <p class="entry__text">{subject.units.filter((unit) => unit.title).slice(0, 4).map((unit) => unit.title).join(' · ') || subject.units[0].topics.slice(0, 3).join(' · ')}</p>
+            </div>
+          </li>
         ))}
       </ul>
-      <p class="program__for">
-        <span>{t.programs.forLabel}</span>
-        {program.audience}
-      </p>
     </PageShell>
   ))
 }
 
-<!-- ================= Teachers ================= -->
+<PageShell lang={lang} number={42} chapter="deeniyat">
+  <p class="rubric">{c.byAge}</p>
+  <dl class="rows">
+    {
+      deeniyat.ages.map((group) => (
+        <div>
+          <dt>{group.title}</dt>
+          <dd>{group.items.join(', ')}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p class="page__aside">{hifz.method.deeniyat[0]}, alongside the Hifz lessons.</p>
+</PageShell>
 
-<PageShell lang={lang} number={17} chapter="teachers" kind="plate">
+<!-- ================= Academics: 43–48 ================= -->
+
+<PageShell lang={lang} number={43} chapter="academics" kind="plate">
+  <Plate lang={lang} chapter="academics" />
+</PageShell>
+
+<PageShell lang={lang} number={44} chapter="academics">
+  <p class="rubric">{c.philosophy}</p>
+  <h2 class="page__title">Four principles behind every lesson</h2>
+  <ol class="entries entries--tight">
+    {
+      framework.philosophy.principles.map((principle, index) => (
+        <li class="entry">
+          <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{num(index + 1, lang)}</span></span>
+          <div>
+            <h3 class="value__name">{principle.name}</h3>
+            <p class="entry__text">{principle.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</PageShell>
+
+<PageShell lang={lang} number={45} chapter="academics">
+  <p class="rubric">{c.teaching}</p>
+  <p class="page__text">{framework.teaching.intro}</p>
+  <ul class="ticks">
+    {framework.teaching.points.map((point) => <li>{point}</li>)}
+  </ul>
+  <p class="page__aside" data-optional>{framework.teaching.note}</p>
+</PageShell>
+
+<PageShell lang={lang} number={46} chapter="academics">
+  <p class="rubric">{c.assessmentProgress}</p>
+  <ul class="ticks">
+    {framework.assessment.methods.map((method) => <li>{method}</li>)}
+  </ul>
+  <p class="page__text">{framework.assessment.purpose}</p>
+  <p class="page__aside" data-optional>{framework.assessment.parents}</p>
+</PageShell>
+
+<PageShell lang={lang} number={47} chapter="academics">
+  <p class="rubric">{c.welfare}</p>
+  <p class="page__text">{framework.welfare.intro}</p>
+  <ul class="ticks">
+    {framework.welfare.points.map((point) => <li>{point}</li>)}
+  </ul>
+</PageShell>
+
+<PageShell lang={lang} number={48} chapter="academics">
+  <p class="rubric">{c.improvement}</p>
+  {framework.improvement.map((paragraph, index) => <p class:list={['page__text', { 'page__text--opening': index === 0 }]}>{paragraph}</p>)}
+</PageShell>
+
+<!-- ================= Teachers: 49–54 ================= -->
+
+<PageShell lang={lang} number={49} chapter="teachers" kind="plate">
   <Plate lang={lang} chapter="teachers" />
 </PageShell>
 
-<PageShell lang={lang} number={18} chapter="teachers">
+<PageShell lang={lang} number={50} chapter="teachers">
   <p class="rubric">{t.teachers.eyebrow}</p>
   <h2 class="page__title">{t.teachers.title}</h2>
   <div class="fleuron" aria-hidden="true" data-optional><Star variant="double" /></div>
@@ -255,13 +642,13 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
   <p class="page__text">{t.teachers.paragraphs[1]}</p>
 </PageShell>
 
-<PageShell lang={lang} number={19} chapter="teachers">
-  <p class="rubric">{t.pages.teachers.nav}</p>
+<PageShell lang={lang} number={51} chapter="teachers">
+  <p class="rubric">{c.faculty}</p>
   <h2 class="page__title">{t.teachers.standardsTitle}</h2>
   <ul class="ticks">
-    {t.teachers.standards.map((standard) => <li>{standard}</li>)}
+    {framework.faculty.expectations.map((standard) => <li>{standard}</li>)}
   </ul>
-  <p class="page__aside">{p.lead}</p>
+  <p class="page__aside">{t.audience.note}</p>
 </PageShell>
 
 {
@@ -304,17 +691,17 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
   ))
 }
 
-<PageShell lang={lang} number={22} chapter="teachers" kind="plate">
+<PageShell lang={lang} number={54} chapter="teachers" kind="plate">
   <Plate lang={lang} hadith />
 </PageShell>
 
-<!-- ================= Tuition ================= -->
+<!-- ================= Tuition: 55–58 ================= -->
 
-<PageShell lang={lang} number={23} chapter="tuition" kind="plate">
+<PageShell lang={lang} number={55} chapter="tuition" kind="plate">
   <Plate lang={lang} chapter="tuition" />
 </PageShell>
 
-<PageShell lang={lang} number={24} chapter="tuition">
+<PageShell lang={lang} number={56} chapter="tuition">
   <p class="rubric">{t.tuition.eyebrow}</p>
   <h2 class="page__title">{t.tuition.title}</h2>
   <p class="page__lead">{t.tuition.lead}</p>
@@ -342,26 +729,24 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
   </ul>
 </PageShell>
 
-<PageShell lang={lang} number={25} chapter="tuition">
+<PageShell lang={lang} number={57} chapter="tuition">
   <p class="rubric">{t.pages.tuition.nav}</p>
   <h2 class="page__title">{t.tuition.includedTitle}</h2>
   <ul class="ticks">
     {t.tuition.included.map((item) => <li>{item}</li>)}
   </ul>
-  <p class="page__aside">{t.tuition.note}</p>
+  <h3 class="subhead">{t.tuition.group.title}</h3>
+  <p class="page__text" style="margin-top: 0.4em">{t.tuition.group.text}</p>
 </PageShell>
 
-<PageShell lang={lang} number={26} chapter="tuition">
+<PageShell lang={lang} number={58} chapter="tuition">
   <p class="rubric">{t.how.eyebrow}</p>
   <h2 class="page__title">{t.how.title}</h2>
-  <ol class="entries">
+  <ol class="entries entries--tight">
     {
       t.how.steps.map((step, index) => (
         <li class="entry">
-          <span class="entry__mark entry__mark--number">
-            <Star variant="line" />
-            <span>{num(index + 1, lang)}</span>
-          </span>
+          <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{num(index + 1, lang)}</span></span>
           <div>
             <h3 class="entry__title">{step.title}</h3>
             <p class="entry__text">{step.text}</p>
@@ -372,27 +757,17 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
   </ol>
 </PageShell>
 
-<!-- ================= Questions ================= -->
+<!-- ================= Questions: 59–62 ================= -->
 
-<PageShell lang={lang} number={27} chapter="faq" kind="plate">
+<PageShell lang={lang} number={59} chapter="faq" kind="plate">
   <Plate lang={lang} chapter="faq" />
 </PageShell>
 
 {
-  questionPages.map(({ items, number, first, last }) => (
+  questionPages.map(({ items, number }, index) => (
     <PageShell lang={lang} number={number} chapter="faq">
-      {first ? (
-        <>
-          <p class="rubric">{t.faq.eyebrow}</p>
-          <h2 class="page__title">{t.faq.title}</h2>
-          <div class="fleuron" aria-hidden="true" data-optional>
-            <Star variant="double" />
-          </div>
-        </>
-      ) : (
-        <p class="rubric">{t.faq.eyebrow}</p>
-      )}
-      <div class="questions" style={first ? undefined : 'margin-top: 0.8em'}>
+      <p class="rubric">{index === 0 ? t.faq.title : t.faq.eyebrow}</p>
+      <div class="questions">
         {items.map((item) => (
           <div class="question">
             <h3 class="question__q">{item.q}</h3>
@@ -400,47 +775,34 @@ const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.wha
           </div>
         ))}
       </div>
-      {last && (
-        <p class="page__aside">
-          {t.faq.lead}
-          {whatsapp && (
-            <>
-              <br />
-              <a class="btn btn--line" href={whatsapp} target="_blank" rel="noopener" style="margin-top: 0.8em; font-style: normal">
-                {t.faq.contact}
-              </a>
-            </>
-          )}
+      {index === 2 && whatsapp && (
+        <p class="page__actions" style="justify-content: center" data-optional>
+          <a class="btn btn--line" href={whatsapp} target="_blank" rel="noopener">{t.faq.contact}</a>
         </p>
       )}
     </PageShell>
   ))
 }
 
-<!-- ================= Free trial ================= -->
+<!-- ================= Free trial: 63–64 ================= -->
 
-<PageShell lang={lang} number={31} chapter="trial" kind="plate">
+<PageShell lang={lang} number={63} chapter="trial" kind="plate">
   <Plate lang={lang} chapter="trial" />
 </PageShell>
 
-<PageShell lang={lang} number={32} chapter="trial">
+<PageShell lang={lang} number={64} chapter="trial">
   <p class="rubric">{t.trial.eyebrow}</p>
   <h2 class="page__title">{t.pages.trial.heading}</h2>
   <p class="page__lead">{t.pages.trial.lead}</p>
-  <h3 class="subhead">{t.common.nextTitle}</h3>
-  <ol class="entries" style="margin-top: 0.6em">
+  <h3 class="subhead">{c.nextTitle}</h3>
+  <ol class="entries entries--tight" style="margin-top: 0.6em">
     {
       t.how.steps.slice(1).map((step, index) => (
         <li class="entry">
-          <span class="entry__mark entry__mark--number">
-            <Star variant="line" />
-            <span>{num(index + 1, lang)}</span>
-          </span>
+          <span class="entry__mark entry__mark--number"><Star variant="line" /><span>{num(index + 1, lang)}</span></span>
           <div>
             <h4 class="entry__title">{step.title}</h4>
-            <p class="entry__text" data-optional>
-              {step.text}
-            </p>
+            <p class="entry__text" data-optional>{step.text}</p>
           </div>
         </li>
       ))

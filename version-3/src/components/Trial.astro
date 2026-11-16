@@ -1,6 +1,7 @@
 ---
 import Star from './Star.astro';
 import { site } from '../config/site';
+import { alimiyah, hifz, nazirah } from '../content/academy';
 import { arabic, getDict, type Lang } from '../i18n';
 
 /** The free-trial request form, on its own sheet after the book. */
@@ -12,6 +13,13 @@ const { lang } = Astro.props;
 const t = getDict(lang);
 const f = t.trial.form;
 const { email, whatsappNumber, whatsappDisplay } = site.contact;
+
+// Every program a family can ask about: the Qur'an programs, then the Alimiyah divisions.
+const programOptions = [
+  nazirah.name,
+  ...hifz.tracks.map((track) => `${hifz.name}: ${track.name}`),
+  ...alimiyah.divisions.map((division) => `${division.name} (${f.groupLabel})`),
+];
 
 // Everything the form script needs, handed over as a data attribute.
 const messages = {
@@ -112,7 +120,7 @@ const messages = {
           <label for="trial-program">{f.program}</label>
           <select id="trial-program" name="program" data-label={f.program}>
             <option>{f.programUnsure}</option>
-            {t.programs.items.map((program) => <option>{program.name}</option>)}
+            {programOptions.map((option) => <option>{option}</option>)}
           </select>
         </div>
 

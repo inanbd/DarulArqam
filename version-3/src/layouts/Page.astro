@@ -9,7 +9,7 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Trial from '../components/Trial.astro';
 import { site } from '../config/site';
-import { getDict, type Lang } from '../i18n';
+import { getDict, published, type Lang } from '../i18n';
 import { asset } from '../lib/format';
 
 /** The whole site in one language: the book, then the trial form. */
@@ -49,9 +49,7 @@ const schema = {
       hasUrl && (
         <>
           <link rel="canonical" href={address(lang)} />
-          <link rel="alternate" hreflang="en" href={address('en')} />
-          <link rel="alternate" hreflang="bn" href={address('bn')} />
-          <link rel="alternate" hreflang="x-default" href={address('en')} />
+          {published.length > 1 && published.map((code) => <link rel="alternate" hreflang={code} href={address(code)} />)}
           <meta property="og:url" content={address(lang)} />
           <meta property="og:image" content={`${site.url}${asset('/og.png')}`} />
           <meta name="twitter:card" content="summary_large_image" />

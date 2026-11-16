@@ -388,24 +388,40 @@ export const en = {
     contact: 'Ask us on WhatsApp',
     items: [
       {
+        q: 'Which programs do you offer?',
+        a: 'Three. Nazirah teaches a student to read the Qur’an correctly and fluently. Hifz is memorization, either of the whole Qur’an or of selected Surahs. Alimiyah and Islamic Studies is a structured course of Islamic knowledge in three divisions, from Junior Islamic Studies for children to an Adult Alimiyah.',
+      },
+      {
         q: 'How do the online classes work?',
-        a: 'Each class is a live, private video call between the student and the teacher. The teacher shares the lesson on screen, listens to the student recite, and corrects gently as they go. You can join from a laptop, tablet or phone.',
+        a: 'Nazirah and Hifz are live, private video lessons between one student and one teacher, who listens to the student recite and corrects gently as they go. Alimiyah and Junior Islamic Studies are taught in group classes, semester by semester. You can join from a laptop, tablet or phone.',
+      },
+      {
+        q: 'What is Deeniyat?',
+        a: 'Deeniyat is the Islamic studies that every Nazirah and Hifz student takes alongside the Qur’an: Aqidah, practical Fiqh, Hadith and Sunnah, Seerah, manners and character, daily duas, Islamic history and a basic understanding of the Qur’an. It is a compulsory part of both programs.',
       },
       {
         q: 'What ages do you teach?',
-        a: 'We teach children from around five years old, as well as teenagers and adults of any age. Lessons for young children are kept short and lively.',
+        a: 'Nazirah and Hifz are open to children, teenagers and adults. Junior Islamic Studies is for ages 3 to 12, the Youth and Young Adults Alimiyah for ages 12 to 25, and the Adult Alimiyah for ages 25 and above. Placement follows a student’s readiness and previous learning, not age alone.',
       },
       {
         q: 'Can my daughter or I learn with a female teacher?',
         a: 'Yes. Qualified female teachers are available for sisters and girls. Simply choose “Female teacher” when you request your trial class.',
       },
       {
-        q: 'What language are lessons taught in?',
-        a: 'Lessons can be taught in English or Bangla. Tell us which the student is most comfortable with and we will match a teacher accordingly.',
+        q: 'What language are classes taught in?',
+        a: 'English is the main language of instruction. Arabic is taught as a subject and used more and more for reading Islamic texts. Where it is needed, a teacher may clarify a point in another language.',
+      },
+      {
+        q: 'How will I know how my child is doing?',
+        a: 'Parents receive periodic progress reports covering reading or memorization, revision, recitation quality, Deeniyat, attendance, the teacher’s feedback and the areas that need more work.',
+      },
+      {
+        q: 'Do students receive a certificate?',
+        a: 'Yes, on completing a program or stage and passing its assessment. A certificate states the program and level actually completed. It is a certificate of completion from Darul Arqam, not an accredited degree or a government-recognized qualification.',
       },
       {
         q: 'Will the class times suit my time zone?',
-        a: 'Yes. Classes are scheduled in your local time, anywhere in the United States. Because evening in America is morning in Bangladesh, after-school and evening slots work especially well.',
+        a: 'Yes. Classes are scheduled in your local time, anywhere in the United States, and students in other countries are welcome too. Because evening in America is morning in Bangladesh, after-school and evening slots work especially well.',
       },
       {
         q: 'What do we need for a class?',

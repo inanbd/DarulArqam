@@ -6,14 +6,24 @@
 export const chapters = [
   { id: 'home', first: 1 },
   { id: 'about', first: 7 },
-  { id: 'programs', first: 11 },
-  { id: 'teachers', first: 17 },
-  { id: 'tuition', first: 23 },
-  { id: 'faq', first: 27 },
-  { id: 'trial', first: 31 },
+  { id: 'programs', first: 13 },
+  { id: 'nazirah', first: 17 },
+  { id: 'hifz', first: 23 },
+  { id: 'alimiyah', first: 29 },
+  { id: 'deeniyat', first: 39 },
+  { id: 'academics', first: 43 },
+  { id: 'teachers', first: 49 },
+  { id: 'tuition', first: 55 },
+  { id: 'faq', first: 59 },
+  { id: 'trial', first: 63 },
 ] as const;
 
 export type ChapterId = (typeof chapters)[number]['id'];
 
 /** The number of the last page. */
-export const lastPage = 32;
+export const lastPage = 64;
+
+/** The first page of a chapter. */
+export function firstPage(id: ChapterId): number {
+  return chapters.find((chapter) => chapter.id === id)!.first;
+}

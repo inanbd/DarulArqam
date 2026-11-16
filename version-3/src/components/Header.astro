@@ -1,6 +1,6 @@
 ---
 import Star from './Star.astro';
-import { getDict, type Lang } from '../i18n';
+import { getDict, published, type Lang } from '../i18n';
 import { chapters } from '../lib/chapters';
 import { asset } from '../lib/format';
 
@@ -11,7 +11,9 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getDict(lang);
-const other = t.alt.lang as Lang;
+// The language switch shows only when the site is published in a second language.
+const other = published.find((code) => code !== lang);
+const otherLabel: Record<Lang, string> = { en: 'English', bn: 'বাংলা' };
 const home = (which: Lang) => asset(which === 'bn' ? '/bn/index.html' : '/index.html');
 ---
 
@@ -46,10 +48,10 @@ const home = (which: Lang) => asset(which === 'bn' ? '/bn/index.html' : '/index.
   </nav>
 
   <div class="site-header__actions">
-    <a class="site-header__lang" href={home(other)} lang={other} hreflang={other} title={t.alt.title}>{t.alt.label}</a>
+    {other && <a class="site-header__lang" href={home(other)} lang={other} hreflang={other}>{otherLabel[other]}</a>}
     <a class="btn btn--gold site-header__cta" href="#trial">{t.nav.cta}</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="chapters" data-menu-toggle>
-      <span class="sr-only">{t.book.chapters}</span>
+      <span class="menu-toggle__label">{t.book.chaptersButton}</span>
       <span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
     </button>
   </div>
@@ -213,20 +215,28 @@ const home = (which: Lang) => asset(which === 'bn' ? '/bn/index.html' : '/index.
   }
 
   .menu-toggle {
-    display: none;
-    width: 2.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
     height: 2.4rem;
-    padding: 0;
+    padding: 0 0.95rem;
     border: 1px solid rgba(232, 207, 141, 0.4);
-    border-radius: 50%;
+    border-radius: 999px;
     background: transparent;
+    color: var(--gold-300);
+  }
+
+  .menu-toggle__label {
+    font-family: var(--font-caps);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
 
   .menu-toggle__bars {
     display: grid;
     gap: 4px;
     width: 1rem;
-    margin-inline: auto;
   }
 
   .menu-toggle__bars span {
@@ -249,68 +259,63 @@ const home = (which: Lang) => asset(which === 'bn' ? '/bn/index.html' : '/index.
     transform: translateY(-5.5px) rotate(-45deg);
   }
 
-  @media (max-width: 74rem) {
-    .menu-toggle {
-      display: block;
-    }
+  .chapters {
+    position: absolute;
+    inset: 100% 0 auto 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.5rem clamp(0.9rem, 3vw, 2.25rem) 1.25rem;
+    background: var(--desk-950);
+    border-bottom: 1px solid rgba(232, 207, 141, 0.2);
+    box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.8);
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+  }
 
-    .chapters {
-      position: absolute;
-      inset: 100% 0 auto 0;
-      display: none;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      padding: 0.5rem clamp(0.9rem, 3vw, 2.25rem) 1.25rem;
-      background: var(--desk-950);
-      border-bottom: 1px solid rgba(232, 207, 141, 0.2);
-      box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.8);
-      max-height: calc(100dvh - var(--header-h));
-      overflow-y: auto;
-    }
+  .is-open .chapters {
+    display: flex;
+  }
 
-    .is-open .chapters {
-      display: flex;
-    }
+  .site-header.is-open {
+    background: var(--desk-950);
+  }
 
-    .site-header.is-open {
-      background: var(--desk-950);
-    }
+  .chapters ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    column-gap: 2.5rem;
+  }
 
-    .chapters ul {
-      flex-direction: column;
-      gap: 0;
-    }
+  .chapters a,
+  .chapters__plain {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(232, 207, 141, 0.14);
+    font-size: 0.85rem;
+    text-align: left;
+    color: var(--on-dark);
+  }
 
-    .chapters a,
-    .chapters__plain {
-      display: block;
-      width: 100%;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid rgba(232, 207, 141, 0.14);
-      font-size: 0.85rem;
-      text-align: left;
-      color: var(--on-dark);
-    }
+  .chapters a::after {
+    display: none;
+  }
 
-    .chapters a::after {
-      display: none;
-    }
+  .chapters a[aria-current] {
+    color: var(--gold-300);
+  }
 
-    .chapters a[aria-current] {
-      color: var(--gold-300);
-    }
+  .chapters__plain {
+    padding-left: 0;
+    border-left: 0;
+    color: var(--on-dark-soft);
+  }
 
-    .chapters__plain {
-      padding-left: 0;
-      border-left: 0;
-      color: var(--on-dark-soft);
-    }
-
-    /* Without scripts the button cannot open the list; the pages are all on show anyway. */
-    :global(.no-js) .menu-toggle {
-      display: none;
-    }
+  /* Without scripts the button cannot open the list; the pages are all on show anyway. */
+  :global(.no-js) .menu-toggle {
+    display: none;
   }
 
   /* On a phone the bar holds four things; each gives up a little room. */
@@ -360,6 +365,17 @@ const home = (which: Lang) => asset(which === 'bn' ? '/bn/index.html' : '/index.
     .menu-toggle {
       width: 2.15rem;
       height: 2.15rem;
+      padding: 0;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .menu-toggle__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
     }
   }
 

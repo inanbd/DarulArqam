@@ -4,8 +4,6 @@
  */
 export const en = {
   lang: 'en',
-  /** The other language, for the switch in the header. */
-  alt: { lang: 'bn', label: 'বাংলা', title: 'বাংলায় দেখুন' },
 
   meta: {
     title: 'Darul Arqam — Online Qur’an Classes with Qualified Imams',
@@ -32,16 +30,16 @@ export const en = {
       nav: 'Home',
       title: 'Darul Arqam — Online Qur’an Classes with Qualified Imams',
       description:
-        'Live one-on-one Qur’an classes for children, adults and sisters in the USA, taught by qualified imams and huffaz from Bangladesh. Qur’an reading, Tajweed, Hifz and Islamic studies. Book a free trial class.',
+        'Online Qur’an and Islamic education for children, teenagers and adults: Nazirah, Hifz and Alimiyah programs taught by qualified imams and huffaz from Bangladesh, on US time zones. Book a free trial class.',
       heading: '',
       lead: '',
       verse: { text: 'Read, in the name of your Lord who created.', reference: 'Surah al-‘Alaq 96:1' },
     },
     about: {
       nav: 'About',
-      title: 'About Darul Arqam — Named after the First School of Islam',
+      title: 'About Darul Arqam — Vision, Mission and Values',
       description:
-        'The story behind the name Darul Arqam, and how we connect families in the United States with imams and huffaz in Bangladesh.',
+        'The story behind the name Darul Arqam, our vision and mission, and the values at the heart of our teaching.',
       heading: 'A house of Qur’an, carried across the ocean',
       lead: 'We are named after the house where the Prophet ﷺ taught his first companions, and built to bring that same teacher-to-student learning into your home.',
       verse: {
@@ -51,21 +49,78 @@ export const en = {
     },
     programs: {
       nav: 'Programs',
-      title: 'Qur’an Programs — Reading, Tajweed, Hifz and Islamic Studies | Darul Arqam',
+      title: 'Programs — Nazirah, Hifz and Alimiyah | Darul Arqam',
       description:
-        'Four one-on-one programs for children and adults: Qur’an reading from the Noorani Qaida, Tajweed, Hifz, and Islamic studies with Arabic.',
-      heading: 'A clear path, from the first letter to the last surah',
-      lead: 'Four programs, each taught one-on-one and paced to the student.',
+        'Three programs for every stage of learning: Nazirah (reading the Qur’an), Hifz (memorization) and Alimiyah and Islamic Studies, with Deeniyat for every Qur’an student.',
+      heading: 'A clear path, from the first letter to lifelong learning',
+      lead: 'Three programs: read the Qur’an, memorize it, and study the knowledge of Islam. Every Qur’an student also takes Deeniyat.',
       verse: {
         text: 'And We have certainly made the Qur’an easy to remember — so is there anyone who will take heed?',
         reference: 'Surah al-Qamar 54:17',
+      },
+    },
+    nazirah: {
+      nav: 'Nazirah',
+      title: 'Nazirah al-Qur’an — Learn to Read the Qur’an | Darul Arqam',
+      description:
+        'A five-stage program from the Arabic alphabet to fluent, independent recitation with Tajweed, taught one-on-one, with Deeniyat alongside.',
+      heading: 'Read the Qur’an correctly, fluently and with confidence',
+      lead: 'From the first Arabic letter to independent recitation with Tajweed, in five stages and at the student’s own pace.',
+      verse: { text: 'And recite the Qur’an in slow, measured rhythm.', reference: 'From Surah al-Muzzammil 73:4' },
+    },
+    hifz: {
+      nav: 'Hifz',
+      title: 'Hifz al-Qur’an — Memorize the Qur’an | Darul Arqam',
+      description:
+        'Memorize the whole Qur’an or selected Surahs with a daily cycle of new lesson, recent revision and long-term revision, taught one-on-one, with Deeniyat alongside.',
+      heading: 'Carry the Qur’an in your heart',
+      lead: 'Memorize the whole Qur’an or selected Surahs, with a daily rhythm of new lesson and revision that makes it last.',
+      verse: {
+        text: 'Indeed, it is We who sent down the Reminder, and indeed, We will be its guardian.',
+        reference: 'Surah al-Hijr 15:9',
+      },
+    },
+    alimiyah: {
+      nav: 'Alimiyah',
+      title: 'Alimiyah and Islamic Studies — Three Divisions | Darul Arqam',
+      description:
+        'Structured Islamic studies for every stage of life: Junior Islamic Studies (ages 3–12), Youth and Young Adults Alimiyah (12–25) and Adult Alimiyah (25+).',
+      heading: 'Islamic knowledge for every stage of life',
+      lead: 'One curriculum in three divisions, from a child’s first lessons about Allah to a six-semester course in the Islamic sciences.',
+      verse: {
+        text: 'So why should not a group from every community go forth, to gain understanding of the religion?',
+        reference: 'From Surah at-Tawbah 9:122',
+      },
+    },
+    deeniyat: {
+      nav: 'Deeniyat',
+      title: 'Deeniyat — Islamic Studies for Every Qur’an Student | Darul Arqam',
+      description:
+        'The eight subjects every Nazirah and Hifz student studies alongside the Qur’an: Aqidah, Fiqh, Hadith, Seerah, Akhlaq, duas, Islamic history and Qur’anic understanding.',
+      heading: 'Understand your Deen, and live by it',
+      lead: 'Eight subjects that every Nazirah and Hifz student studies alongside the Qur’an.',
+      verse: {
+        text: 'They were commanded only to worship Allah, sincere to Him in religion, upright, and to establish prayer and give zakat. That is the upright religion.',
+        reference: 'Surah al-Bayyinah 98:5',
+      },
+    },
+    academics: {
+      nav: 'Academics',
+      title: 'Academics — How We Teach, Assess and Care | Darul Arqam',
+      description:
+        'Our educational philosophy, teaching approach, assessment and progress reports, teaching standards, student welfare and certification.',
+      heading: 'How we teach, assess and care for students',
+      lead: 'Knowledge, understanding, practice and character: the principles behind every lesson, and the standards we hold ourselves to.',
+      verse: {
+        text: 'Allah will raise in rank those of you who believe and those who have been given knowledge.',
+        reference: 'From Surah al-Mujadilah 58:11',
       },
     },
     teachers: {
       nav: 'Teachers',
       title: 'Our Teachers — Imams and Huffaz from Bangladesh | Darul Arqam',
       description:
-        'Meet the teachers of Darul Arqam: qualified imams, huffaz and female teachers from Bangladesh, teaching in English or Bangla.',
+        'Meet the teachers of Darul Arqam: qualified imams, huffaz and female teachers from Bangladesh, and the standards we expect of them.',
       heading: 'Imams and huffaz, rooted in a living tradition',
       lead: 'Qualified male and female teachers who have devoted years to learning the Qur’an, and to teaching it.',
       verse: {
@@ -77,16 +132,16 @@ export const en = {
       nav: 'Tuition',
       title: 'Tuition and How It Works | Darul Arqam',
       description:
-        'Simple monthly tuition for private one-on-one Qur’an classes, and the four steps from a free trial class to regular lessons.',
+        'Simple monthly tuition for private one-on-one Qur’an classes, semester tuition for group programs, and the four steps from a free trial class to regular lessons.',
       heading: 'Simple monthly tuition',
-      lead: 'These plans are for Nazirah and Hifz: private, one-on-one teaching in live 30-minute classes. Start with a free trial class.',
+      lead: 'Private one-on-one lessons for Nazirah and Hifz, and group classes by semester for Alimiyah. Start with a free trial class.',
       verse: { text: 'So recite as much of the Qur’an as is easy for you.', reference: 'From Surah al-Muzzammil 73:20' },
     },
     faq: {
       nav: 'FAQ',
       title: 'Questions and Answers | Darul Arqam',
       description:
-        'Answers to common questions about online Qur’an classes at Darul Arqam: ages, female teachers, language, time zones and missed classes.',
+        'Answers to common questions about Darul Arqam: programs, Deeniyat, ages, female teachers, language, progress reports, certificates and time zones.',
       heading: 'Answers for parents and students',
       lead: 'Something else on your mind? Message us and we will gladly help.',
       verse: { text: 'So ask the people of knowledge, if you do not know.', reference: 'From Surah an-Nahl 16:43' },
@@ -95,16 +150,16 @@ export const en = {
       nav: 'Free trial',
       title: 'Book a Free Trial Class | Darul Arqam',
       description:
-        'Request a free one-on-one Qur’an class with a qualified teacher. Tell us about the student and we will arrange a time in your US time zone.',
+        'Request a free class with a qualified teacher. Tell us about the student and we will arrange a time in your time zone.',
       heading: 'Begin with a free class, in sha Allah',
-      lead: 'Tell us a little about the student and we will be in touch to arrange a free one-on-one lesson with one of our teachers.',
+      lead: 'Tell us a little about the student and we will be in touch to arrange a free lesson with one of our teachers.',
       verse: { text: 'And say: My Lord, increase me in knowledge.', reference: 'From Surah Ta-Ha 20:114' },
     },
   },
 
   /** Short pieces of wording used on several pages. */
   common: {
-    topbar: 'Live one-on-one Qur’an classes for families across the United States',
+    topbar: 'Live online Qur’an and Islamic education for families in the United States and beyond',
     verseLabel: 'From the Qur’an',
     hadithLabel: 'From the Sunnah',
     learnMore: 'Learn more',
@@ -114,18 +169,86 @@ export const en = {
     ourStory: 'Read our story',
     allQuestions: 'See all questions',
     startTrial: 'Start with a free trial',
+    viewProgram: 'View the program',
     whatYouLearn: 'What you will learn',
+    whatIsCovered: 'What is covered',
     different: 'What sets Darul Arqam apart',
-    valuesTitle: 'What we hold to',
     plansFrom: (price: string) => `Plans from ${price} a month`,
     nextTitle: 'What happens next',
     cta: {
       title: 'Begin with a free class, in sha Allah',
-      text: 'Meet a teacher one-on-one before you decide anything.',
+      text: 'Meet a teacher before you decide anything.',
       button: 'Book a free trial class',
     },
     footerPages: 'Pages',
     footerPrograms: 'Programs',
+
+    // Headings and labels on the program and academics pages.
+    format: 'Format',
+    forWhom: 'For',
+    online: 'Online',
+    oneOnOne: 'One-on-one',
+    groupClasses: 'Group classes by semester',
+    overview: 'Overview',
+    vision: 'Our vision',
+    mission: 'Our mission',
+    values: 'Our core values',
+    philosophy: 'Educational philosophy',
+    community: 'An international learning community',
+    improvement: 'Always improving',
+    stage: 'Stage',
+    stages: 'The stages',
+    objective: 'Objective',
+    outcome: 'By the end',
+    outcomes: 'What students achieve',
+    byAge: 'Learning by age',
+    alongside: 'Alongside the reading',
+    deeniyatBand: {
+      title: 'Deeniyat, with every Qur’an program',
+      text: 'Nazirah and Hifz students also study eight subjects of essential Islamic knowledge, from Aqidah and Fiqh to manners and daily duas.',
+      link: 'See the Deeniyat subjects',
+    },
+    assessment: 'Assessment',
+    reports: 'Progress reports for parents',
+    reportsLead: 'Parents receive periodic reports covering:',
+    certification: 'Certification',
+    tracks: 'Two tracks',
+    track: 'Track',
+    cycle: 'Three parts to every lesson',
+    cycleLead: 'New memorization is only kept by revising it. Every Hifz lesson therefore has three parts.',
+    tajweed: 'Tajweed and Makharij',
+    accuracy: 'Trained for accuracy',
+    essentialSurahs: 'Essential Surahs',
+    longerSurahs: 'Selected longer Surahs',
+    surah: 'Surah',
+    method: 'How lessons run',
+    divisions: 'Three divisions',
+    ages: 'Ages',
+    subjects: 'Core subjects',
+    subjectsLead: 'Thirteen subjects run through the curriculum, introduced gradually and deepened year by year.',
+    pathway: 'The six-semester pathway',
+    semester: 'Semester',
+    year: 'Year',
+    finalProject: 'Final project',
+    grading: 'How work is graded',
+    language: 'Language of instruction',
+    differences: 'Fiqh and scholarly differences',
+    summary: 'The three divisions at a glance',
+    feature: 'Feature',
+    placement: 'Placement',
+    teaching: 'Teaching and learning',
+    assessmentProgress: 'Assessment and student progress',
+    faculty: 'Faculty and teaching standards',
+    welfare: 'Student welfare and learning environment',
+    integrity: 'Academic integrity',
+    progression: 'Progression',
+    records: 'Academic records',
+    examinations: 'Examinations',
+    methods: 'Teaching methods',
+    units: (n: number) => `${n} units`,
+    programsFor: 'Programs for this age',
+    findProgram: 'Find the right program',
+    findProgramLead: 'Placement follows a student’s readiness and previous learning, not age alone. As a guide:',
   },
 
   hero: {
@@ -157,11 +280,6 @@ export const en = {
       'Darul Arqam carries that spirit across the ocean. We connect families in the United States with imams and huffaz in Bangladesh — a land where learning and teaching the Qur’an is a living tradition, passed from teacher to student, generation after generation.',
     ],
     medallionCaption: 'Dar al-Arqam · The House of al-Arqam',
-    values: [
-      { name: 'Ikhlas', gloss: 'Sincerity', text: 'We teach the Qur’an as a trust to be honored, not a product to be sold.' },
-      { name: 'Itqan', gloss: 'Excellence', text: 'Correct recitation from the very first letter, with patient attention to every student.' },
-      { name: 'Rahmah', gloss: 'Gentleness', text: 'Kind, encouraging teachers who help children grow to love the Qur’an.' },
-    ],
   },
 
   ayah: {
@@ -171,55 +289,9 @@ export const en = {
 
   programs: {
     eyebrow: 'Programs',
-    title: 'A clear path, from the first letter to the last surah',
-    lead: 'Four programs, each taught one-on-one and paced to the student.',
+    title: 'Three programs, one path',
+    lead: 'Read the Qur’an, memorize it, and study the knowledge of Islam.',
     forLabel: 'For',
-    items: [
-      {
-        q: 'Which programs do you offer?',
-        a: 'Three. Nazirah teaches a student to read the Qur’an correctly and fluently. Hifz is memorization, either of the whole Qur’an or of selected Surahs. Alimiyah and Islamic Studies is a structured course of Islamic knowledge in three divisions, from Junior Islamic Studies for children to an Adult Alimiyah.',
-      },
-      {
-        q: 'How do the online classes work?',
-        a: 'Nazirah and Hifz are live, private video lessons between one student and one teacher, who listens to the student recite and corrects gently as they go. Alimiyah and Junior Islamic Studies are taught in group classes, semester by semester. You can join from a laptop, tablet or phone.',
-      },
-      {
-        q: 'What is Deeniyat?',
-        a: 'Deeniyat is the Islamic studies that every Nazirah and Hifz student takes alongside the Qur’an: Aqidah, practical Fiqh, Hadith and Sunnah, Seerah, manners and character, daily duas, Islamic history and a basic understanding of the Qur’an. It is a compulsory part of both programs.',
-      },
-      {
-        q: 'What ages do you teach?',
-        a: 'Nazirah and Hifz are open to children, teenagers and adults. Junior Islamic Studies is for ages 3 to 12, the Youth and Young Adults Alimiyah for ages 12 to 25, and the Adult Alimiyah for ages 25 and above. Placement follows a student’s readiness and previous learning, not age alone.',
-      },
-      {
-        q: 'Can my daughter or I learn with a female teacher?',
-        a: 'Yes. Qualified female teachers are available for sisters and girls. Simply choose “Female teacher” when you request your trial class.',
-      },
-      {
-        q: 'What language are classes taught in?',
-        a: 'English is the main language of instruction. Arabic is taught as a subject and used more and more for reading Islamic texts. Where it is needed, a teacher may clarify a point in another language.',
-      },
-      {
-        q: 'How will I know how my child is doing?',
-        a: 'Parents receive periodic progress reports covering reading or memorization, revision, recitation quality, Deeniyat, attendance, the teacher’s feedback and the areas that need more work.',
-      },
-      {
-        q: 'Do students receive a certificate?',
-        a: 'Yes, on completing a program or stage and passing its assessment. A certificate states the program and level actually completed. It is a certificate of completion from Darul Arqam, not an accredited degree or a government-recognized qualification.',
-      },
-      {
-        q: 'Will the class times suit my time zone?',
-        a: 'Yes. Classes are scheduled in your local time, anywhere in the United States, and students in other countries are welcome too. Because evening in America is morning in Bangladesh, after-school and evening slots work especially well.',
-      },
-      {
-        q: 'What do we need for a class?',
-        a: 'A device with a camera and microphone, a steady internet connection and a quiet place to sit. For reading lessons, a printed Qaida or Mushaf beside the student is helpful.',
-      },
-      {
-        q: 'What if we have to miss a class?',
-        a: 'Let your teacher know ahead of time and we will do our best to arrange a make-up class.',
-      },
-    ],
   },
 
   audience: {
@@ -321,24 +393,40 @@ export const en = {
     contact: 'Ask us on WhatsApp',
     items: [
       {
+        q: 'Which programs do you offer?',
+        a: 'Three. Nazirah teaches a student to read the Qur’an correctly and fluently. Hifz is memorization, either of the whole Qur’an or of selected Surahs. Alimiyah and Islamic Studies is a structured course of Islamic knowledge in three divisions, from Junior Islamic Studies for children to an Adult Alimiyah.',
+      },
+      {
         q: 'How do the online classes work?',
-        a: 'Each class is a live, private video call between the student and the teacher. The teacher shares the lesson on screen, listens to the student recite, and corrects gently as they go. You can join from a laptop, tablet or phone.',
+        a: 'Nazirah and Hifz are live, private video lessons between one student and one teacher, who listens to the student recite and corrects gently as they go. Alimiyah and Junior Islamic Studies are taught in group classes, semester by semester. You can join from a laptop, tablet or phone.',
+      },
+      {
+        q: 'What is Deeniyat?',
+        a: 'Deeniyat is the Islamic studies that every Nazirah and Hifz student takes alongside the Qur’an: Aqidah, practical Fiqh, Hadith and Sunnah, Seerah, manners and character, daily duas, Islamic history and a basic understanding of the Qur’an. It is a compulsory part of both programs.',
       },
       {
         q: 'What ages do you teach?',
-        a: 'We teach children from around five years old, as well as teenagers and adults of any age. Lessons for young children are kept short and lively.',
+        a: 'Nazirah and Hifz are open to children, teenagers and adults. Junior Islamic Studies is for ages 3 to 12, the Youth and Young Adults Alimiyah for ages 12 to 25, and the Adult Alimiyah for ages 25 and above. Placement follows a student’s readiness and previous learning, not age alone.',
       },
       {
         q: 'Can my daughter or I learn with a female teacher?',
         a: 'Yes. Qualified female teachers are available for sisters and girls. Simply choose “Female teacher” when you request your trial class.',
       },
       {
-        q: 'What language are lessons taught in?',
-        a: 'Lessons can be taught in English or Bangla. Tell us which the student is most comfortable with and we will match a teacher accordingly.',
+        q: 'What language are classes taught in?',
+        a: 'English is the main language of instruction. Arabic is taught as a subject and used more and more for reading Islamic texts. Where it is needed, a teacher may clarify a point in another language.',
+      },
+      {
+        q: 'How will I know how my child is doing?',
+        a: 'Parents receive periodic progress reports covering reading or memorization, revision, recitation quality, Deeniyat, attendance, the teacher’s feedback and the areas that need more work.',
+      },
+      {
+        q: 'Do students receive a certificate?',
+        a: 'Yes, on completing a program or stage and passing its assessment. A certificate states the program and level actually completed. It is a certificate of completion from Darul Arqam, not an accredited degree or a government-recognized qualification.',
       },
       {
         q: 'Will the class times suit my time zone?',
-        a: 'Yes. Classes are scheduled in your local time, anywhere in the United States. Because evening in America is morning in Bangladesh, after-school and evening slots work especially well.',
+        a: 'Yes. Classes are scheduled in your local time, anywhere in the United States, and students in other countries are welcome too. Because evening in America is morning in Bangladesh, after-school and evening slots work especially well.',
       },
       {
         q: 'What do we need for a class?',
@@ -416,6 +504,7 @@ export const en = {
     turn: 'Scroll to turn the page',
     contents: 'Contents',
     contentsNote: 'Scroll, swipe or press the arrow keys to turn the pages.',
+    chaptersButton: 'Chapters',
     chapters: 'Chapters',
     cover: 'Cover',
     page: 'Page',
@@ -427,6 +516,8 @@ export const en = {
     bookTitle: 'Read the site as a book again',
     established: 'Live one-on-one Qur’an classes',
     apart: 'What sets us apart',
+    values: 'What we hold to',
+    begin: 'Where to begin',
     continues: 'Request your free class',
   },
 

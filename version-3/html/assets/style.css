@@ -2079,6 +2079,188 @@ html[lang='bn'] .question__q {
 .book__flow .page--half .page__body {
   justify-content: center;
 }
+
+/* ========== Pieces for the curriculum pages ========== */
+
+/* The vision, set large like a pull quote. */
+.statement {
+  margin-top: 0.4em;
+  font-size: 1.32em;
+  font-style: italic;
+  line-height: 1.32;
+  color: var(--leather-700);
+}
+
+.entries--tight {
+  gap: 0.7em;
+}
+
+.entry__title a {
+  border-bottom: 1px solid var(--gold-500);
+  transition: color 0.2s var(--ease);
+}
+
+.entry__title a:hover {
+  color: var(--rubric);
+}
+
+/* An Arabic word, or an age range, in place of the star at the head of an entry. */
+.entry__emblem {
+  min-width: 2.4em;
+  font-family: var(--font-ruqaa);
+  font-size: 1.5em;
+  line-height: 1.4;
+  color: var(--gold-500);
+  text-align: center;
+}
+
+.entry__emblem--small {
+  min-width: 2.7em;
+  font-size: 1.15em;
+}
+
+.entry__ages {
+  min-width: 3.4em;
+  font-size: 1.45em;
+  font-weight: 500;
+  line-height: 1.25;
+  font-variant-numeric: lining-nums;
+  color: var(--rubric);
+}
+
+.ticks--tight {
+  gap: 0.4em;
+}
+
+.contents--tight {
+  gap: 0.2em;
+  margin-top: 0.9em;
+}
+
+.contents--tight a,
+.contents__row {
+  font-size: 1em;
+}
+
+/* A row of the contents that leads nowhere: a semester and its level. */
+.contents__row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  padding-block: 0.15em;
+}
+
+.contents__row::after {
+  content: '';
+  order: 2;
+  flex: 1;
+  border-bottom: 1px dotted var(--gold-500);
+  transform: translateY(-0.25em);
+}
+
+.contents__row .contents__number {
+  font-size: 0.66em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* A plain numbered list, as in an index. */
+.numbered {
+  margin-top: 0.8em;
+  counter-reset: item;
+}
+
+.numbered li {
+  display: flex;
+  gap: 0.7em;
+  padding-block: 0.3em;
+  border-bottom: 1px solid var(--paper-edge);
+  line-height: 1.3;
+  counter-increment: item;
+}
+
+.numbered li::before {
+  content: counter(item, decimal-leading-zero);
+  font-family: var(--font-caps);
+  font-size: 0.72em;
+  font-weight: 600;
+  line-height: 1.8;
+  color: var(--rubric);
+}
+
+.numbered--2 {
+  columns: 2;
+  column-gap: 1.6em;
+}
+
+.numbered--2 li {
+  break-inside: avoid;
+}
+
+/* A run of names separated by middle dots. */
+.inline-list {
+  margin-top: 0.6em;
+  line-height: 1.75;
+  color: var(--leather-700);
+}
+
+/* Term and description, one pair to a line. */
+.rows {
+  display: grid;
+  gap: 0.55em;
+  margin: 0.9em 0 0;
+}
+
+.rows div {
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--paper-edge);
+}
+
+.rows dt {
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--leather-700);
+}
+
+.rows dd {
+  font-size: 0.92em;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* How work is graded: each part as a bar of its weight. */
+.weights {
+  display: grid;
+  gap: 0.75em;
+  margin: 1.1em 0 0;
+}
+
+.weights div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.2em 1em;
+  align-items: baseline;
+}
+
+.weights div::after {
+  content: '';
+  grid-column: 1 / -1;
+  height: 0.5em;
+  width: calc(var(--weight) * 2.5%);
+  background: linear-gradient(90deg, var(--leather-600), var(--gold-500));
+}
+
+.weights dt {
+  line-height: 1.3;
+}
+
+.weights dd {
+  font-size: 1.15em;
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
+  color: var(--rubric);
+}
 .footer[data-astro-cid-jo6i4kqk] {
   background: var(--desk-950);
   border-top: 1px solid #e8cf8d29;
@@ -2290,20 +2472,28 @@ html[lang="bn"] .site-header__cta[data-astro-cid-nen7h5rs] {
 }
 
 .menu-toggle[data-astro-cid-nen7h5rs] {
-  display: none;
-  width: 2.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
   height: 2.4rem;
-  padding: 0;
+  padding: 0 .95rem;
   border: 1px solid #e8cf8d66;
-  border-radius: 50%;
+  border-radius: 999px;
   background: none;
+  color: var(--gold-300);
+}
+
+.menu-toggle__label[data-astro-cid-nen7h5rs] {
+  font-family: var(--font-caps);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
 }
 
 .menu-toggle__bars[data-astro-cid-nen7h5rs] {
   display: grid;
   gap: 4px;
   width: 1rem;
-  margin-inline: auto;
 }
 
 .menu-toggle__bars[data-astro-cid-nen7h5rs] span[data-astro-cid-nen7h5rs] {
@@ -2325,66 +2515,61 @@ html[lang="bn"] .site-header__cta[data-astro-cid-nen7h5rs] {
   transform: translateY(-5.5px) rotate(-45deg);
 }
 
-@media (width <= 74rem) {
-  .menu-toggle[data-astro-cid-nen7h5rs] {
-    display: block;
-  }
+.chapters[data-astro-cid-nen7h5rs] {
+  position: absolute;
+  inset: 100% 0 auto;
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: .5rem clamp(.9rem, 3vw, 2.25rem) 1.25rem;
+  background: var(--desk-950);
+  border-bottom: 1px solid #e8cf8d33;
+  box-shadow: 0 30px 40px -20px #000c;
+  max-height: calc(100dvh - var(--header-h));
+  overflow-y: auto;
+}
 
-  .chapters[data-astro-cid-nen7h5rs] {
-    position: absolute;
-    inset: 100% 0 auto;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: .5rem clamp(.9rem, 3vw, 2.25rem) 1.25rem;
-    background: var(--desk-950);
-    border-bottom: 1px solid #e8cf8d33;
-    box-shadow: 0 30px 40px -20px #000c;
-    max-height: calc(100dvh - var(--header-h));
-    overflow-y: auto;
-  }
+.is-open[data-astro-cid-nen7h5rs] .chapters[data-astro-cid-nen7h5rs] {
+  display: flex;
+}
 
-  .is-open[data-astro-cid-nen7h5rs] .chapters[data-astro-cid-nen7h5rs] {
-    display: flex;
-  }
+.site-header[data-astro-cid-nen7h5rs].is-open {
+  background: var(--desk-950);
+}
 
-  .site-header[data-astro-cid-nen7h5rs].is-open {
-    background: var(--desk-950);
-  }
+.chapters[data-astro-cid-nen7h5rs] ul[data-astro-cid-nen7h5rs] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  column-gap: 2.5rem;
+}
 
-  .chapters[data-astro-cid-nen7h5rs] ul[data-astro-cid-nen7h5rs] {
-    flex-direction: column;
-    gap: 0;
-  }
+.chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs], .chapters__plain[data-astro-cid-nen7h5rs] {
+  display: block;
+  width: 100%;
+  padding: .85rem 0;
+  border-bottom: 1px solid #e8cf8d24;
+  font-size: .85rem;
+  text-align: left;
+  color: var(--on-dark);
+}
 
-  .chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs], .chapters__plain[data-astro-cid-nen7h5rs] {
-    display: block;
-    width: 100%;
-    padding: .85rem 0;
-    border-bottom: 1px solid #e8cf8d24;
-    font-size: .85rem;
-    text-align: left;
-    color: var(--on-dark);
-  }
+.chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs]:after {
+  display: none;
+}
 
-  .chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs]:after {
-    display: none;
-  }
+.chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs][aria-current] {
+  color: var(--gold-300);
+}
 
-  .chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs][aria-current] {
-    color: var(--gold-300);
-  }
+.chapters__plain[data-astro-cid-nen7h5rs] {
+  padding-left: 0;
+  border-left: 0;
+  color: var(--on-dark-soft);
+}
 
-  .chapters__plain[data-astro-cid-nen7h5rs] {
-    padding-left: 0;
-    border-left: 0;
-    color: var(--on-dark-soft);
-  }
-
-  .no-js .menu-toggle[data-astro-cid-nen7h5rs] {
-    display: none;
-  }
+.no-js .menu-toggle[data-astro-cid-nen7h5rs] {
+  display: none;
 }
 
 @media (width <= 30rem) {
@@ -2433,6 +2618,17 @@ html[lang="bn"] .site-header__cta[data-astro-cid-nen7h5rs] {
   .menu-toggle[data-astro-cid-nen7h5rs] {
     width: 2.15rem;
     height: 2.15rem;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .menu-toggle__label[data-astro-cid-nen7h5rs] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
   }
 }
 
