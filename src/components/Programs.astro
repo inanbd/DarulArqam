@@ -1,13 +1,29 @@
 ---
-import { arabic, getDict, type Lang } from '../i18n';
+import { deeniyat, programs } from '../content/academy';
+import { getDict, type Lang } from '../i18n';
 import { counter } from '../lib/format';
+import { pageHref, programPage } from '../lib/routes';
 
+/** The three programs, and Deeniyat beside them, each leading to its own page. */
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
 const t = getDict(lang);
+const cards = [
+  ...programs.map((program) => ({ ...program, text: program.summary })),
+  {
+    id: 'deeniyat',
+    name: deeniyat.name,
+    emblem: deeniyat.emblem,
+    tagline: deeniyat.gloss,
+    text: `${deeniyat.objective[0]} ${deeniyat.objective[1]}`,
+    points: deeniyat.subjects.slice(0, 5).map((subject) => `${subject.name}: ${subject.gloss.toLowerCase()}`),
+    format: 'With Nazirah and Hifz',
+    ages: 'Every Qur’an student',
+  },
+];
 ---
 
 <section class="section section--parchment programs" id="programs">
@@ -20,12 +36,12 @@ const t = getDict(lang);
 
     <ol class="programs__grid">
       {
-        t.programs.items.map((program, index) => (
+        cards.map((program, index) => (
           <li class="program" data-reveal style={`--reveal-order: ${index % 2}`}>
             <div class="program__top">
               <span class="program__number">{counter(index, lang)}</span>
               <span class="program__emblem" lang="ar" dir="rtl" aria-hidden="true">
-                {arabic.programs[program.id]}
+                {program.emblem}
               </span>
             </div>
             <h3 class="program__name">{program.name}</h3>
@@ -35,9 +51,16 @@ const t = getDict(lang);
               {program.points.map((point) => <li>{point}</li>)}
             </ul>
             <p class="program__audience">
-              <span>{t.programs.forLabel}</span>
-              {program.audience}
+              <span>{program.format}</span>
+              {program.ages}
             </p>
+            <a class="program__link" href={pageHref(lang, programPage[program.id])}>
+              {t.common.viewProgram}
+              <span class="sr-only">: {program.name}</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6"></path>
+              </svg>
+            </a>
           </li>
         ))
       }
@@ -65,8 +88,8 @@ const t = getDict(lang);
     transition:
       border-color 0.4s var(--ease),
       box-shadow 0.4s var(--ease),
-      transform 0.4s var(--ease),
-      opacity 0.9s var(--ease);
+      opacity 0.9s var(--ease),
+      transform 0.9s var(--ease);
   }
 
   .program::before {
@@ -124,10 +147,6 @@ const t = getDict(lang);
     color: var(--gold-ink);
   }
 
-  :global(html[lang='bn']) .program__tagline {
-    font-style: normal;
-  }
-
   .program__text {
     margin-top: 1.1rem;
     color: var(--ink-soft);
@@ -157,14 +176,6 @@ const t = getDict(lang);
     transform: rotate(45deg);
   }
 
-  :global(html[lang='bn']) .program__points li {
-    line-height: 1.7;
-  }
-
-  :global(html[lang='bn']) .program__points li::before {
-    top: 0.62em;
-  }
-
   .program__audience {
     display: flex;
     flex-wrap: wrap;
@@ -185,9 +196,31 @@ const t = getDict(lang);
     color: var(--gold-ink);
   }
 
-  :global(html[lang='bn']) .program__audience span {
-    font-size: 0.88rem;
-    letter-spacing: 0.02em;
+  .program__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: flex-start;
+    margin-top: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--emerald-700);
+    border-bottom: 1px solid var(--gold-500);
+  }
+
+  .program__link svg {
+    transition: transform 0.3s var(--ease);
+  }
+
+  .program:hover .program__link svg {
+    transform: translateX(4px);
+  }
+
+  /* The whole card leads to the program's page. */
+  .program__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
   }
 
   @media (max-width: 52rem) {

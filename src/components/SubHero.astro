@@ -1,0 +1,199 @@
+---
+import Star from './Star.astro';
+import { arabic, getDict, type Lang } from '../i18n';
+import { pageHref, programPages, sectionHref, type PageId } from '../lib/routes';
+
+/** The top of a program or academics page: where you are, the heading, and the page's verse in an arch. */
+interface Props {
+  lang: Lang;
+  page: Exclude<PageId, 'home'>;
+}
+
+const { lang, page } = Astro.props;
+const t = getDict(lang);
+const meta = t.pages[page];
+const verse = arabic.verses[page];
+const size = verse.length > 100 ? 'long' : verse.length > 60 ? 'medium' : 'short';
+const arch = 'M6 594V250C6 132 96 70 220 8c124 62 214 124 214 242v344z';
+const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
+---
+
+<section class="subhero on-dark">
+  <div class="pattern pattern--fade-left"></div>
+  <div class="container subhero__grid">
+    <div>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={pageHref(lang, 'home')}>{t.nav.home}</a>
+        <span aria-hidden="true">·</span>
+        {
+          programPages.includes(page) && (
+            <>
+              <a href={sectionHref(lang, page, 'programs')}>{t.nav.programs}</a>
+              <span aria-hidden="true">·</span>
+            </>
+          )
+        }
+        <span aria-current="page">{meta.nav}</span>
+      </nav>
+      <h1 class="subhero__title">{meta.heading}</h1>
+      <p class="subhero__lead">{meta.lead}</p>
+      <slot />
+    </div>
+
+    <figure class="verse">
+      <svg class="verse__shape" viewBox="0 0 440 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="verse-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1a6650"></stop>
+            <stop offset="0.55" stop-color="#0f4a39"></stop>
+            <stop offset="1" stop-color="#0a372a"></stop>
+          </linearGradient>
+        </defs>
+        <path d={arch} fill="url(#verse-fill)"></path>
+        <path d={arch} fill="none" stroke="#d8bb7e" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+        <path d={archInner} fill="none" stroke="#d8bb7e" stroke-opacity="0.45" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+      </svg>
+      <blockquote class:list={['verse__body', `verse__body--${size}`]}>
+        <Star size={22} variant="double" class="verse__star" />
+        <p class="verse__arabic" lang="ar" dir="rtl">{verse}</p>
+        <p class="verse__text">{meta.verse.text}</p>
+        <footer class="verse__reference"><cite>{meta.verse.reference}</cite></footer>
+      </blockquote>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .subhero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(8rem, 13vw, 10.5rem) clamp(3.5rem, 7vw, 6rem);
+    background:
+      radial-gradient(120% 90% at 85% 10%, #10513f 0%, transparent 60%),
+      linear-gradient(180deg, var(--emerald-900) 0%, var(--emerald-950) 100%);
+    color: var(--on-dark);
+  }
+
+  .subhero .pattern {
+    z-index: -1;
+    --pattern-opacity: 0.11;
+  }
+
+  .subhero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+  }
+
+  .crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+
+  .crumbs a {
+    color: var(--on-dark-soft);
+    transition: color 0.2s var(--ease);
+  }
+
+  .crumbs a:hover {
+    color: #fff;
+  }
+
+  .subhero__title {
+    margin-top: 1.25rem;
+    font-size: calc(clamp(2.5rem, 3.6vw + 1.1rem, 4rem) * var(--display-scale));
+    letter-spacing: -0.01em;
+    color: #fffdf6;
+  }
+
+  .subhero__lead {
+    margin-top: 1.4rem;
+    max-width: 36rem;
+    font-size: 1.17rem;
+    color: var(--on-dark-soft);
+  }
+
+  .verse {
+    position: relative;
+    width: min(100%, 21rem);
+    aspect-ratio: 440 / 600;
+    margin-inline: auto;
+    filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.45));
+  }
+
+  .verse__shape {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .verse__body {
+    position: absolute;
+    inset: 26% 11% 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 0;
+    text-align: center;
+  }
+
+  .verse__body :global(.verse__star) {
+    color: var(--gold-400);
+  }
+
+  .verse__arabic {
+    font-size: 1.75rem;
+    line-height: 1.8;
+    color: var(--gold-300);
+    text-wrap: balance;
+  }
+
+  .verse__body--medium .verse__arabic {
+    font-size: 1.35rem;
+  }
+
+  .verse__body--long .verse__arabic {
+    font-size: 1.02rem;
+    line-height: 1.9;
+  }
+
+  .verse__text {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.3;
+    color: #fffdf6;
+    text-wrap: balance;
+  }
+
+  .verse__body--long .verse__text {
+    font-size: 0.95rem;
+  }
+
+  .verse__reference {
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+
+  .verse__reference cite {
+    font-style: normal;
+  }
+
+  @media (max-width: 60rem) {
+    .subhero__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

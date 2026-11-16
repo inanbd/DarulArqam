@@ -465,3 +465,401 @@ html[lang='bn'] .eyebrow {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ------------------------------------------------------------------
+   Pieces used by the program and academics pages.
+------------------------------------------------------------------- */
+
+.block {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.cols {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.cols--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cols--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cols--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 62rem) {
+  .cols--3,
+  .cols--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 42rem) {
+  .cols--2,
+  .cols--3,
+  .cols--4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* A sheet of ivory with a fine sand rule. */
+.panel {
+  position: relative;
+  padding: clamp(1.6rem, 3vw, 2.4rem);
+  background: #fffdf8;
+  border: 1px solid var(--sand);
+  border-radius: var(--radius);
+}
+
+/* A panel with gold brackets at two corners, like the frame of a manuscript page. */
+.panel--framed {
+  border-color: var(--sand-deep);
+  border-radius: 0;
+  background: var(--parchment);
+}
+
+.section--parchment .panel--framed {
+  background: var(--ivory);
+}
+
+.panel--framed::before,
+.panel--framed::after {
+  content: '';
+  position: absolute;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 2px solid var(--gold-500);
+  pointer-events: none;
+}
+
+.panel--framed::before {
+  top: -6px;
+  left: -6px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.panel--framed::after {
+  right: -6px;
+  bottom: -6px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.panel--dark {
+  background: linear-gradient(180deg, var(--emerald-800), var(--emerald-950));
+  border-color: var(--gold-500);
+  color: var(--on-dark);
+}
+
+.panel__title {
+  font-size: calc(1.8rem * var(--display-scale));
+  color: var(--emerald-800);
+}
+
+.panel--dark .panel__title {
+  color: #fffdf6;
+}
+
+.panel__text {
+  margin-top: 0.7rem;
+  color: var(--ink-soft);
+}
+
+.panel--dark .panel__text {
+  color: var(--on-dark-soft);
+}
+
+.label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+.panel--dark .label,
+.section--dark .label {
+  color: var(--gold-400);
+}
+
+.prose {
+  max-width: 46rem;
+  color: var(--ink-soft);
+}
+
+.prose p + p {
+  margin-top: 1.1rem;
+}
+
+.prose p:first-of-type {
+  font-size: 1.14rem;
+  color: var(--ink);
+}
+
+/* A list marked with small gold diamonds. */
+.diamonds {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1.1rem;
+}
+
+.diamonds li {
+  position: relative;
+  padding-left: 1.5rem;
+  line-height: 1.5;
+}
+
+.diamonds li::before {
+  content: '';
+  position: absolute;
+  left: 0.1rem;
+  top: 0.5em;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--gold-500);
+  transform: rotate(45deg);
+}
+
+.diamonds--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2.5rem;
+}
+
+@media (max-width: 42rem) {
+  .diamonds--2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+}
+
+.tag {
+  padding: 0.3rem 0.9rem;
+  border: 1px solid var(--sand-deep);
+  border-radius: 999px;
+  background: var(--parchment);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--emerald-800);
+}
+
+.tag--gold {
+  border-color: var(--gold-500);
+  background: transparent;
+  color: var(--gold-ink);
+}
+
+.on-dark .tag,
+.section--dark .tag {
+  border-color: rgba(216, 187, 126, 0.45);
+  background: rgba(216, 187, 126, 0.08);
+  color: var(--gold-300);
+}
+
+/* An eight-pointed star holding a number or a letter. */
+.star-badge {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: var(--emerald-800);
+  color: var(--gold-300);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  clip-path: polygon(50% 0%, 64.6% 14.6%, 85.4% 14.6%, 85.4% 35.4%, 100% 50%, 85.4% 64.6%, 85.4% 85.4%, 64.6% 85.4%, 50% 100%, 35.4% 85.4%, 14.6% 85.4%, 14.6% 64.6%, 0% 50%, 14.6% 35.4%, 14.6% 14.6%, 35.4% 14.6%);
+}
+
+.star-badge--gold {
+  background: var(--gold-500);
+  color: var(--emerald-950);
+}
+
+/* A trail: starred steps down a dashed gold thread. */
+.trail {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.trail__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.trail__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 1.75rem;
+  top: 3.9rem;
+  bottom: -1.5rem;
+  border-left: 1px dashed var(--gold-600);
+}
+
+.trail__outcome {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold-500);
+  font-family: var(--font-display);
+  font-size: calc(1.22rem * (var(--display-scale) + 0.04));
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--gold-ink);
+}
+
+@media (max-width: 36rem) {
+  .trail__step {
+    grid-template-columns: 1fr;
+  }
+
+  .trail__step:not(:last-child)::before {
+    display: none;
+  }
+}
+
+/* "What is covered": opens the detailed syllabus. */
+.fold {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--sand-deep);
+}
+
+.fold > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  font-family: var(--font-display);
+  font-size: calc(1.3rem * var(--display-scale));
+  font-weight: 600;
+  color: var(--emerald-800);
+  cursor: pointer;
+  list-style: none;
+}
+
+.fold > summary::-webkit-details-marker {
+  display: none;
+}
+
+.fold > summary::after {
+  content: '+';
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--gold-500);
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--gold-ink);
+}
+
+.fold[open] > summary::after {
+  content: '–';
+  background: var(--emerald-800);
+  border-color: var(--emerald-800);
+  color: var(--gold-300);
+}
+
+.units {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.4rem 2.25rem;
+  padding-top: 1.25rem;
+}
+
+.unit__title {
+  font-family: var(--font-display);
+  font-size: calc(1.22rem * (var(--display-scale) + 0.04));
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--emerald-800);
+}
+
+.unit ul {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.45rem;
+  font-size: 0.97rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.unit li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.unit li::before {
+  content: '';
+  position: absolute;
+  left: 0.1rem;
+  top: 0.58em;
+  width: 0.32rem;
+  height: 0.32rem;
+  background: var(--gold-500);
+  transform: rotate(45deg);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--sand);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table thead th {
+  font-family: var(--font-display);
+  font-size: calc(1.3rem * var(--display-scale));
+  font-weight: 600;
+  color: var(--emerald-800);
+  border-bottom: 2px solid var(--gold-500);
+}
+
+.table tbody th {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  white-space: nowrap;
+}
+
+.note {
+  margin-top: 1.5rem;
+  max-width: 50rem;
+  color: var(--ink-soft);
+}
+
+.note strong {
+  font-weight: 500;
+  color: var(--emerald-800);
+}

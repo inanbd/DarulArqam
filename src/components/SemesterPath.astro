@@ -1,0 +1,154 @@
+---
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+
+/** Six semesters over three years. Each semester opens to show its subjects and topics. */
+interface Semester {
+  number: number;
+  year: number;
+  yearName: string;
+  level: string;
+  title: string;
+  subjects: { name: string; topics: string[] }[];
+}
+
+interface Props {
+  lang: Lang;
+  semesters: Semester[];
+}
+
+const { lang, semesters } = Astro.props;
+const t = getDict(lang);
+const years = [1, 2, 3].map((year) => semesters.filter((semester) => semester.year === year));
+---
+
+<ol class="trail">
+  {
+    years.map((pair, index) => (
+      <li class="trail__step" data-reveal>
+        <span class="star-badge">{num(index + 1, lang)}</span>
+        <div>
+          <p class="label">{t.common.year} {num(index + 1, lang)}</p>
+          <h4 class="year__name">{pair[0].yearName}</h4>
+          <div class="year__semesters">
+            {pair.map((semester) => (
+              <details class="semester">
+                <summary>
+                  <span class="label">{t.common.semester} {num(semester.number, lang)} · {semester.level}</span>
+                  <span class="semester__title">{semester.title}</span>
+                  <span class="semester__subjects">{semester.subjects.map((subject) => subject.name).join(' · ')}</span>
+                </summary>
+                <div class="units">
+                  {semester.subjects.map((subject) => (
+                    <div class="unit">
+                      <h5 class="unit__title">{subject.name}</h5>
+                      <ul>
+                        {subject.topics.map((topic) => (
+                          <li>{topic}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .year__name {
+    margin: 0.2rem 0 1rem;
+    font-family: var(--font-display);
+    font-size: calc(1.7rem * var(--display-scale));
+    font-weight: 500;
+    font-style: italic;
+    color: var(--emerald-800);
+  }
+
+  .year__semesters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .semester {
+    padding: 0 1.5rem;
+    background: #fffdf8;
+    border: 1px solid var(--sand);
+    border-top: 2px solid var(--gold-500);
+  }
+
+  .semester[open] {
+    grid-column: 1 / -1;
+    padding-bottom: 1.5rem;
+  }
+
+  .semester summary {
+    position: relative;
+    display: grid;
+    gap: 0.3rem;
+    padding: 1.25rem 2.75rem 1.25rem 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .semester summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .semester summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 1.2rem;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--gold-500);
+    border-radius: 50%;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--gold-ink);
+  }
+
+  .semester[open] summary::after {
+    content: '–';
+    background: var(--emerald-800);
+    border-color: var(--emerald-800);
+    color: var(--gold-300);
+  }
+
+  .semester__title {
+    font-family: var(--font-display);
+    font-size: calc(1.45rem * var(--display-scale));
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--emerald-800);
+  }
+
+  .semester__subjects {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .semester[open] .semester__subjects {
+    display: none;
+  }
+
+  .semester .units {
+    border-top: 1px solid var(--sand);
+  }
+
+  @media (max-width: 46rem) {
+    .year__semesters {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

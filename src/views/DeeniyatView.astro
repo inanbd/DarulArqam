@@ -1,0 +1,126 @@
+---
+import Sub from '../components/Sub.astro';
+import Syllabus from '../components/Syllabus.astro';
+import { deeniyat, hifz } from '../content/academy';
+import { getDict, type Lang } from '../i18n';
+import { counter, num } from '../lib/format';
+import { pageHref } from '../lib/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const c = t.common;
+---
+
+<Sub lang={lang} page="deeniyat">
+  <ul class="tags" slot="facts">
+    <li class="tag">{t.pages.nazirah.nav} + {t.pages.hifz.nav}</li>
+    <li class="tag">{num(deeniyat.subjects.length, lang)} subjects</li>
+    <li class="tag">{hifz.method.deeniyat[0]}</li>
+  </ul>
+
+  <section class="section">
+    <div class="container">
+      <div class="prose" data-reveal>
+        <p class="eyebrow">{deeniyat.gloss}</p>
+        {deeniyat.objective.map((paragraph) => <p>{paragraph}</p>)}
+        <p>{deeniyat.commitment}</p>
+      </div>
+
+      <ol class="cols cols--2 block">
+        {
+          deeniyat.subjects.map((subject, index) => (
+            <li class="panel subject" id={subject.id} data-reveal style={`--reveal-order: ${index % 2}`}>
+              <div class="subject__top">
+                <span class="subject__number">{counter(index, lang)}</span>
+                <span class="subject__emblem" lang="ar" dir="rtl" aria-hidden="true">{subject.emblem}</span>
+              </div>
+              <h2 class="panel__title">{subject.name}</h2>
+              <p class="subject__gloss">{subject.gloss}</p>
+              <p class="panel__text">{subject.objective}</p>
+              <p class="trail__outcome">{subject.outcome}</p>
+              <Syllabus label={c.whatIsCovered} units={subject.units} />
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--parchment">
+    <div class="container">
+      <header class="heading heading--center" data-reveal>
+        <p class="eyebrow">{c.byAge}</p>
+        <h2 class="title">Taught at the student’s level</h2>
+      </header>
+      <ul class="cols cols--3 block">
+        {
+          deeniyat.ages.map((group, index) => (
+            <li class="panel" data-reveal style={`--reveal-order: ${index}`}>
+              <h3 class="panel__title">{group.title}</h3>
+              <ul class="diamonds">
+                {group.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+      <aside class="panel panel--framed block" data-reveal>
+        <h3 class="panel__title">{c.methods}</h3>
+        <ul class="tags">
+          {deeniyat.methods.map((method) => <li class="tag">{method}</li>)}
+        </ul>
+      </aside>
+      <p class="links" data-reveal>
+        <a class="btn btn--emerald" href={pageHref(lang, 'nazirah')}>{t.pages.nazirah.nav}</a>
+        <a class="btn btn--outline" href={pageHref(lang, 'hifz')}>{t.pages.hifz.nav}</a>
+      </p>
+    </div>
+  </section>
+</Sub>
+
+<style>
+  .subject {
+    scroll-margin-top: 6rem;
+  }
+
+  .subject__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .subject__number {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--gold-ink);
+  }
+
+  .subject__emblem {
+    font-size: 2.3rem;
+    line-height: 1.5;
+    color: var(--gold-500);
+  }
+
+  .subject__gloss {
+    margin-top: 0.2rem;
+    font-family: var(--font-display);
+    font-size: calc(1.3rem * (var(--display-scale) + 0.04));
+    font-style: italic;
+    color: var(--gold-ink);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 2.5rem;
+  }
+</style>

@@ -14,8 +14,8 @@ import { fileURLToPath } from 'node:url';
  *      which every current browser reads;
  *   3. adds a version tag to stylesheet links, so browsers fetch a changed
  *      stylesheet instead of reusing an old copy;
- *   4. adds one line of script so links to a folder ("bn/") open that folder's
- *      index.html when the pages are viewed from disk.
+ *   4. writes the page scripts into the pages themselves, because browsers refuse
+ *      to load a script module from a separate file when a page is opened from disk.
  *
  * 404.html is left with root-based links, because a server may show it for an
  * address at any depth.
@@ -51,19 +51,33 @@ export default function portableHtml() {
           removed++;
         }
 
-        const openIndexFromDisk =
-          "<script>if(location.protocol==='file:')document.querySelectorAll('a[href$=\"/\"]').forEach(function(a){if(a.protocol==='file:')a.href+='index.html'})</script>";
+        // Scripts, keyed by their path from the site root, to be written into the pages.
+        // Browsers refuse to load a script module from a separate file when a page is opened from disk.
+        const scripts = new Map();
+        for (const file of files.filter((name) => name.endsWith('.js'))) {
+          const code = await readFile(file, 'utf8');
+          if (/^\s*(import|export)\s/m.test(code)) continue;
+          scripts.set(toPosix(path.relative(root, file)), { file, code: code.replace(/<\/script/gi, '<\\/script') });
+        }
+        const inlined = new Set();
 
         let pages = 0;
         for (const file of files.filter((name) => name.endsWith('.html'))) {
           let html = await readFile(file, 'utf8');
+
+          html = html.replace(/<script type="module" src="([^"]+)"><\/script>/g, (match, src) => {
+            const target = src.startsWith('/') ? src.slice(1) : toPosix(path.relative(root, path.resolve(path.dirname(file), src)));
+            const script = scripts.get(target);
+            if (!script) return match;
+            inlined.add(script.file);
+            return `<script type="module">\n${script.code}</script>`;
+          });
           const isNotFoundPage = path.basename(file) === '404.html';
 
           if (!isNotFoundPage) {
             const prefix = prefixFor(file);
             html = html
-              .replace(/(\s(?:href|src|action|poster)=")\/(?!\/)/g, (_, attribute) => `${attribute}${prefix}`)
-              .replace('</body>', `${openIndexFromDisk}</body>`);
+              .replace(/(\s(?:href|src|action|poster)=")\/(?!\/)/g, (_, attribute) => `${attribute}${prefix}`);
             pages++;
           }
 
@@ -78,6 +92,8 @@ export default function portableHtml() {
 
           await writeFile(file, html);
         }
+
+        for (const file of inlined) await unlink(file);
 
         logger.info(`${pages} page(s) made portable; ${removed} legacy font file(s) dropped.`);
       },

@@ -1,0 +1,104 @@
+---
+import { framework } from '../content/academy';
+import { getDict, type Lang } from '../i18n';
+import { counter } from '../lib/format';
+import { pageHref } from '../lib/routes';
+
+/** The educational philosophy in brief, leading to the Academics page. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section class="section section--parchment approach" id="academics">
+  <div class="container">
+    <header class="heading heading--center" data-reveal>
+      <p class="eyebrow">{t.common.philosophy}</p>
+      <h2 class="title">More than memorizing</h2>
+      <p class="lead">{framework.philosophy.intro}</p>
+    </header>
+
+    <ol class="principles">
+      {
+        framework.philosophy.principles.map((principle, index) => (
+          <li class="principle" data-reveal style={`--reveal-order: ${index}`}>
+            <span class="star-badge">{counter(index, lang).slice(-1)}</span>
+            <h3 class="principle__name">{principle.name}</h3>
+            <p class="principle__text">{principle.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="approach__more" data-reveal>
+      <a class="btn btn--emerald" href={pageHref(lang, 'academics')}>{t.pages.academics.heading}</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .principles {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  /* The gold thread: knowledge leads to understanding, practice and character. */
+  .principles::before {
+    content: '';
+    position: absolute;
+    top: 1.75rem;
+    left: 12.5%;
+    right: 12.5%;
+    border-top: 1px dashed var(--gold-600);
+  }
+
+  .principle {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .principle .star-badge {
+    outline: 0.6rem solid var(--parchment);
+  }
+
+  .principle__name {
+    margin-top: 1.3rem;
+    font-size: calc(1.8rem * var(--display-scale));
+    font-style: italic;
+    color: var(--emerald-800);
+  }
+
+  .principle__text {
+    margin-top: 0.5rem;
+    color: var(--ink-soft);
+  }
+
+  .approach__more {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    text-align: center;
+  }
+
+  @media (max-width: 60rem) {
+    .principles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .principles::before {
+      display: none;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .principles {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

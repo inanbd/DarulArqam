@@ -47,6 +47,14 @@ const t = getDict(lang);
       }
     </ul>
 
+    <aside class="group" data-reveal>
+      <div>
+        <h3 class="group__title">{t.tuition.group.title}</h3>
+        <p class="group__text">{t.tuition.group.text}</p>
+      </div>
+      <a class="btn btn--emerald" href="#trial">{t.tuition.group.cta}</a>
+    </aside>
+
     <div class="included" data-reveal>
       <h3 class="included__title">{t.tuition.includedTitle}</h3>
       <ul class="included__list">
@@ -206,10 +214,38 @@ const t = getDict(lang);
     margin-top: auto;
   }
 
+  /* ----- Group programs ----- */
+
+  .group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding: clamp(1.75rem, 3.5vw, 2.5rem);
+    border: 1px solid var(--gold-500);
+    border-radius: var(--radius);
+  }
+
+  .group > div {
+    flex: 1 1 20rem;
+  }
+
+  .group__title {
+    font-size: calc(1.8rem * var(--display-scale));
+    color: var(--emerald-800);
+  }
+
+  .group__text {
+    margin-top: 0.3rem;
+    color: var(--ink-soft);
+  }
+
   /* ----- Included with every plan ----- */
 
   .included {
-    margin-top: clamp(2.5rem, 5vw, 4rem);
+    margin-top: clamp(1.25rem, 2.5vw, 2rem);
     padding: clamp(1.75rem, 3.5vw, 2.75rem);
     background: var(--parchment);
     border: 1px solid var(--sand);

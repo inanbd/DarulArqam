@@ -18,23 +18,28 @@ import '@fontsource-variable/noto-serif-bengali/wght.css';
 import '../styles/global.css';
 
 import { site } from '../config/site';
-import { getDict, type Lang } from '../i18n';
+import { getDict, published, type Lang } from '../i18n';
 import { href } from '../lib/format';
+import { pageHref, type PageId } from '../lib/routes';
 
 interface Props {
   lang: Lang;
+  /** Which page this is. Its title and description come from the language file. */
+  page?: PageId;
   title?: string;
   description?: string;
   /** Pages that should stay out of search results (the 404 page). */
   noindex?: boolean;
 }
 
-const { lang, noindex = false } = Astro.props;
+const { lang, page = 'home', noindex = false } = Astro.props;
 const t = getDict(lang);
-const title = Astro.props.title ?? t.meta.title;
-const description = Astro.props.description ?? t.meta.description;
+const meta = page === 'home' ? t.meta : t.pages[page];
+const title = Astro.props.title ?? meta.title;
+const description = Astro.props.description ?? meta.description;
 
 const absolute = (path: string) => `${site.url}${href(path)}`;
+const address = `${site.url}${pageHref(lang, page)}`;
 const hasUrl = site.url.length > 0;
 
 const schema = {
@@ -44,7 +49,7 @@ const schema = {
   alternateName: [site.nameBn, site.nameAr],
   description: t.meta.description,
   areaServed: 'US',
-  ...(hasUrl ? { url: absolute(t.path), logo: absolute('/favicon.svg') } : {}),
+  ...(hasUrl ? { url: `${site.url}${pageHref(lang, 'home')}`, logo: absolute('/favicon.svg') } : {}),
 };
 ---
 
@@ -62,11 +67,9 @@ const schema = {
     {
       hasUrl && !noindex && (
         <>
-          <link rel="canonical" href={absolute(t.path)} />
-          <link rel="alternate" hreflang="en" href={absolute('/')} />
-          <link rel="alternate" hreflang="bn" href={absolute('/bn/')} />
-          <link rel="alternate" hreflang="x-default" href={absolute('/')} />
-          <meta property="og:url" content={absolute(t.path)} />
+          <link rel="canonical" href={address} />
+          {published.length > 1 && published.map((code) => <link rel="alternate" hreflang={code} href={`${site.url}${pageHref(code, page)}`} />)}
+          <meta property="og:url" content={address} />
           <meta property="og:image" content={absolute('/og.png')} />
           <meta name="twitter:card" content="summary_large_image" />
         </>

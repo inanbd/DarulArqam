@@ -1,6 +1,7 @@
 ---
 import Star from './Star.astro';
 import TeacherProfiles from './TeacherProfiles.astro';
+import { framework } from '../content/academy';
 import { getDict, type Lang } from '../i18n';
 
 interface Props {
@@ -17,6 +18,7 @@ const t = getDict(lang);
       <p class="eyebrow">{t.teachers.eyebrow}</p>
       <h2 class="title">{t.teachers.title}</h2>
       {t.teachers.paragraphs.map((paragraph) => <p class="teachers__text">{paragraph}</p>)}
+      <p class="teachers__text">{framework.faculty.intro[1]}</p>
       <a class="btn btn--emerald teachers__cta" href="#trial">{t.teachers.cta}</a>
     </div>
 
@@ -28,7 +30,7 @@ const t = getDict(lang);
       <h3 class="standards__title">{t.teachers.standardsTitle}</h3>
       <ul class="standards__list">
         {
-          t.teachers.standards.map((standard) => (
+          framework.faculty.expectations.map((standard) => (
             <li>
               <Star size={15} class="standards__star" />
               {standard}

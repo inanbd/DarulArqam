@@ -1,0 +1,194 @@
+---
+import Sub from '../components/Sub.astro';
+import Weights from '../components/Weights.astro';
+import { alimiyah, framework } from '../content/academy';
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const c = t.common;
+const { policies } = alimiyah;
+---
+
+<Sub lang={lang} page="academics">
+  <section class="section">
+    <div class="container">
+      <header class="heading heading--center" data-reveal>
+        <p class="eyebrow">{c.philosophy}</p>
+        <h2 class="title">Four principles behind every lesson</h2>
+        <p class="lead">{framework.philosophy.intro}</p>
+      </header>
+      <ol class="principles block">
+        {
+          framework.philosophy.principles.map((principle, index) => (
+            <li class="principle" data-reveal style={`--reveal-order: ${index}`}>
+              <span class="star-badge">{num(index + 1, lang)}</span>
+              <h3 class="principle__name">{principle.name}</h3>
+              <p class="principle__text">{principle.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="center-note" data-reveal>{framework.philosophy.note}</p>
+    </div>
+  </section>
+
+  <section class="section section--parchment">
+    <div class="container cols cols--2">
+      <article class="panel" data-reveal>
+        <h2 class="panel__title">{c.teaching}</h2>
+        <p class="panel__text">{framework.teaching.intro}</p>
+        <ul class="diamonds">
+          {framework.teaching.points.map((point) => <li>{point}</li>)}
+        </ul>
+        <p class="panel__text">{framework.teaching.note}</p>
+        <p class="label" style="margin-top: 1.5rem">{c.methods}</p>
+        <ul class="tags" style="margin-top: 0.6rem">
+          {policies.methods.map((method) => <li class="tag">{method}</li>)}
+        </ul>
+      </article>
+      <article class="panel" data-reveal style="--reveal-order: 1">
+        <h2 class="panel__title">{c.assessmentProgress}</h2>
+        <p class="panel__text">{framework.assessment.intro} {framework.assessment.lead}</p>
+        <ul class="diamonds">
+          {framework.assessment.methods.map((method) => <li>{method}</li>)}
+        </ul>
+        <p class="panel__text">{framework.assessment.purpose}</p>
+        <p class="panel__text">{framework.assessment.parents}</p>
+      </article>
+    </div>
+    <div class="container block">
+      <div class="panel panel--framed" data-reveal>
+        <h2 class="panel__title">{c.grading}</h2>
+        <div style="margin-top: 0.75rem">
+          <Weights />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cols cols--2">
+      <article class="panel panel--framed" data-reveal>
+        <h2 class="panel__title">{c.faculty}</h2>
+        {framework.faculty.intro.map((paragraph) => <p class="panel__text">{paragraph}</p>)}
+        <ul class="diamonds">
+          {framework.faculty.expectations.map((item) => <li>{item}</li>)}
+        </ul>
+        <p class="panel__text">{policies.faculty.note}</p>
+      </article>
+      <article class="panel panel--framed" data-reveal style="--reveal-order: 1">
+        <h2 class="panel__title">{c.welfare}</h2>
+        <p class="panel__text">{framework.welfare.intro}</p>
+        <ul class="diamonds">
+          {framework.welfare.points.map((item) => <li>{item}</li>)}
+        </ul>
+        <p class="panel__text">{framework.welfare.aim}</p>
+      </article>
+    </div>
+    <div class="container cols cols--3 block">
+      <aside class="panel" data-reveal>
+        <h3 class="panel__title">{c.progression}</h3>
+        <p class="panel__text">{policies.progression}</p>
+      </aside>
+      <aside class="panel" data-reveal style="--reveal-order: 1">
+        <h3 class="panel__title">{c.integrity}</h3>
+        <p class="panel__text">{policies.integrity}</p>
+      </aside>
+      <aside class="panel" data-reveal style="--reveal-order: 2">
+        <h3 class="panel__title">{c.certification}</h3>
+        {alimiyah.certification.policy.map((paragraph) => <p class="panel__text">{paragraph}</p>)}
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--parchment">
+    <div class="container cols cols--2">
+      <article data-reveal>
+        <p class="eyebrow">{c.community}</p>
+        <div class="prose" style="margin-top: 1.25rem">
+          {framework.community.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </article>
+      <article data-reveal style="--reveal-order: 1">
+        <p class="eyebrow">{c.improvement}</p>
+        <div class="prose" style="margin-top: 1.25rem">
+          {framework.improvement.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </article>
+    </div>
+  </section>
+</Sub>
+
+<style>
+  .principles {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  /* The gold thread: knowledge leads to understanding, practice and character. */
+  .principles::before {
+    content: '';
+    position: absolute;
+    top: 1.75rem;
+    left: 12.5%;
+    right: 12.5%;
+    border-top: 1px dashed var(--gold-600);
+  }
+
+  .principle {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .principle .star-badge {
+    outline: 0.6rem solid var(--ivory);
+  }
+
+  .principle__name {
+    margin-top: 1.3rem;
+    font-size: calc(1.8rem * var(--display-scale));
+    font-style: italic;
+    color: var(--emerald-800);
+  }
+
+  .principle__text {
+    margin-top: 0.5rem;
+    color: var(--ink-soft);
+  }
+
+  .center-note {
+    max-width: 40rem;
+    margin: 2.5rem auto 0;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--gold-ink);
+    text-align: center;
+  }
+
+  @media (max-width: 60rem) {
+    .principles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .principles::before {
+      display: none;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .principles {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

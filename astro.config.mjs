@@ -6,10 +6,9 @@ import portableHtml from './integrations/portable-html.mjs';
 export default defineConfig({
   output: 'static',
   outDir: './html',
-  trailingSlash: 'always',
   // Keep the generated pages and stylesheet readable.
   compressHTML: false,
-  build: { assets: 'assets', inlineStylesheets: 'never' },
+  build: { format: 'preserve', assets: 'assets', inlineStylesheets: 'never' },
   vite: {
     build: {
       minify: false,

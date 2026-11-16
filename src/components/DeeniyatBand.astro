@@ -1,0 +1,71 @@
+---
+import { deeniyat } from '../content/academy';
+import { getDict, type Lang } from '../i18n';
+import { pageHref } from '../lib/routes';
+
+/** A reminder, on the Qur'an program pages, that Deeniyat comes with them. */
+interface Props {
+  lang: Lang;
+  note?: string;
+}
+
+const { lang, note } = Astro.props;
+const t = getDict(lang);
+const band = t.common.deeniyatBand;
+---
+
+<aside class="panel panel--dark band" data-reveal>
+  <span class="band__emblem" lang="ar" dir="rtl" aria-hidden="true">{deeniyat.emblem}</span>
+  <div class="band__copy">
+    <h3 class="panel__title">{band.title}</h3>
+    <p class="panel__text">{band.text}</p>
+    {note && <p class="band__note">{note}</p>}
+    <ul class="tags">
+      {deeniyat.subjects.map((subject) => <li class="tag">{subject.name}</li>)}
+    </ul>
+  </div>
+  <a class="btn btn--gold" href={pageHref(lang, 'deeniyat')}>{band.link}</a>
+</aside>
+
+<style>
+  .band {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem 2.5rem;
+    overflow: hidden;
+  }
+
+  .band__emblem {
+    position: absolute;
+    right: 2rem;
+    top: -1rem;
+    font-size: 7rem;
+    line-height: 1.6;
+    color: rgba(216, 187, 126, 0.12);
+    pointer-events: none;
+  }
+
+  .band__copy {
+    position: relative;
+    flex: 1 1 26rem;
+  }
+
+  .band__note {
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--gold-300);
+  }
+
+  .band .tag {
+    border-color: rgba(216, 187, 126, 0.45);
+    background: rgba(216, 187, 126, 0.08);
+    color: var(--gold-300);
+  }
+
+  .band .btn {
+    position: relative;
+  }
+</style>

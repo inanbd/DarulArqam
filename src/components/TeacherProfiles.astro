@@ -1,6 +1,7 @@
 ---
 import Star from './Star.astro';
 import { teachers } from '../config/teachers';
+import { programs } from '../content/academy';
 import { getDict, type Lang } from '../i18n';
 import { href, num } from '../lib/format';
 
@@ -12,7 +13,7 @@ const { lang } = Astro.props;
 const t = getDict(lang);
 const p = t.teachers.profiles;
 
-const programNames = Object.fromEntries(t.programs.items.map((program) => [program.id, program.name]));
+const programNames = Object.fromEntries(programs.map((program) => [program.id, program.short]));
 const groups = [
   { id: 'male', label: p.male, note: '', people: teachers.filter((teacher) => teacher.gender === 'male') },
   { id: 'female', label: p.female, note: p.femaleNote, people: teachers.filter((teacher) => teacher.gender === 'female') },

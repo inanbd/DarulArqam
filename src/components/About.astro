@@ -1,7 +1,9 @@
 ---
 import Rosette from './Rosette.astro';
 import Star from './Star.astro';
+import { framework } from '../content/academy';
 import { arabic, getDict, type Lang } from '../i18n';
+import { counter } from '../lib/format';
 
 interface Props {
   lang: Lang;
@@ -28,16 +30,27 @@ const t = getDict(lang);
     </div>
   </div>
 
+  <div class="container purpose">
+    <article class="purpose__vision" data-reveal>
+      <p class="eyebrow">{t.common.vision}</p>
+      <p class="purpose__statement">{framework.vision}</p>
+    </article>
+    <article class="panel panel--framed" data-reveal style="--reveal-order: 1">
+      <h3 class="panel__title">{t.common.mission}</h3>
+      <ul class="diamonds">
+        {framework.mission.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+  </div>
+
   <div class="container">
+    <h3 class="values__heading" data-reveal>{t.common.values}</h3>
     <ul class="values">
       {
-        t.about.values.map((value, index) => (
+        framework.values.map((value, index) => (
           <li class="value" data-reveal style={`--reveal-order: ${index}`}>
-            <Star size={14} class="value__star" />
-            <h3 class="value__name">
-              {value.name}
-              <span class="value__gloss">{value.gloss}</span>
-            </h3>
+            <span class="value__number">{counter(index, lang)}</span>
+            <h4 class="value__name">{value.name}</h4>
             <p class="value__text">{value.text}</p>
           </li>
         ))
@@ -122,58 +135,96 @@ const t = getDict(lang);
     letter-spacing: 0.02em;
   }
 
-  /* ----- Values ----- */
+  /* ----- Vision and mission ----- */
 
-  .values {
+  .purpose {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1.5rem, 4vw, 3.5rem);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: center;
+    gap: clamp(2.5rem, 7vw, 6rem);
     margin-top: clamp(3.5rem, 7vw, 6rem);
-    padding-top: clamp(2.25rem, 4vw, 3.25rem);
+    padding-top: clamp(3rem, 6vw, 5rem);
     border-top: 1px solid var(--sand);
   }
 
-  .value :global(.value__star) {
-    color: var(--gold-500);
-  }
-
-  .value__name {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.2rem 0.75rem;
-    margin-top: 0.9rem;
-    font-size: calc(1.85rem * var(--display-scale));
+  .purpose__statement {
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-size: calc(clamp(1.7rem, 1.6vw + 1.2rem, 2.4rem) * var(--display-scale));
     font-style: italic;
+    line-height: 1.3;
     color: var(--emerald-800);
   }
 
-  :global(html[lang='bn']) .value__name {
-    font-style: normal;
+  /* ----- Values ----- */
+
+  .values__heading {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-ink);
+    text-align: center;
   }
 
-  .value__gloss {
-    font-family: var(--font-body);
-    font-size: 0.76rem;
-    font-style: normal;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+  .values {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin-top: 1.75rem;
+    border-top: 1px solid var(--gold-500);
+  }
+
+  .value {
+    padding: 1.75rem 1.25rem 0;
+    border-left: 1px solid var(--sand);
+  }
+
+  .value:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .value__number {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     color: var(--gold-ink);
   }
 
-  :global(html[lang='bn']) .value__gloss {
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
+  .value__name {
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-size: calc(1.5rem * var(--display-scale));
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--emerald-800);
   }
 
   .value__text {
     margin-top: 0.6rem;
+    font-size: 0.98rem;
     color: var(--ink-soft);
   }
 
+  @media (max-width: 68rem) {
+    .values {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .value,
+    .value:first-child {
+      padding: 1.5rem 1.25rem 1.5rem 0;
+      border-left: 0;
+      border-bottom: 1px solid var(--sand);
+    }
+  }
+
   @media (max-width: 56rem) {
-    .about__grid {
+    .about__grid,
+    .purpose {
       grid-template-columns: 1fr;
     }
 
@@ -181,8 +232,5 @@ const t = getDict(lang);
       width: min(78%, 21rem);
     }
 
-    .values {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

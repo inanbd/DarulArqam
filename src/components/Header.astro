@@ -1,19 +1,30 @@
 ---
 import Logo from './Logo.astro';
 import { getDict, type Lang } from '../i18n';
-import { href } from '../lib/format';
+import { pageHref, programPages, sectionHref, type PageId } from '../lib/routes';
 
 interface Props {
   lang: Lang;
+  page?: PageId;
 }
 
-const { lang } = Astro.props;
+const { lang, page = 'home' } = Astro.props;
 const t = getDict(lang);
+
+// Sections of the home page, and the pages that stand beside it.
+const links = [
+  { label: t.nav.about, href: sectionHref(lang, page, 'about') },
+  { label: t.nav.programs, href: sectionHref(lang, page, 'programs'), under: programPages, current: programPages.includes(page) },
+  { label: t.nav.academics, href: pageHref(lang, 'academics'), current: page === 'academics' },
+  { label: t.nav.teachers, href: sectionHref(lang, page, 'teachers') },
+  { label: t.nav.tuition, href: sectionHref(lang, page, 'tuition') },
+  { label: t.nav.faq, href: sectionHref(lang, page, 'faq') },
+];
 ---
 
 <header class="site-header" data-header>
   <div class="container site-header__inner">
-    <a class="brand" href={href(t.path)} aria-label={`${t.brand.name} — ${t.brand.tagline}`}>
+    <a class="brand" href={pageHref(lang, 'home')} aria-label={`${t.brand.name} — ${t.brand.tagline}`}>
       <span class="brand__mark"><Logo size={46} /></span>
       <span class="brand__text">
         <span class="brand__name">{t.brand.name}</span>
@@ -29,22 +40,28 @@ const t = getDict(lang);
     <nav class="nav" id="site-nav" aria-label={t.nav.label}>
       <ul class="nav__links">
         {
-          t.nav.links.map((link) => (
-            <li>
-              <a href={link.href}>{link.label}</a>
+          links.map((link) => (
+            <li class:list={{ 'has-sub': link.under }}>
+              <a href={link.href} aria-current={link.current ? 'true' : undefined}>
+                {link.label}
+              </a>
+              {link.under && (
+                <ul class="nav__sub">
+                  {link.under.map((id) => (
+                    <li>
+                      <a href={pageHref(lang, id)} aria-current={id === page ? 'page' : undefined}>
+                        {t.pages[id].nav}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))
         }
       </ul>
       <div class="nav__actions">
-        <a class="lang-switch" href={href(t.alt.path)} lang={t.alt.lang} hreflang={t.alt.lang} title={t.alt.title}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <circle cx="12" cy="12" r="9"></circle>
-            <path d="M3 12h18M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9z"></path>
-          </svg>
-          {t.alt.label}
-        </a>
-        <a class="btn btn--gold btn--sm" href="#trial">{t.nav.cta}</a>
+        <a class="btn btn--gold btn--sm" href={sectionHref(lang, page, 'trial')}>{t.nav.cta}</a>
       </div>
     </nav>
   </div>
@@ -187,34 +204,55 @@ const t = getDict(lang);
     transition: transform 0.3s var(--ease);
   }
 
-  .nav__links a:hover {
+  .nav__links a:hover,
+  .nav__links a[aria-current] {
     opacity: 1;
   }
 
-  .nav__links a:hover::after {
+  .nav__links > li > a:hover::after,
+  .nav__links > li > a[aria-current]::after {
     transform: scaleX(1);
+  }
+
+  .nav__links > li {
+    position: relative;
+  }
+
+  /* The program pages open beneath "Programs". */
+  .nav__sub {
+    position: absolute;
+    top: 100%;
+    left: -1rem;
+    display: none;
+    min-width: 11rem;
+    padding: 0.5rem 1rem 0.75rem;
+    background: var(--emerald-950);
+    border: 1px solid rgba(216, 187, 126, 0.25);
+    box-shadow: 0 24px 40px -20px rgba(0, 0, 0, 0.8);
+  }
+
+  .has-sub:hover .nav__sub,
+  .has-sub:focus-within .nav__sub {
+    display: block;
+  }
+
+  .nav__sub a {
+    display: block;
+    padding-block: 0.45rem;
+  }
+
+  .nav__sub a::after {
+    display: none;
+  }
+
+  .nav__sub a[aria-current='page'] {
+    color: var(--gold-300);
   }
 
   .nav__actions {
     display: flex;
     align-items: center;
     gap: 1.1rem;
-  }
-
-  .lang-switch {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.4rem 0.2rem;
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    line-height: 1.4;
-    color: var(--gold-300);
-    transition: color 0.2s var(--ease);
-  }
-
-  .lang-switch:hover {
-    color: #fff;
   }
 
   .nav-toggle {
@@ -298,6 +336,21 @@ const t = getDict(lang);
 
     .nav__links a::after {
       display: none;
+    }
+
+    .nav__sub {
+      position: static;
+      display: block;
+      min-width: 0;
+      padding: 0 0 0 1.25rem;
+      background: none;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .nav__sub a {
+      font-size: calc(1.2rem * (var(--display-scale) + 0.1));
+      color: var(--on-dark-soft);
     }
 
     .nav__actions {

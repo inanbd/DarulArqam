@@ -1,0 +1,75 @@
+---
+import { alimiyah } from '../content/academy';
+
+/** The assessment model of the Youth and Adult divisions, as one bar split by weight. */
+const { intro, rows, note } = alimiyah.policies.grading;
+const tones = ['#e9d6a9', '#c6a15b', '#1d6d55', '#0d4132', '#05211a'];
+---
+
+<figure class="weights">
+  <figcaption class="panel__text" style="margin-top: 0">{intro}</figcaption>
+  <div class="weights__bar" role="img" aria-label={rows.map((row) => `${row.component} ${row.weight}%`).join(', ')}>
+    {rows.map((row, index) => <span style={`flex: ${row.weight}; background: ${tones[index]}`}>{row.weight}%</span>)}
+  </div>
+  <ul class="weights__legend">
+    {
+      rows.map((row, index) => (
+        <li>
+          <span class="weights__dot" style={`background: ${tones[index]}`} />
+          {row.component}
+          <strong>{row.weight}%</strong>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="panel__text">{note}</p>
+</figure>
+
+<style>
+  .weights__bar {
+    display: flex;
+    gap: 2px;
+    margin-top: 1.25rem;
+    border: 1px solid var(--gold-500);
+    padding: 3px;
+  }
+
+  .weights__bar span {
+    display: grid;
+    place-items: center;
+    min-height: 3.25rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--gold-300);
+  }
+
+  /* Dark figures on the two gold segments. */
+  .weights__bar span:nth-child(-n + 2) {
+    color: var(--emerald-950);
+  }
+
+  .weights__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin-top: 1.1rem;
+  }
+
+  .weights__legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .weights__legend strong {
+    font-weight: 500;
+    color: var(--emerald-800);
+  }
+
+  .weights__dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    transform: rotate(45deg);
+  }
+</style>

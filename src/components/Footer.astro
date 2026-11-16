@@ -2,13 +2,15 @@
 import Logo from './Logo.astro';
 import { site } from '../config/site';
 import { arabic, getDict, type Lang } from '../i18n';
-import { href, num } from '../lib/format';
+import { num } from '../lib/format';
+import { pageHref, programPages, sectionHref, type PageId } from '../lib/routes';
 
 interface Props {
   lang: Lang;
+  page?: PageId;
 }
 
-const { lang } = Astro.props;
+const { lang, page = 'home' } = Astro.props;
 const t = getDict(lang);
 const { email, whatsappNumber, whatsappDisplay } = site.contact;
 const year = num(new Date().getFullYear(), lang);
@@ -17,7 +19,7 @@ const year = num(new Date().getFullYear(), lang);
 <footer class="footer on-dark">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <a class="footer__logo" href={href(t.path)}>
+      <a class="footer__logo" href={pageHref(lang, 'home')}>
         <span class="footer__mark"><Logo size={52} /></span>
         <span>
           <span class="footer__name">{t.brand.name}</span>
@@ -32,13 +34,16 @@ const year = num(new Date().getFullYear(), lang);
       <h2 class="footer__heading">{t.footer.explore}</h2>
       <ul>
         {
-          t.nav.links.map((link) => (
+          programPages.map((id) => (
             <li>
-              <a href={link.href}>{link.label}</a>
+              <a href={pageHref(lang, id)}>{t.pages[id].nav}</a>
             </li>
           ))
         }
-        <li><a href="#trial">{t.nav.cta}</a></li>
+        <li><a href={pageHref(lang, 'academics')}>{t.nav.academics}</a></li>
+        <li><a href={sectionHref(lang, page, 'teachers')}>{t.nav.teachers}</a></li>
+        <li><a href={sectionHref(lang, page, 'tuition')}>{t.nav.tuition}</a></li>
+        <li><a href={sectionHref(lang, page, 'trial')}>{t.nav.cta}</a></li>
       </ul>
     </nav>
 
@@ -61,9 +66,6 @@ const year = num(new Date().getFullYear(), lang);
             </li>
           )
         }
-        <li>
-          <a href={href(t.alt.path)} lang={t.alt.lang} hreflang={t.alt.lang}>{t.alt.label}</a>
-        </li>
       </ul>
     </div>
   </div>
