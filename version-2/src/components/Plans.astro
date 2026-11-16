@@ -42,6 +42,15 @@ const t = getDict(lang);
   }
 </ul>
 
+<aside class="group card" data-reveal>
+  <span class="icon-tile icon-tile--navy"><Icon name="people" size={24} /></span>
+  <div>
+    <h2 class="group__title">{t.tuition.group.title}</h2>
+    <p class="group__text">{t.tuition.group.text}</p>
+  </div>
+  <a class="btn btn--outline" href={pageHref(lang, 'trial')}>{t.tuition.group.cta}</a>
+</aside>
+
 <div class="included card" data-reveal>
   <h2 class="included__title">{t.tuition.includedTitle}</h2>
   <ul class="ticks included__list">
@@ -185,6 +194,30 @@ const t = getDict(lang);
 
   .plan .btn {
     margin-top: auto;
+  }
+
+  /* ----- Group programs ----- */
+
+  .group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem 1.5rem;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .group > div {
+    flex: 1 1 18rem;
+  }
+
+  .group__title {
+    font-size: calc(1.5rem * var(--display-scale));
+  }
+
+  .group__text {
+    margin-top: 0.3rem;
+    color: var(--ink-soft);
   }
 
   /* ----- Included with every plan ----- */

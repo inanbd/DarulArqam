@@ -12,6 +12,7 @@ import TeacherCard from '../components/TeacherCard.astro';
 import TimeBand from '../components/TimeBand.astro';
 import { site } from '../config/site';
 import { teachers } from '../config/teachers';
+import { framework } from '../content/academy';
 import { arabic, getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
 import { pageHref } from '../lib/routes';
@@ -126,7 +127,7 @@ const lowestPrice = Math.min(...site.plans.map((plan) => plan.monthlyUsd));
         <h2 class="title">{t.teachers.title}</h2>
         <p class="home-teachers__text">{t.teachers.paragraphs[1]}</p>
         <ul class="ticks home-teachers__list">
-          {t.teachers.standards.slice(0, 3).map((standard) => <li>{standard}</li>)}
+          {framework.faculty.expectations.slice(0, 3).map((standard) => <li>{standard}</li>)}
         </ul>
         <a class="btn btn--navy" href={pageHref(lang, 'teachers')}>
           {t.common.allTeachers}

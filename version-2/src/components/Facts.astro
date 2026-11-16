@@ -1,0 +1,34 @@
+---
+import Icon from './Icon.astro';
+
+/** A row of key facts about a program, shown as chips under the page heading. */
+interface Props {
+  facts: { icon: 'video' | 'people' | 'child' | 'layers' | 'clock' | 'book' | 'certificate' | 'globe'; text: string }[];
+}
+
+const { facts } = Astro.props;
+---
+
+<ul class="chips facts">
+  {
+    facts.map((fact) => (
+      <li class="chip">
+        <Icon name={fact.icon} size={16} />
+        {fact.text}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .facts {
+    margin-top: 1.5rem;
+  }
+
+  .facts .chip {
+    padding: 0.5rem 1rem;
+    background: #fff;
+    border: 1px solid var(--teal-200);
+    font-size: 0.93rem;
+  }
+</style>

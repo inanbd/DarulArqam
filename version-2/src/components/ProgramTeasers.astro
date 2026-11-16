@@ -1,39 +1,44 @@
 ---
 import Icon from './Icon.astro';
-import { arabic, getDict, type Lang } from '../i18n';
-import { pageHref } from '../lib/routes';
+import { deeniyat, programs } from '../content/academy';
+import { getDict, type Lang } from '../i18n';
+import { pageHref, programPage } from '../lib/routes';
 import { programIcons } from '../lib/programs';
 
-/** The four programs as compact cards that lead to the Programs page. */
+/** The three programs and Deeniyat as compact cards that lead to their pages. */
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
 const t = getDict(lang);
+const cards = [
+  ...programs.map((program) => ({ id: program.id, name: program.name, emblem: program.emblem, tagline: program.tagline, format: program.format, ages: program.ages })),
+  { id: 'deeniyat', name: deeniyat.name, emblem: deeniyat.emblem, tagline: deeniyat.gloss, format: 'With Nazirah and Hifz', ages: 'Every Qur’an student' },
+];
 ---
 
 <ul class="teasers">
   {
-    t.programs.items.map((program, index) => (
+    cards.map((card, index) => (
       <li class="teaser card" data-reveal style={`--reveal-order: ${index}`}>
         <div class="teaser__top">
           <span class="icon-tile icon-tile--navy">
-            <Icon name={programIcons[program.id]} size={24} />
+            <Icon name={programIcons[card.id]} size={24} />
           </span>
           <span class="teaser__emblem" lang="ar" dir="rtl" aria-hidden="true">
-            {arabic.programs[program.id]}
+            {card.emblem}
           </span>
         </div>
-        <h3 class="teaser__name">{program.name}</h3>
-        <p class="teaser__tagline">{program.tagline}</p>
+        <h3 class="teaser__name">{card.name}</h3>
+        <p class="teaser__tagline">{card.tagline}</p>
         <p class="teaser__audience">
-          <span>{t.programs.forLabel}</span>
-          {program.audience}
+          <span>{card.format}</span>
+          {card.ages}
         </p>
-        <a class="link teaser__link" href={pageHref(lang, 'programs', `#${program.id}`)}>
+        <a class="link teaser__link" href={pageHref(lang, programPage[card.id])}>
           {t.common.learnMore}
-          <span class="sr-only">: {program.name}</span>
+          <span class="sr-only">: {card.name}</span>
           <Icon name="arrow" size={17} />
         </a>
       </li>
@@ -66,6 +71,12 @@ const t = getDict(lang);
     box-shadow: var(--shadow-lift);
   }
 
+  /* Deeniyat is not a program of its own: it comes with the Qur'an programs. */
+  .teaser:last-child {
+    background: linear-gradient(160deg, var(--saffron-100), #fff);
+    border-color: var(--saffron-400);
+  }
+
   .teaser__top {
     display: flex;
     align-items: center;
@@ -82,7 +93,7 @@ const t = getDict(lang);
 
   .teaser__name {
     margin-top: 1.2rem;
-    font-size: calc(1.45rem * var(--display-scale));
+    font-size: calc(1.4rem * var(--display-scale));
   }
 
   .teaser__tagline {
@@ -108,11 +119,6 @@ const t = getDict(lang);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--saffron-ink);
-  }
-
-  :global(html[lang='bn']) .teaser__audience span {
-    font-size: 0.88rem;
-    letter-spacing: 0;
   }
 
   .teaser__link {

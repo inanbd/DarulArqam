@@ -1,0 +1,27 @@
+---
+/** A detailed syllabus behind a "What is covered" disclosure: units, each with its topics. */
+interface Props {
+  label: string;
+  units: { title?: string; name?: string; topics: string[] }[];
+}
+
+const { label, units } = Astro.props;
+---
+
+<details class="more">
+  <summary>{label}</summary>
+  <div class="more__body units">
+    {
+      units.map((unit) => (
+        <div class="unit">
+          {(unit.title || unit.name) && <h4 class="unit__title">{unit.title || unit.name}</h4>}
+          <ul>
+            {unit.topics.map((topic) => (
+              <li>{topic}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</details>

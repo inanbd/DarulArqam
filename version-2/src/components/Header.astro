@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import Shamsa from './Shamsa.astro';
 import { site } from '../config/site';
-import { getDict, type Lang } from '../i18n';
+import { getDict, published, type Lang } from '../i18n';
 import { menu, pageHref, type PageId } from '../lib/routes';
 
 interface Props {
@@ -13,7 +13,9 @@ interface Props {
 
 const { lang, page } = Astro.props;
 const t = getDict(lang);
-const other = t.alt.lang as Lang;
+// The language switch shows only when the site is published in a second language.
+const other = published.find((code) => code !== lang);
+const otherLabel: Record<Lang, string> = { en: 'English', bn: 'বাংলা' };
 const { whatsappNumber, whatsappDisplay } = site.contact;
 ---
 
@@ -32,10 +34,14 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
           </a>
         )
       }
-      <a href={pageHref(other, page ?? 'home')} lang={other} hreflang={other} title={t.alt.title}>
-        <Icon name="globe" size={15} />
-        {t.alt.label}
-      </a>
+      {
+        other && (
+          <a href={pageHref(other, page ?? 'home')} lang={other} hreflang={other}>
+            <Icon name="globe" size={15} />
+            {otherLabel[other]}
+          </a>
+        )
+      }
     </div>
   </div>
 </div>
@@ -58,13 +64,32 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
     <nav class="nav" id="site-nav" aria-label={t.nav.label}>
       <ul class="nav__links">
         {
-          menu.map((id) => (
-            <li>
-              <a href={pageHref(lang, id)} aria-current={id === page ? 'page' : undefined}>
-                {t.pages[id].nav}
-              </a>
-            </li>
-          ))
+          menu.map((entry) => {
+            const open = entry.page === page || (entry.under ?? []).includes(page as PageId);
+            return (
+              <li class:list={{ 'has-sub': entry.under }}>
+                <a href={pageHref(lang, entry.page)} aria-current={entry.page === page ? 'page' : open ? 'true' : undefined}>
+                  {t.pages[entry.page].nav}
+                  {entry.under && (
+                    <svg class="nav__caret" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M1 1l4 4 4-4" />
+                    </svg>
+                  )}
+                </a>
+                {entry.under && (
+                  <ul class="nav__sub">
+                    {entry.under.map((id) => (
+                      <li>
+                        <a href={pageHref(lang, id)} aria-current={id === page ? 'page' : undefined}>
+                          {t.pages[id].nav}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            );
+          })
         }
       </ul>
       <a class="btn btn--saffron btn--sm nav__cta" href={pageHref(lang, 'trial')} aria-current={page === 'trial' ? 'page' : undefined}>
@@ -249,12 +274,12 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
     background: var(--sand-100);
   }
 
-  .nav__links a[aria-current='page'] {
+  .nav__links > li > a[aria-current] {
     color: var(--navy-900);
   }
 
   /* The current page is marked with a small turquoise bar. */
-  .nav__links a[aria-current='page']::after {
+  .nav__links > li > a[aria-current]::after {
     content: '';
     position: absolute;
     left: 0.8rem;
@@ -263,6 +288,49 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
     height: 3px;
     border-radius: 3px;
     background: var(--teal-500);
+  }
+
+  .nav__links > li {
+    position: relative;
+  }
+
+  .nav__links > li > a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .nav__caret {
+    color: var(--teal-600);
+  }
+
+  /* The program pages open beneath "Programs". */
+  .nav__sub {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 5;
+    display: none;
+    min-width: 12rem;
+    padding: 0.5rem;
+    border: 1px solid var(--sand-200);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .has-sub:hover .nav__sub,
+  .has-sub:focus-within .nav__sub {
+    display: block;
+  }
+
+  .nav__sub a {
+    padding: 0.55rem 0.8rem;
+  }
+
+  .nav__sub a[aria-current='page'] {
+    color: var(--teal-700);
+    background: var(--teal-50);
   }
 
   .nav-toggle {
@@ -304,7 +372,7 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  @media (max-width: 66rem) {
+  @media (max-width: 72rem) {
     .site-header__inner {
       min-height: 4.5rem;
     }
@@ -350,12 +418,38 @@ const { whatsappNumber, whatsappDisplay } = site.contact;
       background: none;
     }
 
-    .nav__links a[aria-current='page'] {
+    .nav__links a[aria-current] {
       color: var(--teal-700);
     }
 
-    .nav__links a[aria-current='page']::after {
+    .nav__links > li > a[aria-current]::after {
       display: none;
+    }
+
+    .nav__caret {
+      display: none;
+    }
+
+    .nav__sub {
+      position: static;
+      display: block;
+      min-width: 0;
+      padding: 0 0 0 1.25rem;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+    }
+
+    .nav__sub a {
+      font-family: var(--font-body);
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    .nav__sub a[aria-current='page'] {
+      background: none;
     }
 
     .nav__cta {

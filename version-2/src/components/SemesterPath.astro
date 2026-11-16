@@ -1,0 +1,201 @@
+---
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+
+/** Six semesters over three years. Each semester opens to show its subjects and topics. */
+interface Semester {
+  number: number;
+  year: number;
+  yearName: string;
+  level: string;
+  title: string;
+  subjects: { name: string; topics: string[] }[];
+}
+
+interface Props {
+  lang: Lang;
+  semesters: Semester[];
+}
+
+const { lang, semesters } = Astro.props;
+const t = getDict(lang);
+const years = [1, 2, 3].map((year) => semesters.filter((semester) => semester.year === year));
+---
+
+<ol class="years">
+  {
+    years.map((pair, index) => (
+      <li class="year" data-reveal style={`--reveal-order: ${index}`}>
+        <div class="year__head">
+          <span class="year__number">{num(index + 1, lang)}</span>
+          <p>
+            <span class="label">
+              {t.common.year} {num(index + 1, lang)}
+            </span>
+            <strong>{pair[0].yearName}</strong>
+          </p>
+        </div>
+        <div class="year__semesters">
+          {pair.map((semester) => (
+            <details class="semester card">
+              <summary>
+                <span class="label">
+                  {t.common.semester} {num(semester.number, lang)} · {semester.level}
+                </span>
+                <span class="semester__title">{semester.title}</span>
+                <span class="semester__subjects">{semester.subjects.map((subject) => subject.name).join(' · ')}</span>
+              </summary>
+              <div class="units semester__body">
+                {semester.subjects.map((subject) => (
+                  <div class="unit">
+                    <h4 class="unit__title">{subject.name}</h4>
+                    <ul>
+                      {subject.topics.map((topic) => (
+                        <li>{topic}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .years {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .year {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: clamp(1rem, 2.5vw, 2rem);
+    align-items: start;
+  }
+
+  .year__head {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding-top: 0.75rem;
+  }
+
+  .year__head strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.25;
+    color: var(--navy-900);
+  }
+
+  .year__number {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--navy-900);
+    color: var(--saffron-400);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    box-shadow: 0 0 0 5px var(--saffron-100);
+  }
+
+  .year__semesters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .semester {
+    padding: 0 1.4rem;
+  }
+
+  .semester[open] {
+    grid-column: 1 / -1;
+    border-color: var(--teal-200);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .semester summary {
+    position: relative;
+    display: grid;
+    gap: 0.3rem;
+    padding: 1.2rem 2.5rem 1.2rem 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .semester summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .semester summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 1.1rem;
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0.6rem;
+    background: var(--teal-100);
+    font-size: 1.2rem;
+    line-height: 1;
+    color: var(--teal-800);
+  }
+
+  .semester[open] summary::after {
+    content: '–';
+    background: var(--saffron-500);
+    color: var(--navy-950);
+  }
+
+  .semester__title {
+    font-family: var(--font-display);
+    font-size: calc(1.25rem * var(--display-scale));
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--navy-900);
+  }
+
+  .semester__subjects {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .semester[open] .semester__subjects {
+    display: none;
+  }
+
+  .semester__body {
+    padding: 1.1rem 0 1.5rem;
+    border-top: 1px dashed var(--sand-300);
+  }
+
+  @media (max-width: 58rem) {
+    .year {
+      grid-template-columns: 1fr;
+    }
+
+    .year__head {
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .year__semesters {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

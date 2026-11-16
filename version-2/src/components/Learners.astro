@@ -9,7 +9,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getDict(lang);
-const icons = ['child', 'book', 'people'] as const;
+const icons = ['child', 'scholar', 'book'] as const;
 ---
 
 <ul class="learners">
@@ -25,12 +25,20 @@ const icons = ['child', 'book', 'people'] as const;
     ))
   }
 </ul>
+<p class="learners__note" data-reveal>{t.audience.note}</p>
 
 <style>
   .learners {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(1rem, 2.5vw, 2rem);
+  }
+
+  .learners__note {
+    margin-top: 1.5rem;
+    font-weight: 600;
+    color: var(--teal-800);
+    text-align: center;
   }
 
   .learner {

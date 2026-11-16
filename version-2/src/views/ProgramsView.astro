@@ -1,10 +1,15 @@
 ---
 import Page from '../layouts/Page.astro';
+import DeeniyatBand from '../components/DeeniyatBand.astro';
+import Icon from '../components/Icon.astro';
 import Learners from '../components/Learners.astro';
 import PageHero from '../components/PageHero.astro';
-import ProgramDetails from '../components/ProgramDetails.astro';
 import Shamsa from '../components/Shamsa.astro';
+import { alimiyah, programs } from '../content/academy';
 import { getDict, type Lang } from '../i18n';
+import { counter, num } from '../lib/format';
+import { pageHref, programPage } from '../lib/routes';
+import { programIcons } from '../lib/programs';
 
 interface Props {
   lang: Lang;
@@ -12,6 +17,17 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getDict(lang);
+const c = t.common;
+const [nazirah, hifz] = programs;
+// Which programs suit which age: the Qur'an programs at every age, and the Alimiyah division for that age.
+const byAge = alimiyah.divisions.map((division) => ({
+  ages: division.ages,
+  programs: [
+    { name: nazirah.name, page: 'nazirah' as const },
+    { name: hifz.name, page: 'hifz' as const },
+    { name: division.name, page: 'alimiyah' as const, hash: `#${division.id}` },
+  ],
+}));
 ---
 
 <Page lang={lang} page="programs">
@@ -19,11 +35,79 @@ const t = getDict(lang);
 
   <section class="section">
     <div class="container">
-      <ProgramDetails lang={lang} />
+      <ol class="programs">
+        {
+          programs.map((program, index) => (
+            <li class="program card" id={program.id} data-reveal>
+              <div class="program__main">
+                <div class="program__top">
+                  <span class="icon-tile icon-tile--navy">
+                    <Icon name={programIcons[program.id]} size={26} />
+                  </span>
+                  <span class="program__number">{counter(index, lang)}</span>
+                </div>
+                <h2 class="program__name">{program.name}</h2>
+                <p class="program__tagline">{program.tagline}</p>
+                <p class="program__text">{program.summary} {program.aim}</p>
+                <ul class="chips" style="margin: 1.1rem 0 1.6rem">
+                  <li class="chip"><Icon name={program.id === 'alimiyah' ? 'people' : 'video'} size={16} />{program.format}</li>
+                  <li class="chip chip--saffron">{program.ages}</li>
+                </ul>
+                <a class="btn btn--navy" href={pageHref(lang, programPage[program.id])}>
+                  {c.viewProgram}
+                  <Icon name="arrow" size={18} />
+                </a>
+              </div>
+              <div class="program__learn">
+                <span class="program__emblem" lang="ar" dir="rtl" aria-hidden="true">{program.emblem}</span>
+                <h3 class="program__learn-title">{program.lead.replace(':', '')}</h3>
+                <ul class="ticks">
+                  {program.points.map((point) => <li>{point}</li>)}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="block">
+        <DeeniyatBand lang={lang} />
+      </div>
     </div>
   </section>
 
-  <section class="section section--sand">
+  <section class="section section--tint">
+    <div class="container">
+      <header class="heading heading--center" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{c.findProgram}</p>
+        <h2 class="title">Where to begin, by age</h2>
+        <p class="lead">{c.findProgramLead}</p>
+      </header>
+      <ul class="cols cols--3 block">
+        {
+          byAge.map((group, index) => (
+            <li class="card pad finder" data-reveal style={`--reveal-order: ${index}`}>
+              <p class="finder__ages">
+                <span class="label">{c.ages}</span>
+                {num(group.ages, lang)}
+              </p>
+              <ul>
+                {group.programs.map((program) => (
+                  <li>
+                    <a class="link" href={pageHref(lang, program.page, program.hash ?? '')}>
+                      {program.name}
+                      <Icon name="arrow" size={16} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container">
       <header class="heading heading--center" data-reveal>
         <p class="kicker"><Shamsa size={14} />{t.audience.eyebrow}</p>
@@ -37,7 +121,147 @@ const t = getDict(lang);
 </Page>
 
 <style>
-  .block {
-    margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
+  .programs {
+    display: grid;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .program {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    overflow: hidden;
+    scroll-margin-top: 7rem;
+  }
+
+  .program__main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.75rem, 3.5vw, 3rem);
+  }
+
+  .program__top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .program__number {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--saffron-ink);
+  }
+
+  .program__name {
+    margin-top: 1.25rem;
+    font-size: calc(clamp(1.8rem, 1.6vw + 1.2rem, 2.4rem) * var(--display-scale));
+  }
+
+  .program__tagline {
+    margin-top: 0.35rem;
+    font-size: 1.12rem;
+    font-weight: 600;
+    color: var(--teal-700);
+  }
+
+  .program__text {
+    margin-top: 1rem;
+    color: var(--ink-soft);
+  }
+
+  .program__main .btn {
+    margin-top: auto;
+  }
+
+  .program__learn {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(1.75rem, 3.5vw, 3rem);
+    background: var(--teal-50);
+    border-left: 1px solid var(--sand-200);
+  }
+
+  /* Every other panel swaps sides and tint, so the page has a rhythm. */
+  .program:nth-child(even) .program__main {
+    order: 2;
+  }
+
+  .program:nth-child(even) .program__learn {
+    background: var(--sand-100);
+    border-left: 0;
+    border-right: 1px solid var(--sand-200);
+  }
+
+  .program__emblem {
+    position: absolute;
+    right: 1.25rem;
+    top: 0.5rem;
+    font-family: var(--font-kufi);
+    font-size: 4.75rem;
+    line-height: 1.5;
+    color: var(--teal-200);
+    pointer-events: none;
+  }
+
+  .program:nth-child(even) .program__emblem {
+    color: var(--sand-300);
+  }
+
+  .program__learn-title {
+    position: relative;
+    margin-top: 4.5rem;
+    margin-bottom: 1.1rem;
+    font-size: calc(1.3rem * var(--display-scale));
+  }
+
+  .program__learn .ticks {
+    position: relative;
+  }
+
+  .program__learn .ticks li::before {
+    background-color: #fff;
+  }
+
+  .finder__ages {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--navy-900);
+  }
+
+  .finder__ages .label {
+    font-family: var(--font-body);
+  }
+
+  .finder ul {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 1.1rem;
+    padding-top: 1.1rem;
+    border-top: 1px dashed var(--sand-300);
+  }
+
+  @media (max-width: 54rem) {
+    .program {
+      grid-template-columns: 1fr;
+    }
+
+    .program:nth-child(even) .program__main {
+      order: 0;
+    }
+
+    .program__learn,
+    .program:nth-child(even) .program__learn {
+      border-left: 0;
+      border-right: 0;
+      border-top: 1px solid var(--sand-200);
+    }
+
+    .program__learn-title {
+      margin-top: 3rem;
+    }
   }
 </style>

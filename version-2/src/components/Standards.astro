@@ -1,7 +1,8 @@
 ---
+import { framework } from '../content/academy';
 import { getDict, type Lang } from '../i18n';
 
-/** What every teacher brings. */
+/** What the academy expects of every teacher. */
 interface Props {
   lang: Lang;
 }
@@ -13,7 +14,7 @@ const t = getDict(lang);
 <aside class="standards card">
   <h3 class="standards__title">{t.teachers.standardsTitle}</h3>
   <ul class="ticks">
-    {t.teachers.standards.map((standard) => <li>{standard}</li>)}
+    {framework.faculty.expectations.map((standard) => <li>{standard}</li>)}
   </ul>
 </aside>
 

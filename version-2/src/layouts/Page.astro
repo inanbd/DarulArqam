@@ -6,7 +6,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
-import { getDict, type Lang } from '../i18n';
+import { getDict, published, type Lang } from '../i18n';
 import { asset } from '../lib/format';
 import { pageHref, type PageId } from '../lib/routes';
 
@@ -47,9 +47,7 @@ const schema = {
       hasUrl && (
         <>
           <link rel="canonical" href={absolute(pageHref(lang, page))} />
-          <link rel="alternate" hreflang="en" href={absolute(pageHref('en', page))} />
-          <link rel="alternate" hreflang="bn" href={absolute(pageHref('bn', page))} />
-          <link rel="alternate" hreflang="x-default" href={absolute(pageHref('en', page))} />
+          {published.length > 1 && published.map((code) => <link rel="alternate" hreflang={code} href={absolute(pageHref(code, page))} />)}
           <meta property="og:url" content={absolute(pageHref(lang, page))} />
           <meta property="og:image" content={absolute(asset('/og.png'))} />
           <meta name="twitter:card" content="summary_large_image" />

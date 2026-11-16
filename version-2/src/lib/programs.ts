@@ -1,7 +1,7 @@
 /** The icon that stands for each program, keyed by program id. */
-export const programIcons: Record<string, 'book' | 'wave' | 'heart' | 'crescent'> = {
-  reading: 'book',
-  tajweed: 'wave',
+export const programIcons: Record<string, 'book' | 'heart' | 'scholar' | 'crescent'> = {
+  nazirah: 'book',
   hifz: 'heart',
-  studies: 'crescent',
+  alimiyah: 'scholar',
+  deeniyat: 'crescent',
 };

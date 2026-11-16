@@ -2,9 +2,10 @@
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import { site } from '../config/site';
-import { arabic, getDict, type Lang } from '../i18n';
+import { programs } from '../content/academy';
+import { arabic, getDict, published, type Lang } from '../i18n';
 import { num } from '../lib/format';
-import { menu, pageHref } from '../lib/routes';
+import { menu, pageHref, programPage } from '../lib/routes';
 
 interface Props {
   lang: Lang;
@@ -12,7 +13,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getDict(lang);
-const other = t.alt.lang as Lang;
+const other = published.find((code) => code !== lang);
+const otherLabel: Record<Lang, string> = { en: 'English', bn: 'বাংলা' };
 const { email, whatsappNumber, whatsappDisplay } = site.contact;
 const year = num(new Date().getFullYear(), lang);
 ---
@@ -36,9 +38,9 @@ const year = num(new Date().getFullYear(), lang);
       <h2 class="footer__heading">{t.common.footerPages}</h2>
       <ul>
         {
-          menu.map((id) => (
+          menu.map((entry) => (
             <li>
-              <a href={pageHref(lang, id)}>{t.pages[id].nav}</a>
+              <a href={pageHref(lang, entry.page)}>{t.pages[entry.page].nav}</a>
             </li>
           ))
         }
@@ -50,12 +52,13 @@ const year = num(new Date().getFullYear(), lang);
       <h2 class="footer__heading">{t.common.footerPrograms}</h2>
       <ul>
         {
-          t.programs.items.map((program) => (
+          programs.map((program) => (
             <li>
-              <a href={pageHref(lang, 'programs', `#${program.id}`)}>{program.name}</a>
+              <a href={pageHref(lang, programPage[program.id])}>{program.name}</a>
             </li>
           ))
         }
+        <li><a href={pageHref(lang, 'deeniyat')}>{t.pages.deeniyat.nav}</a></li>
       </ul>
     </nav>
 
@@ -82,12 +85,16 @@ const year = num(new Date().getFullYear(), lang);
             </li>
           )
         }
-        <li>
-          <a class="footer__contact" href={pageHref(other, 'home')} lang={other} hreflang={other}>
-            <Icon name="globe" size={18} />
-            {t.alt.label}
-          </a>
-        </li>
+        {
+          other && (
+            <li>
+              <a class="footer__contact" href={pageHref(other, 'home')} lang={other} hreflang={other}>
+                <Icon name="globe" size={18} />
+                {otherLabel[other]}
+              </a>
+            </li>
+          )
+        }
       </ul>
     </div>
   </div>

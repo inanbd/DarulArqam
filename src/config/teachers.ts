@@ -23,7 +23,7 @@ export interface Teacher {
   emblem: string;
   /** Years of teaching experience. */
   years: number;
-  /** Program ids, as used in the i18n files: reading, tajweed, hifz, studies. */
+  /** Program ids, as used in src/content/academy.ts: nazirah, hifz, alimiyah. */
   programs: string[];
   /** Language codes: bn, en, ar. */
   languages: string[];
@@ -38,14 +38,14 @@ export const teachers: Teacher[] = [
     photo: '',
     emblem: 'حَافِظ',
     years: 14,
-    programs: ['hifz', 'tajweed'],
+    programs: ['hifz', 'nazirah'],
     languages: ['bn', 'en', 'ar'],
     text: {
       en: {
         name: 'Hafiz Mawlana Abdur Rahman',
         title: 'Imam and khatib · Hifz teacher',
-        bio: 'Leads the daily prayers at his mosque and has guided many students through the memorization of the whole Quran.',
-        qualifications: ['Hafiz of the Quran', 'Dawra-e-Hadith graduate'],
+        bio: 'Leads the daily prayers at his mosque and has guided many students through the memorization of the whole Qur’an.',
+        qualifications: ['Hafiz of the Qur’an', 'Dawra-e-Hadith graduate'],
       },
       bn: {
         name: 'হাফেজ মাওলানা আব্দুর রহমান',
@@ -62,14 +62,14 @@ export const teachers: Teacher[] = [
     photo: '',
     emblem: 'قَارِئ',
     years: 10,
-    programs: ['reading', 'tajweed'],
+    programs: ['nazirah'],
     languages: ['bn', 'en'],
     text: {
       en: {
         name: 'Qari Muhammad Yusuf',
         title: 'Qari · Tajweed teacher',
         bio: 'Known for his patience with beginners, he takes students from their first letters to confident, measured recitation.',
-        qualifications: ['Hafiz of the Quran', 'Trained in qira’at and tajweed'],
+        qualifications: ['Hafiz of the Qur’an', 'Trained in qira’at and tajweed'],
       },
       bn: {
         name: 'ক্বারী মুহাম্মদ ইউসুফ',
@@ -86,7 +86,7 @@ export const teachers: Teacher[] = [
     photo: '',
     emblem: 'إِمَام',
     years: 8,
-    programs: ['studies', 'reading'],
+    programs: ['alimiyah'],
     languages: ['bn', 'en', 'ar'],
     text: {
       en: {
@@ -110,14 +110,14 @@ export const teachers: Teacher[] = [
     photo: '',
     emblem: 'حَافِظَة',
     years: 9,
-    programs: ['hifz', 'tajweed'],
+    programs: ['hifz', 'nazirah'],
     languages: ['bn', 'en'],
     text: {
       en: {
         name: 'Hafiza Maryam Siddiqa',
         title: 'Hafiza · Hifz and tajweed teacher',
         bio: 'Teaches memorization to girls and women with a steady daily routine and a great deal of encouragement.',
-        qualifications: ['Hafiza of the Quran', 'Graduate of a girls’ madrasah'],
+        qualifications: ['Hafiza of the Qur’an', 'Graduate of a girls’ madrasah'],
       },
       bn: {
         name: 'হাফেজা মারইয়াম সিদ্দিকা',
@@ -134,7 +134,7 @@ export const teachers: Teacher[] = [
     photo: '',
     emblem: 'عَالِمَة',
     years: 7,
-    programs: ['studies', 'tajweed'],
+    programs: ['alimiyah', 'nazirah'],
     languages: ['bn', 'en', 'ar'],
     text: {
       en: {
@@ -158,12 +158,12 @@ export const teachers: Teacher[] = [
     photo: '',
     emblem: 'أُسْتَاذَة',
     years: 6,
-    programs: ['reading'],
+    programs: ['nazirah'],
     languages: ['bn', 'en'],
     text: {
       en: {
         name: 'Ustadha Ayesha Khatun',
-        title: 'Quran reading teacher for children',
+        title: 'Qur’an reading teacher for children',
         bio: 'Loved by her youngest students, she makes the Noorani Qaida lively with gentle repetition and warm praise.',
         qualifications: ['Trained Noorani Qaida teacher', 'Strong tajweed'],
       },

@@ -4,16 +4,14 @@
  */
 export const en = {
   lang: 'en',
-  /** The other language, for the switch in the header. */
-  alt: { lang: 'bn', label: 'বাংলা', title: 'বাংলায় দেখুন' },
 
   meta: {
-    title: 'Darul Arqam — Online Quran Classes with Qualified Imams',
+    title: 'Darul Arqam — Online Qur’an Classes with Qualified Imams',
     description:
-      'Live one-on-one Quran classes for children, adults and sisters in the USA, taught by qualified imams and huffaz from Bangladesh. Quran reading, Tajweed, Hifz and Islamic studies. Book a free trial class.',
+      'Live one-on-one Qur’an classes for children, adults and sisters in the USA, taught by qualified imams and huffaz from Bangladesh. Qur’an reading, Tajweed, Hifz and Islamic studies. Book a free trial class.',
   },
 
-  brand: { name: 'Darul Arqam', tagline: 'Online Quran Academy' },
+  brand: { name: 'Darul Arqam', tagline: 'Online Qur’an Academy' },
 
   nav: {
     label: 'Main',
@@ -30,19 +28,19 @@ export const en = {
   pages: {
     home: {
       nav: 'Home',
-      title: 'Darul Arqam — Online Quran Classes with Qualified Imams',
+      title: 'Darul Arqam — Online Qur’an Classes with Qualified Imams',
       description:
-        'Live one-on-one Quran classes for children, adults and sisters in the USA, taught by qualified imams and huffaz from Bangladesh. Quran reading, Tajweed, Hifz and Islamic studies. Book a free trial class.',
+        'Online Qur’an and Islamic education for children, teenagers and adults: Nazirah, Hifz and Alimiyah programs taught by qualified imams and huffaz from Bangladesh, on US time zones. Book a free trial class.',
       heading: '',
       lead: '',
       verse: { text: 'Read, in the name of your Lord who created.', reference: 'Surah al-‘Alaq 96:1' },
     },
     about: {
       nav: 'About',
-      title: 'About Darul Arqam — Named after the First School of Islam',
+      title: 'About Darul Arqam — Vision, Mission and Values',
       description:
-        'The story behind the name Darul Arqam, and how we connect families in the United States with imams and huffaz in Bangladesh.',
-      heading: 'A house of Quran, carried across the ocean',
+        'The story behind the name Darul Arqam, our vision and mission, and the values at the heart of our teaching.',
+      heading: 'A house of Qur’an, carried across the ocean',
       lead: 'We are named after the house where the Prophet ﷺ taught his first companions, and built to bring that same teacher-to-student learning into your home.',
       verse: {
         text: 'It is He who raised among the unlettered a Messenger from among themselves, reciting to them His verses, purifying them, and teaching them the Book and wisdom — though before that they had been in clear error.',
@@ -51,25 +49,82 @@ export const en = {
     },
     programs: {
       nav: 'Programs',
-      title: 'Quran Programs — Reading, Tajweed, Hifz and Islamic Studies | Darul Arqam',
+      title: 'Programs — Nazirah, Hifz and Alimiyah | Darul Arqam',
       description:
-        'Four one-on-one programs for children and adults: Quran reading from the Noorani Qaida, Tajweed, Hifz, and Islamic studies with Arabic.',
-      heading: 'A clear path, from the first letter to the last surah',
-      lead: 'Four programs, each taught one-on-one and paced to the student.',
+        'Three programs for every stage of learning: Nazirah (reading the Qur’an), Hifz (memorization) and Alimiyah and Islamic Studies, with Deeniyat for every Qur’an student.',
+      heading: 'A clear path, from the first letter to lifelong learning',
+      lead: 'Three programs: read the Qur’an, memorize it, and study the knowledge of Islam. Every Qur’an student also takes Deeniyat.',
       verse: {
-        text: 'And We have certainly made the Quran easy to remember — so is there anyone who will take heed?',
+        text: 'And We have certainly made the Qur’an easy to remember — so is there anyone who will take heed?',
         reference: 'Surah al-Qamar 54:17',
+      },
+    },
+    nazirah: {
+      nav: 'Nazirah',
+      title: 'Nazirah al-Qur’an — Learn to Read the Qur’an | Darul Arqam',
+      description:
+        'A five-stage program from the Arabic alphabet to fluent, independent recitation with Tajweed, taught one-on-one, with Deeniyat alongside.',
+      heading: 'Read the Qur’an correctly, fluently and with confidence',
+      lead: 'From the first Arabic letter to independent recitation with Tajweed, in five stages and at the student’s own pace.',
+      verse: { text: 'And recite the Qur’an in slow, measured rhythm.', reference: 'From Surah al-Muzzammil 73:4' },
+    },
+    hifz: {
+      nav: 'Hifz',
+      title: 'Hifz al-Qur’an — Memorize the Qur’an | Darul Arqam',
+      description:
+        'Memorize the whole Qur’an or selected Surahs with a daily cycle of new lesson, recent revision and long-term revision, taught one-on-one, with Deeniyat alongside.',
+      heading: 'Carry the Qur’an in your heart',
+      lead: 'Memorize the whole Qur’an or selected Surahs, with a daily rhythm of new lesson and revision that makes it last.',
+      verse: {
+        text: 'Indeed, it is We who sent down the Reminder, and indeed, We will be its guardian.',
+        reference: 'Surah al-Hijr 15:9',
+      },
+    },
+    alimiyah: {
+      nav: 'Alimiyah',
+      title: 'Alimiyah and Islamic Studies — Three Divisions | Darul Arqam',
+      description:
+        'Structured Islamic studies for every stage of life: Junior Islamic Studies (ages 3–12), Youth and Young Adults Alimiyah (12–25) and Adult Alimiyah (25+).',
+      heading: 'Islamic knowledge for every stage of life',
+      lead: 'One curriculum in three divisions, from a child’s first lessons about Allah to a six-semester course in the Islamic sciences.',
+      verse: {
+        text: 'So why should not a group from every community go forth, to gain understanding of the religion?',
+        reference: 'From Surah at-Tawbah 9:122',
+      },
+    },
+    deeniyat: {
+      nav: 'Deeniyat',
+      title: 'Deeniyat — Islamic Studies for Every Qur’an Student | Darul Arqam',
+      description:
+        'The eight subjects every Nazirah and Hifz student studies alongside the Qur’an: Aqidah, Fiqh, Hadith, Seerah, Akhlaq, duas, Islamic history and Qur’anic understanding.',
+      heading: 'Understand your Deen, and live by it',
+      lead: 'Eight subjects that every Nazirah and Hifz student studies alongside the Qur’an.',
+      verse: {
+        text: 'They were commanded only to worship Allah, sincere to Him in religion, upright, and to establish prayer and give zakat. That is the upright religion.',
+        reference: 'Surah al-Bayyinah 98:5',
+      },
+    },
+    academics: {
+      nav: 'Academics',
+      title: 'Academics — How We Teach, Assess and Care | Darul Arqam',
+      description:
+        'Our educational philosophy, teaching approach, assessment and progress reports, teaching standards, student welfare and certification.',
+      heading: 'How we teach, assess and care for students',
+      lead: 'Knowledge, understanding, practice and character: the principles behind every lesson, and the standards we hold ourselves to.',
+      verse: {
+        text: 'Allah will raise in rank those of you who believe and those who have been given knowledge.',
+        reference: 'From Surah al-Mujadilah 58:11',
       },
     },
     teachers: {
       nav: 'Teachers',
       title: 'Our Teachers — Imams and Huffaz from Bangladesh | Darul Arqam',
       description:
-        'Meet the teachers of Darul Arqam: qualified imams, huffaz and female teachers from Bangladesh, teaching in English or Bangla.',
+        'Meet the teachers of Darul Arqam: qualified imams, huffaz and female teachers from Bangladesh, and the standards we expect of them.',
       heading: 'Imams and huffaz, rooted in a living tradition',
-      lead: 'Qualified male and female teachers who have devoted years to learning the Quran, and to teaching it.',
+      lead: 'Qualified male and female teachers who have devoted years to learning the Qur’an, and to teaching it.',
       verse: {
-        text: 'Rather, the Quran is clear verses within the hearts of those who have been given knowledge.',
+        text: 'Rather, the Qur’an is clear verses within the hearts of those who have been given knowledge.',
         reference: 'From Surah al-‘Ankabut 29:49',
       },
     },
@@ -77,16 +132,16 @@ export const en = {
       nav: 'Tuition',
       title: 'Tuition and How It Works | Darul Arqam',
       description:
-        'Simple monthly tuition for private one-on-one Quran classes, and the four steps from a free trial class to regular lessons.',
+        'Simple monthly tuition for private one-on-one Qur’an classes, semester tuition for group programs, and the four steps from a free trial class to regular lessons.',
       heading: 'Simple monthly tuition',
-      lead: 'Every plan is private, one-on-one teaching in live 30-minute classes. Start with a free trial class.',
-      verse: { text: 'So recite as much of the Quran as is easy for you.', reference: 'From Surah al-Muzzammil 73:20' },
+      lead: 'Private one-on-one lessons for Nazirah and Hifz, and group classes by semester for Alimiyah. Start with a free trial class.',
+      verse: { text: 'So recite as much of the Qur’an as is easy for you.', reference: 'From Surah al-Muzzammil 73:20' },
     },
     faq: {
       nav: 'FAQ',
       title: 'Questions and Answers | Darul Arqam',
       description:
-        'Answers to common questions about online Quran classes at Darul Arqam: ages, female teachers, language, time zones and missed classes.',
+        'Answers to common questions about Darul Arqam: programs, Deeniyat, ages, female teachers, language, progress reports, certificates and time zones.',
       heading: 'Answers for parents and students',
       lead: 'Something else on your mind? Message us and we will gladly help.',
       verse: { text: 'So ask the people of knowledge, if you do not know.', reference: 'From Surah an-Nahl 16:43' },
@@ -95,17 +150,17 @@ export const en = {
       nav: 'Free trial',
       title: 'Book a Free Trial Class | Darul Arqam',
       description:
-        'Request a free one-on-one Quran class with a qualified teacher. Tell us about the student and we will arrange a time in your US time zone.',
+        'Request a free class with a qualified teacher. Tell us about the student and we will arrange a time in your time zone.',
       heading: 'Begin with a free class, in sha Allah',
-      lead: 'Tell us a little about the student and we will be in touch to arrange a free one-on-one lesson with one of our teachers.',
+      lead: 'Tell us a little about the student and we will be in touch to arrange a free lesson with one of our teachers.',
       verse: { text: 'And say: My Lord, increase me in knowledge.', reference: 'From Surah Ta-Ha 20:114' },
     },
   },
 
   /** Short pieces of wording used on several pages. */
   common: {
-    topbar: 'Live one-on-one Quran classes for families across the United States',
-    verseLabel: 'From the Quran',
+    topbar: 'Live online Qur’an and Islamic education for families in the United States and beyond',
+    verseLabel: 'From the Qur’an',
     hadithLabel: 'From the Sunnah',
     learnMore: 'Learn more',
     allPrograms: 'See all programs',
@@ -114,100 +169,124 @@ export const en = {
     ourStory: 'Read our story',
     allQuestions: 'See all questions',
     startTrial: 'Start with a free trial',
+    viewProgram: 'View the program',
     whatYouLearn: 'What you will learn',
+    whatIsCovered: 'What is covered',
     different: 'What sets Darul Arqam apart',
-    valuesTitle: 'What we hold to',
     plansFrom: (price: string) => `Plans from ${price} a month`,
     nextTitle: 'What happens next',
     cta: {
       title: 'Begin with a free class, in sha Allah',
-      text: 'Meet a teacher one-on-one before you decide anything.',
+      text: 'Meet a teacher before you decide anything.',
       button: 'Book a free trial class',
     },
     footerPages: 'Pages',
     footerPrograms: 'Programs',
+
+    // Headings and labels on the program and academics pages.
+    format: 'Format',
+    forWhom: 'For',
+    online: 'Online',
+    oneOnOne: 'One-on-one',
+    groupClasses: 'Group classes by semester',
+    overview: 'Overview',
+    vision: 'Our vision',
+    mission: 'Our mission',
+    values: 'Our core values',
+    philosophy: 'Educational philosophy',
+    community: 'An international learning community',
+    improvement: 'Always improving',
+    stage: 'Stage',
+    stages: 'The stages',
+    objective: 'Objective',
+    outcome: 'By the end',
+    outcomes: 'What students achieve',
+    byAge: 'Learning by age',
+    alongside: 'Alongside the reading',
+    deeniyatBand: {
+      title: 'Deeniyat, with every Qur’an program',
+      text: 'Nazirah and Hifz students also study eight subjects of essential Islamic knowledge, from Aqidah and Fiqh to manners and daily duas.',
+      link: 'See the Deeniyat subjects',
+    },
+    assessment: 'Assessment',
+    reports: 'Progress reports for parents',
+    reportsLead: 'Parents receive periodic reports covering:',
+    certification: 'Certification',
+    tracks: 'Two tracks',
+    track: 'Track',
+    cycle: 'Three parts to every lesson',
+    cycleLead: 'New memorization is only kept by revising it. Every Hifz lesson therefore has three parts.',
+    tajweed: 'Tajweed and Makharij',
+    accuracy: 'Trained for accuracy',
+    essentialSurahs: 'Essential Surahs',
+    longerSurahs: 'Selected longer Surahs',
+    surah: 'Surah',
+    method: 'How lessons run',
+    divisions: 'Three divisions',
+    ages: 'Ages',
+    subjects: 'Core subjects',
+    subjectsLead: 'Thirteen subjects run through the curriculum, introduced gradually and deepened year by year.',
+    pathway: 'The six-semester pathway',
+    semester: 'Semester',
+    year: 'Year',
+    finalProject: 'Final project',
+    grading: 'How work is graded',
+    language: 'Language of instruction',
+    differences: 'Fiqh and scholarly differences',
+    summary: 'The three divisions at a glance',
+    feature: 'Feature',
+    placement: 'Placement',
+    teaching: 'Teaching and learning',
+    assessmentProgress: 'Assessment and student progress',
+    faculty: 'Faculty and teaching standards',
+    welfare: 'Student welfare and learning environment',
+    integrity: 'Academic integrity',
+    progression: 'Progression',
+    records: 'Academic records',
+    examinations: 'Examinations',
+    methods: 'Teaching methods',
+    units: (n: number) => `${n} units`,
+    programsFor: 'Programs for this age',
+    findProgram: 'Find the right program',
+    findProgramLead: 'Placement follows a student’s readiness and previous learning, not age alone. As a guide:',
   },
 
   hero: {
-    eyebrow: 'Online Quran Academy · Live one-on-one classes',
-    title: { before: 'Learn the Quran the way it has always been taught — ', accent: 'teacher to student', after: '.' },
-    lead: 'Darul Arqam brings qualified imams and huffaz from Bangladesh into your home through live, one-on-one lessons — for children, adults and sisters, scheduled around your US time zone.',
+    eyebrow: 'Online Qur’an Academy · Nazirah · Hifz · Alimiyah',
+    title: { before: 'Learn the Qur’an the way it has always been taught — ', accent: 'teacher to student', after: '.' },
+    lead: 'Darul Arqam brings qualified imams and huffaz from Bangladesh into your home, with live online programs in Qur’an reading, memorization and Islamic studies for children, teenagers and adults, scheduled around your US time zone.',
     primary: 'Book a free trial class',
     secondary: 'Explore programs',
     points: ['First class free', 'Male and female teachers', 'All US time zones'],
     hadith: {
-      text: 'The best of you are those who learn the Quran and teach it.',
+      text: 'The best of you are those who learn the Qur’an and teach it.',
       source: 'Prophet Muhammad ﷺ',
       reference: 'Sahih al-Bukhari 5027',
     },
   },
 
   pillars: [
-    { title: 'Live and one-on-one', text: 'Every lesson is a private class with a real teacher — never a recording.' },
-    { title: 'Qualified imams and huffaz', text: 'Teachers shaped by Bangladesh’s renowned madrasah tradition.' },
-    { title: 'Teachers for brothers and sisters', text: 'Female teachers are available for sisters and girls.' },
-    { title: 'Made for US families', text: 'Class times that fit Eastern, Central, Mountain and Pacific schedules.' },
+    { title: 'One-on-one Qur’an lessons', text: 'Nazirah and Hifz are taught in private, live lessons with a real teacher — never a recording.' },
+    { title: 'Qur’an together with Deeniyat', text: 'Every Qur’an student also studies the essentials of belief, worship and character.' },
+    { title: 'Qualified imams and huffaz', text: 'Teachers shaped by Bangladesh’s renowned madrasah tradition, with female teachers for sisters and girls.' },
+    { title: 'Made for US families, open to all', text: 'Class times fit Eastern, Central, Mountain and Pacific schedules, and students elsewhere are welcome.' },
   ],
 
   about: {
     eyebrow: 'Our name',
     title: 'Named after the first school of Islam',
     paragraphs: [
-      'In the earliest days of Islam, the Prophet Muhammad ﷺ gathered his companions in a modest house at the foot of Mount Safa in Makkah — the home of al-Arqam ibn Abi al-Arqam, may Allah be pleased with him. There, away from the noise of the city, the Quran was taught from heart to heart. That house came to be known as Dar al-Arqam: the first school of Islam.',
-      'Darul Arqam carries that spirit across the ocean. We connect families in the United States with imams and huffaz in Bangladesh — a land where learning and teaching the Quran is a living tradition, passed from teacher to student, generation after generation.',
+      'In the earliest days of Islam, the Prophet Muhammad ﷺ gathered his companions in a modest house at the foot of Mount Safa in Makkah — the home of al-Arqam ibn Abi al-Arqam, may Allah be pleased with him. There, away from the noise of the city, the Qur’an was taught from heart to heart. That house came to be known as Dar al-Arqam: the first school of Islam.',
+      'Darul Arqam carries that spirit across the ocean. We connect families in the United States with imams and huffaz in Bangladesh — a land where learning and teaching the Qur’an is a living tradition, passed from teacher to student, generation after generation.',
     ],
     medallionCaption: 'Dar al-Arqam · The House of al-Arqam',
-    values: [
-      { name: 'Ikhlas', gloss: 'Sincerity', text: 'We teach the Quran as a trust to be honored, not a product to be sold.' },
-      { name: 'Itqan', gloss: 'Excellence', text: 'Correct recitation from the very first letter, with patient attention to every student.' },
-      { name: 'Rahmah', gloss: 'Gentleness', text: 'Kind, encouraging teachers who help children grow to love the Quran.' },
-    ],
-  },
-
-  ayah: {
-    text: 'And We have certainly made the Quran easy to remember — so is there anyone who will take heed?',
-    reference: 'Surah al-Qamar 54:17',
   },
 
   programs: {
     eyebrow: 'Programs',
-    title: 'A clear path, from the first letter to the last surah',
-    lead: 'Four programs, each taught one-on-one and paced to the student.',
+    title: 'Three programs, one path',
+    lead: 'Read the Qur’an, memorize it, and study the knowledge of Islam.',
     forLabel: 'For',
-    items: [
-      {
-        id: 'reading',
-        name: 'Quran Reading',
-        tagline: 'From Noorani Qaida to fluent reading',
-        text: 'Begin with the Arabic letters and their sounds through the Noorani Qaida, then move step by step to reading the Quran fluently (Nazra) and with confidence.',
-        points: ['Arabic letters and their correct articulation', 'Joining letters, vowels and the first rules', 'Guided reading from the Mushaf'],
-        audience: 'Beginners of any age',
-      },
-      {
-        id: 'tajweed',
-        name: 'Tajweed',
-        tagline: 'Recite correctly and beautifully',
-        text: 'Learn the rules of recitation and apply them verse by verse, with your teacher listening and correcting you in real time.',
-        points: ['Makharij and sifaat of every letter', 'Rules of noon, meem, madd and waqf', 'Applied practice with live correction'],
-        audience: 'Students who can already read',
-      },
-      {
-        id: 'hifz',
-        name: 'Hifz',
-        tagline: 'Memorize with a hafiz by your side',
-        text: 'A structured memorization program built on the daily rhythm of new lesson, recent revision and older revision — the method of Bangladesh’s hifz madrasahs.',
-        points: ['Daily sabaq, sabqi and manzil', 'A personal goal: selected surahs, a juz or the whole Quran', 'Regular progress updates for parents'],
-        audience: 'Children and adults ready to commit',
-      },
-      {
-        id: 'studies',
-        name: 'Islamic Studies and Arabic',
-        tagline: 'Knowledge for everyday life',
-        text: 'The essentials every Muslim needs, taught warmly and at the right level for the student’s age, alongside a first step into the language of the Quran.',
-        points: ['Salah, wudu and daily duas', 'Seerah, stories of the prophets and good character', 'Basic Quranic Arabic and vocabulary'],
-        audience: 'Children, teens and adults',
-      },
-    ],
   },
 
   audience: {
@@ -216,34 +295,28 @@ export const en = {
     items: [
       {
         title: 'Children',
-        text: 'Patient teachers and short, focused lessons that keep young learners engaged — with regular updates so parents always know how their child is doing.',
+        text: 'From the first Arabic letters to fluent reading and memorization, with Junior Islamic Studies for ages 3 to 12 and regular progress reports for parents.',
+      },
+      {
+        title: 'Teenagers and young adults',
+        text: 'Qur’an programs at their own level, and the Youth Alimiyah: a six-semester path through Qur’an, Hadith, Aqidah, Fiqh and Arabic for ages 12 to 25.',
       },
       {
         title: 'Adults',
-        text: 'It is never too late. Private lessons at your own pace and on your own schedule, whether you are starting from alif or refining your tajweed.',
-      },
-      {
-        title: 'Sisters and girls',
-        text: 'Qualified female teachers are available for sisters and girls who prefer to learn with a woman.',
+        text: 'It is never too late. Private Qur’an lessons at your own pace, and an Adult Alimiyah paced around work and family.',
       },
     ],
+    note: 'Qualified female teachers are available for sisters and girls.',
   },
 
   teachers: {
     eyebrow: 'Our teachers',
     title: 'Imams and huffaz, rooted in a living tradition',
     paragraphs: [
-      'Bangladesh is home to one of the world’s richest traditions of Quran memorization, and its huffaz regularly earn top honors at international Quran competitions.',
-      'Our teachers come from that tradition: imams and huffaz who have devoted years to learning the Quran and to teaching it in mosques and madrasahs — and who now bring the same care to your family’s lessons.',
+      'Bangladesh is home to one of the world’s richest traditions of Qur’an memorization, and its huffaz regularly earn top honors at international Qur’an competitions.',
+      'Our teachers come from that tradition: imams and huffaz who have devoted years to learning the Qur’an and to teaching it in mosques and madrasahs — and who now bring the same care to your family’s lessons.',
     ],
-    standardsTitle: 'What every teacher brings',
-    standards: [
-      'Serving imams, huffaz and trained teachers of the Quran',
-      'A formal madrasah education with strong tajweed',
-      'Experience teaching both children and adults',
-      'Lessons in English or Bangla, as the student prefers',
-      'Female teachers for sisters and girls',
-    ],
+    standardsTitle: 'What we expect of every teacher',
     cta: 'Meet a teacher in a free trial',
     profiles: {
       title: 'Meet some of our teachers',
@@ -265,9 +338,9 @@ export const en = {
     title: 'From first hello to first lesson in four steps',
     steps: [
       { title: 'Request a free trial', text: 'Tell us about the student and the times that suit you. It takes two minutes.' },
-      { title: 'Meet your teacher', text: 'In a free one-on-one class, the teacher gets to know the student and gauges their level.' },
-      { title: 'Choose your schedule', text: 'Pick a plan and fixed weekly class times in your own time zone.' },
-      { title: 'Learn and grow', text: 'Join each lesson by video call from home, and follow the student’s progress along the way.' },
+      { title: 'Meet your teacher', text: 'In a free first class the teacher gets to know the student and assesses their level, so they start in the right place.' },
+      { title: 'Choose your schedule', text: 'Pick a program and fixed weekly class times in your own time zone.' },
+      { title: 'Learn and grow', text: 'Join each lesson by video call from home, and receive regular reports on the student’s progress.' },
     ],
     time: {
       title: 'Evening in America is morning in Bangladesh',
@@ -281,7 +354,7 @@ export const en = {
   tuition: {
     eyebrow: 'Tuition',
     title: 'Simple monthly tuition',
-    lead: 'Every plan is private, one-on-one teaching in live 30-minute classes. Start with a free trial class.',
+    lead: 'These plans are for Nazirah and Hifz: private, one-on-one teaching in live 30-minute classes. Start with a free trial class.',
     perMonth: 'per month',
     perWeek: (n: string) => `${n} classes a week`,
     perMonthClasses: (n: string) => `${n} classes each month`,
@@ -289,15 +362,20 @@ export const en = {
     choose: 'Start with a free trial',
     plans: {
       two: { name: 'Steady', text: 'A gentle rhythm for young beginners and busy adults.' },
-      three: { name: 'Devoted', text: 'Consistent progress in reading and tajweed.' },
-      five: { name: 'Intensive', text: 'Daily lessons for hifz and for faster progress.' },
+      three: { name: 'Devoted', text: 'Consistent progress in reading and Tajweed.' },
+      five: { name: 'Intensive', text: 'Daily lessons for Hifz and for faster progress.' },
+    },
+    group: {
+      title: 'Alimiyah and Junior Islamic Studies',
+      text: 'These programs are taught in group classes, semester by semester. Ask us for the tuition for the coming semester.',
+      cta: 'Ask about group classes',
     },
     includedTitle: 'Included with every plan',
     included: [
       'Private one-on-one classes',
       'Your choice of a male or female teacher',
       'Fixed class times in your time zone',
-      'Regular progress updates',
+      'Regular progress reports',
       'Month-to-month tuition, with no long contract',
     ],
     note: 'More than one student at home? Ask us about tuition for families.',
@@ -361,6 +439,7 @@ export const en = {
       age: 'Student’s age',
       program: 'Program',
       programUnsure: 'Not sure yet',
+      groupLabel: 'group classes',
       teacher: 'Preferred teacher',
       teacherOptions: ['No preference', 'Male teacher', 'Female teacher'],
       timezone: 'Your time zone',
@@ -390,10 +469,10 @@ export const en = {
   },
 
   footer: {
-    about: 'Live one-on-one Quran classes for families across the United States, taught by qualified imams and huffaz from Bangladesh.',
+    about: 'Live online Qur’an and Islamic education for families across the United States and beyond, taught by qualified imams and huffaz from Bangladesh.',
     explore: 'Explore',
     contact: 'Contact',
-    reach: 'Teaching from Bangladesh · Serving families across the United States',
+    reach: 'Teaching from Bangladesh · Serving families in the United States and beyond',
     rights: 'All rights reserved.',
     top: 'Back to top',
   },

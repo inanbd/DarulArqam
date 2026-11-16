@@ -1,0 +1,139 @@
+---
+import Page from '../layouts/Page.astro';
+import Facts from '../components/Facts.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import Shamsa from '../components/Shamsa.astro';
+import Syllabus from '../components/Syllabus.astro';
+import { deeniyat, hifz } from '../content/academy';
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+import { pageHref } from '../lib/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const c = t.common;
+---
+
+<Page lang={lang} page="deeniyat">
+  <PageHero lang={lang} page="deeniyat">
+    <Facts facts={[{ icon: 'book', text: `${t.pages.nazirah.nav} + ${t.pages.hifz.nav}` }, { icon: 'layers', text: `${num(deeniyat.subjects.length, lang)} subjects` }, { icon: 'clock', text: hifz.method.deeniyat[0] }]} />
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="prose" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{deeniyat.gloss}</p>
+        {deeniyat.objective.map((paragraph) => <p>{paragraph}</p>)}
+        <p>{deeniyat.commitment}</p>
+      </div>
+
+      <ol class="cols cols--2 block">
+        {
+          deeniyat.subjects.map((subject, index) => (
+            <li class="card pad subject" id={subject.id} data-reveal style={`--reveal-order: ${index % 2}`}>
+              <div class="subject__top">
+                <span class="subject__number">{num(String(index + 1).padStart(2, '0'), lang)}</span>
+                <span class="subject__emblem" lang="ar" dir="rtl" aria-hidden="true">{subject.emblem}</span>
+              </div>
+              <h2 class="subject__name">{subject.name}</h2>
+              <p class="subject__gloss">{subject.gloss}</p>
+              <p class="subject__text">{subject.objective}</p>
+              <ul class="chips" style="margin-top: 1rem">
+                {subject.units.filter((unit) => unit.title).map((unit) => <li class="chip chip--plain">{unit.title}</li>)}
+              </ul>
+              <p class="path__outcome"><strong>{c.outcome}:</strong> {subject.outcome}</p>
+              <Syllabus label={c.whatIsCovered} units={subject.units} />
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <header class="heading heading--center" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{c.byAge}</p>
+        <h2 class="title">Taught at the student’s level</h2>
+      </header>
+      <ul class="cols cols--3 block">
+        {
+          deeniyat.ages.map((group, index) => (
+            <li class="card pad" data-reveal style={`--reveal-order: ${index}`}>
+              <h3 class="h3">{group.title}</h3>
+              <ul class="ticks" style="margin-top: 0.9rem">
+                {group.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="card pad block methods" data-reveal>
+        <h3 class="h3">{c.methods}</h3>
+        <ul class="chips" style="margin-top: 1rem">
+          {deeniyat.methods.map((method) => <li class="chip">{method}</li>)}
+        </ul>
+      </div>
+      <p class="links" data-reveal>
+        <a class="btn btn--navy" href={pageHref(lang, 'nazirah')}>{t.pages.nazirah.nav}<Icon name="arrow" size={18} /></a>
+        <a class="btn btn--outline" href={pageHref(lang, 'hifz')}>{t.pages.hifz.nav}<Icon name="arrow" size={18} /></a>
+      </p>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .subject {
+    scroll-margin-top: 7rem;
+  }
+
+  .subject__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .subject__number {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--saffron-ink);
+  }
+
+  .subject__emblem {
+    font-family: var(--font-kufi);
+    font-size: 2rem;
+    line-height: 1.4;
+    color: var(--teal-500);
+  }
+
+  .subject__name {
+    margin-top: 0.5rem;
+    font-size: calc(1.7rem * var(--display-scale));
+  }
+
+  .subject__gloss {
+    font-weight: 700;
+    color: var(--teal-700);
+  }
+
+  .subject__text {
+    margin-top: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 2.25rem;
+  }
+</style>

@@ -4,7 +4,9 @@ import PageHero from '../components/PageHero.astro';
 import Pillars from '../components/Pillars.astro';
 import Shamsa from '../components/Shamsa.astro';
 import TimeBand from '../components/TimeBand.astro';
+import { framework } from '../content/academy';
 import { arabic, getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
 
 interface Props {
   lang: Lang;
@@ -36,16 +38,33 @@ const t = getDict(lang);
     </div>
   </section>
 
+  <section class="section section--tint">
+    <div class="container purpose">
+      <article class="purpose__vision" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{t.common.vision}</p>
+        <p class="purpose__statement">{framework.vision}</p>
+        {framework.approach.slice(1).map((paragraph) => <p class="purpose__text">{paragraph}</p>)}
+      </article>
+      <article class="card pad" data-reveal style="--reveal-order: 1">
+        <p class="kicker"><Shamsa size={14} />{t.common.mission}</p>
+        <ol class="mission">
+          {framework.mission.map((item, index) => <li><span>{num(index + 1, lang)}</span>{item}</li>)}
+        </ol>
+      </article>
+    </div>
+  </section>
+
   <section class="section section--sand">
     <div class="container">
       <header class="heading heading--center" data-reveal>
-        <p class="kicker"><Shamsa size={14} />{t.common.valuesTitle}</p>
+        <p class="kicker"><Shamsa size={14} />{t.common.values}</p>
+        <h2 class="title">What we hold to</h2>
       </header>
       <ul class="values">
         {
-          t.about.values.map((value, index) => (
+          framework.values.map((value, index) => (
             <li class="value card" data-reveal style={`--reveal-order: ${index}`}>
-              <span class="value__gloss">{value.gloss}</span>
+              <span class="value__number">{num(index + 1, lang)}</span>
               <h3 class="value__name">{value.name}</h3>
               <p class="value__text">{value.text}</p>
             </li>
@@ -66,6 +85,20 @@ const t = getDict(lang);
       </div>
       <div class="block">
         <TimeBand lang={lang} />
+      </div>
+      <div class="cols cols--2 block">
+        <article data-reveal>
+          <p class="kicker"><Shamsa size={14} />{t.common.community}</p>
+          <div class="prose" style="margin-top: 1rem">
+            {framework.community.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </article>
+        <article data-reveal style="--reveal-order: 1">
+          <p class="kicker"><Shamsa size={14} />{t.common.improvement}</p>
+          <div class="prose" style="margin-top: 1rem">
+            {framework.improvement.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -148,50 +181,95 @@ const t = getDict(lang);
     text-align: center;
   }
 
+  /* ----- Vision and mission ----- */
+
+  .purpose {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+
+  .purpose__statement {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-size: calc(clamp(1.5rem, 1.5vw + 1.1rem, 2.1rem) * var(--display-scale));
+    line-height: 1.35;
+    color: var(--navy-900);
+  }
+
+  .purpose__text {
+    margin-top: 1rem;
+    color: var(--ink-soft);
+  }
+
+  .mission {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1.25rem;
+  }
+
+  .mission li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+  }
+
+  .mission span {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: var(--teal-100);
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--teal-800);
+  }
+
   /* ----- Values ----- */
 
   .values {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1rem, 2.5vw, 2rem);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(0.9rem, 1.6vw, 1.25rem);
     margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
   }
 
   .value {
-    padding: 2rem 1.75rem;
-    text-align: center;
+    padding: 1.6rem 1.25rem;
   }
 
-  .value__gloss {
-    display: inline-block;
-    padding: 0.25rem 0.85rem;
-    border-radius: 999px;
-    background: var(--teal-100);
-    font-size: 0.78rem;
+  .value__number {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal-800);
-  }
-
-  :global(html[lang='bn']) .value__gloss {
-    font-size: 0.94rem;
-    letter-spacing: 0;
+    line-height: 1;
+    color: var(--teal-200);
   }
 
   .value__name {
-    margin-top: 1rem;
-    font-size: calc(2.1rem * var(--display-scale));
+    margin-top: 0.75rem;
+    font-size: calc(1.25rem * var(--display-scale));
     color: var(--navy-900);
   }
 
   .value__text {
-    margin-top: 0.6rem;
+    margin-top: 0.5rem;
+    font-size: 0.97rem;
     color: var(--ink-soft);
+  }
+
+  @media (max-width: 70rem) {
+    .values {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   @media (max-width: 56rem) {
     .story,
+    .purpose,
     .values {
       grid-template-columns: 1fr;
     }

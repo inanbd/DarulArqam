@@ -1,10 +1,15 @@
 import type { Lang } from '../i18n';
 
-/** The pages of the site, in menu order, and the file each one is written to. */
+/** The pages of the site and the file each one is written to. */
 export const pages = {
   home: 'index',
   about: 'about',
   programs: 'programs',
+  nazirah: 'nazirah',
+  hifz: 'hifz',
+  alimiyah: 'alimiyah',
+  deeniyat: 'deeniyat',
+  academics: 'academics',
   teachers: 'teachers',
   tuition: 'tuition',
   faq: 'faq',
@@ -13,8 +18,19 @@ export const pages = {
 
 export type PageId = keyof typeof pages;
 
-/** Pages listed in the main menu. The free trial is the button beside it. */
-export const menu: PageId[] = ['home', 'about', 'programs', 'teachers', 'tuition', 'faq'];
+/** The main menu, in order. `under` lists the pages that open beneath an entry. */
+export const menu: { page: PageId; under?: PageId[] }[] = [
+  { page: 'home' },
+  { page: 'about' },
+  { page: 'programs', under: ['nazirah', 'hifz', 'alimiyah', 'deeniyat'] },
+  { page: 'academics' },
+  { page: 'teachers' },
+  { page: 'tuition' },
+  { page: 'faq' },
+];
+
+/** The page of each program, keyed by the program's id in src/content/academy.ts. */
+export const programPage: Record<string, PageId> = { nazirah: 'nazirah', hifz: 'hifz', alimiyah: 'alimiyah', deeniyat: 'deeniyat' };
 
 /**
  * Link to a page in a language, e.g. `/programs.html` or `/bn/programs.html`.
