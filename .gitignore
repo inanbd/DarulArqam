@@ -6,3 +6,6 @@ dist/
 .env.*
 !.env.example
 .DS_Store
+
+# The download bundle of the three designs is rebuilt on request, not kept in the repository.
+darul-arqam-three-designs.zip
