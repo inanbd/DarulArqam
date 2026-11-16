@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Darul Arqam: two designs</title>
+    <title>Darul Arqam: three designs</title>
     <meta name="robots" content="noindex" />
     <style>
-      /* A plain page for comparing the two designs. It is not part of either site. */
+      /* A plain page for comparing the designs. It is not part of any of the sites. */
       *,
       *::before,
       *::after {
@@ -23,7 +23,7 @@
       }
 
       main {
-        width: min(100% - 2.5rem, 72rem);
+        width: min(100% - 2.5rem, 90rem);
         margin-inline: auto;
         padding-block: clamp(2.5rem, 7vw, 5rem);
       }
@@ -55,8 +55,8 @@
 
       .grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: clamp(1.25rem, 3vw, 2.5rem);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(1.25rem, 2.2vw, 2rem);
         margin-top: clamp(2rem, 5vw, 3.5rem);
       }
 
@@ -127,8 +127,8 @@
       }
 
       .links a {
-        flex: 1 1 10rem;
-        padding: 0.8rem 1.25rem;
+        flex: 1 1 9rem;
+        padding: 0.8rem 1rem;
         border: 2px solid #1b2330;
         border-radius: 0.75rem;
         font-weight: 700;
@@ -157,9 +157,10 @@
         color: #6b7280;
       }
 
-      @media (max-width: 48rem) {
+      @media (max-width: 68rem) {
         .grid {
           grid-template-columns: 1fr;
+          max-width: 40rem;
         }
       }
     </style>
@@ -168,8 +169,8 @@
     <main>
       <header>
         <p class="kicker">Darul Arqam · Online Quran Academy</p>
-        <h1>Two designs to choose from</h1>
-        <p>Both carry the same content, in English and in Bangla. Open each one and click through it.</p>
+        <h1>Three designs to choose from</h1>
+        <p>All three carry the same content, in English and in Bangla. Open each one and click through it.</p>
       </header>
 
       <div class="grid">
@@ -208,9 +209,27 @@
             </p>
           </div>
         </article>
+
+        <article>
+          <a class="shot" href="version-3/html/index.html">
+            <img src="designs/design-3.jpg" width="1280" height="800" alt="Design 3: an open book on a dark desk, with a verse on a blue plate on the left-hand page" />
+          </a>
+          <div class="body">
+            <h2><span>Design 3</span>The book</h2>
+            <ul>
+              <li>A book that opens, then turns its pages as you scroll</li>
+              <li>Burgundy leather, gold leaf and cream paper</li>
+              <li>Thirty-two pages; each chapter opens with a Quranic verse</li>
+            </ul>
+            <p class="links">
+              <a href="version-3/html/index.html">Open in English</a>
+              <a href="version-3/html/bn/index.html" lang="bn">বাংলায় খুলুন</a>
+            </p>
+          </div>
+        </article>
       </div>
 
-      <footer>Contact details, prices and teacher profiles shown in both designs are placeholders.</footer>
+      <footer>Contact details, prices and teacher profiles shown in the designs are placeholders.</footer>
     </main>
   </body>
 </html>
