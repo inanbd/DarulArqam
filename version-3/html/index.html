@@ -25,7 +25,7 @@
         }, 3000);
       })(document.documentElement);
     </script>
-  <link rel="stylesheet" href="./assets/style.css?v=d360fdf5"></head>
+  <link rel="stylesheet" href="./assets/style.css?v=9d3656cc"></head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header" data-header data-astro-cid-nen7h5rs>
@@ -1629,8 +1629,8 @@ function startBook(track) {
 		parts.castLeft.style.opacity = (lift * eased * .9).toFixed(3);
 		parts.spine.style.opacity = opening.toFixed(3);
 		parts.blockLeft.style.opacity = shown >= .999 ? "1" : "0";
-		parts.hint.style.opacity = (1 - opening).toFixed(3);
-		parts.controls.style.opacity = opening.toFixed(3);
+		parts.hint.style.opacity = (1 - smooth(clamp(shown * 2, 0, 1))).toFixed(3);
+		parts.controls.style.opacity = smooth(clamp(shown * 2 - 1, 0, 1)).toFixed(3);
 		parts.thread.style.transform = `scaleX(${read.toFixed(4)})`;
 		if (resting !== rested) {
 			rested = resting;

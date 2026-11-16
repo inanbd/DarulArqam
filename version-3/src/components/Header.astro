@@ -86,7 +86,9 @@ const home = (which: Lang) => asset(which === 'bn' ? '/bn/index.html' : '/index.
     gap: 1.25rem;
     height: var(--header-h);
     padding-inline: clamp(0.9rem, 3vw, 2.25rem);
-    background: linear-gradient(180deg, rgba(15, 7, 9, 0.97) 0%, rgba(15, 7, 9, 0.9) 75%, rgba(15, 7, 9, 0.6) 100%);
+    /* Solid, so that a page in the air passes cleanly behind the bar. */
+    background: var(--desk-950);
+    border-bottom: 1px solid rgba(232, 207, 141, 0.14);
     color: var(--on-dark);
   }
 
