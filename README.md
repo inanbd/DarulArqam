@@ -6,7 +6,7 @@ This repository holds **three designs** of the site, with the same content, so t
 
 | | Design 1, classic | Design 2, modern | Design 3, the book |
 | --- | --- | --- | --- |
-| Layout | One long page | Seven separate pages | A book that opens and turns its pages as you scroll |
+| Layout | A long home page, with a page for each program | Twelve separate pages | A book of 64 pages that opens and turns as you scroll |
 | Look | Deep emerald, antique gold and ivory; pointed arches and a star lattice | Lapis blue, turquoise and saffron on warm paper; round forms | Burgundy leather, gold leaf and cream paper; illuminated verse plates |
 | Sources | This folder (`src/`) | [`version-2/`](version-2) | [`version-3/`](version-3) |
 | HTML files | [`html/`](html) | [`version-2/html/`](version-2/html) | [`version-3/html/`](version-3/html) |
@@ -20,8 +20,8 @@ The designs are separate projects that share nothing. Contact details, prices an
 
 It is a static site: plain HTML, CSS and a little JavaScript, with no server and no database.
 
-- English lives at `/`, Bangla at `/bn/`.
-- Sections: introduction, the story of the name, programs, who we teach, teachers and their profiles, how it works, tuition, questions, and the free-trial request form.
+- **Home** is one long page: introduction, the story of the name, vision and mission, programs, who we teach, the educational philosophy, teachers and their profiles, how it works, tuition, questions, and the free-trial request form.
+- **Five more pages** go into detail: Nazirah, Hifz, Alimiyah, Deeniyat and Academics. Each opens with a related Quranic verse in an arch.
 
 ## The HTML files
 
@@ -29,15 +29,34 @@ The finished site is in the [`html/`](html) folder, ready to use as it is:
 
 | File | What it is |
 | --- | --- |
-| `html/index.html` | The English page |
-| `html/bn/index.html` | The Bangla page |
+| `html/index.html` | The home page |
+| `html/nazirah.html` | Nazirah al-Qur'an: reading, in five stages |
+| `html/hifz.html` | Hifz al-Qur'an: memorization, in two tracks |
+| `html/alimiyah.html` | Alimiyah and Islamic Studies: three divisions |
+| `html/deeniyat.html` | Deeniyat: the eight subjects every Qur'an student takes |
+| `html/academics.html` | Philosophy, teaching, assessment, standards and welfare |
 | `html/404.html` | The "page not found" page |
-| `html/assets/style.css` | The stylesheet |
-| `html/assets/*.woff2` | The fonts |
+| `html/assets/` | The stylesheet and the fonts |
 
 Double-click `html/index.html` to view the site in a browser, or upload everything inside `html/` to a web host. The pages use relative links, so they work from disk, from the root of a domain, or from any sub-folder.
 
 The files in `html/` are generated from the sources in `src/` with [Astro](https://astro.build). Change the sources and build again, rather than editing the generated files, or the next build will overwrite your edits.
+
+## Where the content comes from
+
+What Darul Arqam teaches, and how, is taken from the academy's four documents: the Public Academic Framework, the Nazirah al-Qur'an & Deeniyat Program, the Master Hifz & Deeniyat Curriculum, and the Alimiyah & Islamic Studies Program.
+
+That content lives in one file, `src/content/academy.ts`, which is identical in all three designs: programs, stages, syllabus units, semesters, outcomes, assessment, certification, vision, mission and values. Each design only decides how to show it. When the curriculum changes, change that file and copy it to the other designs.
+
+The site shows a curated version of the curriculum: the structure and outcomes are always visible, and the unit-by-unit detail opens on request ("What is covered"). Two editorial choices were made throughout: American spelling (program, memorize), and one spelling for each Arabic term (Tawheed, Zakat, Qur'an).
+
+One thing on the site comes from the academy directly rather than from the documents: Nazirah and Hifz are taught one-on-one, while Alimiyah and Junior Islamic Studies are taught in group classes by semester. Two things should still be confirmed: the certificate wording, which turns the documents' certification policy into a plain public statement that a certificate is not an accredited degree; and that the first class is free.
+
+## Languages
+
+The site is published in English. A Bangla version existed for the earlier content and is switched off until the new content has been translated, so that the two languages never disagree.
+
+To bring Bangla back: add `src/i18n/bn.ts` with the same shape as `en.ts`, add `'bn'` to `published` in `src/i18n/index.ts`, and add the pages under `src/pages/bn/`. The language switch then reappears by itself. The earlier Bangla wording is in the repository history (`src/i18n/bn.ts` before the commit "restructure around the academy's curriculum documents") and is a useful starting point for the parts that did not change. The Bangla fonts and type settings are still in place.
 
 ## Run it
 
@@ -61,15 +80,15 @@ npm run build
 
 | To change | Edit |
 | --- | --- |
+| The curriculum: programs, stages, subjects, semesters, values | `src/content/academy.ts` |
 | Contact details, form destination, tuition prices, site address | `src/config/site.ts` |
 | Teacher profiles | `src/config/teachers.ts` |
-| English wording | `src/i18n/en.ts` |
-| Bangla wording | `src/i18n/bn.ts` |
-| Arabic texts (hadith, ayat, program emblems) | `src/i18n/index.ts` |
-| Colours, fonts, spacing | `src/styles/global.css` |
-| Layout of a section | `src/components/<Section>.astro` |
-
-The two language files have the same shape. When you add or reword something in one, do the same in the other.
+| Headings, page titles, questions, form labels and other wording | `src/i18n/en.ts` |
+| Arabic texts: the verses, the hadith | `src/i18n/index.ts` |
+| Which pages exist and their file names | `src/lib/routes.ts` |
+| Colours, fonts, spacing, shared pieces | `src/styles/global.css` |
+| A section of the home page | `src/components/<Section>.astro` |
+| A program or academics page | `src/views/<Page>View.astro` |
 
 ## Before going live
 
@@ -87,11 +106,9 @@ The wording also states a few things about how the academy works. Check that eac
 - Classes last 30 minutes.
 - The first class is free.
 - Students are taught from about five years old.
-- Lessons can be taught in English or in Bangla.
 - Tuition is month to month, with no long contract.
 - A missed class can be made up when the teacher is told in advance.
 - Parents receive regular progress updates.
-- Teachers have a formal madrasah education and experience teaching both children and adults.
 
 ## The free-trial form
 

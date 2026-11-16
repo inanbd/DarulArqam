@@ -3,7 +3,7 @@
 The second design of the Darul Arqam website: the same content as the first design, laid out as a **multi-page site** with its own look.
 
 - **Look:** lapis blue, turquoise and saffron on warm paper, with round forms and a lattice of overlapping circles.
-- **Pages:** home, about, programs, teachers, tuition, questions and the free-trial form, in English and in Bangla.
+- **Pages:** twelve: home, about, programs, a page each for Nazirah, Hifz, Alimiyah and Deeniyat, academics, teachers, tuition, questions and the free-trial form.
 - **Verses:** every page opens with a Quranic verse related to its subject.
 
 This folder is a complete project of its own. It shares nothing with the first design in the folder above, so either one can be deleted once a design is chosen.
@@ -15,19 +15,40 @@ The finished site is in the [`html/`](html) folder, ready to use as it is:
 | File | Page | Verse |
 | --- | --- | --- |
 | `index.html` | Home | al-'Alaq 96:1 |
-| `about.html` | About | al-Jumu'ah 62:2 |
-| `programs.html` | Programs | al-Qamar 54:17 |
+| `about.html` | About: the name, vision, mission, values | al-Jumu'ah 62:2 |
+| `programs.html` | Programs: overview, and where to begin by age | al-Qamar 54:17 |
+| `nazirah.html` | Nazirah al-Qur'an: reading, in five stages | from al-Muzzammil 73:4 |
+| `hifz.html` | Hifz al-Qur'an: memorization, in two tracks | al-Hijr 15:9 |
+| `alimiyah.html` | Alimiyah and Islamic Studies: three divisions | from at-Tawbah 9:122 |
+| `deeniyat.html` | Deeniyat: eight subjects | al-Bayyinah 98:5 |
+| `academics.html` | Philosophy, teaching, assessment, standards, welfare | from al-Mujadilah 58:11 |
 | `teachers.html` | Teachers | from al-'Ankabut 29:49 |
 | `tuition.html` | Tuition and how it works | from al-Muzzammil 73:20 |
 | `faq.html` | Questions | from an-Nahl 16:43 |
 | `free-trial.html` | Free-trial request form | from Ta-Ha 20:114 |
 | `404.html` | "Page not found" | none |
 
-The Bangla pages have the same names inside `html/bn/`. The stylesheet and fonts are in `html/assets/`.
+The stylesheet and fonts are in `html/assets/`.
 
 Double-click `html/index.html` to view the site in a browser, or upload everything inside `html/` to a web host. The pages use relative links, so they work from disk, from the root of a domain, or from any sub-folder.
 
 The files in `html/` are generated from the sources in `src/` with [Astro](https://astro.build). Change the sources and build again, rather than editing the generated files, or the next build will overwrite your edits.
+
+## Where the content comes from
+
+What Darul Arqam teaches, and how, is taken from the academy's four documents: the Public Academic Framework, the Nazirah al-Qur'an & Deeniyat Program, the Master Hifz & Deeniyat Curriculum, and the Alimiyah & Islamic Studies Program.
+
+That content lives in one file, `src/content/academy.ts`, which is identical in all three designs: programs, stages, syllabus units, semesters, outcomes, assessment, certification, vision, mission and values. Each design only decides how to show it. When the curriculum changes, change that file and copy it to the other designs.
+
+The site shows a curated version of the curriculum: the structure and outcomes are always visible, and the unit-by-unit detail opens on request ("What is covered"). Two editorial choices were made throughout: American spelling (program, memorize), and one spelling for each Arabic term (Tawheed, Zakat, Qur'an).
+
+One thing on the site comes from the academy directly rather than from the documents: Nazirah and Hifz are taught one-on-one, while Alimiyah and Junior Islamic Studies are taught in group classes by semester. Two things should still be confirmed: the certificate wording, which turns the documents' certification policy into a plain public statement that a certificate is not an accredited degree; and that the first class is free.
+
+## Languages
+
+The site is published in English. A Bangla version existed for the earlier content and is switched off until the new content has been translated, so that the two languages never disagree.
+
+To bring Bangla back: add `src/i18n/bn.ts` with the same shape as `en.ts`, add `'bn'` to `published` in `src/i18n/index.ts`, and add the pages under `src/pages/bn/`. The language switch then reappears by itself. The earlier Bangla wording is in the repository history (`src/i18n/bn.ts` before the commit "restructure around the academy's curriculum documents") and is a useful starting point for the parts that did not change. The Bangla fonts and type settings are still in place.
 
 ## Run it
 
@@ -51,21 +72,19 @@ npm run build
 
 | To change | Edit |
 | --- | --- |
+| The curriculum: programs, stages, subjects, semesters, values | `src/content/academy.ts` |
 | Contact details, form destination, tuition prices, site address | `src/config/site.ts` |
 | Teacher profiles | `src/config/teachers.ts` |
-| English wording, page titles, the meaning of each verse | `src/i18n/en.ts` |
-| Bangla wording, page titles, the meaning of each verse | `src/i18n/bn.ts` |
-| Arabic texts: the verses, the hadith, program emblems | `src/i18n/index.ts` |
-| Which pages exist and their file names | `src/lib/routes.ts` |
-| Colours, fonts, spacing | `src/styles/global.css` |
+| Page titles and headings, the meaning of each verse, questions, labels | `src/i18n/en.ts` |
+| Arabic texts: the verses, the hadith | `src/i18n/index.ts` |
+| Which pages exist, their file names and the menu | `src/lib/routes.ts` |
+| Colours, fonts, spacing, shared pieces | `src/styles/global.css` |
 | What a page contains | `src/views/<Page>View.astro` |
 | How one block looks | `src/components/<Block>.astro` |
 
-The two language files have the same shape. When you add or reword something in one, do the same in the other.
-
 ### The verses
 
-Each page's verse has three parts: the Arabic in `src/i18n/index.ts` (under `verses`), and its meaning and reference in each language file (under `pages`). The Arabic is in the simple script with full vowel marks and was checked against the Tanzil text of the Quran. Where a page quotes part of a verse, its reference begins with "From". The meanings are plain renderings written for this site; have someone qualified review them, in both languages, before the site goes live.
+Each page's verse has three parts: the Arabic in `src/i18n/index.ts` (under `verses`), and its meaning and reference in `src/i18n/en.ts` (under `pages`). The Arabic is in the simple script with full vowel marks and was checked against the Tanzil text of the Quran. Where a page quotes part of a verse, its reference begins with "From". The meanings are plain renderings written for this site; have someone qualified review them before the site goes live.
 
 To change a page's verse, replace all three parts together.
 
@@ -85,11 +104,9 @@ The wording also states a few things about how the academy works. Check that eac
 - Classes last 30 minutes.
 - The first class is free.
 - Students are taught from about five years old.
-- Lessons can be taught in English or in Bangla.
 - Tuition is month to month, with no long contract.
 - A missed class can be made up when the teacher is told in advance.
 - Parents receive regular progress updates.
-- Teachers have a formal madrasah education and experience teaching both children and adults.
 
 ## The free-trial form
 
