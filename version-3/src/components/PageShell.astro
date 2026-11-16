@@ -1,0 +1,37 @@
+---
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+import type { ChapterId } from '../lib/chapters';
+
+/**
+ * One page of the book: the paper, its gold frame, the running head and
+ * the page number. The content goes in the slot.
+ */
+interface Props {
+  lang: Lang;
+  number: number;
+  chapter: ChapterId;
+  /** 'plate' marks a decorative page: a verse or the hadith. */
+  kind?: 'text' | 'plate';
+}
+
+const { lang, number, chapter, kind = 'text' } = Astro.props;
+const t = getDict(lang);
+---
+
+<section
+  class:list={['face', 'page', `page--${kind}`]}
+  id={`p-${number}`}
+  data-chapter={chapter}
+  data-page={number}
+  aria-label={`${t.book.page} ${num(number, lang)}`}
+>
+  <div class="page__inner">
+    <span class="page__frame" aria-hidden="true"></span>
+    <p class="page__head" aria-hidden="true">{t.pages[chapter].nav}</p>
+    <div class="page__body" data-fit>
+      <slot />
+    </div>
+    <p class="page__foot" aria-hidden="true">{num(number, lang)}</p>
+  </div>
+</section>

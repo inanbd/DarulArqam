@@ -1,0 +1,599 @@
+---
+import Star from './Star.astro';
+import { site } from '../config/site';
+import { arabic, getDict, type Lang } from '../i18n';
+
+/** The free-trial request form, on its own sheet after the book. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const f = t.trial.form;
+const { email, whatsappNumber, whatsappDisplay } = site.contact;
+
+// Everything the form script needs, handed over as a data attribute.
+const messages = {
+  sending: f.sending,
+  submit: f.submit,
+  successTitle: f.successTitle,
+  success: f.success,
+  whatsappTitle: f.whatsappTitle,
+  whatsappNote: f.whatsappNote,
+  whatsappAgain: f.whatsappAgain,
+  emailNote: f.emailNote,
+  greeting: f.greeting,
+  subject: f.subject,
+};
+---
+
+<section class="trial" id="trial">
+  <span class="pattern"></span>
+  <div class="container trial__grid">
+    <div class="trial__copy">
+      <p class="trial__rubric">{t.trial.eyebrow}</p>
+      <h2 class="trial__title">{t.pages.trial.heading}</h2>
+      <p class="trial__lead">{t.pages.trial.lead}</p>
+
+      {
+        (whatsappNumber || email) && (
+          <div class="trial__contact">
+            <h3>{t.trial.contactTitle}</h3>
+            <ul>
+              {whatsappNumber && (
+                <li>
+                  <span>{t.trial.whatsapp}</span>
+                  <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener">
+                    {whatsappDisplay}
+                  </a>
+                </li>
+              )}
+              {email && (
+                <li>
+                  <span>{t.trial.email}</span>
+                  <a href={`mailto:${email}`}>{email}</a>
+                </li>
+              )}
+            </ul>
+          </div>
+        )
+      }
+
+      <blockquote class="trial__verse">
+        <p lang="ar" dir="rtl">{arabic.verses.trial}</p>
+        <footer>
+          {t.pages.trial.verse.text}
+          <cite>{t.pages.trial.verse.reference}</cite>
+        </footer>
+      </blockquote>
+    </div>
+
+    <div class="sheet">
+      <span class="sheet__frame" aria-hidden="true"></span>
+      <form
+        class="form"
+        method="post"
+        action={site.formEndpoint || undefined}
+        data-trial-form
+        data-endpoint={site.formEndpoint}
+        data-whatsapp={whatsappNumber}
+        data-email={email}
+        data-messages={JSON.stringify(messages)}
+      >
+        <div class="field">
+          <label for="trial-name">{f.name}</label>
+          <input id="trial-name" name="name" type="text" autocomplete="name" required data-label={f.name} />
+        </div>
+
+        <div class="field">
+          <label for="trial-email">{f.email}</label>
+          <input id="trial-email" name="email" type="email" autocomplete="email" required data-label={f.email} />
+        </div>
+
+        <div class="field">
+          <label for="trial-phone">{f.phone} <span class="field__optional">({f.optional})</span></label>
+          <input id="trial-phone" name="phone" type="tel" autocomplete="tel" data-label={f.phone} />
+        </div>
+
+        <div class="field">
+          <label for="trial-learner">{f.learner}</label>
+          <select id="trial-learner" name="learner" data-label={f.learnerShort}>
+            {f.learnerOptions.map((option) => <option>{option}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="trial-age">{f.age} <span class="field__optional">({f.optional})</span></label>
+          <input id="trial-age" name="age" type="text" inputmode="numeric" maxlength="20" data-label={f.age} />
+        </div>
+
+        <div class="field">
+          <label for="trial-program">{f.program}</label>
+          <select id="trial-program" name="program" data-label={f.program}>
+            <option>{f.programUnsure}</option>
+            {t.programs.items.map((program) => <option>{program.name}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="trial-teacher">{f.teacher}</label>
+          <select id="trial-teacher" name="teacher" data-label={f.teacher}>
+            {f.teacherOptions.map((option) => <option>{option}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="trial-timezone">{f.timezone}</label>
+          <select id="trial-timezone" name="timezone" data-label={f.timezone} data-timezone>
+            {f.timezones.map((zone) => <option value={zone.value}>{zone.label}</option>)}
+          </select>
+        </div>
+
+        <div class="field field--wide">
+          <label for="trial-message">{f.message} <span class="field__optional">({f.optional})</span></label>
+          <textarea id="trial-message" name="message" rows="3" data-label={f.messageShort}></textarea>
+        </div>
+
+        <!-- Left empty by people; filled in by spam bots. -->
+        <div class="form__trap" aria-hidden="true">
+          <label for="trial-website">Website</label>
+          <input id="trial-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="field field--wide form__footer">
+          <button class="btn btn--leather" type="submit" data-submit>{f.submit}</button>
+          <p class="form__error" role="alert" hidden data-error>{f.error}</p>
+          <p class="form__privacy">{f.privacy}</p>
+        </div>
+      </form>
+
+      <div class="form__done" role="status" tabindex="-1" hidden data-done>
+        <Star variant="double" class="form__done-mark" />
+        <h3 data-done-title></h3>
+        <p data-done-text></p>
+        <a class="btn btn--leather" target="_blank" rel="noopener" hidden data-done-link></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-trial-form]');
+
+  if (form) {
+    const done = form.parentElement!.querySelector<HTMLElement>('[data-done]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const error = form.querySelector<HTMLElement>('[data-error]')!;
+    const text = JSON.parse(form.dataset.messages ?? '{}') as Record<string, string>;
+    const { endpoint = '', whatsapp = '', email = '' } = form.dataset;
+
+    // Pre-select the visitor's US time zone.
+    const zoneSelect = form.querySelector<HTMLSelectElement>('[data-timezone]');
+    try {
+      const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      // Compare against January, when no daylight saving applies, to read the standard offset.
+      const winter = new Date(new Date().getFullYear(), 0, 15, 12);
+      const hours = -winter.getTimezoneOffset() / 60;
+      const byOffset: Record<string, string> = {
+        '-5': 'Eastern (ET)',
+        '-6': 'Central (CT)',
+        '-7': 'Mountain (MT)',
+        '-8': 'Pacific (PT)',
+        '-9': 'Alaska (AKT)',
+        '-10': 'Hawaii (HT)',
+      };
+      const inAmericas = /^(America|US|Pacific\/Honolulu)/.test(zone);
+      if (zoneSelect) zoneSelect.value = (inAmericas && byOffset[String(hours)]) || 'Other';
+    } catch {
+      // Keep the first option.
+    }
+
+    /** The answers as "Label: value" lines, skipping anything left blank. */
+    const summary = () => {
+      const lines: string[] = [];
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[data-label]').forEach((field) => {
+        const value =
+          field instanceof HTMLSelectElement ? (field.selectedOptions[0]?.textContent ?? '').trim() : field.value.trim();
+        if (value) lines.push(`${field.dataset.label}: ${value}`);
+      });
+      return `${text.greeting}\n\n${lines.join('\n')}`;
+    };
+
+    const finish = (title: string, note: string, link?: { href: string; label: string }) => {
+      done.querySelector('[data-done-title]')!.textContent = title;
+      done.querySelector('[data-done-text]')!.textContent = note;
+      const anchor = done.querySelector<HTMLAnchorElement>('[data-done-link]')!;
+      if (link) {
+        anchor.href = link.href;
+        anchor.textContent = link.label;
+        anchor.hidden = false;
+      }
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      error.hidden = true;
+
+      const data = new FormData(form);
+      if (data.get('website')) return; // A bot filled the hidden field.
+      data.delete('website');
+
+      // No form service configured: hand the request to WhatsApp, or to email.
+      if (!endpoint) {
+        const message = summary();
+        if (whatsapp) {
+          const link = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+          window.open(link, '_blank', 'noopener');
+          finish(text.whatsappTitle, text.whatsappNote, { href: link, label: text.whatsappAgain });
+        } else if (email) {
+          window.location.href = `mailto:${email}?subject=${encodeURIComponent(text.subject)}&body=${encodeURIComponent(message)}`;
+          finish(text.whatsappTitle, text.emailNote);
+        } else {
+          error.hidden = false;
+        }
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = text.sending;
+      try {
+        data.append('_subject', text.subject);
+        const response = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error(`Form service answered ${response.status}`);
+        finish(text.successTitle, text.success);
+      } catch {
+        error.hidden = false;
+        submit.disabled = false;
+        submit.textContent = text.submit;
+      }
+    });
+  }
+</script>
+
+<style>
+  .trial {
+    position: relative;
+    isolation: isolate;
+    padding-block: clamp(4rem, 9vw, 7rem);
+    background:
+      radial-gradient(80% 60% at 80% 20%, rgba(116, 31, 56, 0.55), transparent 70%),
+      linear-gradient(180deg, var(--desk-900), var(--desk-950));
+    border-top: 1px solid rgba(232, 207, 141, 0.18);
+    scroll-margin-top: 0;
+  }
+
+  .trial .pattern {
+    z-index: -1;
+    --pattern-opacity: 0.05;
+    --pattern-size: 96px;
+  }
+
+  .trial__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: start;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+
+  .trial__rubric {
+    font-family: var(--font-caps);
+    font-size: 0.78rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+
+  :global(html[lang='bn']) .trial__rubric {
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .trial__title {
+    margin-top: 0.8rem;
+    font-size: clamp(2.1rem, 3vw + 1rem, 3.2rem);
+    line-height: 1.1;
+    color: #fff8e6;
+  }
+
+  :global(html[lang='bn']) .trial__title {
+    font-size: clamp(1.7rem, 2.2vw + 1rem, 2.5rem);
+    line-height: 1.4;
+  }
+
+  .trial__lead {
+    margin-top: 1.1rem;
+    font-size: 1.2rem;
+    color: var(--on-dark-soft);
+  }
+
+  .trial__contact {
+    margin-top: 2.25rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(232, 207, 141, 0.22);
+  }
+
+  .trial__contact h3 {
+    font-size: 1.45rem;
+    font-style: italic;
+    color: #fff8e6;
+  }
+
+  :global(html[lang='bn']) .trial__contact h3 {
+    font-style: normal;
+  }
+
+  .trial__contact ul {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+
+  .trial__contact li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 1rem;
+  }
+
+  .trial__contact span {
+    min-width: 6.5rem;
+    font-family: var(--font-caps);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+
+  :global(html[lang='bn']) .trial__contact span {
+    font-size: 0.95rem;
+    letter-spacing: 0;
+  }
+
+  .trial__contact a {
+    border-bottom: 1px solid rgba(232, 207, 141, 0.45);
+    overflow-wrap: anywhere;
+    transition: border-color 0.2s var(--ease);
+  }
+
+  .trial__contact a:hover {
+    border-color: var(--gold-200);
+  }
+
+  .trial__verse {
+    margin: 2.5rem 0 0;
+  }
+
+  .trial__verse p {
+    font-size: 2.1rem;
+    color: var(--gold-200);
+    text-align: left;
+  }
+
+  .trial__verse footer {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--on-dark);
+  }
+
+  :global(html[lang='bn']) .trial__verse footer {
+    font-style: normal;
+  }
+
+  .trial__verse cite {
+    display: block;
+    margin-top: 0.3rem;
+    font-family: var(--font-caps);
+    font-size: 0.68rem;
+    font-style: normal;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+
+  :global(html[lang='bn']) .trial__verse cite {
+    font-size: 0.92rem;
+    letter-spacing: 0;
+  }
+
+  /* ----- The sheet of paper the form is written on ----- */
+
+  .sheet {
+    position: relative;
+    padding: clamp(2rem, 4.5vw, 3.5rem);
+    background:
+      radial-gradient(120% 80% at 50% 30%, #fffaf0 0%, transparent 65%),
+      var(--paper);
+    color: var(--ink);
+    box-shadow: 0 40px 70px -30px rgba(0, 0, 0, 0.9);
+  }
+
+  .sheet__frame {
+    position: absolute;
+    inset: 0.6rem;
+    border: 24px solid transparent;
+    border-image: var(--frame-gold) 24 stretch;
+    pointer-events: none;
+  }
+
+  .form {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem 1.4rem;
+  }
+
+  .form[hidden] {
+    display: none;
+  }
+
+  .field {
+    display: grid;
+    gap: 0.3rem;
+    /* When one label of a row runs to two lines, both fields still share a baseline. */
+    align-content: end;
+  }
+
+  .field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    font-family: var(--font-caps);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.5;
+    text-transform: uppercase;
+    color: var(--rubric);
+  }
+
+  :global(html[lang='bn']) .field label {
+    font-size: 0.98rem;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .field__optional {
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+  }
+
+  /* Fields are ruled lines, as on a form printed in a book. */
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.45rem 0.15rem;
+    border: 0;
+    border-bottom: 1.5px solid var(--gold-500);
+    border-radius: 0;
+    background: transparent;
+    font-family: var(--font-text);
+    font-size: 1.12rem;
+    line-height: 1.4;
+    transition:
+      border-color 0.2s var(--ease),
+      background-color 0.2s var(--ease);
+  }
+
+  .field select {
+    appearance: none;
+    padding-right: 1.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%239c2f23' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.35rem center;
+  }
+
+  .field textarea {
+    min-height: 5rem;
+    padding: 0.6rem 0.7rem;
+    border: 1.5px solid var(--gold-500);
+    resize: vertical;
+  }
+
+  .field input:hover,
+  .field select:hover,
+  .field textarea:hover {
+    border-color: var(--leather-600);
+  }
+
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: none;
+    border-color: var(--rubric);
+    background-color: rgba(244, 233, 208, 0.7);
+  }
+
+  .form__trap {
+    position: absolute;
+    left: -200vw;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form__footer {
+    justify-items: center;
+    gap: 0.9rem;
+    margin-top: 0.6rem;
+  }
+
+  .form__footer .btn {
+    padding: 0.95em 2em;
+    font-size: 0.84rem;
+  }
+
+  :global(html[lang='bn']) .form__footer .btn {
+    font-size: 1.05rem;
+  }
+
+  .form__privacy {
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  :global(html[lang='bn']) .form__privacy {
+    font-style: normal;
+  }
+
+  .form__error {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--rubric);
+    background: #f9e7e1;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #7a2317;
+  }
+
+  .form__done {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    padding-block: clamp(2rem, 6vw, 4rem);
+    text-align: center;
+    outline: none;
+  }
+
+  .form__done[hidden] {
+    display: none;
+  }
+
+  .form__done :global(.form__done-mark) {
+    width: 3rem;
+    height: 3rem;
+    color: var(--gold-500);
+  }
+
+  .form__done h3 {
+    font-size: 2rem;
+    color: var(--leather-700);
+  }
+
+  .form__done p {
+    max-width: 27rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 60rem) {
+    .trial__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .form {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

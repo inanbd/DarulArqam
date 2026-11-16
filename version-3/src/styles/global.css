@@ -1,0 +1,314 @@
+/* ------------------------------------------------------------------
+   Darul Arqam, third design: an illuminated book on a reading desk.
+   Design tokens, base styles and shared pieces. The book itself is in
+   book.css and the look of its pages in pages.css.
+------------------------------------------------------------------- */
+
+:root {
+  /* The desk the book lies on */
+  --desk-950: #0f0709;
+  --desk-900: #170b0e;
+  --desk-800: #231115;
+  --desk-700: #33181e;
+
+  /* Burgundy leather */
+  --leather-900: #2c0813;
+  --leather-800: #430f1e;
+  --leather-700: #5a1528;
+  --leather-600: #741f38;
+
+  /* Gold leaf */
+  --gold-200: #f5e6b8;
+  --gold-300: #e8cf8d;
+  --gold-400: #d4af5f;
+  --gold-500: #b98f3a;
+  --gold-ink: #7d5c14; /* gold that stays readable as small text on paper */
+
+  /* Paper and ink */
+  --paper: #fbf4e3;
+  --paper-2: #f4e9d0;
+  --paper-edge: #e2d2ae;
+  --ink: #2b1c14;
+  --ink-soft: #5f4b3c;
+
+  /* Illumination */
+  --lapis-900: #101f47;
+  --lapis-800: #182d63;
+  --lapis-700: #223f86;
+  --rubric: #9c2f23; /* the red ink of manuscript headings */
+
+  --on-dark: #f6ecd6;
+  --on-dark-soft: #c9b79a;
+
+  --font-text: 'EB Garamond Variable', 'Tiro Bangla', 'Amiri Quran', Georgia, 'Times New Roman', serif;
+  --font-caps: 'Cinzel Variable', 'Tiro Bangla', 'Amiri Quran', Georgia, serif;
+  --font-quran: 'Amiri Quran', 'Scheherazade New', 'Traditional Arabic', serif;
+  --font-ruqaa: 'Aref Ruqaa', 'Amiri Quran', serif;
+
+  --text-leading: 1.5;
+  --header-h: 3.75rem;
+  --controls-h: 3.75rem;
+  --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
+
+  /* Eight-pointed star lattice, used as a mask so it can take any colour. */
+  --khatam: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22 viewBox=%220 0 96 96%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221%22%3E%3Cpolygon points=%2248.0,0.0 62.1,14.1 81.9,14.1 81.9,33.9 96.0,48.0 81.9,62.1 81.9,81.9 62.1,81.9 48.0,96.0 33.9,81.9 14.1,81.9 14.1,62.1 0.0,48.0 14.1,33.9 14.1,14.1 33.9,14.1%22/%3E%3Cpolygon points=%2255.3,30.4 58.3,37.7 65.6,40.7 62.5,48.0 65.6,55.3 58.3,58.3 55.3,65.6 48.0,62.5 40.7,65.6 37.7,58.3 30.4,55.3 33.5,48.0 30.4,40.7 37.7,37.7 40.7,30.4 48.0,33.5%22/%3E%3Ccircle cx=%220%22 cy=%220%22 r=%225%22/%3E%3Ccircle cx=%2296%22 cy=%220%22 r=%225%22/%3E%3Ccircle cx=%220%22 cy=%2296%22 r=%225%22/%3E%3Ccircle cx=%2296%22 cy=%2296%22 r=%225%22/%3E%3C/svg%3E");
+
+  /* A ruled frame with a small knot at each corner, used as a border image. */
+  --frame-gold: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23b98f3a'%3E%3Crect x='6.5' y='6.5' width='59' height='59'/%3E%3Crect x='10.5' y='10.5' width='51' height='51' stroke-width='.6'/%3E%3Cpath d='M2.5 14.5h12v-12M57.5 2.5v12h12M69.5 57.5h-12v12M14.5 69.5v-12h-12'/%3E%3C/svg%3E");
+  --frame-bright: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23e8cf8d'%3E%3Crect x='6.5' y='6.5' width='59' height='59'/%3E%3Crect x='10.5' y='10.5' width='51' height='51' stroke-width='.6'/%3E%3Cpath d='M2.5 14.5h12v-12M57.5 2.5v12h12M69.5 57.5h-12v12M14.5 69.5v-12h-12'/%3E%3C/svg%3E");
+}
+
+html[lang='bn'] {
+  --text-leading: 1.72;
+}
+
+@media (max-width: 60rem) {
+  :root {
+    --header-h: 3.25rem;
+    --controls-h: 3.25rem;
+  }
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--desk-950);
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(120% 70% at 50% 0%, var(--desk-700) 0%, transparent 60%),
+    var(--desk-900);
+  color: var(--on-dark);
+  font-family: var(--font-text);
+  font-size: 1.125rem;
+  line-height: var(--text-leading);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-text);
+  font-weight: 500;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-400);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+::selection {
+  background: var(--gold-300);
+  color: var(--leather-900);
+}
+
+[lang='ar'] {
+  font-family: var(--font-quran);
+  line-height: 2.1;
+  letter-spacing: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  background: var(--gold-400);
+  color: var(--leather-900);
+  font-family: var(--font-caps);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  transition: top 0.2s var(--ease);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.container {
+  width: min(100% - 2.5rem, 70rem);
+  margin-inline: auto;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 0.75em 1.5em;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-family: var(--font-caps);
+  font-size: 0.82em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    background-color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+
+html[lang='bn'] .btn {
+  font-size: 0.95em;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Gold leaf */
+.btn--gold {
+  background: linear-gradient(180deg, var(--gold-200) 0%, var(--gold-400) 55%, var(--gold-500) 100%);
+  color: var(--leather-900);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 8px 18px -10px rgba(0, 0, 0, 0.7);
+}
+
+.btn--gold:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 12px 22px -10px rgba(0, 0, 0, 0.8);
+}
+
+/* Burgundy, for use on paper */
+.btn--leather {
+  background: linear-gradient(180deg, var(--leather-600), var(--leather-800));
+  color: var(--gold-200);
+  box-shadow: 0 8px 18px -12px rgba(44, 8, 19, 0.9);
+}
+
+.btn--line {
+  border-color: var(--gold-500);
+  color: var(--gold-ink);
+}
+
+.btn--line:hover {
+  background: rgba(185, 143, 58, 0.1);
+}
+
+.btn--ghost {
+  border-color: rgba(232, 207, 141, 0.5);
+  color: var(--gold-300);
+}
+
+.btn--ghost:hover {
+  border-color: var(--gold-300);
+  background: rgba(232, 207, 141, 0.08);
+}
+
+.btn[disabled] {
+  opacity: 0.7;
+  cursor: progress;
+  transform: none;
+}
+
+/* ---------- Pattern ---------- */
+
+.pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--pattern-color, var(--gold-400));
+  opacity: var(--pattern-opacity, 0.1);
+  -webkit-mask: var(--khatam) center / var(--pattern-size, 72px) var(--pattern-size, 72px) repeat;
+  mask: var(--khatam) center / var(--pattern-size, 72px) var(--pattern-size, 72px) repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

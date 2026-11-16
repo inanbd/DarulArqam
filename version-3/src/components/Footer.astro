@@ -1,0 +1,133 @@
+---
+import Star from './Star.astro';
+import { site } from '../config/site';
+import { arabic, getDict, type Lang } from '../i18n';
+import { asset, num } from '../lib/format';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const other = t.alt.lang as Lang;
+const { email, whatsappNumber, whatsappDisplay } = site.contact;
+const year = num(new Date().getFullYear(), lang);
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <Star variant="double" class="footer__mark" />
+    <p class="footer__arabic" lang="ar" dir="rtl">{arabic.name}</p>
+    <p class="footer__name">{t.brand.name}</p>
+    <p class="footer__about">{t.footer.about}</p>
+    <ul class="footer__links">
+      {
+        whatsappNumber && (
+          <li>
+            <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener">
+              {t.trial.whatsapp}: {whatsappDisplay}
+            </a>
+          </li>
+        )
+      }
+      {
+        email && (
+          <li>
+            <a href={`mailto:${email}`}>{email}</a>
+          </li>
+        )
+      }
+      <li>
+        <a href={asset(other === 'bn' ? '/bn/index.html' : '/index.html')} lang={other} hreflang={other}>{t.alt.label}</a>
+      </li>
+    </ul>
+    <p class="footer__base">
+      © {year} {t.brand.name}. {t.footer.rights}
+      <span>{t.footer.reach}</span>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--desk-950);
+    border-top: 1px solid rgba(232, 207, 141, 0.16);
+    color: var(--on-dark-soft);
+    text-align: center;
+  }
+
+  .footer__inner {
+    display: grid;
+    justify-items: center;
+    gap: 0.6rem;
+    padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+  }
+
+  .footer__inner :global(.footer__mark) {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--gold-400);
+  }
+
+  .footer__arabic {
+    font-family: var(--font-ruqaa);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--gold-300);
+  }
+
+  .footer__name {
+    font-family: var(--font-caps);
+    font-size: 1.05rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold-300);
+  }
+
+  :global(html[lang='bn']) .footer__name {
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+  }
+
+  .footer__about {
+    max-width: 32rem;
+    margin-top: 0.5rem;
+  }
+
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 2rem;
+    margin-top: 1rem;
+  }
+
+  .footer__links a {
+    color: var(--on-dark);
+    border-bottom: 1px solid rgba(232, 207, 141, 0.35);
+    overflow-wrap: anywhere;
+    transition:
+      color 0.2s var(--ease),
+      border-color 0.2s var(--ease);
+  }
+
+  .footer__links a:hover {
+    color: var(--gold-200);
+    border-color: var(--gold-200);
+  }
+
+  .footer__base {
+    width: 100%;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(232, 207, 141, 0.12);
+    font-size: 0.95rem;
+  }
+
+  .footer__base span {
+    display: block;
+    margin-top: 0.2rem;
+  }
+</style>

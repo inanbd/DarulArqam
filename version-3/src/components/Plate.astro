@@ -1,0 +1,47 @@
+---
+import Star from './Star.astro';
+import { arabic, getDict, type Lang } from '../i18n';
+import type { ChapterId } from '../lib/chapters';
+
+/**
+ * An illuminated plate: the verse that opens a chapter, or the hadith.
+ * Pass `chapter` for that chapter's verse, or `hadith` for the hadith.
+ */
+interface Props {
+  lang: Lang;
+  chapter?: ChapterId;
+  hadith?: boolean;
+}
+
+const { lang, chapter, hadith = false } = Astro.props;
+const t = getDict(lang);
+
+const text = hadith ? arabic.hadith : arabic.verses[chapter!];
+const meaning = hadith ? t.hero.hadith.text : t.pages[chapter!].verse.text;
+const label = hadith ? t.common.hadithLabel : t.common.verseLabel;
+// Longer verses are set smaller so the panel keeps its shape.
+const length = text.length > 120 ? 'long' : text.length > 60 ? 'medium' : 'short';
+---
+
+<figure class:list={['plate', `plate--${length}`, { 'plate--hadith': hadith }]}>
+  <blockquote class="plate__panel">
+    <span class="pattern"></span>
+    <span class="plate__frame" aria-hidden="true"></span>
+    <p class="plate__label">{label}</p>
+    <p class="plate__arabic" lang="ar" dir="rtl">{text}</p>
+    <Star variant="double" class="plate__ornament" />
+  </blockquote>
+  <p class="plate__meaning">{meaning}</p>
+  <figcaption class="plate__reference">
+    {
+      hadith ? (
+        <>
+          <cite>{t.hero.hadith.source}</cite>
+          <span>{t.hero.hadith.reference}</span>
+        </>
+      ) : (
+        <cite>{t.pages[chapter!].verse.reference}</cite>
+      )
+    }
+  </figcaption>
+</figure>

@@ -1,0 +1,79 @@
+---
+import '../styles/fonts.css';
+import '../styles/global.css';
+
+import Star from '../components/Star.astro';
+import { arabic, getDict } from '../i18n';
+import { asset } from '../lib/format';
+
+const t = getDict('en');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.notFound.title} | {t.brand.name}</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#170b0e" />
+    <link rel="icon" type="image/svg+xml" href={asset('/favicon.svg')} />
+  </head>
+  <body>
+    <main class="lost">
+      <span class="pattern"></span>
+      <Star variant="double" class="lost__mark" />
+      <p class="lost__arabic" lang="ar" dir="rtl">{arabic.name}</p>
+      <h1>{t.notFound.title}</h1>
+      <p>{t.notFound.text}</p>
+      <a class="btn btn--gold" href={asset('/index.html')}>{t.notFound.home}</a>
+    </main>
+  </body>
+</html>
+
+<style>
+  .lost {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 1rem;
+    min-height: 100dvh;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+  .lost .pattern {
+    z-index: -1;
+    --pattern-opacity: 0.05;
+  }
+
+  .lost :global(.lost__mark) {
+    width: 3.5rem;
+    height: 3.5rem;
+    color: var(--gold-400);
+  }
+
+  .lost__arabic {
+    font-family: var(--font-ruqaa);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold-300);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: #fff8e6;
+  }
+
+  p {
+    max-width: 30rem;
+    color: var(--on-dark-soft);
+  }
+
+  .btn {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+</style>

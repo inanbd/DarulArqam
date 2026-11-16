@@ -1,0 +1,2762 @@
+/*
+  The fonts of the site, limited to the alphabets it uses (Latin, Arabic, Bangla)
+  and to the woff2 format, which every current browser reads.
+
+  The font files come from the @fontsource packages in node_modules.
+  The unicode-range lines tell the browser to download a file only when a page
+  actually contains letters from it.
+*/
+
+@font-face {
+  font-family: 'EB Garamond Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 800;
+  src: url('../assets/eb-garamond-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'EB Garamond Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 800;
+  src: url('../assets/eb-garamond-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: 'EB Garamond Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 800;
+  src: url('../assets/eb-garamond-latin-ext-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'EB Garamond Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 800;
+  src: url('../assets/eb-garamond-latin-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cinzel Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url('../assets/cinzel-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Cinzel Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url('../assets/cinzel-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: 'Aref Ruqaa';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../assets/aref-ruqaa-arabic-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Aref Ruqaa';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('../assets/aref-ruqaa-arabic-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Aref Ruqaa';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../assets/aref-ruqaa-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Amiri Quran';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../assets/amiri-quran-arabic-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Amiri Quran';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../assets/amiri-quran-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Tiro Bangla';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../assets/tiro-bangla-bengali-400-normal.woff2') format('woff2');
+}
+/* ------------------------------------------------------------------
+   Darul Arqam, third design: an illuminated book on a reading desk.
+   Design tokens, base styles and shared pieces. The book itself is in
+   book.css and the look of its pages in pages.css.
+------------------------------------------------------------------- */
+
+:root {
+  /* The desk the book lies on */
+  --desk-950: #0f0709;
+  --desk-900: #170b0e;
+  --desk-800: #231115;
+  --desk-700: #33181e;
+
+  /* Burgundy leather */
+  --leather-900: #2c0813;
+  --leather-800: #430f1e;
+  --leather-700: #5a1528;
+  --leather-600: #741f38;
+
+  /* Gold leaf */
+  --gold-200: #f5e6b8;
+  --gold-300: #e8cf8d;
+  --gold-400: #d4af5f;
+  --gold-500: #b98f3a;
+  --gold-ink: #7d5c14; /* gold that stays readable as small text on paper */
+
+  /* Paper and ink */
+  --paper: #fbf4e3;
+  --paper-2: #f4e9d0;
+  --paper-edge: #e2d2ae;
+  --ink: #2b1c14;
+  --ink-soft: #5f4b3c;
+
+  /* Illumination */
+  --lapis-900: #101f47;
+  --lapis-800: #182d63;
+  --lapis-700: #223f86;
+  --rubric: #9c2f23; /* the red ink of manuscript headings */
+
+  --on-dark: #f6ecd6;
+  --on-dark-soft: #c9b79a;
+
+  --font-text: 'EB Garamond Variable', 'Tiro Bangla', 'Amiri Quran', Georgia, 'Times New Roman', serif;
+  --font-caps: 'Cinzel Variable', 'Tiro Bangla', 'Amiri Quran', Georgia, serif;
+  --font-quran: 'Amiri Quran', 'Scheherazade New', 'Traditional Arabic', serif;
+  --font-ruqaa: 'Aref Ruqaa', 'Amiri Quran', serif;
+
+  --text-leading: 1.5;
+  --header-h: 3.75rem;
+  --controls-h: 3.75rem;
+  --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
+
+  /* Eight-pointed star lattice, used as a mask so it can take any colour. */
+  --khatam: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22 viewBox=%220 0 96 96%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221%22%3E%3Cpolygon points=%2248.0,0.0 62.1,14.1 81.9,14.1 81.9,33.9 96.0,48.0 81.9,62.1 81.9,81.9 62.1,81.9 48.0,96.0 33.9,81.9 14.1,81.9 14.1,62.1 0.0,48.0 14.1,33.9 14.1,14.1 33.9,14.1%22/%3E%3Cpolygon points=%2255.3,30.4 58.3,37.7 65.6,40.7 62.5,48.0 65.6,55.3 58.3,58.3 55.3,65.6 48.0,62.5 40.7,65.6 37.7,58.3 30.4,55.3 33.5,48.0 30.4,40.7 37.7,37.7 40.7,30.4 48.0,33.5%22/%3E%3Ccircle cx=%220%22 cy=%220%22 r=%225%22/%3E%3Ccircle cx=%2296%22 cy=%220%22 r=%225%22/%3E%3Ccircle cx=%220%22 cy=%2296%22 r=%225%22/%3E%3Ccircle cx=%2296%22 cy=%2296%22 r=%225%22/%3E%3C/svg%3E");
+
+  /* A ruled frame with a small knot at each corner, used as a border image. */
+  --frame-gold: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23b98f3a'%3E%3Crect x='6.5' y='6.5' width='59' height='59'/%3E%3Crect x='10.5' y='10.5' width='51' height='51' stroke-width='.6'/%3E%3Cpath d='M2.5 14.5h12v-12M57.5 2.5v12h12M69.5 57.5h-12v12M14.5 69.5v-12h-12'/%3E%3C/svg%3E");
+  --frame-bright: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23e8cf8d'%3E%3Crect x='6.5' y='6.5' width='59' height='59'/%3E%3Crect x='10.5' y='10.5' width='51' height='51' stroke-width='.6'/%3E%3Cpath d='M2.5 14.5h12v-12M57.5 2.5v12h12M69.5 57.5h-12v12M14.5 69.5v-12h-12'/%3E%3C/svg%3E");
+}
+
+html[lang='bn'] {
+  --text-leading: 1.72;
+}
+
+@media (max-width: 60rem) {
+  :root {
+    --header-h: 3.25rem;
+    --controls-h: 3.25rem;
+  }
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--desk-950);
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(120% 70% at 50% 0%, var(--desk-700) 0%, transparent 60%),
+    var(--desk-900);
+  color: var(--on-dark);
+  font-family: var(--font-text);
+  font-size: 1.125rem;
+  line-height: var(--text-leading);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-text);
+  font-weight: 500;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-400);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+::selection {
+  background: var(--gold-300);
+  color: var(--leather-900);
+}
+
+[lang='ar'] {
+  font-family: var(--font-quran);
+  line-height: 2.1;
+  letter-spacing: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  background: var(--gold-400);
+  color: var(--leather-900);
+  font-family: var(--font-caps);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  transition: top 0.2s var(--ease);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.container {
+  width: min(100% - 2.5rem, 70rem);
+  margin-inline: auto;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 0.75em 1.5em;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-family: var(--font-caps);
+  font-size: 0.82em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    background-color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+
+html[lang='bn'] .btn {
+  font-size: 0.95em;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Gold leaf */
+.btn--gold {
+  background: linear-gradient(180deg, var(--gold-200) 0%, var(--gold-400) 55%, var(--gold-500) 100%);
+  color: var(--leather-900);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 8px 18px -10px rgba(0, 0, 0, 0.7);
+}
+
+.btn--gold:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 12px 22px -10px rgba(0, 0, 0, 0.8);
+}
+
+/* Burgundy, for use on paper */
+.btn--leather {
+  background: linear-gradient(180deg, var(--leather-600), var(--leather-800));
+  color: var(--gold-200);
+  box-shadow: 0 8px 18px -12px rgba(44, 8, 19, 0.9);
+}
+
+.btn--line {
+  border-color: var(--gold-500);
+  color: var(--gold-ink);
+}
+
+.btn--line:hover {
+  background: rgba(185, 143, 58, 0.1);
+}
+
+.btn--ghost {
+  border-color: rgba(232, 207, 141, 0.5);
+  color: var(--gold-300);
+}
+
+.btn--ghost:hover {
+  border-color: var(--gold-300);
+  background: rgba(232, 207, 141, 0.08);
+}
+
+.btn[disabled] {
+  opacity: 0.7;
+  cursor: progress;
+  transform: none;
+}
+
+/* ---------- Pattern ---------- */
+
+.pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--pattern-color, var(--gold-400));
+  opacity: var(--pattern-opacity, 0.1);
+  -webkit-mask: var(--khatam) center / var(--pattern-size, 72px) var(--pattern-size, 72px) repeat;
+  mask: var(--khatam) center / var(--pattern-size, 72px) var(--pattern-size, 72px) repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.lost[data-astro-cid-ibpinaeu] {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 1rem;
+  min-height: 100dvh;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.lost[data-astro-cid-ibpinaeu] .pattern[data-astro-cid-ibpinaeu] {
+  z-index: -1;
+  --pattern-opacity: .05;
+}
+
+.lost[data-astro-cid-ibpinaeu] .lost__mark {
+  width: 3.5rem;
+  height: 3.5rem;
+  color: var(--gold-400);
+}
+
+.lost__arabic[data-astro-cid-ibpinaeu] {
+  font-family: var(--font-ruqaa);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--gold-300);
+}
+
+h1[data-astro-cid-ibpinaeu] {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: #fff8e6;
+}
+
+p[data-astro-cid-ibpinaeu] {
+  max-width: 30rem;
+  color: var(--on-dark-soft);
+}
+
+.btn[data-astro-cid-ibpinaeu] {
+  margin-top: 1rem;
+  font-size: .8rem;
+}
+/* ------------------------------------------------------------------
+   The book: its stage, its leaves, and how they turn.
+
+   The page markup is a plain list of "faces" in reading order. Without
+   scripts, or in "plain view", that list is shown as a column of paper
+   sheets (the styles in the first half of this file). The script in
+   Book.astro binds the faces into leaves and sets data-book on <html>
+   to "spread" (two pages side by side) or "single" (one page, on
+   narrow screens); the second half of this file styles those.
+------------------------------------------------------------------- */
+
+/* ========== Plain view: a column of sheets ========== */
+
+.book-track {
+  position: relative;
+}
+
+/* Until the script has chosen a view, keep the unbound pages out of sight. */
+html.js:not([data-book]) .book-track {
+  visibility: hidden;
+}
+
+.stage {
+  position: relative;
+  padding: calc(var(--header-h) + 1.5rem) 1rem 3rem;
+}
+
+.book__leaves,
+.book__block,
+.book__cast,
+.book__spine,
+.controls,
+.hint {
+  display: none;
+}
+
+.book__flow {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+.face {
+  position: relative;
+  width: min(100%, 40rem);
+}
+
+.endpaper {
+  display: none;
+}
+
+/* ========== Book views ========== */
+
+html[data-book='spread'],
+html[data-book='single'] {
+  /* Fallback for browsers without small-viewport units. */
+  --vh: 100vh;
+  --vh: 100svh;
+}
+
+html[data-book='spread'] {
+  --page-h: min(var(--vh) - var(--header-h) - var(--controls-h) - clamp(1.25rem, 4.5vh, 3rem), (100vw - 6rem) / 1.5, 47rem);
+  --page-w: calc(var(--page-h) * 0.75);
+  --book-w: calc(var(--page-w) * 2);
+}
+
+html[data-book='single'] {
+  --page-w: min(100vw - 1.5rem, 31rem, (var(--vh) - var(--header-h) - var(--controls-h) - 1.5rem) * 0.84);
+  --page-h: min(var(--vh) - var(--header-h) - var(--controls-h) - 1.5rem, var(--page-w) * 1.84);
+  --book-w: var(--page-w);
+}
+
+:is(html[data-book='spread'], html[data-book='single']) .stage {
+  position: sticky;
+  top: 0;
+  height: var(--vh);
+  padding: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: var(--header-h) minmax(0, 1fr) var(--controls-h);
+  justify-items: center;
+  align-items: center;
+}
+
+/* A warm pool of lamplight on the desk, with the lattice barely showing. */
+.desk {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(70% 60% at 50% 48%, rgba(120, 62, 40, 0.5) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* The lattice shows around the edges of the desk and fades out under the book. */
+.desk__lattice {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 30%, #000 100%);
+  mask-image: radial-gradient(ellipse at center, transparent 30%, #000 100%);
+}
+
+.desk .pattern {
+  --pattern-opacity: 0.07;
+  --pattern-size: 96px;
+}
+
+:is(html[data-book='spread'], html[data-book='single']) .book {
+  grid-row: 2;
+  position: relative;
+  width: var(--book-w);
+  height: var(--page-h);
+  --persp: calc(var(--page-w) * 5);
+  --rim: 0.45rem;
+}
+
+/* Closed, the book sits in the middle of the desk; the script moves it over as the cover opens. */
+html[data-book='spread'] .book {
+  transform: translateX(calc(var(--page-w) * -0.5));
+}
+
+/* The shadow the book throws on the desk. */
+:is(html[data-book='spread'], html[data-book='single']) .book::before {
+  content: '';
+  position: absolute;
+  inset: 8% -5% -9%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.7), transparent);
+  filter: blur(22px);
+  pointer-events: none;
+}
+
+:is(html[data-book='spread'], html[data-book='single']) .book__flow {
+  display: none;
+}
+
+:is(html[data-book='spread'], html[data-book='single']) .book__leaves {
+  display: block;
+}
+
+/* ----- The block of pages, and the boards behind it ----- */
+
+:is(html[data-book='spread'], html[data-book='single']) .book__block {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: calc(100% - var(--page-w));
+  width: var(--page-w);
+  height: 100%;
+  border-radius: 2px;
+  background: var(--paper-2);
+  box-shadow: 0 0 0 var(--rim) var(--leather-800);
+}
+
+/* The left-hand pile only exists once the cover has come to rest on that side. */
+html[data-book='spread'] .book__block--left {
+  left: 0;
+  opacity: 0;
+}
+
+html[data-book='single'] .book__block--left {
+  display: none;
+}
+
+/* Page edges: a striped sliver that thins on one side and thickens on the other as you read. */
+.book__block::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: 100%;
+  width: calc(var(--rim) * 0.75 * (1 - var(--read, 0)) + 1px);
+  background: repeating-linear-gradient(90deg, #f3e7c9 0 1px, #cbb98e 1px 2px);
+}
+
+.book__block--left::after {
+  left: auto;
+  right: 100%;
+  width: calc(var(--rim) * 0.75 * var(--read, 0) + 1px);
+}
+
+/* ----- Leaves ----- */
+
+.leaf {
+  position: absolute;
+  top: 0;
+  left: calc(100% - var(--page-w));
+  width: var(--page-w);
+  height: 100%;
+  transform-origin: 0 50%;
+  transform: perspective(var(--persp)) rotateY(0deg);
+  transform-style: preserve-3d;
+}
+
+/* The few leaves around the place being read are kept ready on the graphics card, so a turn starts at once. */
+.leaf.is-near {
+  will-change: transform;
+}
+
+.leaf.is-near .shade,
+.book__cast {
+  will-change: opacity;
+}
+
+.leaf > .face {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+  border-radius: 0 3px 3px 0;
+}
+
+.leaf > .face:nth-child(2) {
+  transform: rotateY(180deg);
+  border-radius: 3px 0 0 3px;
+}
+
+/* Hidden in the plain view, the endpapers line the covers of the bound book. */
+.leaf > .endpaper {
+  display: block;
+}
+
+/* The fold: every page darkens a little toward the spine. */
+.leaf > .face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(58, 34, 16, 0.3) 0%, rgba(58, 34, 16, 0.08) 5%, transparent 14%);
+}
+
+.leaf > .face:nth-child(2)::before {
+  background: linear-gradient(270deg, rgba(58, 34, 16, 0.3) 0%, rgba(58, 34, 16, 0.08) 5%, transparent 14%);
+}
+
+/* The turn: a page in the air catches less light on its far edge. The script fades this veil in and out. */
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(30, 14, 6, 0.05), rgba(30, 14, 6, 0.42));
+  opacity: 0;
+}
+
+.leaf > .face:nth-child(2) > .shade {
+  background: linear-gradient(270deg, rgba(30, 14, 6, 0.05), rgba(30, 14, 6, 0.42));
+}
+
+/* The cover and its inside wear the leather rim of the board. */
+.leaf--cover > .face {
+  box-shadow: 0 0 0 var(--rim) var(--leather-800);
+  border-radius: 2px 5px 5px 2px;
+}
+
+.blank {
+  background: var(--paper-2);
+}
+
+/* ----- Shadows cast by the turning page, and the spine ----- */
+
+:is(html[data-book='spread'], html[data-book='single']) .book__cast {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: calc(100% - var(--page-w));
+  width: var(--page-w);
+  height: 100%;
+  z-index: 900;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(24, 10, 4, 0.55), rgba(24, 10, 4, 0.12) 55%, transparent 85%);
+  opacity: 0;
+}
+
+html[data-book='spread'] .book__cast--left {
+  left: 0;
+  background: linear-gradient(270deg, rgba(24, 10, 4, 0.55), rgba(24, 10, 4, 0.12) 55%, transparent 85%);
+}
+
+html[data-book='single'] .book__cast--left {
+  display: none;
+}
+
+html[data-book='spread'] .book__spine {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 1px);
+  width: 2px;
+  height: 100%;
+  z-index: 1100;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(40, 20, 10, 0.1), rgba(40, 20, 10, 0.35), rgba(40, 20, 10, 0.1));
+  opacity: 0;
+}
+
+/* ----- Controls under the book ----- */
+
+:is(html[data-book='spread'], html[data-book='single']) .controls {
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: min(100% - 1.5rem, 34rem);
+  align-self: start;
+  padding-top: 0.35rem;
+  color: var(--on-dark-soft);
+  /* Above the book and the shadow it throws, so the buttons can always be pressed. */
+  position: relative;
+  z-index: 2;
+}
+
+.controls__button {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid rgba(232, 207, 141, 0.4);
+  border-radius: 50%;
+  background: rgba(15, 7, 9, 0.5);
+  color: var(--gold-300);
+  transition:
+    border-color 0.2s var(--ease),
+    background-color 0.2s var(--ease),
+    opacity 0.2s var(--ease);
+}
+
+.controls__button:hover:not([disabled]) {
+  border-color: var(--gold-300);
+  background: rgba(232, 207, 141, 0.12);
+}
+
+.controls__button[disabled] {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.controls__where {
+  flex: 1;
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+  text-align: center;
+}
+
+.controls__label {
+  overflow: hidden;
+  font-family: var(--font-caps);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+html[lang='bn'] .controls__label {
+  font-size: 0.92rem;
+  letter-spacing: 0;
+}
+
+/* A gold thread that fills as the book is read. */
+.controls__thread {
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(232, 207, 141, 0.2);
+  overflow: hidden;
+}
+
+.controls__thread span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-200));
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ----- "Scroll to open" ----- */
+
+:is(html[data-book='spread'], html[data-book='single']) .hint {
+  grid-row: 3;
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  align-self: start;
+  padding-top: 0.85rem;
+  font-family: var(--font-caps);
+  font-size: 0.76rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  pointer-events: none;
+}
+
+html[lang='bn'] .hint {
+  font-size: 0.98rem;
+  letter-spacing: 0;
+}
+
+.hint svg {
+  animation: nudge 1.8s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* While the book is closed the hint takes the place of the controls; the script fades one into the other. */
+:is(html[data-book='spread'], html[data-book='single']) .controls {
+  grid-column: 1;
+  opacity: 0;
+}
+
+.book-track.is-closed .controls {
+  pointer-events: none;
+}
+/* ------------------------------------------------------------------
+   What the cover and the pages look like.
+
+   Everything inside a page is sized in em. In the book views the page's
+   base size follows the size of the page (and is nudged down by the
+   script when a page is too full), so a whole page scales like print.
+------------------------------------------------------------------- */
+
+/* ========== Cover ========== */
+
+.cover {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  min-height: min(38rem, 80vh);
+  background:
+    radial-gradient(90% 70% at 30% 20%, rgba(255, 220, 190, 0.14), transparent 60%),
+    linear-gradient(135deg, var(--leather-600) 0%, var(--leather-800) 45%, var(--leather-900) 100%);
+  color: var(--gold-300);
+  text-align: center;
+  container-type: inline-size;
+}
+
+/* Fine grain, so the leather is not flat. */
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    repeating-linear-gradient(47deg, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(-41deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 4px);
+}
+
+.leaf > .cover {
+  min-height: 0;
+}
+
+/* The crease where the board meets the spine. */
+.leaf > .cover::before {
+  z-index: 5;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 3.5%, rgba(255, 255, 255, 0.07) 5%, transparent 8%),
+    repeating-linear-gradient(47deg, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 3px);
+}
+
+.cover__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1em;
+  padding: 3.4em 2.6em;
+  font-size: clamp(0.8rem, 3.6cqw, 1.3rem);
+}
+
+/* Tooled gold lines around the edge of the board. */
+.cover__frame {
+  position: absolute;
+  inset: 1.3em;
+  border: 1.5em solid transparent;
+  border-image: var(--frame-bright) 24 stretch;
+  pointer-events: none;
+}
+
+.cover__frame::after {
+  content: '';
+  position: absolute;
+  inset: 0.5em;
+  border: 1px solid rgba(232, 207, 141, 0.35);
+}
+
+.cover__medallion {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 62%;
+  aspect-ratio: 1;
+  color: var(--gold-400);
+}
+
+.cover__medallion svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cover__arabic {
+  position: relative;
+  font-family: var(--font-ruqaa);
+  font-size: 3.1em;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.cover__name {
+  font-family: var(--font-caps);
+  font-size: 1.85em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.cover__tagline {
+  font-family: var(--font-caps);
+  font-size: 0.74em;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+html[lang='bn'] .cover__name {
+  letter-spacing: 0.02em;
+}
+
+html[lang='bn'] .cover__tagline {
+  font-size: 0.95em;
+  letter-spacing: 0.02em;
+}
+
+/* Gold leaf lettering. */
+.gilt {
+  background: linear-gradient(180deg, var(--gold-200) 0%, var(--gold-400) 50%, var(--gold-500) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.45));
+}
+
+/* ========== Endpapers ========== */
+
+.endpaper {
+  position: relative;
+  background: linear-gradient(135deg, #f1e3c4, #e7d5ad);
+}
+
+.endpaper .pattern {
+  --pattern-color: var(--leather-700);
+  --pattern-opacity: 0.2;
+  --pattern-size: 64px;
+}
+
+/* ========== Pages ========== */
+
+.page {
+  background:
+    radial-gradient(120% 80% at 50% 30%, #fffaf0 0%, transparent 65%),
+    var(--paper);
+  color: var(--ink);
+  box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.8);
+}
+
+.leaf > .page {
+  box-shadow: none;
+}
+
+.page__inner {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 0.9em;
+  padding: 2.5em 2.6em 1.7em;
+  font-size: 1.0625rem;
+}
+
+/* In the book a page has a fixed size, and its type follows that size. */
+:is(html[data-book='spread'], html[data-book='single']) .leaf > .page {
+  container-type: size;
+}
+
+:is(html[data-book='spread'], html[data-book='single']) .page__inner {
+  position: absolute;
+  inset: 0;
+  font-size: calc(clamp(12.5px, min(2.42cqh, 3.95cqw), 19px) * var(--fit, 1));
+}
+
+html[data-book='single'] .page__inner {
+  padding: 2.3em 2.1em 1.5em;
+}
+
+.page__frame {
+  position: absolute;
+  inset: 0.85em;
+  border: 1.5em solid transparent;
+  border-image: var(--frame-gold) 24 stretch;
+  pointer-events: none;
+}
+
+.page__head,
+.page__foot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9em;
+  font-family: var(--font-caps);
+  font-size: 0.6em;
+  letter-spacing: 0.24em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+html[lang='bn'] :is(.page__head, .page__foot) {
+  font-size: 0.78em;
+  letter-spacing: 0.02em;
+}
+
+/* A short rule on either side of the running head and the page number. */
+.page__head::before,
+.page__head::after,
+.page__foot::before,
+.page__foot::after {
+  content: '';
+  width: 1.8em;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.page__body {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  padding-inline: 0.35em;
+}
+
+:is(html[data-book='spread'], html[data-book='single']) .page__body {
+  overflow: hidden;
+}
+
+/* ----- Type on a page ----- */
+
+.rubric {
+  font-family: var(--font-caps);
+  font-size: 0.66em;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+html[lang='bn'] .rubric {
+  font-size: 0.86em;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.page__title {
+  margin-top: 0.3em;
+  font-size: 1.85em;
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--ink);
+}
+
+.page__title--large {
+  font-size: 2.2em;
+  line-height: 1.08;
+}
+
+.page__title em {
+  font-style: italic;
+  color: var(--rubric);
+}
+
+html[lang='bn'] .page__title {
+  font-size: 1.5em;
+  line-height: 1.4;
+}
+
+html[lang='bn'] .page__title--large {
+  font-size: 1.7em;
+}
+
+html[lang='bn'] .page__title em {
+  font-style: normal;
+}
+
+.page__body p {
+  line-height: var(--text-leading);
+}
+
+.page__lead {
+  margin-top: 0.8em;
+  font-size: 1.06em;
+  color: var(--ink-soft);
+}
+
+.page__text {
+  margin-top: 0.85em;
+  text-align: justify;
+  hyphens: auto;
+}
+
+html[lang='bn'] .page__text {
+  text-align: start;
+}
+
+/* An illuminated first letter. */
+.page__text--opening::first-letter {
+  float: left;
+  margin: 0.06em 0.12em 0 0;
+  font-family: var(--font-caps);
+  font-size: 3.5em;
+  font-weight: 600;
+  line-height: 0.82;
+  color: var(--rubric);
+}
+
+html[lang='bn'] .page__text--opening::first-letter {
+  float: none;
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* A small ornament between a heading and what follows. */
+.fleuron {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  margin-block: 0.9em 0.2em;
+  color: var(--gold-500);
+}
+
+.fleuron::before,
+.fleuron::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+
+.fleuron::after {
+  transform: scaleX(-1);
+}
+
+.fleuron svg {
+  width: 0.95em;
+  height: 0.95em;
+}
+
+.page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  margin-top: 1.3em;
+}
+
+/* When a page is too full for its sheet, the script marks it and these give way first. */
+.page--tight [data-optional] {
+  display: none;
+}
+
+.page--tight .page__inner {
+  gap: 0.5em;
+}
+
+/* ----- Lists of entries (pillars, learners, values, steps, teachers, questions) ----- */
+
+.entries {
+  display: grid;
+  gap: 0.95em;
+  margin-top: 1em;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.85em;
+  align-items: start;
+}
+
+.entry__mark {
+  display: grid;
+  place-items: center;
+  width: 1.9em;
+  height: 1.9em;
+  margin-top: 0.1em;
+  color: var(--gold-500);
+}
+
+.entry__mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* A number set inside the star. */
+.entry__mark--number {
+  position: relative;
+  font-family: var(--font-caps);
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--rubric);
+}
+
+.entry__mark--number svg {
+  position: absolute;
+  inset: 0;
+  color: var(--gold-500);
+}
+
+.entry__mark--number span {
+  position: relative;
+  font-size: 0.72em;
+}
+
+.entry__title {
+  font-size: 1.12em;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+html[lang='bn'] .entry__title {
+  font-size: 1.04em;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--leather-700);
+}
+
+.entry__text {
+  margin-top: 0.15em;
+  font-size: 0.96em;
+  color: var(--ink-soft);
+}
+
+.entry__note {
+  margin-top: 0.2em;
+  font-size: 0.82em;
+  font-style: italic;
+  color: var(--gold-ink);
+}
+
+html[lang='bn'] .entry__note {
+  font-style: normal;
+}
+
+/* Ticked list. */
+.ticks {
+  display: grid;
+  gap: 0.55em;
+  margin-top: 1em;
+}
+
+.ticks li {
+  position: relative;
+  padding-left: 1.6em;
+  line-height: 1.4;
+}
+
+html[lang='bn'] .ticks li {
+  line-height: 1.6;
+}
+
+.ticks li::before {
+  content: '';
+  position: absolute;
+  left: 0.1em;
+  top: 0.42em;
+  width: 0.5em;
+  height: 0.5em;
+  background: var(--gold-500);
+  transform: rotate(45deg);
+}
+
+html[lang='bn'] .ticks li::before {
+  top: 0.55em;
+}
+
+/* ========== Illuminated plates: the verse of each chapter, and the hadith ========== */
+
+.plate {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  height: 100%;
+  text-align: center;
+}
+
+.plate__panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-height: 11em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9em;
+  padding: 2.4em 1.9em;
+  background:
+    radial-gradient(90% 70% at 50% 25%, rgba(110, 150, 240, 0.28), transparent 70%),
+    linear-gradient(170deg, var(--lapis-700), var(--lapis-900));
+  color: var(--paper);
+}
+
+.plate--hadith .plate__panel {
+  background:
+    radial-gradient(90% 70% at 50% 25%, rgba(255, 190, 170, 0.2), transparent 70%),
+    linear-gradient(170deg, var(--leather-600), var(--leather-900));
+}
+
+.plate__panel .pattern {
+  z-index: -1;
+  --pattern-color: var(--gold-300);
+  --pattern-opacity: 0.16;
+  --pattern-size: 4.2em;
+}
+
+.plate__frame {
+  position: absolute;
+  inset: 0.45em;
+  border: 1.4em solid transparent;
+  border-image: var(--frame-bright) 24 stretch;
+  pointer-events: none;
+}
+
+.plate__label {
+  font-family: var(--font-caps);
+  font-size: 0.62em;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+html[lang='bn'] .plate__label {
+  font-size: 0.82em;
+  letter-spacing: 0.02em;
+}
+
+.plate__ornament {
+  width: 1.5em;
+  height: 1.5em;
+  color: var(--gold-300);
+}
+
+.plate__arabic {
+  font-size: 2.35em;
+  line-height: 2.05;
+  color: #fff8e6;
+  text-wrap: balance;
+}
+
+.plate--medium .plate__arabic {
+  font-size: 1.62em;
+}
+
+.plate--long .plate__arabic {
+  font-size: 1.14em;
+  line-height: 2.2;
+}
+
+.plate__meaning {
+  font-size: 1.1em;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+html[lang='bn'] .plate__meaning {
+  font-size: 1em;
+  font-style: normal;
+  line-height: 1.65;
+}
+
+.plate--long .plate__meaning {
+  font-size: 0.92em;
+}
+
+.plate__reference {
+  font-family: var(--font-caps);
+  font-size: 0.64em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+html[lang='bn'] .plate__reference {
+  font-size: 0.84em;
+  letter-spacing: 0.01em;
+}
+
+.plate__reference cite {
+  font-style: normal;
+}
+
+.plate__reference span {
+  display: block;
+  margin-top: 0.2em;
+  color: var(--gold-ink);
+}
+
+/* ========== Particular pages ========== */
+
+/* ----- Half-title: the Bismillah ----- */
+
+.half {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9em;
+  text-align: center;
+}
+
+.half__bismillah {
+  font-size: 2.3em;
+  line-height: 2;
+  color: var(--ink);
+}
+
+.half__name {
+  font-family: var(--font-caps);
+  font-size: 1.45em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--leather-700);
+}
+
+html[lang='bn'] .half__name {
+  letter-spacing: 0.02em;
+}
+
+.half__tagline {
+  font-size: 1em;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+html[lang='bn'] .half__tagline {
+  font-style: normal;
+}
+
+.half__mark {
+  width: 3.2em;
+  height: 3.2em;
+  color: var(--gold-500);
+}
+
+/* ----- Title page ----- */
+
+.points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em 1.3em;
+  margin-top: 1.1em;
+  font-size: 0.92em;
+  color: var(--leather-700);
+}
+
+.points li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+}
+
+.points svg {
+  width: 0.7em;
+  height: 0.7em;
+  color: var(--gold-500);
+}
+
+/* ----- Contents ----- */
+
+.contents {
+  display: grid;
+  gap: 0.5em;
+  margin-top: 1.2em;
+}
+
+.contents a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  padding-block: 0.15em;
+  font-size: 1.1em;
+  transition: color 0.2s var(--ease);
+}
+
+.contents a:hover {
+  color: var(--rubric);
+}
+
+/* Dot leaders between a chapter and its page number. */
+.contents a::after {
+  content: '';
+  order: 2;
+  flex: 1;
+  border-bottom: 1px dotted var(--gold-500);
+  transform: translateY(-0.25em);
+}
+
+.contents__number {
+  order: 3;
+  font-family: var(--font-caps);
+  font-size: 0.78em;
+  color: var(--rubric);
+}
+
+.contents__note {
+  margin-top: 1.4em;
+  font-size: 0.9em;
+  font-style: italic;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+html[lang='bn'] .contents__note {
+  font-style: normal;
+}
+
+/* ----- Clocks ----- */
+
+.clocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8em;
+  margin-top: 1.2em;
+}
+
+.clocks[hidden] {
+  display: none;
+}
+
+.clock {
+  display: grid;
+  gap: 0.1em;
+  padding: 0.8em 0.5em;
+  border: 1px solid var(--paper-edge);
+  background: rgba(244, 233, 208, 0.6);
+  text-align: center;
+}
+
+.clock--dhaka {
+  border-color: var(--gold-500);
+}
+
+.clock__label {
+  font-family: var(--font-caps);
+  font-size: 0.58em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+html[lang='bn'] .clock__label {
+  font-size: 0.8em;
+  letter-spacing: 0;
+}
+
+.clock__time {
+  font-size: 1.7em;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variant-numeric: lining-nums;
+  white-space: nowrap;
+}
+
+.clock__day {
+  font-size: 0.85em;
+  color: var(--ink-soft);
+}
+
+.zones {
+  margin-top: 1em;
+  font-family: var(--font-caps);
+  font-size: 0.6em;
+  letter-spacing: 0.14em;
+  line-height: 1.8;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  text-align: center;
+}
+
+html[lang='bn'] .zones {
+  font-size: 0.82em;
+  letter-spacing: 0;
+}
+
+/* ----- The name, as a medallion ----- */
+
+.seal {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 9.5em;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  color: var(--gold-500);
+}
+
+.seal svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.seal__name {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 58%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--leather-600), var(--leather-900));
+  color: var(--gold-200);
+  font-family: var(--font-ruqaa);
+  font-size: 1.45em;
+  font-weight: 700;
+  line-height: 1.4;
+  box-shadow:
+    0 0 0 0.16em var(--paper),
+    0 0 0 0.22em var(--gold-500);
+}
+
+.seal__caption {
+  margin-top: 0.7em;
+  font-family: var(--font-caps);
+  font-size: 0.58em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  text-align: center;
+}
+
+html[lang='bn'] .seal__caption {
+  font-size: 0.8em;
+  letter-spacing: 0.01em;
+}
+
+/* ----- Values ----- */
+
+.value__name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1em 0.6em;
+  font-size: 1.35em;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--leather-700);
+}
+
+html[lang='bn'] .value__name {
+  font-size: 1.15em;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.value__name small {
+  font-family: var(--font-caps);
+  font-size: 0.45em;
+  font-style: normal;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+html[lang='bn'] .value__name small {
+  font-size: 0.72em;
+  letter-spacing: 0;
+}
+
+/* ----- A program ----- */
+
+.program__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.program__number {
+  font-family: var(--font-caps);
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--rubric);
+}
+
+.program__emblem {
+  font-family: var(--font-ruqaa);
+  font-size: 2.3em;
+  line-height: 1.3;
+  color: var(--gold-500);
+}
+
+.program__tagline {
+  margin-top: 0.15em;
+  font-size: 1.08em;
+  font-style: italic;
+  color: var(--gold-ink);
+}
+
+html[lang='bn'] .program__tagline {
+  font-style: normal;
+}
+
+.program__for {
+  margin-top: 1em;
+  padding-top: 0.7em;
+  border-top: 1px solid var(--paper-edge);
+  font-size: 0.95em;
+  color: var(--leather-700);
+}
+
+.program__for span {
+  margin-right: 0.6em;
+  font-family: var(--font-caps);
+  font-size: 0.68em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+html[lang='bn'] .program__for span {
+  font-size: 0.86em;
+  letter-spacing: 0;
+}
+
+.subhead {
+  margin-top: 1em;
+  font-family: var(--font-caps);
+  font-size: 0.64em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+html[lang='bn'] .subhead {
+  font-size: 0.86em;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.subhead + .ticks {
+  margin-top: 0.55em;
+}
+
+/* ----- Teachers ----- */
+
+.person {
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.9em;
+}
+
+.person__portrait {
+  display: grid;
+  place-items: center;
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--lapis-700), var(--lapis-900));
+  color: var(--gold-200);
+  font-family: var(--font-ruqaa);
+  font-size: 0.86em;
+  line-height: 1.3;
+  box-shadow:
+    0 0 0 0.14em var(--paper),
+    0 0 0 0.22em var(--gold-500);
+  overflow: hidden;
+}
+
+.person__portrait--female {
+  background: linear-gradient(160deg, var(--leather-600), var(--leather-900));
+}
+
+.person__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.person__example {
+  display: inline-block;
+  margin-bottom: 0.2em;
+  padding: 0 0.6em;
+  border: 1px dashed var(--gold-500);
+  border-radius: 999px;
+  font-family: var(--font-caps);
+  font-size: 0.5em;
+  letter-spacing: 0.14em;
+  line-height: 1.9;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+html[lang='bn'] .person__example {
+  font-size: 0.7em;
+  letter-spacing: 0;
+}
+
+.person__title {
+  font-size: 0.92em;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--rubric);
+}
+
+html[lang='bn'] .person__title {
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.person__facts {
+  margin-top: 0.25em;
+  font-size: 0.8em;
+  line-height: 1.4;
+  color: var(--gold-ink);
+}
+
+/* ----- Tuition ----- */
+
+.plans {
+  display: grid;
+  gap: 0.6em;
+  margin-top: 1.1em;
+}
+
+.plan {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.1em 1em;
+  padding: 0.7em 0.95em;
+  border: 1px solid var(--paper-edge);
+  background: rgba(244, 233, 208, 0.5);
+}
+
+.plan--featured {
+  border-color: var(--leather-700);
+  background: linear-gradient(160deg, var(--leather-600), var(--leather-900));
+  color: var(--paper);
+}
+
+.plan__name {
+  font-size: 1.2em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+html[lang='bn'] .plan__name {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.plan__flag {
+  margin-left: 0.6em;
+  font-family: var(--font-caps);
+  font-size: 0.46em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  color: var(--gold-300);
+}
+
+html[lang='bn'] .plan__flag {
+  font-size: 0.66em;
+  letter-spacing: 0;
+}
+
+.plan__detail {
+  grid-column: 1;
+  font-size: 0.86em;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.plan--featured .plan__detail {
+  color: var(--gold-200);
+}
+
+.plan__price {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  text-align: right;
+  line-height: 1.1;
+}
+
+.plan__amount {
+  font-size: 1.9em;
+  font-weight: 500;
+  font-variant-numeric: lining-nums;
+  color: var(--leather-700);
+}
+
+.plan--featured .plan__amount {
+  color: var(--gold-200);
+}
+
+.plan__period {
+  display: block;
+  font-size: 0.74em;
+  color: var(--ink-soft);
+}
+
+.plan--featured .plan__period {
+  color: var(--gold-300);
+}
+
+.page__aside {
+  margin-top: 1.1em;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--paper-edge);
+  font-size: 0.95em;
+  font-style: italic;
+  color: var(--gold-ink);
+  text-align: center;
+}
+
+html[lang='bn'] .page__aside {
+  font-style: normal;
+}
+
+/* ----- Questions ----- */
+
+.question + .question {
+  margin-top: 0.95em;
+  padding-top: 0.85em;
+  border-top: 1px solid var(--paper-edge);
+}
+
+.question__q {
+  font-size: 1.08em;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--leather-700);
+}
+
+html[lang='bn'] .question__q {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.question__a {
+  margin-top: 0.25em;
+  font-size: 0.95em;
+  color: var(--ink-soft);
+}
+
+/* ========== Plain view ========== */
+
+/* The decorative first page keeps a sensible height when it is not in the book. */
+.book__flow .page--plate .page__inner {
+  min-height: 30rem;
+}
+
+.book__flow .page__body {
+  justify-content: flex-start;
+}
+
+.book__flow .page--plate .page__body,
+.book__flow .page--half .page__body {
+  justify-content: center;
+}
+.footer[data-astro-cid-jo6i4kqk] {
+  background: var(--desk-950);
+  border-top: 1px solid #e8cf8d29;
+  color: var(--on-dark-soft);
+  text-align: center;
+}
+
+.footer__inner[data-astro-cid-jo6i4kqk] {
+  display: grid;
+  justify-items: center;
+  gap: .6rem;
+  padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+}
+
+.footer__inner[data-astro-cid-jo6i4kqk] .footer__mark {
+  width: 2.4rem;
+  height: 2.4rem;
+  color: var(--gold-400);
+}
+
+.footer__arabic[data-astro-cid-jo6i4kqk] {
+  font-family: var(--font-ruqaa);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--gold-300);
+}
+
+.footer__name[data-astro-cid-jo6i4kqk] {
+  font-family: var(--font-caps);
+  font-size: 1.05rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+html[lang="bn"] .footer__name[data-astro-cid-jo6i4kqk] {
+  font-size: 1.3rem;
+  letter-spacing: .02em;
+}
+
+.footer__about[data-astro-cid-jo6i4kqk] {
+  max-width: 32rem;
+  margin-top: .5rem;
+}
+
+.footer__links[data-astro-cid-jo6i4kqk] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem 2rem;
+  margin-top: 1rem;
+}
+
+.footer__links[data-astro-cid-jo6i4kqk] a[data-astro-cid-jo6i4kqk] {
+  color: var(--on-dark);
+  border-bottom: 1px solid #e8cf8d59;
+  overflow-wrap: anywhere;
+  transition: color .2s var(--ease),
+      border-color .2s var(--ease);
+}
+
+.footer__links[data-astro-cid-jo6i4kqk] a[data-astro-cid-jo6i4kqk]:hover {
+  color: var(--gold-200);
+  border-color: var(--gold-200);
+}
+
+.footer__base[data-astro-cid-jo6i4kqk] {
+  width: 100%;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8cf8d1f;
+  font-size: .95rem;
+}
+
+.footer__base[data-astro-cid-jo6i4kqk] span[data-astro-cid-jo6i4kqk] {
+  display: block;
+  margin-top: .2rem;
+}
+.site-header[data-astro-cid-nen7h5rs] {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  height: var(--header-h);
+  padding-inline: clamp(.9rem, 3vw, 2.25rem);
+  background: linear-gradient(#0f0709f7 0%, #0f0709e6 75%, #0f070999 100%);
+  color: var(--on-dark);
+}
+
+.brand[data-astro-cid-nen7h5rs] {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  flex-shrink: 0;
+  color: var(--gold-300);
+}
+
+.brand[data-astro-cid-nen7h5rs] .brand__mark {
+  width: 1.7rem;
+  height: 1.7rem;
+  color: var(--gold-400);
+}
+
+.brand__name[data-astro-cid-nen7h5rs] {
+  font-family: var(--font-caps);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+html[lang="bn"] .brand__name[data-astro-cid-nen7h5rs] {
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: .02em;
+}
+
+.chapters[data-astro-cid-nen7h5rs] {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.chapters[data-astro-cid-nen7h5rs] ul[data-astro-cid-nen7h5rs] {
+  display: flex;
+  gap: clamp(.5rem, 1.6vw, 1.5rem);
+}
+
+.chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs], .chapters__plain[data-astro-cid-nen7h5rs] {
+  position: relative;
+  padding: .4rem .1rem;
+  border: 0;
+  background: none;
+  font-family: var(--font-caps);
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--on-dark-soft);
+  transition: color .2s var(--ease);
+}
+
+html[lang="bn"] [data-astro-cid-nen7h5rs]:is(.chapters a, .chapters__plain) {
+  font-size: .98rem;
+  letter-spacing: 0;
+}
+
+.chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs]:hover, .chapters__plain[data-astro-cid-nen7h5rs]:hover, .chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs][aria-current] {
+  color: var(--gold-200);
+}
+
+.chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs]:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--gold-400);
+  transform: scaleX(0);
+  transition: transform .3s var(--ease);
+}
+
+.chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs][aria-current]:after {
+  transform: scaleX(1);
+}
+
+.chapters__plain[data-astro-cid-nen7h5rs] {
+  padding-left: 1.25rem;
+  border-left: 1px solid #e8cf8d4d;
+  cursor: pointer;
+}
+
+.chapters__plain[data-astro-cid-nen7h5rs][hidden] {
+  display: none;
+}
+
+.site-header__actions[data-astro-cid-nen7h5rs] {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.site-header__lang[data-astro-cid-nen7h5rs] {
+  font-size: 1rem;
+  color: var(--gold-300);
+  transition: color .2s var(--ease);
+}
+
+.site-header__lang[data-astro-cid-nen7h5rs]:hover {
+  color: #fff;
+}
+
+.site-header__cta[data-astro-cid-nen7h5rs] {
+  padding: .6em 1.1em;
+  font-size: .68rem;
+}
+
+html[lang="bn"] .site-header__cta[data-astro-cid-nen7h5rs] {
+  font-size: .9rem;
+}
+
+.menu-toggle[data-astro-cid-nen7h5rs] {
+  display: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 1px solid #e8cf8d66;
+  border-radius: 50%;
+  background: none;
+}
+
+.menu-toggle__bars[data-astro-cid-nen7h5rs] {
+  display: grid;
+  gap: 4px;
+  width: 1rem;
+  margin-inline: auto;
+}
+
+.menu-toggle__bars[data-astro-cid-nen7h5rs] span[data-astro-cid-nen7h5rs] {
+  height: 1.5px;
+  background: var(--gold-300);
+  transition: transform .3s var(--ease),
+      opacity .3s var(--ease);
+}
+
+.is-open[data-astro-cid-nen7h5rs] .menu-toggle__bars[data-astro-cid-nen7h5rs] span[data-astro-cid-nen7h5rs]:first-child {
+  transform: translateY(5.5px) rotate(45deg);
+}
+
+.is-open[data-astro-cid-nen7h5rs] .menu-toggle__bars[data-astro-cid-nen7h5rs] span[data-astro-cid-nen7h5rs]:nth-child(2) {
+  opacity: 0;
+}
+
+.is-open[data-astro-cid-nen7h5rs] .menu-toggle__bars[data-astro-cid-nen7h5rs] span[data-astro-cid-nen7h5rs]:nth-child(3) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+@media (width <= 74rem) {
+  .menu-toggle[data-astro-cid-nen7h5rs] {
+    display: block;
+  }
+
+  .chapters[data-astro-cid-nen7h5rs] {
+    position: absolute;
+    inset: 100% 0 auto;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: .5rem clamp(.9rem, 3vw, 2.25rem) 1.25rem;
+    background: var(--desk-950);
+    border-bottom: 1px solid #e8cf8d33;
+    box-shadow: 0 30px 40px -20px #000c;
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+  }
+
+  .is-open[data-astro-cid-nen7h5rs] .chapters[data-astro-cid-nen7h5rs] {
+    display: flex;
+  }
+
+  .site-header[data-astro-cid-nen7h5rs].is-open {
+    background: var(--desk-950);
+  }
+
+  .chapters[data-astro-cid-nen7h5rs] ul[data-astro-cid-nen7h5rs] {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs], .chapters__plain[data-astro-cid-nen7h5rs] {
+    display: block;
+    width: 100%;
+    padding: .85rem 0;
+    border-bottom: 1px solid #e8cf8d24;
+    font-size: .85rem;
+    text-align: left;
+    color: var(--on-dark);
+  }
+
+  .chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs]:after {
+    display: none;
+  }
+
+  .chapters[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs][aria-current] {
+    color: var(--gold-300);
+  }
+
+  .chapters__plain[data-astro-cid-nen7h5rs] {
+    padding-left: 0;
+    border-left: 0;
+    color: var(--on-dark-soft);
+  }
+
+  .no-js .menu-toggle[data-astro-cid-nen7h5rs] {
+    display: none;
+  }
+}
+
+@media (width <= 30rem) {
+  .site-header[data-astro-cid-nen7h5rs] {
+    gap: .5rem;
+    padding-inline: .75rem;
+  }
+
+  .brand[data-astro-cid-nen7h5rs] {
+    gap: .45rem;
+    min-width: 0;
+  }
+
+  .brand[data-astro-cid-nen7h5rs] .brand__mark {
+    width: 1.45rem;
+    height: 1.45rem;
+  }
+
+  .brand__name[data-astro-cid-nen7h5rs] {
+    font-size: .74rem;
+    letter-spacing: .1em;
+  }
+
+  html[lang="bn"] .brand__name[data-astro-cid-nen7h5rs] {
+    font-size: 1rem;
+  }
+
+  .site-header__actions[data-astro-cid-nen7h5rs] {
+    gap: .55rem;
+  }
+
+  .site-header__lang[data-astro-cid-nen7h5rs] {
+    font-size: .9rem;
+  }
+
+  .site-header__cta[data-astro-cid-nen7h5rs] {
+    padding: .5em .65em;
+    font-size: .56rem;
+    letter-spacing: .06em;
+  }
+
+  html[lang="bn"] .site-header__cta[data-astro-cid-nen7h5rs] {
+    font-size: .78rem;
+  }
+
+  .menu-toggle[data-astro-cid-nen7h5rs] {
+    width: 2.15rem;
+    height: 2.15rem;
+  }
+}
+
+@media (width <= 22.5rem) {
+  .brand[data-astro-cid-nen7h5rs] .brand__mark {
+    display: none;
+  }
+}
+.trial[data-astro-cid-i6pbehfx] {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(4rem, 9vw, 7rem);
+  background: radial-gradient(80% 60% at 80% 20%, #741f388c, transparent 70%),
+      linear-gradient(180deg, var(--desk-900), var(--desk-950));
+  border-top: 1px solid #e8cf8d2e;
+  scroll-margin-top: 0;
+}
+
+.trial[data-astro-cid-i6pbehfx] .pattern[data-astro-cid-i6pbehfx] {
+  z-index: -1;
+  --pattern-opacity: .05;
+  --pattern-size: 96px;
+}
+
+.trial__grid[data-astro-cid-i6pbehfx] {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.trial__rubric[data-astro-cid-i6pbehfx] {
+  font-family: var(--font-caps);
+  font-size: .78rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+html[lang="bn"] .trial__rubric[data-astro-cid-i6pbehfx] {
+  font-size: 1rem;
+  letter-spacing: .02em;
+}
+
+.trial__title[data-astro-cid-i6pbehfx] {
+  margin-top: .8rem;
+  font-size: clamp(2.1rem, 3vw + 1rem, 3.2rem);
+  line-height: 1.1;
+  color: #fff8e6;
+}
+
+html[lang="bn"] .trial__title[data-astro-cid-i6pbehfx] {
+  font-size: clamp(1.7rem, 2.2vw + 1rem, 2.5rem);
+  line-height: 1.4;
+}
+
+.trial__lead[data-astro-cid-i6pbehfx] {
+  margin-top: 1.1rem;
+  font-size: 1.2rem;
+  color: var(--on-dark-soft);
+}
+
+.trial__contact[data-astro-cid-i6pbehfx] {
+  margin-top: 2.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8cf8d38;
+}
+
+.trial__contact[data-astro-cid-i6pbehfx] h3[data-astro-cid-i6pbehfx] {
+  font-size: 1.45rem;
+  font-style: italic;
+  color: #fff8e6;
+}
+
+html[lang="bn"] .trial__contact[data-astro-cid-i6pbehfx] h3[data-astro-cid-i6pbehfx] {
+  font-style: normal;
+}
+
+.trial__contact[data-astro-cid-i6pbehfx] ul[data-astro-cid-i6pbehfx] {
+  display: grid;
+  gap: .6rem;
+  margin-top: .9rem;
+}
+
+.trial__contact[data-astro-cid-i6pbehfx] li[data-astro-cid-i6pbehfx] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2rem 1rem;
+}
+
+.trial__contact[data-astro-cid-i6pbehfx] span[data-astro-cid-i6pbehfx] {
+  min-width: 6.5rem;
+  font-family: var(--font-caps);
+  font-size: .7rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+html[lang="bn"] .trial__contact[data-astro-cid-i6pbehfx] span[data-astro-cid-i6pbehfx] {
+  font-size: .95rem;
+  letter-spacing: 0;
+}
+
+.trial__contact[data-astro-cid-i6pbehfx] a[data-astro-cid-i6pbehfx] {
+  border-bottom: 1px solid #e8cf8d73;
+  overflow-wrap: anywhere;
+  transition: border-color .2s var(--ease);
+}
+
+.trial__contact[data-astro-cid-i6pbehfx] a[data-astro-cid-i6pbehfx]:hover {
+  border-color: var(--gold-200);
+}
+
+.trial__verse[data-astro-cid-i6pbehfx] {
+  margin: 2.5rem 0 0;
+}
+
+.trial__verse[data-astro-cid-i6pbehfx] p[data-astro-cid-i6pbehfx] {
+  font-size: 2.1rem;
+  color: var(--gold-200);
+  text-align: left;
+}
+
+.trial__verse[data-astro-cid-i6pbehfx] footer[data-astro-cid-i6pbehfx] {
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--on-dark);
+}
+
+html[lang="bn"] .trial__verse[data-astro-cid-i6pbehfx] footer[data-astro-cid-i6pbehfx] {
+  font-style: normal;
+}
+
+.trial__verse[data-astro-cid-i6pbehfx] cite[data-astro-cid-i6pbehfx] {
+  display: block;
+  margin-top: .3rem;
+  font-family: var(--font-caps);
+  font-size: .68rem;
+  font-style: normal;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+html[lang="bn"] .trial__verse[data-astro-cid-i6pbehfx] cite[data-astro-cid-i6pbehfx] {
+  font-size: .92rem;
+  letter-spacing: 0;
+}
+
+.sheet[data-astro-cid-i6pbehfx] {
+  position: relative;
+  padding: clamp(2rem, 4.5vw, 3.5rem);
+  background: radial-gradient(120% 80% at 50% 30%, #fffaf0 0%, transparent 65%),
+      var(--paper);
+  color: var(--ink);
+  box-shadow: 0 40px 70px -30px #000000e6;
+}
+
+.sheet__frame[data-astro-cid-i6pbehfx] {
+  position: absolute;
+  inset: .6rem;
+  border: 24px solid #0000;
+  border-image: var(--frame-gold) 24 stretch;
+  pointer-events: none;
+}
+
+.form[data-astro-cid-i6pbehfx] {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem 1.4rem;
+}
+
+.form[data-astro-cid-i6pbehfx][hidden] {
+  display: none;
+}
+
+.field[data-astro-cid-i6pbehfx] {
+  display: grid;
+  gap: .3rem;
+  align-content: end;
+}
+
+.field--wide[data-astro-cid-i6pbehfx] {
+  grid-column: 1 / -1;
+}
+
+.field[data-astro-cid-i6pbehfx] label[data-astro-cid-i6pbehfx] {
+  font-family: var(--font-caps);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+html[lang="bn"] .field[data-astro-cid-i6pbehfx] label[data-astro-cid-i6pbehfx] {
+  font-size: .98rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.field__optional[data-astro-cid-i6pbehfx] {
+  font-weight: 400;
+  letter-spacing: .06em;
+  color: var(--ink-soft);
+}
+
+.field[data-astro-cid-i6pbehfx] input[data-astro-cid-i6pbehfx], .field[data-astro-cid-i6pbehfx] select[data-astro-cid-i6pbehfx], .field[data-astro-cid-i6pbehfx] textarea[data-astro-cid-i6pbehfx] {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: .45rem .15rem;
+  border: 0;
+  border-bottom: 1.5px solid var(--gold-500);
+  border-radius: 0;
+  background: none;
+  font-family: var(--font-text);
+  font-size: 1.12rem;
+  line-height: 1.4;
+  transition: border-color .2s var(--ease),
+      background-color .2s var(--ease);
+}
+
+.field[data-astro-cid-i6pbehfx] select[data-astro-cid-i6pbehfx] {
+  appearance: none;
+  padding-right: 1.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%239c2f23' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .35rem center;
+}
+
+.field[data-astro-cid-i6pbehfx] textarea[data-astro-cid-i6pbehfx] {
+  min-height: 5rem;
+  padding: .6rem .7rem;
+  border: 1.5px solid var(--gold-500);
+  resize: vertical;
+}
+
+.field[data-astro-cid-i6pbehfx] input[data-astro-cid-i6pbehfx]:hover, .field[data-astro-cid-i6pbehfx] select[data-astro-cid-i6pbehfx]:hover, .field[data-astro-cid-i6pbehfx] textarea[data-astro-cid-i6pbehfx]:hover {
+  border-color: var(--leather-600);
+}
+
+.field[data-astro-cid-i6pbehfx] input[data-astro-cid-i6pbehfx]:focus-visible, .field[data-astro-cid-i6pbehfx] select[data-astro-cid-i6pbehfx]:focus-visible, .field[data-astro-cid-i6pbehfx] textarea[data-astro-cid-i6pbehfx]:focus-visible {
+  outline: none;
+  border-color: var(--rubric);
+  background-color: #f4e9d0b3;
+}
+
+.form__trap[data-astro-cid-i6pbehfx] {
+  position: absolute;
+  left: -200vw;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form__footer[data-astro-cid-i6pbehfx] {
+  justify-items: center;
+  gap: .9rem;
+  margin-top: .6rem;
+}
+
+.form__footer[data-astro-cid-i6pbehfx] .btn[data-astro-cid-i6pbehfx] {
+  padding: .95em 2em;
+  font-size: .84rem;
+}
+
+html[lang="bn"] .form__footer[data-astro-cid-i6pbehfx] .btn[data-astro-cid-i6pbehfx] {
+  font-size: 1.05rem;
+}
+
+.form__privacy[data-astro-cid-i6pbehfx] {
+  font-size: .95rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+html[lang="bn"] .form__privacy[data-astro-cid-i6pbehfx] {
+  font-style: normal;
+}
+
+.form__error[data-astro-cid-i6pbehfx] {
+  padding: .7rem 1rem;
+  border: 1px solid var(--rubric);
+  background: #f9e7e1;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #7a2317;
+}
+
+.form__done[data-astro-cid-i6pbehfx] {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding-block: clamp(2rem, 6vw, 4rem);
+  text-align: center;
+  outline: none;
+}
+
+.form__done[data-astro-cid-i6pbehfx][hidden] {
+  display: none;
+}
+
+.form__done[data-astro-cid-i6pbehfx] .form__done-mark {
+  width: 3rem;
+  height: 3rem;
+  color: var(--gold-500);
+}
+
+.form__done[data-astro-cid-i6pbehfx] h3[data-astro-cid-i6pbehfx] {
+  font-size: 2rem;
+  color: var(--leather-700);
+}
+
+.form__done[data-astro-cid-i6pbehfx] p[data-astro-cid-i6pbehfx] {
+  max-width: 27rem;
+  color: var(--ink-soft);
+}
+
+@media (width <= 60rem) {
+  .trial__grid[data-astro-cid-i6pbehfx] {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (width <= 34rem) {
+  .form[data-astro-cid-i6pbehfx] {
+    grid-template-columns: 1fr;
+  }
+}
+/*$vite$:1*/

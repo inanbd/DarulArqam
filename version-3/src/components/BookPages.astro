@@ -1,0 +1,452 @@
+---
+import PageShell from './PageShell.astro';
+import Plate from './Plate.astro';
+import Rosette from './Rosette.astro';
+import Star from './Star.astro';
+import { site } from '../config/site';
+import { teachers } from '../config/teachers';
+import { arabic, getDict, type Lang } from '../i18n';
+import { chapters } from '../lib/chapters';
+import { asset, counter, num } from '../lib/format';
+
+/**
+ * The thirty-two pages of the book, in reading order.
+ *
+ * Each chapter opens with its verse on a left-hand page and has an even number
+ * of pages. If you add or remove a page, renumber the ones after it and update
+ * `src/lib/chapters.ts`.
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const p = t.teachers.profiles;
+
+const men = teachers.filter((teacher) => teacher.gender === 'male');
+const women = teachers.filter((teacher) => teacher.gender === 'female');
+const [reading, tajweed, hifz, studies] = t.programs.items;
+const programPages = [
+  { program: reading, number: 13 },
+  { program: tajweed, number: 14 },
+  { program: hifz, number: 15 },
+  { program: studies, number: 16 },
+];
+const teacherPages = [
+  { people: men, number: 20, title: p.male, note: '' },
+  { people: women, number: 21, title: p.female, note: p.femaleNote },
+];
+const questionPages = [
+  { items: t.faq.items.slice(0, 2), number: 28, first: true, last: false },
+  { items: t.faq.items.slice(2, 5), number: 29, first: false, last: false },
+  { items: t.faq.items.slice(5), number: 30, first: false, last: true },
+];
+const whatsapp = site.contact.whatsappNumber ? `https://wa.me/${site.contact.whatsappNumber}` : '';
+---
+
+<!-- ================= Home ================= -->
+
+<PageShell lang={lang} number={1} chapter="home" kind="plate">
+  <Plate lang={lang} chapter="home" />
+</PageShell>
+
+<PageShell lang={lang} number={2} chapter="home">
+  <p class="rubric">{t.hero.eyebrow}</p>
+  <h1 class="page__title page__title--large">
+    {t.hero.title.before}<em>{t.hero.title.accent}</em>{t.hero.title.after}
+  </h1>
+  <p class="page__lead">{t.hero.lead}</p>
+  <ul class="points" data-optional>
+    {
+      t.hero.points.map((point) => (
+        <li>
+          <Star />
+          {point}
+        </li>
+      ))
+    }
+  </ul>
+  <p class="page__actions">
+    <a class="btn btn--leather" href="#trial">{t.hero.primary}</a>
+    <a class="btn btn--line" href="#p-11" data-goto>{t.hero.secondary}</a>
+  </p>
+</PageShell>
+
+<PageShell lang={lang} number={3} chapter="home">
+  <p class="rubric">{t.brand.name}</p>
+  <h2 class="page__title">{t.book.contents}</h2>
+  <div class="fleuron" aria-hidden="true"><Star variant="double" /></div>
+  <nav class="contents" aria-label={t.book.contents}>
+    {
+      chapters.map((chapter) => (
+        <a href={`#p-${chapter.first}`} data-goto>
+          <span>{t.pages[chapter.id].nav}</span>
+          <span class="contents__number">{num(chapter.first, lang)}</span>
+        </a>
+      ))
+    }
+  </nav>
+  <p class="contents__note" data-optional>{t.book.contentsNote}</p>
+</PageShell>
+
+<PageShell lang={lang} number={4} chapter="home">
+  <p class="rubric">{t.brand.tagline}</p>
+  <h2 class="page__title">{t.common.different}</h2>
+  <ul class="entries">
+    {
+      t.pillars.map((pillar) => (
+        <li class="entry">
+          <span class="entry__mark"><Star variant="double" /></span>
+          <div>
+            <h3 class="entry__title">{pillar.title}</h3>
+            <p class="entry__text">{pillar.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</PageShell>
+
+<PageShell lang={lang} number={5} chapter="home">
+  <p class="rubric">{t.audience.eyebrow}</p>
+  <h2 class="page__title">{t.audience.title}</h2>
+  <ul class="entries">
+    {
+      t.audience.items.map((item, index) => (
+        <li class="entry">
+          <span class="entry__mark entry__mark--number">
+            <Star variant="line" />
+            <span>{num(index + 1, lang)}</span>
+          </span>
+          <div>
+            <h3 class="entry__title">{item.title}</h3>
+            <p class="entry__text">{item.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</PageShell>
+
+<PageShell lang={lang} number={6} chapter="home">
+  <p class="rubric">{t.pillars[3].title}</p>
+  <h2 class="page__title">{t.how.time.title}</h2>
+  <p class="page__text">{t.how.time.text}</p>
+  <div class="clocks" hidden data-clock data-locale={lang === 'bn' ? 'bn-BD' : 'en-US'} aria-hidden="true">
+    <div class="clock">
+      <span class="clock__label">{t.how.time.yours}</span>
+      <span class="clock__time" data-clock-local>--:--</span>
+      <span class="clock__day" data-clock-zone></span>
+    </div>
+    <div class="clock clock--dhaka">
+      <span class="clock__label">{t.how.time.dhaka}</span>
+      <span class="clock__time" data-clock-dhaka>--:--</span>
+      <span class="clock__day" data-clock-day></span>
+    </div>
+  </div>
+  <p class="zones" data-optional>{t.how.time.zones}</p>
+</PageShell>
+
+<!-- ================= About ================= -->
+
+<PageShell lang={lang} number={7} chapter="about" kind="plate">
+  <Plate lang={lang} chapter="about" />
+</PageShell>
+
+<PageShell lang={lang} number={8} chapter="about">
+  <p class="rubric">{t.about.eyebrow}</p>
+  <h2 class="page__title">{t.about.title}</h2>
+  <div class="fleuron" aria-hidden="true"><Star variant="double" /></div>
+  <p class="page__text page__text--opening">{t.about.paragraphs[0]}</p>
+</PageShell>
+
+<PageShell lang={lang} number={9} chapter="about">
+  <figure>
+    <div class="seal">
+      <Rosette />
+      <p class="seal__name" lang="ar" dir="rtl">{arabic.name}</p>
+    </div>
+    <figcaption class="seal__caption">{t.about.medallionCaption}</figcaption>
+  </figure>
+  <p class="page__text">{t.about.paragraphs[1]}</p>
+</PageShell>
+
+<PageShell lang={lang} number={10} chapter="about">
+  <p class="rubric">{t.pages.about.nav}</p>
+  <h2 class="page__title">{t.common.valuesTitle}</h2>
+  <ul class="entries">
+    {
+      t.about.values.map((value) => (
+        <li class="entry">
+          <span class="entry__mark"><Star variant="double" /></span>
+          <div>
+            <h3 class="value__name">
+              {value.name}
+              <small>{value.gloss}</small>
+            </h3>
+            <p class="entry__text">{value.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</PageShell>
+
+<!-- ================= Programs ================= -->
+
+<PageShell lang={lang} number={11} chapter="programs" kind="plate">
+  <Plate lang={lang} chapter="programs" />
+</PageShell>
+
+<PageShell lang={lang} number={12} chapter="programs">
+  <p class="rubric">{t.programs.eyebrow}</p>
+  <h2 class="page__title">{t.programs.title}</h2>
+  <p class="page__lead">{t.programs.lead}</p>
+  <nav class="contents" aria-label={t.programs.eyebrow}>
+    {
+      programPages.map(({ program, number }) => (
+        <a href={`#p-${number}`} data-goto>
+          <span>{program.name}</span>
+          <span class="contents__number">{num(number, lang)}</span>
+        </a>
+      ))
+    }
+  </nav>
+</PageShell>
+
+{
+  programPages.map(({ program, number }, index) => (
+    <PageShell lang={lang} number={number} chapter="programs">
+      <div class="program__top">
+        <span class="program__number">{counter(index, lang)}</span>
+        <span class="program__emblem" lang="ar" dir="rtl" aria-hidden="true">
+          {arabic.programs[program.id]}
+        </span>
+      </div>
+      <h2 class="page__title">{program.name}</h2>
+      <p class="program__tagline">{program.tagline}</p>
+      <p class="page__text">{program.text}</p>
+      <h3 class="subhead">{t.common.whatYouLearn}</h3>
+      <ul class="ticks">
+        {program.points.map((point) => (
+          <li>{point}</li>
+        ))}
+      </ul>
+      <p class="program__for">
+        <span>{t.programs.forLabel}</span>
+        {program.audience}
+      </p>
+    </PageShell>
+  ))
+}
+
+<!-- ================= Teachers ================= -->
+
+<PageShell lang={lang} number={17} chapter="teachers" kind="plate">
+  <Plate lang={lang} chapter="teachers" />
+</PageShell>
+
+<PageShell lang={lang} number={18} chapter="teachers">
+  <p class="rubric">{t.teachers.eyebrow}</p>
+  <h2 class="page__title">{t.teachers.title}</h2>
+  <div class="fleuron" aria-hidden="true" data-optional><Star variant="double" /></div>
+  <p class="page__text page__text--opening">{t.teachers.paragraphs[0]}</p>
+  <p class="page__text">{t.teachers.paragraphs[1]}</p>
+</PageShell>
+
+<PageShell lang={lang} number={19} chapter="teachers">
+  <p class="rubric">{t.pages.teachers.nav}</p>
+  <h2 class="page__title">{t.teachers.standardsTitle}</h2>
+  <ul class="ticks">
+    {t.teachers.standards.map((standard) => <li>{standard}</li>)}
+  </ul>
+  <p class="page__aside">{p.lead}</p>
+</PageShell>
+
+{
+  teacherPages.map(({ people, number, title, note }) => (
+    <PageShell lang={lang} number={number} chapter="teachers">
+      <p class="rubric">{note || p.title}</p>
+      <h2 class="page__title">{title}</h2>
+      <ul class="entries">
+        {people.map((teacher) => {
+          const text = teacher.text[lang];
+          return (
+            <li class="entry person">
+              <span class:list={['person__portrait', `person__portrait--${teacher.gender}`]}>
+                {teacher.photo ? (
+                  <img src={asset(teacher.photo)} alt="" width="120" height="120" loading="lazy" decoding="async" />
+                ) : (
+                  <span lang="ar" dir="rtl" aria-hidden="true">
+                    {teacher.emblem}
+                  </span>
+                )}
+              </span>
+              <div>
+                {teacher.example && <span class="person__example">{p.example}</span>}
+                <h3 class="entry__title">{text.name}</h3>
+                <p class="person__title">{text.title}</p>
+                <p class="entry__text" data-optional>
+                  {text.bio}
+                </p>
+                <p class="person__facts">
+                  {text.qualifications.join(' · ')}
+                  <br />
+                  {p.experience(num(teacher.years, lang))} · {teacher.languages.map((code) => p.languageNames[code] ?? code).join(p.separator)}
+                </p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </PageShell>
+  ))
+}
+
+<PageShell lang={lang} number={22} chapter="teachers" kind="plate">
+  <Plate lang={lang} hadith />
+</PageShell>
+
+<!-- ================= Tuition ================= -->
+
+<PageShell lang={lang} number={23} chapter="tuition" kind="plate">
+  <Plate lang={lang} chapter="tuition" />
+</PageShell>
+
+<PageShell lang={lang} number={24} chapter="tuition">
+  <p class="rubric">{t.tuition.eyebrow}</p>
+  <h2 class="page__title">{t.tuition.title}</h2>
+  <p class="page__lead">{t.tuition.lead}</p>
+  <ul class="plans">
+    {
+      site.plans.map((plan) => {
+        const copy = t.tuition.plans[plan.id];
+        return (
+          <li class:list={['plan', { 'plan--featured': plan.featured }]}>
+            <h3 class="plan__name">
+              {copy.name}
+              {plan.featured && <span class="plan__flag">{t.tuition.featured}</span>}
+            </h3>
+            <p class="plan__detail">
+              {t.tuition.perWeek(num(plan.classesPerWeek, lang))} · {t.tuition.perMonthClasses(num(plan.classesPerMonth, lang))}
+            </p>
+            <p class="plan__price">
+              <span class="plan__amount">${num(plan.monthlyUsd, lang)}</span>
+              <span class="plan__period">{t.tuition.perMonth}</span>
+            </p>
+          </li>
+        );
+      })
+    }
+  </ul>
+</PageShell>
+
+<PageShell lang={lang} number={25} chapter="tuition">
+  <p class="rubric">{t.pages.tuition.nav}</p>
+  <h2 class="page__title">{t.tuition.includedTitle}</h2>
+  <ul class="ticks">
+    {t.tuition.included.map((item) => <li>{item}</li>)}
+  </ul>
+  <p class="page__aside">{t.tuition.note}</p>
+</PageShell>
+
+<PageShell lang={lang} number={26} chapter="tuition">
+  <p class="rubric">{t.how.eyebrow}</p>
+  <h2 class="page__title">{t.how.title}</h2>
+  <ol class="entries">
+    {
+      t.how.steps.map((step, index) => (
+        <li class="entry">
+          <span class="entry__mark entry__mark--number">
+            <Star variant="line" />
+            <span>{num(index + 1, lang)}</span>
+          </span>
+          <div>
+            <h3 class="entry__title">{step.title}</h3>
+            <p class="entry__text">{step.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</PageShell>
+
+<!-- ================= Questions ================= -->
+
+<PageShell lang={lang} number={27} chapter="faq" kind="plate">
+  <Plate lang={lang} chapter="faq" />
+</PageShell>
+
+{
+  questionPages.map(({ items, number, first, last }) => (
+    <PageShell lang={lang} number={number} chapter="faq">
+      {first ? (
+        <>
+          <p class="rubric">{t.faq.eyebrow}</p>
+          <h2 class="page__title">{t.faq.title}</h2>
+          <div class="fleuron" aria-hidden="true" data-optional>
+            <Star variant="double" />
+          </div>
+        </>
+      ) : (
+        <p class="rubric">{t.faq.eyebrow}</p>
+      )}
+      <div class="questions" style={first ? undefined : 'margin-top: 0.8em'}>
+        {items.map((item) => (
+          <div class="question">
+            <h3 class="question__q">{item.q}</h3>
+            <p class="question__a">{item.a}</p>
+          </div>
+        ))}
+      </div>
+      {last && (
+        <p class="page__aside">
+          {t.faq.lead}
+          {whatsapp && (
+            <>
+              <br />
+              <a class="btn btn--line" href={whatsapp} target="_blank" rel="noopener" style="margin-top: 0.8em; font-style: normal">
+                {t.faq.contact}
+              </a>
+            </>
+          )}
+        </p>
+      )}
+    </PageShell>
+  ))
+}
+
+<!-- ================= Free trial ================= -->
+
+<PageShell lang={lang} number={31} chapter="trial" kind="plate">
+  <Plate lang={lang} chapter="trial" />
+</PageShell>
+
+<PageShell lang={lang} number={32} chapter="trial">
+  <p class="rubric">{t.trial.eyebrow}</p>
+  <h2 class="page__title">{t.pages.trial.heading}</h2>
+  <p class="page__lead">{t.pages.trial.lead}</p>
+  <h3 class="subhead">{t.common.nextTitle}</h3>
+  <ol class="entries" style="margin-top: 0.6em">
+    {
+      t.how.steps.slice(1).map((step, index) => (
+        <li class="entry">
+          <span class="entry__mark entry__mark--number">
+            <Star variant="line" />
+            <span>{num(index + 1, lang)}</span>
+          </span>
+          <div>
+            <h4 class="entry__title">{step.title}</h4>
+            <p class="entry__text" data-optional>
+              {step.text}
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="page__actions" style="justify-content: center">
+    <a class="btn btn--leather" href="#trial">{t.book.continues}</a>
+  </p>
+</PageShell>
