@@ -4,31 +4,32 @@
 ------------------------------------------------------------------- */
 
 :root {
+  /* The colours of the academy's logo sheet: Deep Emerald, Islamic Green, Soft Gold, Off White, Dark Text. */
   /* Emerald, from near-black to mist */
-  --emerald-950: #05211a;
-  --emerald-900: #083025;
-  --emerald-800: #0d4132;
-  --emerald-700: #145542;
-  --emerald-600: #1d6d55;
+  --emerald-950: #042a21;
+  --emerald-900: #063d30; /* Deep Emerald */
+  --emerald-800: #075040;
+  --emerald-700: #08664b;
+  --emerald-600: #087c59; /* Islamic Green */
   --emerald-100: #dcebe3;
 
   /* Antique gold */
-  --gold-600: #a8843f;
-  --gold-500: #c6a15b;
-  --gold-400: #d8bb7e;
-  --gold-300: #e9d6a9;
+  --gold-600: #b8964a;
+  --gold-500: #d6b66d; /* Soft Gold */
+  --gold-400: #dfc689;
+  --gold-300: #ecdcb0;
   --gold-ink: #7a5d1f; /* gold that stays readable as small text on ivory */
 
   /* Paper */
-  --ivory: #fbf8f0;
-  --parchment: #f4eedf;
-  --sand: #e6dcc4;
-  --sand-deep: #d6c9a8;
+  --ivory: #f7f8f4; /* Off White */
+  --parchment: #eef0e8;
+  --sand: #dde1d4;
+  --sand-deep: #c8cfbf;
 
   /* Text */
-  --ink: #18261f;
+  --ink: #172923; /* Dark Text */
   --ink-soft: #4d5c54;
-  --on-dark: #f5f0e2;
+  --on-dark: #f7f8f4;
   --on-dark-soft: #b9c8bf;
 
   --font-display: 'Cormorant Garamond', 'Noto Serif Bengali Variable', 'Amiri', Georgia, 'Times New Roman', serif;
@@ -46,7 +47,7 @@
   --section: clamp(4.5rem, 9vw, 8rem);
 
   --radius: 1.25rem;
-  --shadow-soft: 0 24px 60px -32px rgba(5, 33, 26, 0.35);
+  --shadow-soft: 0 24px 60px -32px rgba(4, 42, 33, 0.35);
   --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
 
   /* Eight-pointed star lattice, used as a mask so it can take any colour. */
@@ -317,7 +318,7 @@ html[lang='bn'] .eyebrow {
 }
 
 .btn--gold {
-  background: linear-gradient(180deg, #dfc58c 0%, #c39d55 100%);
+  background: linear-gradient(180deg, #e6d19c 0%, #cdab5f 100%);
   color: var(--emerald-950);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.45),
@@ -331,19 +332,19 @@ html[lang='bn'] .eyebrow {
 }
 
 .btn--ghost {
-  border-color: rgba(233, 214, 169, 0.45);
+  border-color: rgba(236, 220, 176, 0.45);
   color: var(--on-dark);
 }
 
 .btn--ghost:hover {
   border-color: var(--gold-400);
-  background: rgba(233, 214, 169, 0.08);
+  background: rgba(236, 220, 176, 0.08);
 }
 
 .btn--emerald {
   background: var(--emerald-800);
   color: var(--ivory);
-  box-shadow: 0 14px 30px -16px rgba(5, 33, 26, 0.7);
+  box-shadow: 0 14px 30px -16px rgba(4, 42, 33, 0.7);
 }
 
 .btn--emerald:hover {
@@ -357,7 +358,7 @@ html[lang='bn'] .eyebrow {
 
 .btn--outline:hover {
   border-color: var(--emerald-700);
-  background: rgba(13, 65, 50, 0.04);
+  background: rgba(7, 80, 64, 0.04);
 }
 
 .btn--sm {
@@ -510,7 +511,7 @@ html[lang='bn'] .eyebrow {
 .panel {
   position: relative;
   padding: clamp(1.6rem, 3vw, 2.4rem);
-  background: #fffdf8;
+  background: #ffffff;
   border: 1px solid var(--sand);
   border-radius: var(--radius);
 }
@@ -562,7 +563,7 @@ html[lang='bn'] .eyebrow {
 }
 
 .panel--dark .panel__title {
-  color: #fffdf6;
+  color: #ffffff;
 }
 
 .panel__text {
@@ -663,8 +664,8 @@ html[lang='bn'] .eyebrow {
 
 .on-dark .tag,
 .section--dark .tag {
-  border-color: rgba(216, 187, 126, 0.45);
-  background: rgba(216, 187, 126, 0.08);
+  border-color: rgba(214, 182, 109, 0.45);
+  background: rgba(214, 182, 109, 0.08);
   color: var(--gold-300);
 }
 

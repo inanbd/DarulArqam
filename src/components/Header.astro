@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import Wordmark from './Wordmark.astro';
 import { getDict, type Lang } from '../i18n';
 import { pageHref, programPages, sectionHref, type PageId } from '../lib/routes';
 
@@ -25,9 +26,9 @@ const links = [
 <header class="site-header" data-header>
   <div class="container site-header__inner">
     <a class="brand" href={pageHref(lang, 'home')} aria-label={`${t.brand.name} — ${t.brand.tagline}`}>
-      <span class="brand__mark"><Logo size={46} /></span>
+      <span class="brand__mark"><Logo size={50} /></span>
       <span class="brand__text">
-        <span class="brand__name">{t.brand.name}</span>
+        <span class="brand__name"><Wordmark height={19} /></span>
         <span class="brand__tagline">{t.brand.tagline}</span>
       </span>
     </a>
@@ -108,8 +109,8 @@ const links = [
 
   .site-header.is-scrolled,
   .site-header.is-open {
-    background-color: rgba(5, 33, 26, 0.94);
-    border-bottom-color: rgba(216, 187, 126, 0.18);
+    background-color: rgba(4, 42, 33, 0.94);
+    border-bottom-color: rgba(214, 182, 109, 0.18);
     box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.8);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
@@ -140,7 +141,7 @@ const links = [
   }
 
   .brand__mark {
-    color: var(--gold-400);
+    color: var(--on-dark); /* the single-colour logo, as on the logo sheet */
   }
 
   .brand__text {
@@ -227,7 +228,7 @@ const links = [
     min-width: 11rem;
     padding: 0.5rem 1rem 0.75rem;
     background: var(--emerald-950);
-    border: 1px solid rgba(216, 187, 126, 0.25);
+    border: 1px solid rgba(214, 182, 109, 0.25);
     box-shadow: 0 24px 40px -20px rgba(0, 0, 0, 0.8);
   }
 
@@ -260,7 +261,7 @@ const links = [
     width: 2.75rem;
     height: 2.75rem;
     padding: 0;
-    border: 1px solid rgba(216, 187, 126, 0.35);
+    border: 1px solid rgba(214, 182, 109, 0.35);
     border-radius: 50%;
     background: transparent;
     cursor: pointer;
@@ -311,7 +312,7 @@ const links = [
       gap: 1.5rem;
       padding: 1.25rem var(--gutter) 2rem;
       background: var(--emerald-950);
-      border-bottom: 1px solid rgba(216, 187, 126, 0.18);
+      border-bottom: 1px solid rgba(214, 182, 109, 0.18);
       max-height: calc(100dvh - 4.5rem);
       overflow-y: auto;
     }
@@ -330,7 +331,7 @@ const links = [
       padding-block: 0.95rem;
       font-family: var(--font-display);
       font-size: calc(1.5rem * (var(--display-scale) + 0.1));
-      border-bottom: 1px solid rgba(216, 187, 126, 0.14);
+      border-bottom: 1px solid rgba(214, 182, 109, 0.14);
       opacity: 1;
     }
 

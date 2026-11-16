@@ -54,19 +54,19 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
         <svg class="arch__shape" viewBox="0 0 440 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
           <defs>
             <linearGradient id="arch-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#1a6650"></stop>
-              <stop offset="0.55" stop-color="#0f4a39"></stop>
-              <stop offset="1" stop-color="#0a372a"></stop>
+              <stop offset="0" stop-color="#0a8a64"></stop>
+              <stop offset="0.55" stop-color="#087055"></stop>
+              <stop offset="1" stop-color="#06523f"></stop>
             </linearGradient>
             <radialGradient id="arch-light" cx="0.5" cy="0.28" r="0.6">
-              <stop offset="0" stop-color="#e9d6a9" stop-opacity="0.22"></stop>
-              <stop offset="1" stop-color="#e9d6a9" stop-opacity="0"></stop>
+              <stop offset="0" stop-color="#ecdcb0" stop-opacity="0.22"></stop>
+              <stop offset="1" stop-color="#ecdcb0" stop-opacity="0"></stop>
             </radialGradient>
           </defs>
           <path d={arch} fill="url(#arch-fill)"></path>
           <path d={arch} fill="url(#arch-light)"></path>
-          <path d={arch} fill="none" stroke="#d8bb7e" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
-          <path d={archInner} fill="none" stroke="#d8bb7e" stroke-opacity="0.45" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+          <path d={arch} fill="none" stroke="#d6b66d" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+          <path d={archInner} fill="none" stroke="#d6b66d" stroke-opacity="0.45" stroke-width="1" vector-effect="non-scaling-stroke"></path>
         </svg>
         <blockquote class="arch__body">
           <span class="arch__star"><Star size={26} variant="double" /></span>
@@ -106,7 +106,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     overflow: hidden;
     padding-top: clamp(7.5rem, 13vw, 10.5rem);
     background:
-      radial-gradient(120% 90% at 85% 10%, #10513f 0%, transparent 60%),
+      radial-gradient(120% 90% at 85% 10%, #087c59 0%, transparent 60%),
       linear-gradient(180deg, var(--emerald-900) 0%, var(--emerald-950) 100%);
     color: var(--on-dark);
   }
@@ -123,7 +123,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     top: 5%;
     width: 60%;
     aspect-ratio: 1;
-    background: radial-gradient(circle, rgba(216, 187, 126, 0.16) 0%, transparent 62%);
+    background: radial-gradient(circle, rgba(214, 182, 109, 0.16) 0%, transparent 62%);
     pointer-events: none;
   }
 
@@ -148,7 +148,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     font-size: calc(clamp(2.7rem, 4.6vw + 1.1rem, 4.75rem) * var(--display-scale));
     line-height: calc(var(--display-leading) - 0.04);
     letter-spacing: -0.012em;
-    color: #fffdf6;
+    color: #ffffff;
   }
 
   .hero__title em {
@@ -266,7 +266,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     font-size: calc(1.42rem * var(--display-scale));
     font-style: italic;
     line-height: calc(var(--display-leading) + 0.22);
-    color: #fffdf6;
+    color: #ffffff;
     text-wrap: balance;
   }
 
@@ -302,14 +302,14 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
   .pillars {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    border-top: 1px solid rgba(216, 187, 126, 0.22);
+    border-top: 1px solid rgba(214, 182, 109, 0.22);
   }
 
   .pillar {
     display: flex;
     gap: 0.9rem;
     padding: 1.9rem 1.5rem 2.2rem;
-    border-left: 1px solid rgba(216, 187, 126, 0.14);
+    border-left: 1px solid rgba(214, 182, 109, 0.14);
   }
 
   .pillar:first-child {
@@ -331,7 +331,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     font-size: calc(1.3rem * (var(--display-scale) + 0.06));
     font-weight: 600;
     line-height: 1.25;
-    color: #fffdf6;
+    color: #ffffff;
   }
 
   .pillar__text {
@@ -367,7 +367,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     .pillar:last-child {
       padding: 1.5rem 1.25rem 1.6rem 0;
       border-left: 0;
-      border-bottom: 1px solid rgba(216, 187, 126, 0.14);
+      border-bottom: 1px solid rgba(214, 182, 109, 0.14);
     }
 
     .pillar:nth-last-child(-n + 2) {
@@ -393,7 +393,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     }
 
     .pillar:nth-last-child(2) {
-      border-bottom: 1px solid rgba(216, 187, 126, 0.14);
+      border-bottom: 1px solid rgba(214, 182, 109, 0.14);
     }
   }
 </style>

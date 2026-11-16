@@ -44,14 +44,14 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
       <svg class="verse__shape" viewBox="0 0 440 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="verse-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#1a6650"></stop>
-            <stop offset="0.55" stop-color="#0f4a39"></stop>
-            <stop offset="1" stop-color="#0a372a"></stop>
+            <stop offset="0" stop-color="#0a8a64"></stop>
+            <stop offset="0.55" stop-color="#087055"></stop>
+            <stop offset="1" stop-color="#06523f"></stop>
           </linearGradient>
         </defs>
         <path d={arch} fill="url(#verse-fill)"></path>
-        <path d={arch} fill="none" stroke="#d8bb7e" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
-        <path d={archInner} fill="none" stroke="#d8bb7e" stroke-opacity="0.45" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+        <path d={arch} fill="none" stroke="#d6b66d" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+        <path d={archInner} fill="none" stroke="#d6b66d" stroke-opacity="0.45" stroke-width="1" vector-effect="non-scaling-stroke"></path>
       </svg>
       <blockquote class:list={['verse__body', `verse__body--${size}`]}>
         <Star size={22} variant="double" class="verse__star" />
@@ -70,7 +70,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     overflow: hidden;
     padding-block: clamp(8rem, 13vw, 10.5rem) clamp(3.5rem, 7vw, 6rem);
     background:
-      radial-gradient(120% 90% at 85% 10%, #10513f 0%, transparent 60%),
+      radial-gradient(120% 90% at 85% 10%, #087c59 0%, transparent 60%),
       linear-gradient(180deg, var(--emerald-900) 0%, var(--emerald-950) 100%);
     color: var(--on-dark);
   }
@@ -110,7 +110,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     margin-top: 1.25rem;
     font-size: calc(clamp(2.5rem, 3.6vw + 1.1rem, 4rem) * var(--display-scale));
     letter-spacing: -0.01em;
-    color: #fffdf6;
+    color: #ffffff;
   }
 
   .subhero__lead {
@@ -172,7 +172,7 @@ const archInner = 'M22 594V252c0-106 82-164 198-224 116 60 198 118 198 224v342';
     font-size: 1.15rem;
     font-style: italic;
     line-height: 1.3;
-    color: #fffdf6;
+    color: #ffffff;
     text-wrap: balance;
   }
 

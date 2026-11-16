@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import Wordmark from './Wordmark.astro';
 import { site } from '../config/site';
 import { arabic, getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
@@ -22,7 +23,7 @@ const year = num(new Date().getFullYear(), lang);
       <a class="footer__logo" href={pageHref(lang, 'home')}>
         <span class="footer__mark"><Logo size={52} /></span>
         <span>
-          <span class="footer__name">{t.brand.name}</span>
+          <span class="footer__name"><Wordmark height={22} /></span>
           <span class="footer__tagline">{t.brand.tagline}</span>
         </span>
       </a>
@@ -80,7 +81,7 @@ const year = num(new Date().getFullYear(), lang);
   .footer {
     background: var(--emerald-950);
     color: var(--on-dark-soft);
-    border-top: 1px solid rgba(216, 187, 126, 0.18);
+    border-top: 1px solid rgba(214, 182, 109, 0.18);
   }
 
   .footer__grid {
@@ -98,7 +99,7 @@ const year = num(new Date().getFullYear(), lang);
   }
 
   .footer__mark {
-    color: var(--gold-400);
+    color: var(--on-dark); /* the single-colour logo, as on the logo sheet */
   }
 
   .footer__name {
@@ -176,7 +177,7 @@ const year = num(new Date().getFullYear(), lang);
     justify-content: space-between;
     gap: 0.5rem 2rem;
     padding-block: 1.5rem 2rem;
-    border-top: 1px solid rgba(216, 187, 126, 0.14);
+    border-top: 1px solid rgba(214, 182, 109, 0.14);
     font-size: 0.9rem;
   }
 

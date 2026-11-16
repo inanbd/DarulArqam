@@ -7,7 +7,7 @@ This repository holds **three designs** of the site, with the same content, so t
 | | Design 1, classic | Design 2, modern | Design 3, the book |
 | --- | --- | --- | --- |
 | Layout | A long home page, with a page for each program | Twelve separate pages | A book of 64 pages that opens and turns as you scroll |
-| Look | Deep emerald, antique gold and ivory; pointed arches and a star lattice | Lapis blue, turquoise and saffron on warm paper; round forms | Burgundy leather, gold leaf and cream paper; illuminated verse plates |
+| Look | The academy's logo and colours: emerald, soft gold and off-white; pointed arches and a star lattice | Lapis blue, turquoise and saffron on warm paper; round forms | Burgundy leather, gold leaf and cream paper; illuminated verse plates |
 | Sources | This folder (`src/`) | [`version-2/`](version-2) | [`version-3/`](version-3) |
 | HTML files | [`html/`](html) | [`version-2/html/`](version-2/html) | [`version-3/html/`](version-3/html) |
 | Guide | This file | [`version-2/README.md`](version-2/README.md) | [`version-3/README.md`](version-3/README.md) |
@@ -128,7 +128,8 @@ Point the host's "not found" page at `404.html`. That one page uses links from t
 
 ## Design notes
 
-- **Palette:** deep emerald, antique gold and ivory, defined as custom properties at the top of `src/styles/global.css`.
+- **Logo:** the academy's own mark and lettering, taken as vector shapes from its logo sheet (`src/components/Logo.astro`, `Wordmark.astro`; a standalone copy is in `public/logo-mark.svg`). The tagline under it is set in type, because the artwork on the sheet spells it "Islamic Institue".
+- **Palette:** the five colours of the logo sheet: Deep Emerald `#063D30`, Islamic Green `#087C59`, Soft Gold `#D6B66D`, Off White `#F7F8F4` and Dark Text `#172923`, with shades between them, defined as custom properties at the top of `src/styles/global.css`.
 - **Type:** Cormorant Garamond for headings, Jost for text, Amiri for Arabic, Noto Serif Bengali and Hind Siliguri for Bangla. The fonts are bundled with the site, so nothing is loaded from a third party.
 - **Ornament:** the eight-pointed star (khatam) lattice, the rosette and the pointed arch are drawn in SVG. `src/lib/geometry.ts` computes their points.
 - The pages work without JavaScript. Scripts add the mobile menu, the scroll reveals, the two clocks and the form hand-off.

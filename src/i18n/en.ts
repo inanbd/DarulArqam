@@ -10,7 +10,7 @@ export const en = {
       'Online Qur’an and Islamic education for children, teenagers and adults: Nazirah, Hifz and Alimiyah programs taught by qualified imams and huffaz from Bangladesh, on US time zones. Book a free trial class.',
   },
 
-  brand: { name: 'Darul Arqam', tagline: 'Online Qur’an Academy' },
+  brand: { name: 'Darul Arqam', tagline: 'Islamic Institute' },
 
   nav: {
     label: 'Main',
