@@ -938,6 +938,13 @@ html[lang='bn'] .ticks li::before {
   color: var(--saffron-ink);
   white-space: nowrap;
 }
+
+/* Bangla letters are not spaced out or set in capitals: small labels keep their normal spacing. */
+html[lang='bn'] :is(.label, .table tbody th, .teaser__audience span, .program__audience span, .clock__label, .unit__title) {
+  font-size: 0.92rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
 .logo[data-astro-cid-f7espo7c] {
   width: auto;
 }

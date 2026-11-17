@@ -3,7 +3,7 @@
 The second design of the Darul Arqam website: the same content as the first design, laid out as a **multi-page site** with its own look.
 
 - **Look:** lapis blue, turquoise and saffron on warm paper, with round forms and a lattice of overlapping circles. The header and footer carry the academy's logo (`src/components/Logo.astro` and `Wordmark.astro`).
-- **Pages:** twelve: home, about, programs, a page each for Nazirah, Hifz, Alimiyah and Deeniyat, academics, teachers, tuition, questions and the free-trial form.
+- **Pages:** twelve, in English and in Bangla: home, about, programs, a page each for Nazirah, Hifz, Alimiyah and Deeniyat, academics, teachers, tuition, questions and the free-trial form.
 - **Verses:** every page opens with a Quranic verse related to its subject.
 
 This folder is a complete project of its own. It shares nothing with the first design in the folder above, so either one can be deleted once a design is chosen.
@@ -46,9 +46,12 @@ One thing on the site comes from the academy directly rather than from the docum
 
 ## Languages
 
-The site is published in English. A Bangla version existed for the earlier content and is switched off until the new content has been translated, so that the two languages never disagree.
+The site is published in English and in Bangla. The Bangla pages have the same names inside `html/bn/`, and the language switch in the top bar keeps the reader on the same page.
 
-To bring Bangla back: add `src/i18n/bn.ts` with the same shape as `en.ts`, add `'bn'` to `published` in `src/i18n/index.ts`, and add the pages under `src/pages/bn/`. The language switch then reappears by itself. The earlier Bangla wording is in the repository history (`src/i18n/bn.ts` before the commit "restructure around the academy's curriculum documents") and is a useful starting point for the parts that did not change. The Bangla fonts and type settings are still in place.
+- `src/i18n/bn.ts` holds the Bangla wording and `src/content/academy.bn.ts` the Bangla curriculum. Each has the same shape as its English file (`en.ts`, `academy.ts`): when you add or reword something in one, do the same in the other.
+- The meaning of each page's verse in Bangla is Muhiuddin Khan's translation, trimmed to the part quoted on the page.
+- Arabic terms use the forms common in Bangladesh (নাজেরা, হিফজ, আলিমিয়াহ, দ্বীনিয়াত, সবক, সাবকি, মানজিল).
+- The translation was machine-assisted. Have a native Bangla reader review it, especially the curriculum pages, before the site goes live.
 
 ## Run it
 
