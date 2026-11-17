@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import Wordmark from './Wordmark.astro';
 import { site } from '../config/site';
-import { programs } from '../content/academy';
+import { academy } from '../content';
 import { arabic, getDict, published, type Lang } from '../i18n';
 import { num } from '../lib/format';
 import { menu, pageHref, programPage } from '../lib/routes';
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { programs } = academy(lang);
 const t = getDict(lang);
 const other = published.find((code) => code !== lang);
 const otherLabel: Record<Lang, string> = { en: 'English', bn: 'বাংলা' };

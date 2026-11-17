@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { deeniyat, programs } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { pageHref, programPage } from '../lib/routes';
 import { programIcons } from '../lib/programs';
@@ -11,10 +11,11 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { deeniyat, programs } = academy(lang);
 const t = getDict(lang);
 const cards = [
   ...programs.map((program) => ({ id: program.id, name: program.name, emblem: program.emblem, tagline: program.tagline, format: program.format, ages: program.ages })),
-  { id: 'deeniyat', name: deeniyat.name, emblem: deeniyat.emblem, tagline: deeniyat.gloss, format: 'With Nazirah and Hifz', ages: 'Every Qur’an student' },
+  { id: 'deeniyat', name: deeniyat.name, emblem: deeniyat.emblem, tagline: deeniyat.gloss, format: t.common.deeniyatFormat, ages: t.common.deeniyatAges },
 ];
 ---
 

@@ -12,7 +12,7 @@ import TeacherCard from '../components/TeacherCard.astro';
 import TimeBand from '../components/TimeBand.astro';
 import { site } from '../config/site';
 import { teachers } from '../config/teachers';
-import { framework } from '../content/academy';
+import { academy } from '../content';
 import { arabic, getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
 import { pageHref } from '../lib/routes';
@@ -22,6 +22,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { framework } = academy(lang);
 const t = getDict(lang);
 
 // Two male and two female teachers for the home page.

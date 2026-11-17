@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Pillars from '../components/Pillars.astro';
 import Shamsa from '../components/Shamsa.astro';
 import TimeBand from '../components/TimeBand.astro';
-import { framework } from '../content/academy';
+import { academy } from '../content';
 import { arabic, getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
 
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { framework } = academy(lang);
 const t = getDict(lang);
 ---
 
@@ -58,7 +59,7 @@ const t = getDict(lang);
     <div class="container">
       <header class="heading heading--center" data-reveal>
         <p class="kicker"><Shamsa size={14} />{t.common.values}</p>
-        <h2 class="title">What we hold to</h2>
+        <h2 class="title">{t.common.heads.values}</h2>
       </header>
       <ul class="values">
         {

@@ -5,7 +5,7 @@ import Icon from '../components/Icon.astro';
 import Learners from '../components/Learners.astro';
 import PageHero from '../components/PageHero.astro';
 import Shamsa from '../components/Shamsa.astro';
-import { alimiyah, programs } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { counter, num } from '../lib/format';
 import { pageHref, programPage } from '../lib/routes';
@@ -16,6 +16,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { alimiyah, programs } = academy(lang);
 const t = getDict(lang);
 const c = t.common;
 const [nazirah, hifz] = programs;
@@ -79,7 +80,7 @@ const byAge = alimiyah.divisions.map((division) => ({
     <div class="container">
       <header class="heading heading--center" data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.findProgram}</p>
-        <h2 class="title">Where to begin, by age</h2>
+        <h2 class="title">{c.heads.whereToBegin}</h2>
         <p class="lead">{c.findProgramLead}</p>
       </header>
       <ul class="cols cols--3 block">

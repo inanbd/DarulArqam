@@ -21,7 +21,7 @@ const meta = t.pages[page];
 
   <div class="container page-hero__grid">
     <div class="page-hero__copy">
-      <nav class="crumbs" aria-label="Breadcrumb">
+      <nav class="crumbs" aria-label={t.common.breadcrumb}>
         <a href={pageHref(lang, 'home')}>{t.pages.home.nav}</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">{meta.nav}</span>

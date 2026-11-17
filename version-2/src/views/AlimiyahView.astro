@@ -7,7 +7,7 @@ import SemesterPath from '../components/SemesterPath.astro';
 import Shamsa from '../components/Shamsa.astro';
 import Syllabus from '../components/Syllabus.astro';
 import Weights from '../components/Weights.astro';
-import { alimiyah } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
 import { pageHref } from '../lib/routes';
@@ -17,6 +17,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { alimiyah } = academy(lang);
 const t = getDict(lang);
 const c = t.common;
 const { junior, youth, adult, policies } = alimiyah;
@@ -24,7 +25,7 @@ const { junior, youth, adult, policies } = alimiyah;
 
 <Page lang={lang} page="alimiyah">
   <PageHero lang={lang} page="alimiyah">
-    <Facts facts={[{ icon: 'people', text: c.groupClasses }, { icon: 'child', text: 'Ages 3 to adult' }, { icon: 'layers', text: c.divisions }]} />
+    <Facts facts={[{ icon: 'people', text: c.groupClasses }, { icon: 'child', text: c.agesAll }, { icon: 'layers', text: c.divisions }]} />
   </PageHero>
 
   <section class="section">
@@ -58,7 +59,7 @@ const { junior, youth, adult, policies } = alimiyah;
     <div class="container">
       <header class="heading" data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.subjects}</p>
-        <h2 class="title">What the curriculum covers</h2>
+        <h2 class="title">{c.heads.curriculum}</h2>
         <p class="lead">{c.subjectsLead}</p>
       </header>
       <ol class="subjects block">
@@ -179,7 +180,7 @@ const { junior, youth, adult, policies } = alimiyah;
         <h2 class="title">{c.grading}</h2>
       </header>
       <div class="card pad block" data-reveal>
-        <Weights />
+        <Weights lang={lang} />
       </div>
       <div class="cols cols--3 block">
         <aside class="card pad" data-reveal>

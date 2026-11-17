@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Shamsa from '../components/Shamsa.astro';
 import Standards from '../components/Standards.astro';
 import TeacherGroups from '../components/TeacherGroups.astro';
-import { framework } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { framework } = academy(lang);
 const t = getDict(lang);
 ---
 

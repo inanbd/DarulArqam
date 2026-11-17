@@ -1,7 +1,7 @@
 ---
 import Shamsa from './Shamsa.astro';
 import { site } from '../config/site';
-import { alimiyah, hifz, nazirah } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 
 /** The free-trial request form. See the README for where its answers go. */
@@ -10,6 +10,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { alimiyah, hifz, nazirah } = academy(lang);
 const t = getDict(lang);
 const f = t.trial.form;
 const { email, whatsappNumber } = site.contact;

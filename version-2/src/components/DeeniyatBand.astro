@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { deeniyat } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { pageHref } from '../lib/routes';
 
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const { lang, note } = Astro.props;
+const { deeniyat } = academy(lang);
 const t = getDict(lang);
 const band = t.common.deeniyatBand;
 ---

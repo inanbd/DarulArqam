@@ -1,5 +1,5 @@
 ---
-import { framework } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 
 /** What the academy expects of every teacher. */
@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { framework } = academy(lang);
 const t = getDict(lang);
 ---
 

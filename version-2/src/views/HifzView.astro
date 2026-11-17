@@ -5,7 +5,7 @@ import Facts from '../components/Facts.astro';
 import Icon from '../components/Icon.astro';
 import PageHero from '../components/PageHero.astro';
 import Shamsa from '../components/Shamsa.astro';
-import { hifz, programs } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
 
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { hifz, programs } = academy(lang);
 const t = getDict(lang);
 const c = t.common;
 const card = programs.find((program) => program.id === 'hifz')!;
@@ -98,7 +99,7 @@ const card = programs.find((program) => program.id === 'hifz')!;
     <div class="container">
       <header class="heading" data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.track} A · {hifz.tracks[0].name}</p>
-        <h2 class="title">Four stages to the whole Qur’an</h2>
+        <h2 class="title">{c.heads.hifzStages}</h2>
         <p class="lead">{hifz.stagesNote}</p>
       </header>
       <ol class="cols cols--4 block milestones">
@@ -121,7 +122,7 @@ const card = programs.find((program) => program.id === 'hifz')!;
     <div class="container">
       <header class="heading" data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.track} B · {hifz.tracks[1].name}</p>
-        <h2 class="title">Begin with the Surahs you recite most</h2>
+        <h2 class="title">{c.heads.surahs}</h2>
         <p class="lead">{hifz.selected.approach}</p>
       </header>
       <div class="cols cols--2 block">
@@ -149,7 +150,7 @@ const card = programs.find((program) => program.id === 'hifz')!;
     <div class="container">
       <header class="heading" data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.outcomes}</p>
-        <h2 class="title">Progress you can see</h2>
+        <h2 class="title">{c.heads.progress}</h2>
       </header>
       <div class="cols cols--3 block">
         <aside class="card pad" data-reveal>

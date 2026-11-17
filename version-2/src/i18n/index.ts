@@ -1,19 +1,16 @@
 import { en, type Dict } from './en';
+import { bn } from './bn';
 
 export type Lang = 'en' | 'bn';
 export type { Dict };
 
-/**
- * The languages the site is published in. Bangla is switched off until its
- * translation of the new content is ready: to bring it back, add `bn.ts` with
- * the same shape as `en.ts`, list it here and add the pages under `src/pages/bn/`.
- */
-export const published: Lang[] = ['en'];
+/** The languages the site is published in. The language switch appears when there is more than one. */
+export const published: Lang[] = ['en', 'bn'];
 
-const dictionaries: Partial<Record<Lang, Dict>> = { en };
+const dictionaries: Record<Lang, Dict> = { en, bn };
 
 export function getDict(lang: Lang): Dict {
-  return dictionaries[lang] ?? en;
+  return dictionaries[lang];
 }
 
 /**

@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import type { Teacher } from '../config/teachers';
-import { programs } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { asset, num } from '../lib/format';
 
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const { lang, teacher, compact = false } = Astro.props;
+const { programs } = academy(lang);
 const t = getDict(lang);
 const p = t.teachers.profiles;
 const text = teacher.text[lang];

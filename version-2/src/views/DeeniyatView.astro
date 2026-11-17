@@ -5,7 +5,7 @@ import Icon from '../components/Icon.astro';
 import PageHero from '../components/PageHero.astro';
 import Shamsa from '../components/Shamsa.astro';
 import Syllabus from '../components/Syllabus.astro';
-import { deeniyat, hifz } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
 import { pageHref } from '../lib/routes';
@@ -15,13 +15,14 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { deeniyat, hifz } = academy(lang);
 const t = getDict(lang);
 const c = t.common;
 ---
 
 <Page lang={lang} page="deeniyat">
   <PageHero lang={lang} page="deeniyat">
-    <Facts facts={[{ icon: 'book', text: `${t.pages.nazirah.nav} + ${t.pages.hifz.nav}` }, { icon: 'layers', text: `${num(deeniyat.subjects.length, lang)} subjects` }, { icon: 'clock', text: hifz.method.deeniyat[0] }]} />
+    <Facts facts={[{ icon: 'book', text: `${t.pages.nazirah.nav} + ${t.pages.hifz.nav}` }, { icon: 'layers', text: c.subjectsCount(num(deeniyat.subjects.length, lang)) }, { icon: 'clock', text: hifz.method.deeniyat[0] }]} />
   </PageHero>
 
   <section class="section">
@@ -59,7 +60,7 @@ const c = t.common;
     <div class="container">
       <header class="heading heading--center" data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.byAge}</p>
-        <h2 class="title">Taught at the student’s level</h2>
+        <h2 class="title">{c.heads.studentLevel}</h2>
       </header>
       <ul class="cols cols--3 block">
         {

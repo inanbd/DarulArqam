@@ -249,6 +249,29 @@ export const en = {
     programsFor: 'Programs for this age',
     findProgram: 'Find the right program',
     findProgramLead: 'Placement follows a student’s readiness and previous learning, not age alone. As a guide:',
+
+    // Section headings on the program and academics pages.
+    heads: {
+      values: 'What we hold to',
+      principles: 'Four principles behind every lesson',
+      curriculum: 'What the curriculum covers',
+      studentLevel: 'Taught at the student’s level',
+      hifzStages: 'Four stages to the whole Qur’an',
+      surahs: 'Begin with the Surahs you recite most',
+      progress: 'Progress you can see',
+      nazirahStages: 'From the first letter to independent recitation',
+      nazirahStagesLead: 'Students move on when they are ready, not by the calendar.',
+      moreThanReading: 'More than reading',
+      everyAge: 'The same path, at every age',
+      completing: 'On completing the program',
+      whereToBegin: 'Where to begin, by age',
+    },
+    agesAll: 'Ages 3 to adult',
+    stagesCount: (n: string) => `${n} stages`,
+    subjectsCount: (n: string) => `${n} subjects`,
+    breadcrumb: 'Breadcrumb',
+    deeniyatFormat: 'With Nazirah and Hifz',
+    deeniyatAges: 'Every Qur’an student',
   },
 
   hero: {

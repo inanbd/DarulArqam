@@ -1,7 +1,15 @@
 ---
-import { alimiyah } from '../content/academy';
+import { academy } from '../content';
+
+import type { Lang } from '../i18n';
 
 /** The assessment model of the Youth and Adult divisions, as one bar split by weight. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const { alimiyah } = academy(lang);
 const { intro, rows, note } = alimiyah.policies.grading;
 const tones = ['#b9e6e0', '#1aa6a0', '#f3c063', '#2247a4', '#0b1a3b'];
 ---

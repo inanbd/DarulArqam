@@ -6,7 +6,7 @@ import Icon from '../components/Icon.astro';
 import PageHero from '../components/PageHero.astro';
 import Shamsa from '../components/Shamsa.astro';
 import Syllabus from '../components/Syllabus.astro';
-import { nazirah, programs } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
 
@@ -15,6 +15,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { nazirah, programs } = academy(lang);
 const t = getDict(lang);
 const c = t.common;
 const card = programs.find((program) => program.id === 'nazirah')!;
@@ -24,7 +25,7 @@ const marks = ['ا', 'بَ', 'مَدّ', 'رَتِّلِ', 'اقْرَأْ'];
 
 <Page lang={lang} page="nazirah">
   <PageHero lang={lang} page="nazirah">
-    <Facts facts={[{ icon: 'video', text: `${c.online} · ${c.oneOnOne}` }, { icon: 'people', text: card.ages }, { icon: 'layers', text: `${num(nazirah.stages.length, lang)} ${c.stages.toLowerCase().replace('the ', '')}` }]} />
+    <Facts facts={[{ icon: 'video', text: `${c.online} · ${c.oneOnOne}` }, { icon: 'people', text: card.ages }, { icon: 'layers', text: c.stagesCount(num(nazirah.stages.length, lang)) }]} />
   </PageHero>
 
   <section class="section">
@@ -46,8 +47,8 @@ const marks = ['ا', 'بَ', 'مَدّ', 'رَتِّلِ', 'اقْرَأْ'];
     <div class="container">
       <header class="heading" data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.stages}</p>
-        <h2 class="title">From the first letter to independent recitation</h2>
-        <p class="lead">Students move on when they are ready, not by the calendar.</p>
+        <h2 class="title">{c.heads.nazirahStages}</h2>
+        <p class="lead">{c.heads.nazirahStagesLead}</p>
       </header>
 
       <ol class="path block">
@@ -75,7 +76,7 @@ const marks = ['ا', 'بَ', 'مَدّ', 'رَتِّلِ', 'اقْرَأْ'];
     <div class="container">
       <header class="heading" data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.alongside}</p>
-        <h2 class="title">More than reading</h2>
+        <h2 class="title">{c.heads.moreThanReading}</h2>
       </header>
       <ul class="cols cols--3 block">
         {
@@ -100,7 +101,7 @@ const marks = ['ا', 'بَ', 'مَدّ', 'رَتِّلِ', 'اقْرَأْ'];
     <div class="container">
       <header class="heading heading--center" data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.byAge}</p>
-        <h2 class="title">The same path, at every age</h2>
+        <h2 class="title">{c.heads.everyAge}</h2>
       </header>
       <ul class="cols cols--3 block">
         {
@@ -121,7 +122,7 @@ const marks = ['ا', 'بَ', 'مَدّ', 'رَتِّلِ', 'اقْرَأْ'];
     <div class="container split">
       <div data-reveal>
         <p class="kicker"><Shamsa size={14} />{c.outcomes}</p>
-        <h2 class="title">On completing the program</h2>
+        <h2 class="title">{c.heads.completing}</h2>
         <ol class="results">
           {nazirah.outcomes.map((outcome, index) => <li><span>{num(index + 1, lang)}</span>{outcome}</li>)}
         </ol>
