@@ -1,45 +1,45 @@
 /* ------------------------------------------------------------------
    Darul Arqam, second design: design tokens, base styles, shared pieces.
-   The colours of the academy's logo sheet (emerald greens, soft gold, off-white), with round forms.
+   Lapis blue, turquoise and saffron on warm paper, with round forms.
    Section-specific styles live beside each component.
 ------------------------------------------------------------------- */
 
 :root {
   /* Lapis and night blue */
-  --navy-950: #042a21;
-  --navy-900: #063d30; /* Deep Emerald */
-  --navy-800: #075040;
-  --navy-700: #08664b;
-  --lapis: #172923; /* Dark Text, as the third accent */
+  --navy-950: #071126;
+  --navy-900: #0b1a3b;
+  --navy-800: #122658;
+  --navy-700: #1a3478;
+  --lapis: #2247a4;
 
   /* Turquoise */
-  --teal-800: #06523f;
-  --teal-700: #08664b;
-  --teal-600: #087c59; /* Islamic Green */
-  --teal-500: #0f9a70;
-  --teal-200: #b5dccb;
-  --teal-100: #d9ede4;
-  --teal-50: #edf5f0;
+  --teal-800: #085a60;
+  --teal-700: #0b7078;
+  --teal-600: #0f8a8c;
+  --teal-500: #1aa6a0;
+  --teal-200: #b9e6e0;
+  --teal-100: #dbf2ee;
+  --teal-50: #eef9f6;
 
   /* Saffron */
-  --saffron-600: #b8964a;
-  --saffron-500: #d6b66d; /* Soft Gold */
-  --saffron-400: #dfc689;
-  --saffron-100: #f4ead0;
-  --saffron-ink: #7a5d1f; /* saffron that stays readable as small text on paper */
+  --saffron-600: #d18f1c;
+  --saffron-500: #eaa93b;
+  --saffron-400: #f3c063;
+  --saffron-100: #fbedcf;
+  --saffron-ink: #8a5a06; /* saffron that stays readable as small text on paper */
 
   /* Paper */
-  --paper: #f7f8f4; /* Off White */
-  --sand-50: #f1f3ec;
-  --sand-100: #e9ece3;
-  --sand-200: #dde1d4;
-  --sand-300: #c8cfbf;
+  --paper: #fffdf8;
+  --sand-50: #fbf7ee;
+  --sand-100: #f6eedd;
+  --sand-200: #ece0c6;
+  --sand-300: #dccba6;
 
   /* Text */
-  --ink: #172923; /* Dark Text */
-  --ink-soft: #4d5c54;
-  --on-dark: #f7f8f4;
-  --on-dark-soft: #b3c7bd;
+  --ink: #0f1b38;
+  --ink-soft: #4a5775;
+  --on-dark: #f4f6fb;
+  --on-dark-soft: #b4c0dc;
 
   --font-display: 'El Messiri Variable', 'Anek Bangla Variable', 'Noto Naskh Arabic Variable', system-ui, sans-serif;
   --font-body: 'Figtree Variable', 'Noto Sans Bengali Variable', 'Noto Naskh Arabic Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -59,8 +59,8 @@
   --radius-sm: 0.75rem;
   --radius: 1.25rem;
   --radius-lg: 2rem;
-  --shadow-card: 0 1px 2px rgba(23, 41, 35, 0.04), 0 12px 32px -18px rgba(23, 41, 35, 0.22);
-  --shadow-lift: 0 2px 4px rgba(23, 41, 35, 0.05), 0 28px 50px -24px rgba(23, 41, 35, 0.35);
+  --shadow-card: 0 1px 2px rgba(15, 27, 56, 0.04), 0 12px 32px -18px rgba(15, 27, 56, 0.22);
+  --shadow-lift: 0 2px 4px rgba(15, 27, 56, 0.05), 0 28px 50px -24px rgba(15, 27, 56, 0.35);
   --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
 
   /* A lattice of overlapping circles, used as a mask so it can take any colour. */
@@ -334,7 +334,7 @@ html[lang='bn'] .kicker {
 .btn--saffron {
   background: var(--saffron-500);
   color: var(--navy-950);
-  box-shadow: 0 10px 24px -12px rgba(184, 150, 74, 0.9);
+  box-shadow: 0 10px 24px -12px rgba(209, 143, 28, 0.9);
 }
 
 .btn--saffron:hover {
@@ -344,7 +344,7 @@ html[lang='bn'] .kicker {
 .btn--navy {
   background: var(--navy-900);
   color: #fff;
-  box-shadow: 0 10px 24px -14px rgba(6, 61, 48, 0.9);
+  box-shadow: 0 10px 24px -14px rgba(11, 26, 59, 0.9);
 }
 
 .btn--navy:hover {

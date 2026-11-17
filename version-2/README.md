@@ -2,7 +2,7 @@
 
 The second design of the Darul Arqam website: the same content as the first design, laid out as a **multi-page site** with its own look.
 
-- **Look:** the academy's logo and its colours (Deep Emerald `#063D30`, Islamic Green `#087C59`, Soft Gold `#D6B66D`, Off White `#F7F8F4`, Dark Text `#172923`), with round forms and a lattice of overlapping circles. The logo's shapes are in `src/components/Logo.astro` and `Wordmark.astro`.
+- **Look:** lapis blue, turquoise and saffron on warm paper, with round forms and a lattice of overlapping circles. The header and footer carry the academy's logo (`src/components/Logo.astro` and `Wordmark.astro`).
 - **Pages:** twelve: home, about, programs, a page each for Nazirah, Hifz, Alimiyah and Deeniyat, academics, teachers, tuition, questions and the free-trial form.
 - **Verses:** every page opens with a Quranic verse related to its subject.
 
@@ -126,7 +126,7 @@ Point the host's "not found" page at `404.html`. That one page uses links from t
 
 ## Design notes
 
-- **Palette:** the five colours of the logo sheet, with shades between them, defined as custom properties at the top of `src/styles/global.css`. The token names (`--navy-*`, `--teal-*`, `--saffron-*`) are kept from the earlier palette.
+- **Palette:** night blue and lapis, turquoise, saffron and warm paper, defined as custom properties at the top of `src/styles/global.css`.
 - **Type:** El Messiri for headings, Figtree for text, Noto Naskh Arabic for verses, Reem Kufi for the Arabic name, Anek Bangla and Noto Sans Bengali for Bangla. The fonts are bundled with the site, so nothing is loaded from a third party.
 - **Ornament:** the twelve-pointed medallion (shamsa) of illuminated Quran manuscripts, and a lattice of overlapping circles.
 - The pages work without JavaScript. Scripts add the mobile menu, the scroll reveals, the two clocks and the form hand-off.
