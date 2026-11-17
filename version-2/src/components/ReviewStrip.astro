@@ -1,0 +1,144 @@
+---
+import Icon from './Icon.astro';
+import ReviewCard from './ReviewCard.astro';
+import Shamsa from './Shamsa.astro';
+import { reviews } from '../config/reviews';
+import { getDict, type Lang } from '../i18n';
+import { pageHref } from '../lib/routes';
+
+/** Reviews on the home page: a row that scrolls sideways, with buttons to step through it. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const r = t.reviews;
+---
+
+{
+  reviews.length > 0 && (
+    <section class="section strip" data-strip>
+      <div class="container">
+        <div class="heading-row" data-reveal>
+          <header class="heading">
+            <p class="kicker">
+              <Shamsa size={14} />
+              {r.eyebrow}
+            </p>
+            <h2 class="title">{r.title}</h2>
+            <p class="lead">{r.lead}</p>
+          </header>
+          <div class="strip__controls">
+            <button class="strip__button" type="button" data-strip-previous aria-label={r.previous}>
+              <Icon name="arrow" size={18} class="flip" />
+            </button>
+            <button class="strip__button" type="button" data-strip-next aria-label={r.next}>
+              <Icon name="arrow" size={18} />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ul class="strip__track" data-strip-track>
+        {reviews.map((review) => (
+          <li class="strip__item">
+            <ReviewCard lang={lang} review={review} />
+          </li>
+        ))}
+      </ul>
+
+      <div class="container strip__more" data-reveal>
+        <a class="btn btn--outline" href={pageHref(lang, 'reviews')}>
+          {r.all}
+          <Icon name="arrow" size={18} />
+        </a>
+        <a class="link" href={pageHref(lang, 'reviews', '#write')}>
+          {r.form.title}
+          <Icon name="arrow" size={17} />
+        </a>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-strip]').forEach((strip) => {
+    const track = strip.querySelector<HTMLElement>('[data-strip-track]')!;
+    const step = (direction: number) => {
+      const card = track.querySelector<HTMLElement>('.strip__item');
+      const distance = card ? card.offsetWidth + 20 : track.clientWidth * 0.8;
+      track.scrollBy({ left: direction * distance, behavior: 'smooth' });
+    };
+    strip.querySelector('[data-strip-previous]')?.addEventListener('click', () => step(-1));
+    strip.querySelector('[data-strip-next]')?.addEventListener('click', () => step(1));
+  });
+</script>
+
+<style>
+  .strip {
+    overflow: hidden;
+  }
+
+  .strip__controls {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .strip__button {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border: 1.5px solid var(--sand-300);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--navy-900);
+    cursor: pointer;
+    transition:
+      border-color 0.2s var(--ease),
+      background-color 0.2s var(--ease);
+  }
+
+  .strip__button:hover {
+    border-color: var(--navy-900);
+  }
+
+  .strip__button :global(.flip) {
+    transform: scaleX(-1);
+  }
+
+  /* The row lines up with the page's column on the left and runs off the right edge. */
+  .strip__track {
+    --edge: max(var(--gutter), (100% - var(--container)) / 2);
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(24rem, 82vw);
+    gap: 1.25rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding: 0.5rem var(--edge) 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--edge);
+    scrollbar-width: thin;
+    scrollbar-color: var(--sand-300) transparent;
+  }
+
+  .strip__item {
+    scroll-snap-align: start;
+  }
+
+  .strip__more {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.75rem;
+    margin-top: 0.75rem;
+  }
+
+  /* Without scripts the buttons cannot scroll; the row still scrolls by hand. */
+  :global(.no-js) .strip__controls {
+    display: none;
+  }
+</style>

@@ -1,0 +1,412 @@
+---
+import Shamsa from './Shamsa.astro';
+import { site } from '../config/site';
+import { academy } from '../content';
+import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+
+/**
+ * A form for families to send a review. Like the trial form, it posts to
+ * `site.formEndpoint` when one is set, and otherwise opens WhatsApp or email
+ * with the review written out. Nothing is published until you add the review
+ * to src/config/reviews.ts.
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const f = t.reviews.form;
+const { programs } = academy(lang);
+const { email, whatsappNumber } = site.contact;
+
+const messages = {
+  sending: f.sending,
+  submit: f.submit,
+  successTitle: f.successTitle,
+  success: f.success,
+  whatsappTitle: f.whatsappTitle,
+  whatsappNote: f.whatsappNote,
+  whatsappAgain: f.whatsappAgain,
+  emailNote: f.emailNote,
+  greeting: f.greeting,
+  subject: f.subject,
+  ratingLabel: f.rating,
+};
+---
+
+<div class="review-form card">
+  <form
+    class="form"
+    method="post"
+    action={site.formEndpoint || undefined}
+    data-review-form
+    data-endpoint={site.formEndpoint}
+    data-whatsapp={whatsappNumber}
+    data-email={email}
+    data-messages={JSON.stringify(messages)}
+  >
+    <div class="field">
+      <label for="review-name">{f.name}</label>
+      <input id="review-name" name="name" type="text" autocomplete="name" required maxlength="60" data-label={f.name} aria-describedby="review-name-hint" />
+      <span class="field__hint" id="review-name-hint">{f.nameHint}</span>
+    </div>
+
+    <div class="field">
+      <label for="review-place">{f.place}</label>
+      <input id="review-place" name="place" type="text" maxlength="60" data-label={f.place} />
+    </div>
+
+    <div class="field">
+      <label for="review-role">{f.role}</label>
+      <select id="review-role" name="role" data-label={f.role}>
+        {f.roleOptions.map((option) => <option>{option}</option>)}
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="review-program">{f.program}</label>
+      <select id="review-program" name="program" data-label={f.program}>
+        {programs.map((program) => <option>{program.name}</option>)}
+      </select>
+    </div>
+
+    <fieldset class="field field--wide stars">
+      <legend>{f.ratingLegend}</legend>
+      <div class="stars__row">
+        {
+          [5, 4, 3, 2, 1].map((n) => (
+            <>
+              <input type="radio" id={`review-star-${n}`} name="rating" value={n} checked={n === 5} />
+              <label for={`review-star-${n}`} title={f.stars(n)}>
+                <span aria-hidden="true">★</span>
+                <span class="sr-only">{f.stars(n)}</span>
+              </label>
+            </>
+          ))
+        }
+      </div>
+      <span class="stars__value" aria-hidden="true" data-stars-value>{num(5, lang)} / {num(5, lang)}</span>
+    </fieldset>
+
+    <div class="field field--wide">
+      <label for="review-text">{f.text}</label>
+      <textarea id="review-text" name="review" rows="5" required minlength="20" maxlength="1200" data-label={f.text}></textarea>
+    </div>
+
+    <label class="consent field--wide">
+      <input type="checkbox" name="consent" required />
+      <span>{f.consent}</span>
+    </label>
+
+    <div class="form__trap" aria-hidden="true">
+      <label for="review-website">Website</label>
+      <input id="review-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="field field--wide form__footer">
+      <button class="btn btn--saffron btn--block" type="submit" data-submit>{f.submit}</button>
+      <p class="form__error" role="alert" hidden data-error>{f.error}</p>
+    </div>
+  </form>
+
+  <div class="form__done" role="status" tabindex="-1" hidden data-done>
+    <span class="form__done-mark"><Shamsa variant="ring" size={56} /></span>
+    <h3 data-done-title></h3>
+    <p data-done-text></p>
+    <a class="btn btn--navy" target="_blank" rel="noopener" hidden data-done-link></a>
+  </div>
+</div>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-review-form]');
+
+  if (form) {
+    const done = form.parentElement!.querySelector<HTMLElement>('[data-done]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const error = form.querySelector<HTMLElement>('[data-error]')!;
+    const value = form.querySelector<HTMLElement>('[data-stars-value]')!;
+    const text = JSON.parse(form.dataset.messages ?? '{}') as Record<string, string>;
+    const { endpoint = '', whatsapp = '', email = '' } = form.dataset;
+    const digits = document.documentElement.lang === 'bn' ? (s: string) => s.replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]) : (s: string) => s;
+
+    const rating = () => form.querySelector<HTMLInputElement>('input[name="rating"]:checked')?.value ?? '5';
+    form.addEventListener('change', () => {
+      value.textContent = digits(`${rating()} / 5`);
+    });
+
+    /** The review as "Label: value" lines, skipping anything left blank. */
+    const summary = () => {
+      const lines: string[] = [];
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[data-label]').forEach((field) => {
+        const entry = field instanceof HTMLSelectElement ? (field.selectedOptions[0]?.textContent ?? '').trim() : field.value.trim();
+        if (entry) lines.push(`${field.dataset.label}: ${entry}`);
+      });
+      lines.push(`${text.ratingLabel}: ${'★'.repeat(Number(rating()))} (${digits(rating())}/${digits('5')})`);
+      return `${text.greeting}\n\n${lines.join('\n')}`;
+    };
+
+    const finish = (title: string, note: string, link?: { href: string; label: string }) => {
+      done.querySelector('[data-done-title]')!.textContent = title;
+      done.querySelector('[data-done-text]')!.textContent = note;
+      const anchor = done.querySelector<HTMLAnchorElement>('[data-done-link]')!;
+      if (link) {
+        anchor.href = link.href;
+        anchor.textContent = link.label;
+        anchor.hidden = false;
+      }
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      error.hidden = true;
+      const data = new FormData(form);
+      if (data.get('website')) return; // A bot filled the hidden field.
+      data.delete('website');
+
+      if (!endpoint) {
+        const message = summary();
+        if (whatsapp) {
+          const link = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+          window.open(link, '_blank', 'noopener');
+          finish(text.whatsappTitle, text.whatsappNote, { href: link, label: text.whatsappAgain });
+        } else if (email) {
+          window.location.href = `mailto:${email}?subject=${encodeURIComponent(text.subject)}&body=${encodeURIComponent(message)}`;
+          finish(text.whatsappTitle, text.emailNote);
+        } else {
+          error.hidden = false;
+        }
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = text.sending;
+      try {
+        data.append('_subject', text.subject);
+        const response = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error(`Form service answered ${response.status}`);
+        finish(text.successTitle, text.success);
+      } catch {
+        error.hidden = false;
+        submit.disabled = false;
+        submit.textContent = text.submit;
+      }
+    });
+  }
+</script>
+
+<style>
+  .review-form {
+    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    border-top: 6px solid var(--saffron-500);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem 1.25rem;
+  }
+
+  .form[hidden] {
+    display: none;
+  }
+
+  .field {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+
+  .field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label,
+  .stars legend {
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--navy-900);
+  }
+
+  .field__hint {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 3.1rem;
+    padding: 0.7rem 0.95rem;
+    border: 1.5px solid var(--sand-300);
+    border-radius: var(--radius-sm);
+    background: var(--sand-50);
+    font-size: 1rem;
+    line-height: 1.5;
+    transition:
+      border-color 0.2s var(--ease),
+      box-shadow 0.2s var(--ease),
+      background-color 0.2s var(--ease);
+  }
+
+  .field select {
+    appearance: none;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%230b7078' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: none;
+    border-color: var(--teal-600);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(26, 166, 160, 0.2);
+  }
+
+  /* ----- Stars: five radio buttons, drawn right to left so the hovered star and those before it light up ----- */
+
+  .stars {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .stars legend {
+    padding: 0;
+    margin-bottom: 0.4rem;
+  }
+
+  .stars__row {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 0.25rem;
+    justify-self: start;
+    width: max-content;
+  }
+
+  .stars__row input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .stars__row label {
+    font-size: 2.1rem;
+    line-height: 1;
+    color: var(--sand-300);
+    cursor: pointer;
+    transition:
+      color 0.15s var(--ease),
+      transform 0.15s var(--ease);
+  }
+
+  .stars__row input:checked ~ label,
+  .stars__row label:hover,
+  .stars__row label:hover ~ label {
+    color: var(--saffron-500);
+  }
+
+  .stars__row label:hover {
+    transform: scale(1.12);
+  }
+
+  .stars__row input:focus-visible + label {
+    outline: 3px solid var(--teal-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .stars__value {
+    justify-self: start;
+    font-weight: 700;
+    color: var(--saffron-ink);
+  }
+
+  .consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  .consent input {
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.2rem;
+    accent-color: var(--teal-700);
+  }
+
+  .form__trap {
+    position: absolute;
+    left: -200vw;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form__footer {
+    margin-top: 0.3rem;
+  }
+
+  .form__error {
+    padding: 0.8rem 1rem;
+    border: 1px solid #e2a093;
+    border-radius: var(--radius-sm);
+    background: #fdf0ec;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #8a2c17;
+  }
+
+  .form__done {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    padding-block: clamp(2rem, 6vw, 4rem);
+    text-align: center;
+    outline: none;
+  }
+
+  .form__done[hidden] {
+    display: none;
+  }
+
+  .form__done-mark {
+    color: var(--saffron-500);
+  }
+
+  .form__done h3 {
+    font-size: calc(2rem * var(--display-scale));
+  }
+
+  .form__done p {
+    max-width: 27rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 34rem) {
+    .form {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

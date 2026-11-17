@@ -3,7 +3,7 @@
 The second design of the Darul Arqam website: the same content as the first design, laid out as a **multi-page site** with its own look.
 
 - **Look:** lapis blue, turquoise and saffron on warm paper, with round forms and a lattice of overlapping circles. The header and footer carry the academy's logo (`src/components/Logo.astro` and `Wordmark.astro`).
-- **Pages:** twelve, in English and in Bangla: home, about, programs, a page each for Nazirah, Hifz, Alimiyah and Deeniyat, academics, teachers, tuition, questions and the free-trial form.
+- **Pages:** thirteen, in English and in Bangla: home, about, programs, a page each for Nazirah, Hifz, Alimiyah and Deeniyat, academics, teachers, reviews, tuition, questions and the free-trial form.
 - **Verses:** every page opens with a Quranic verse related to its subject.
 
 This folder is a complete project of its own. It shares nothing with the first design in the folder above, so either one can be deleted once a design is chosen.
@@ -23,6 +23,7 @@ The finished site is in the [`html/`](html) folder, ready to use as it is:
 | `deeniyat.html` | Deeniyat: eight subjects | al-Bayyinah 98:5 |
 | `academics.html` | Philosophy, teaching, assessment, standards, welfare | from al-Mujadilah 58:11 |
 | `teachers.html` | Teachers | from al-'Ankabut 29:49 |
+| `reviews.html` | Reviews, and a form to send one | from Ibrahim 14:7 |
 | `tuition.html` | Tuition and how it works | from al-Muzzammil 73:20 |
 | `faq.html` | Questions | from an-Nahl 16:43 |
 | `free-trial.html` | Free-trial request form | from Ta-Ha 20:114 |
@@ -78,6 +79,7 @@ npm run build
 | The curriculum: programs, stages, subjects, semesters, values | `src/content/academy.ts` |
 | Contact details, form destination, tuition prices, site address | `src/config/site.ts` |
 | Teacher profiles | `src/config/teachers.ts` |
+| Reviews | `src/config/reviews.ts` |
 | Page titles and headings, the meaning of each verse, questions, labels | `src/i18n/en.ts` |
 | Arabic texts: the verses, the hadith | `src/i18n/index.ts` |
 | Which pages exist, their file names and the menu | `src/lib/routes.ts` |
@@ -99,6 +101,8 @@ To change a page's verse, replace all three parts together.
 - **`plans`** holds placeholder prices (40, 55 and 85 US dollars a month).
 - **`url`** is empty. Set it to the public address of the site so that canonical links, language alternates and the social-sharing image are written into the pages.
 - **`formEndpoint`** is empty. See the next section.
+
+`src/config/reviews.ts` holds the reviews shown on the home page and the Reviews page. **All six are invented examples** written in the voice of parents and students, and each carries an "Example review" tag. Publishing invented reviews as real ones misleads families and breaks US rules on testimonials, so replace them with reviews from real families, with their permission, before launch. The review form on the Reviews page sends new reviews to you the same way the trial form sends requests; nothing appears on the site until you add it to that file.
 
 `src/config/teachers.ts` holds the teacher profiles. **All six are invented examples**, there to show the layout, and each card carries an "Example profile" tag. Replace them with your real teachers; the file explains how, including how to add a photo.
 

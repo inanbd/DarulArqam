@@ -5,6 +5,7 @@ import HadithBand from '../components/HadithBand.astro';
 import Icon from '../components/Icon.astro';
 import Learners from '../components/Learners.astro';
 import Pillars from '../components/Pillars.astro';
+import ReviewStrip from '../components/ReviewStrip.astro';
 import ProgramTeasers from '../components/ProgramTeasers.astro';
 import Shamsa from '../components/Shamsa.astro';
 import Steps from '../components/Steps.astro';
@@ -146,6 +147,8 @@ const lowestPrice = Math.min(...site.plans.map((plan) => plan.monthlyUsd));
       </ul>
     </div>
   </section>
+
+  <ReviewStrip lang={lang} />
 
   <section class="section section--sand">
     <div class="container">

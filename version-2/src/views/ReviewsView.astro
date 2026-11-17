@@ -1,0 +1,146 @@
+---
+import Page from '../layouts/Page.astro';
+import PageHero from '../components/PageHero.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import ReviewForm from '../components/ReviewForm.astro';
+import Shamsa from '../components/Shamsa.astro';
+import { reviews } from '../config/reviews';
+import { academy } from '../content';
+import { getDict, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+const r = t.reviews;
+const { programs } = academy(lang);
+// Only the programs that have reviews get a filter button.
+const reviewed = programs.filter((program) => reviews.some((review) => review.program === program.id));
+---
+
+<Page lang={lang} page="reviews">
+  <PageHero lang={lang} page="reviews" />
+
+  <section class="section">
+    <div class="container">
+      <div class="filters" role="group" aria-label={r.filterLabel} hidden data-filters>
+        <button class="chip filter" type="button" aria-pressed="true" data-filter="all">{r.filterAll}</button>
+        {
+          reviewed.map((program) => (
+            <button class="chip filter" type="button" aria-pressed="false" data-filter={program.id}>
+              {program.short}
+            </button>
+          ))
+        }
+      </div>
+
+      <ul class="wall" data-wall>
+        {
+          reviews.map((review, index) => (
+            <li class="wall__item" data-program={review.program} data-reveal style={`--reveal-order: ${index % 3}`}>
+              <ReviewCard lang={lang} review={review} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="write">
+    <div class="container write">
+      <header class="write__copy" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{r.eyebrow}</p>
+        <h2 class="title">{r.form.title}</h2>
+        <p class="lead">{r.form.lead}</p>
+      </header>
+      <div data-reveal style="--reveal-order: 1">
+        <ReviewForm lang={lang} />
+      </div>
+    </div>
+  </section>
+</Page>
+
+<script>
+  // Filter the reviews by program. Without scripts every review shows and the buttons stay hidden.
+  const filters = document.querySelector<HTMLElement>('[data-filters]');
+  const wall = document.querySelector<HTMLElement>('[data-wall]');
+  if (filters && wall) {
+    filters.hidden = false;
+    filters.addEventListener('click', (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-filter]');
+      if (!button) return;
+      const choice = button.dataset.filter;
+      filters.querySelectorAll('[data-filter]').forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
+      wall.querySelectorAll<HTMLElement>('.wall__item').forEach((item) => {
+        item.hidden = choice !== 'all' && item.dataset.program !== choice;
+      });
+    });
+  }
+</script>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .filters[hidden] {
+    display: none;
+  }
+
+  .filter {
+    padding: 0.55rem 1.1rem;
+    border: 1.5px solid transparent;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition:
+      background-color 0.2s var(--ease),
+      color 0.2s var(--ease);
+  }
+
+  .filter[aria-pressed='true'] {
+    background: var(--navy-900);
+    color: #fff;
+  }
+
+  .filter:hover:not([aria-pressed='true']) {
+    border-color: var(--teal-500);
+  }
+
+  /* Cards of different lengths, set in columns like a wall of notes. */
+  .wall {
+    columns: 3 20rem;
+    column-gap: 1.25rem;
+  }
+
+  .wall__item {
+    margin-bottom: 1.25rem;
+    break-inside: avoid;
+  }
+
+  .wall__item[hidden] {
+    display: none;
+  }
+
+  .write {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+    gap: clamp(2rem, 5vw, 4rem);
+    scroll-margin-top: 6rem;
+  }
+
+  .write__copy .lead {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 58rem) {
+    .write {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

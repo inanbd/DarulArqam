@@ -11,6 +11,7 @@ export const pages = {
   deeniyat: 'deeniyat',
   academics: 'academics',
   teachers: 'teachers',
+  reviews: 'reviews',
   tuition: 'tuition',
   faq: 'faq',
   trial: 'free-trial',
@@ -25,6 +26,7 @@ export const menu: { page: PageId; under?: PageId[] }[] = [
   { page: 'programs', under: ['nazirah', 'hifz', 'alimiyah', 'deeniyat'] },
   { page: 'academics' },
   { page: 'teachers' },
+  { page: 'reviews' },
   { page: 'tuition' },
   { page: 'faq' },
 ];
