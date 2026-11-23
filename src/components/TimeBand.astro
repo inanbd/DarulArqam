@@ -43,7 +43,18 @@ const t = getDict(lang);
     try {
       const locale = band.dataset.locale ?? 'en-US';
       const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      const time = (timeZone: string) => new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: '2-digit', timeZone });
+      // In Bangla, name the part of the day first (সন্ধ্যা ৬:৩০) rather than AM and PM.
+      const time = (timeZone: string) => {
+        if (locale !== 'bn-BD') return new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: '2-digit', timeZone });
+        const clock = new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: '2-digit', dayPeriod: 'short', timeZone });
+        return {
+          format: (date: Date) => {
+            const parts = clock.formatToParts(date);
+            const part = (type: string) => parts.find((entry) => entry.type === type)?.value ?? '';
+            return `${part('dayPeriod') === 'রাত্রি' ? 'রাত' : part('dayPeriod')} ${part('hour')}:${part('minute')}`;
+          },
+        };
+      };
       const day = (timeZone: string) => new Intl.DateTimeFormat(locale, { weekday: 'long', timeZone });
       const formats = {
         '[data-clock-local]': time(zone),

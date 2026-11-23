@@ -3,23 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Book a Free Trial Class | Darul Arqam</title>
-    <meta name="description" content="Request a free class with a qualified teacher. Tell us about the student and we will arrange a time in your time zone.">
+    <title>Start Your Free Week | Darul Arqam</title>
+    <meta name="description" content="Start with a free first week of classes with a qualified teacher. Tell us about the student and we will arrange it in your time zone.">
     <meta name="theme-color" content="#0b1a3b">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
     
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Darul Arqam">
-    <meta property="og:title" content="Book a Free Trial Class | Darul Arqam">
-    <meta property="og:description" content="Request a free class with a qualified teacher. Tell us about the student and we will arrange a time in your time zone.">
+    <meta property="og:title" content="Start Your Free Week | Darul Arqam">
+    <meta property="og:description" content="Start with a free first week of classes with a qualified teacher. Tell us about the student and we will arrange it in your time zone.">
     <meta property="og:locale" content="en_US">
 
     
     <script>
-      document.documentElement.classList.replace('no-js', 'js');
+      // Marks that scripts run, and chooses the region whose fees and timetable to show:
+      // the reader's own choice if they made one, otherwise a guess from their time zone.
+      (function (root) {
+        root.classList.replace('no-js', 'js');
+        var region;
+        try {
+          region = localStorage.getItem('darul-arqam-region');
+        } catch (e) {}
+        if (region !== 'us' && region !== 'bd') {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            region = zone === 'Asia/Dhaka' || zone === 'Asia/Dacca' ? 'bd' : 'us';
+          } catch (e) {
+            region = 'us';
+          }
+        }
+        root.dataset.region = region;
+      })(document.documentElement);
     </script>
-  <link rel="stylesheet" href="./assets/style.css?v=da4a2c17"></head>
+  <link rel="stylesheet" href="./assets/style.css?v=910d72e1"></head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="topbar" data-astro-cid-nen7h5rs>
@@ -28,12 +45,34 @@
       <svg width="12" height="12" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
   <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
 </svg>
-      Live online Qur’an and Islamic education for families in the United States and beyond
+      Live online Qur’an and Islamic education for students in the USA, Canada and Bangladesh
     </p>
     <div class="topbar__links" data-astro-cid-nen7h5rs>
+      <div class="region-switch region-switch--small" role="group" aria-label="Choose your region" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>USA &amp; Canada</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>Bangladesh</button>
+</div>
+
+<script type="module">// src/components/RegionSwitch.astro?astro&type=script&index=0&lang.ts
+var root = document.documentElement;
+var sync = () => {
+	document.querySelectorAll("[data-set-region]").forEach((button) => {
+		button.setAttribute("aria-pressed", String(button.dataset.setRegion === root.dataset.region));
+	});
+};
+document.addEventListener("click", (event) => {
+	const button = event.target.closest("[data-set-region]");
+	if (!button) return;
+	root.dataset.region = button.dataset.setRegion;
+	try {
+		window.localStorage.setItem("darul-arqam-region", button.dataset.setRegion ?? "us");
+	} catch {}
+	sync();
+});
+sync();</script>
       <a href="https://wa.me/15550100123" target="_blank" rel="noopener" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.5a8.3 8.3 0 0 1-12.3 7.3L3.5 20.5l1.7-4.6A8.3 8.3 0 1 1 20.5 11.5z"/></svg>
-            +1 (555) 010-0123
+            <span class="topbar__label" data-astro-cid-nen7h5rs>+1 (555) 010-0123</span>
           </a>
       <a href="./bn/free-trial.html" lang="bn" hreflang="bn" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
@@ -138,7 +177,7 @@
                 
               </li><li data-astro-cid-nen7h5rs>
                 <a href="./tuition.html" data-astro-cid-nen7h5rs>
-                  Tuition
+                  Fees &amp; Timetable
                   
                 </a>
                 
@@ -151,7 +190,7 @@
               </li>
       </ul>
       <a class="btn btn--saffron btn--sm nav__cta" href="./free-trial.html" aria-current="page" data-astro-cid-nen7h5rs>
-        Free trial class
+        Free first week
       </a>
     </nav>
   </div>
@@ -188,10 +227,10 @@ if (header && toggle) {
       <nav class="crumbs" aria-label="Breadcrumb" data-astro-cid-75ysl5lo>
         <a href="./index.html" data-astro-cid-75ysl5lo>Home</a>
         <span aria-hidden="true" data-astro-cid-75ysl5lo>/</span>
-        <span aria-current="page" data-astro-cid-75ysl5lo>Free trial</span>
+        <span aria-current="page" data-astro-cid-75ysl5lo>Free first week</span>
       </nav>
-      <h1 class="page-hero__title" data-astro-cid-75ysl5lo>Begin with a free class, in sha Allah</h1>
-      <p class="lead" data-astro-cid-75ysl5lo>Tell us a little about the student and we will be in touch to arrange a free lesson with one of our teachers.</p>
+      <h1 class="page-hero__title" data-astro-cid-75ysl5lo>Begin with a free week, in sha Allah</h1>
+      <p class="lead" data-astro-cid-75ysl5lo>Tell us a little about the student and we will be in touch to arrange a free first week of classes with one of our teachers.</p>
       
     </div>
     <div class="page-hero__verse" data-astro-cid-75ysl5lo>
@@ -218,7 +257,7 @@ if (header && toggle) {
     <div class="container columns" data-astro-cid-opi5ki5c>
       <div data-reveal data-astro-cid-opi5ki5c>
         <div class="trial-card card" data-astro-cid-uczwokaa>
-  <form class="form" method="post" data-trial-form data-endpoint data-whatsapp="15550100123" data-email="salam@darularqam.example" data-messages="{&quot;sending&quot;:&quot;Sending…&quot;,&quot;submit&quot;:&quot;Request my free trial&quot;,&quot;successTitle&quot;:&quot;Jazakum Allahu khayran!&quot;,&quot;success&quot;:&quot;Your request has reached us. We will contact you soon to arrange your free class, in sha Allah.&quot;,&quot;whatsappTitle&quot;:&quot;One last step&quot;,&quot;whatsappNote&quot;:&quot;WhatsApp has opened with your request written out. Press send there and we will reply to arrange your free class.&quot;,&quot;whatsappAgain&quot;:&quot;Open WhatsApp again&quot;,&quot;emailNote&quot;:&quot;Your email app has opened with your request written out. Press send there and we will reply to arrange your free class.&quot;,&quot;greeting&quot;:&quot;Assalamu alaikum. I would like to request a free trial class.&quot;,&quot;subject&quot;:&quot;Free trial class request&quot;}" data-astro-cid-uczwokaa>
+  <form class="form" method="post" data-trial-form data-endpoint data-whatsapp="15550100123" data-email="salam@darularqam.example" data-messages="{&quot;sending&quot;:&quot;Sending…&quot;,&quot;submit&quot;:&quot;Request my free week&quot;,&quot;successTitle&quot;:&quot;Jazakum Allahu khayran!&quot;,&quot;success&quot;:&quot;Your request has reached us. We will contact you soon to start your free week, in sha Allah.&quot;,&quot;whatsappTitle&quot;:&quot;One last step&quot;,&quot;whatsappNote&quot;:&quot;WhatsApp has opened with your request written out. Press send there and we will reply to start your free week.&quot;,&quot;whatsappAgain&quot;:&quot;Open WhatsApp again&quot;,&quot;emailNote&quot;:&quot;Your email app has opened with your request written out. Press send there and we will reply to start your free week.&quot;,&quot;greeting&quot;:&quot;Assalamu alaikum. I would like to start a free first week of classes.&quot;,&quot;subject&quot;:&quot;Free first week request&quot;}" data-astro-cid-uczwokaa>
     <div class="field" data-astro-cid-uczwokaa>
       <label for="trial-name" data-astro-cid-uczwokaa>Your name</label>
       <input id="trial-name" name="name" type="text" autocomplete="name" required data-label="Your name" data-astro-cid-uczwokaa>
@@ -235,6 +274,20 @@ if (header && toggle) {
     </div>
 
     <div class="field" data-astro-cid-uczwokaa>
+      <label for="trial-country" data-astro-cid-uczwokaa>Where do you live?</label>
+      <select id="trial-country" name="country" data-label="Where do you live?" data-country data-astro-cid-uczwokaa>
+        <option data-astro-cid-uczwokaa>USA</option><option data-astro-cid-uczwokaa>Canada</option><option data-astro-cid-uczwokaa>Bangladesh</option><option data-astro-cid-uczwokaa>Another country</option>
+      </select>
+    </div>
+
+    <div class="field" data-astro-cid-uczwokaa>
+      <label for="trial-timezone" data-astro-cid-uczwokaa>Your time zone</label>
+      <select id="trial-timezone" name="timezone" data-label="Your time zone" data-timezone data-astro-cid-uczwokaa>
+        <option value="Bangladesh (BST)" data-astro-cid-uczwokaa>Bangladesh (BST)</option><option value="Newfoundland (NT)" data-astro-cid-uczwokaa>Newfoundland (NT)</option><option value="Atlantic (AT)" data-astro-cid-uczwokaa>Atlantic (AT)</option><option value="Eastern (ET)" data-astro-cid-uczwokaa>Eastern (ET)</option><option value="Central (CT)" data-astro-cid-uczwokaa>Central (CT)</option><option value="Mountain (MT)" data-astro-cid-uczwokaa>Mountain (MT)</option><option value="Pacific (PT)" data-astro-cid-uczwokaa>Pacific (PT)</option><option value="Alaska (AKT)" data-astro-cid-uczwokaa>Alaska (AKT)</option><option value="Hawaii (HT)" data-astro-cid-uczwokaa>Hawaii (HT)</option><option value="Other" data-astro-cid-uczwokaa>Other</option>
+      </select>
+    </div>
+
+    <div class="field" data-astro-cid-uczwokaa>
       <label for="trial-learner" data-astro-cid-uczwokaa>Who is the class for?</label>
       <select id="trial-learner" name="learner" data-label="Class for" data-astro-cid-uczwokaa>
         <option data-astro-cid-uczwokaa>My child</option><option data-astro-cid-uczwokaa>Myself</option><option data-astro-cid-uczwokaa>Several family members</option>
@@ -247,24 +300,31 @@ if (header && toggle) {
     </div>
 
     <div class="field" data-astro-cid-uczwokaa>
-      <label for="trial-program" data-astro-cid-uczwokaa>Program</label>
-      <select id="trial-program" name="program" data-label="Program" data-astro-cid-uczwokaa>
-        <option data-astro-cid-uczwokaa>Not sure yet</option>
-        <option data-astro-cid-uczwokaa>Nazirah al-Qur’an</option><option data-astro-cid-uczwokaa>Hifz al-Qur’an: Complete Hifz</option><option data-astro-cid-uczwokaa>Hifz al-Qur’an: Selected Surahs Hifz</option><option data-astro-cid-uczwokaa>Junior Islamic Studies (group classes)</option><option data-astro-cid-uczwokaa>Youth and Young Adults Alimiyah (group classes)</option><option data-astro-cid-uczwokaa>Adult Alimiyah (group classes)</option>
-      </select>
-    </div>
-
-    <div class="field" data-astro-cid-uczwokaa>
       <label for="trial-teacher" data-astro-cid-uczwokaa>Preferred teacher</label>
       <select id="trial-teacher" name="teacher" data-label="Preferred teacher" data-astro-cid-uczwokaa>
         <option data-astro-cid-uczwokaa>No preference</option><option data-astro-cid-uczwokaa>Male teacher</option><option data-astro-cid-uczwokaa>Female teacher</option>
       </select>
     </div>
 
+    <div class="field field--wide" data-astro-cid-uczwokaa>
+      <label for="trial-program" data-astro-cid-uczwokaa>Program</label>
+      <select id="trial-program" name="program" data-label="Program" data-astro-cid-uczwokaa>
+        <option data-astro-cid-uczwokaa>Not sure yet</option>
+        <option data-astro-cid-uczwokaa>Nazirah al-Qur’an</option><option data-astro-cid-uczwokaa>Hifz al-Qur’an: Complete Hifz</option><option data-astro-cid-uczwokaa>Hifz al-Qur’an: Selected Surahs Hifz</option><option data-astro-cid-uczwokaa>Junior Islamic Studies (group batch)</option><option data-astro-cid-uczwokaa>Youth and Young Adults Alimiyah (group batch)</option><option data-astro-cid-uczwokaa>Adult Alimiyah (group batch)</option>
+      </select>
+    </div>
+
     <div class="field" data-astro-cid-uczwokaa>
-      <label for="trial-timezone" data-astro-cid-uczwokaa>Your time zone</label>
-      <select id="trial-timezone" name="timezone" data-label="Your time zone" data-timezone data-astro-cid-uczwokaa>
-        <option value="Eastern (ET)" data-astro-cid-uczwokaa>Eastern (ET)</option><option value="Central (CT)" data-astro-cid-uczwokaa>Central (CT)</option><option value="Mountain (MT)" data-astro-cid-uczwokaa>Mountain (MT)</option><option value="Pacific (PT)" data-astro-cid-uczwokaa>Pacific (PT)</option><option value="Alaska (AKT)" data-astro-cid-uczwokaa>Alaska (AKT)</option><option value="Hawaii (HT)" data-astro-cid-uczwokaa>Hawaii (HT)</option><option value="Other" data-astro-cid-uczwokaa>Other</option>
+      <label for="trial-format" data-astro-cid-uczwokaa>Class format</label>
+      <select id="trial-format" name="format" data-label="Class format" data-astro-cid-uczwokaa>
+        <option data-astro-cid-uczwokaa>Not sure yet</option><option data-astro-cid-uczwokaa>Group batch</option><option data-astro-cid-uczwokaa>One-to-one</option>
+      </select>
+    </div>
+
+    <div class="field" data-astro-cid-uczwokaa>
+      <label for="trial-days" data-astro-cid-uczwokaa>Classes a week</label>
+      <select id="trial-days" name="days" data-label="Classes a week" data-astro-cid-uczwokaa>
+        <option data-astro-cid-uczwokaa>Not sure yet</option><option data-astro-cid-uczwokaa>4 days</option><option data-astro-cid-uczwokaa>3 days</option><option data-astro-cid-uczwokaa>2 days</option>
       </select>
     </div>
 
@@ -280,7 +340,7 @@ if (header && toggle) {
     </div>
 
     <div class="field field--wide form__footer" data-astro-cid-uczwokaa>
-      <button class="btn btn--saffron btn--block" type="submit" data-submit data-astro-cid-uczwokaa>Request my free trial</button>
+      <button class="btn btn--saffron btn--block" type="submit" data-submit data-astro-cid-uczwokaa>Request my free week</button>
       <p class="form__error" role="alert" hidden data-error data-astro-cid-uczwokaa>Something went wrong and your request was not sent. Please try again, or message us directly.</p>
       <p class="form__privacy" data-astro-cid-uczwokaa>We use your details only to arrange your class, and never share them.</p>
     </div>
@@ -309,10 +369,13 @@ if (form) {
 	const text = JSON.parse(form.dataset.messages ?? "{}");
 	const { endpoint = "", whatsapp = "", email = "" } = form.dataset;
 	const zoneSelect = form.querySelector("[data-timezone]");
+	const countrySelect = form.querySelector("[data-country]");
 	try {
 		const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 		const hours = -new Date((/* @__PURE__ */ new Date()).getFullYear(), 0, 15, 12).getTimezoneOffset() / 60;
 		const byOffset = {
+			"-3.5": "Newfoundland (NT)",
+			"-4": "Atlantic (AT)",
 			"-5": "Eastern (ET)",
 			"-6": "Central (CT)",
 			"-7": "Mountain (MT)",
@@ -320,8 +383,11 @@ if (form) {
 			"-9": "Alaska (AKT)",
 			"-10": "Hawaii (HT)"
 		};
-		const inAmericas = /^(America|US|Pacific\/Honolulu)/.test(zone);
-		if (zoneSelect) zoneSelect.value = inAmericas && byOffset[String(hours)] || "Other";
+		const canada = /^America\/(Toronto|Montreal|Vancouver|Edmonton|Calgary|Winnipeg|Regina|Swift_Current|Halifax|Glace_Bay|Moncton|Goose_Bay|St_Johns|Whitehorse|Dawson|Dawson_Creek|Fort_Nelson|Creston|Yellowknife|Inuvik|Cambridge_Bay|Rankin_Inlet|Resolute|Iqaluit|Atikokan|Blanc-Sablon|Nipigon|Thunder_Bay|Rainy_River|Pangnirtung)$|^Canada\//.test(zone);
+		const usa = !canada && /^America\/(New_York|Detroit|Chicago|Denver|Phoenix|Boise|Los_Angeles|Anchorage|Juneau|Sitka|Yakutat|Nome|Metlakatla|Adak|Menominee|Indiana\/.+|Kentucky\/.+|North_Dakota\/.+)$|^Pacific\/Honolulu$|^US\//.test(zone);
+		const bangladesh = zone === "Asia/Dhaka";
+		if (zoneSelect) zoneSelect.value = bangladesh ? "Bangladesh (BST)" : (usa || canada) && byOffset[String(hours)] || "Other";
+		if (countrySelect) countrySelect.selectedIndex = usa ? 0 : canada ? 1 : bangladesh ? 2 : 3;
 	} catch {}
 	/** The answers as "Label: value" lines, skipping anything left blank. */
 	const summary = () => {
@@ -393,14 +459,14 @@ if (form) {
             <li data-astro-cid-opi5ki5c>
                   <span class="next__number" data-astro-cid-opi5ki5c>1</span>
                   <div data-astro-cid-opi5ki5c>
-                    <h3 data-astro-cid-opi5ki5c>Meet your teacher</h3>
-                    <p data-astro-cid-opi5ki5c>In a free first class the teacher gets to know the student and assesses their level, so they start in the right place.</p>
+                    <h3 data-astro-cid-opi5ki5c>Learn free for a week</h3>
+                    <p data-astro-cid-opi5ki5c>In the free first week the teacher gets to know the student and assesses their level, so they start in the right place.</p>
                   </div>
                 </li><li data-astro-cid-opi5ki5c>
                   <span class="next__number" data-astro-cid-opi5ki5c>2</span>
                   <div data-astro-cid-opi5ki5c>
-                    <h3 data-astro-cid-opi5ki5c>Choose your schedule</h3>
-                    <p data-astro-cid-opi5ki5c>Pick a program and fixed weekly class times in your own time zone.</p>
+                    <h3 data-astro-cid-opi5ki5c>Confirm your place</h3>
+                    <p data-astro-cid-opi5ki5c>Choose 2, 3 or 4 days a week and a group batch or one-to-one, then pay the first month’s fee to confirm admission.</p>
                   </div>
                 </li><li data-astro-cid-opi5ki5c>
                   <span class="next__number" data-astro-cid-opi5ki5c>3</span>
@@ -475,7 +541,7 @@ if (form) {
           <span class="footer__tagline" data-astro-cid-jo6i4kqk>Islamic Institute</span>
         </span>
       </a>
-      <p class="footer__about" data-astro-cid-jo6i4kqk>Live online Qur’an and Islamic education for families across the United States and beyond, taught by qualified imams and huffaz from Bangladesh.</p>
+      <p class="footer__about" data-astro-cid-jo6i4kqk>Live online Qur’an and Islamic education for students in the USA, Canada and Bangladesh, taught by qualified imams and huffaz from Bangladesh.</p>
       <p class="footer__arabic" lang="ar" dir="rtl" data-astro-cid-jo6i4kqk>دار الأرقم</p>
     </div>
 
@@ -495,11 +561,11 @@ if (form) {
             </li><li data-astro-cid-jo6i4kqk>
               <a href="./reviews.html" data-astro-cid-jo6i4kqk>Reviews</a>
             </li><li data-astro-cid-jo6i4kqk>
-              <a href="./tuition.html" data-astro-cid-jo6i4kqk>Tuition</a>
+              <a href="./tuition.html" data-astro-cid-jo6i4kqk>Fees &amp; Timetable</a>
             </li><li data-astro-cid-jo6i4kqk>
               <a href="./faq.html" data-astro-cid-jo6i4kqk>FAQ</a>
             </li>
-        <li data-astro-cid-jo6i4kqk><a href="./free-trial.html" data-astro-cid-jo6i4kqk>Free trial class</a></li>
+        <li data-astro-cid-jo6i4kqk><a href="./free-trial.html" data-astro-cid-jo6i4kqk>Free first week</a></li>
       </ul>
     </nav>
 
@@ -544,7 +610,7 @@ if (form) {
 
   <div class="container footer__base" data-astro-cid-jo6i4kqk>
     <p data-astro-cid-jo6i4kqk>© 2026 Darul Arqam. All rights reserved.</p>
-    <p data-astro-cid-jo6i4kqk>Teaching from Bangladesh · Serving families in the United States and beyond</p>
+    <p data-astro-cid-jo6i4kqk>Teaching from Bangladesh · For students in the USA, Canada, Bangladesh and beyond</p>
   </div>
 </footer>
 

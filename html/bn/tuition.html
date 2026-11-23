@@ -3,23 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ফি এবং যেভাবে শুরু করবেন | দারুল আরকাম</title>
-    <meta name="description" content="ব্যক্তিগত ওয়ান-টু-ওয়ান কুরআন ক্লাসের জন্য সহজ মাসিক ফি, গ্রুপ প্রোগ্রামের জন্য সেমিস্টার ফি, এবং ফ্রি ট্রায়াল ক্লাস থেকে নিয়মিত পাঠ পর্যন্ত চারটি ধাপ।">
+    <title>ফি ও ক্লাসের সময়সূচি | দারুল আরকাম</title>
+    <meta name="description" content="গ্রুপ ব্যাচ ও ওয়ান-টু-ওয়ান পাঠের মাসিক ফি, মার্কিন ডলারে ও বাংলাদেশি টাকায়; যুক্তরাষ্ট্র ও কানাডা এবং বাংলাদেশের ক্লাসের সময়সূচি; আর ফ্রি প্রথম সপ্তাহ।">
     <meta name="theme-color" content="#0b1a3b">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 
     
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Darul Arqam">
-    <meta property="og:title" content="ফি এবং যেভাবে শুরু করবেন | দারুল আরকাম">
-    <meta property="og:description" content="ব্যক্তিগত ওয়ান-টু-ওয়ান কুরআন ক্লাসের জন্য সহজ মাসিক ফি, গ্রুপ প্রোগ্রামের জন্য সেমিস্টার ফি, এবং ফ্রি ট্রায়াল ক্লাস থেকে নিয়মিত পাঠ পর্যন্ত চারটি ধাপ।">
+    <meta property="og:title" content="ফি ও ক্লাসের সময়সূচি | দারুল আরকাম">
+    <meta property="og:description" content="গ্রুপ ব্যাচ ও ওয়ান-টু-ওয়ান পাঠের মাসিক ফি, মার্কিন ডলারে ও বাংলাদেশি টাকায়; যুক্তরাষ্ট্র ও কানাডা এবং বাংলাদেশের ক্লাসের সময়সূচি; আর ফ্রি প্রথম সপ্তাহ।">
     <meta property="og:locale" content="bn_BD">
 
     
     <script>
-      document.documentElement.classList.replace('no-js', 'js');
+      // Marks that scripts run, and chooses the region whose fees and timetable to show:
+      // the reader's own choice if they made one, otherwise a guess from their time zone.
+      (function (root) {
+        root.classList.replace('no-js', 'js');
+        var region;
+        try {
+          region = localStorage.getItem('darul-arqam-region');
+        } catch (e) {}
+        if (region !== 'us' && region !== 'bd') {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            region = zone === 'Asia/Dhaka' || zone === 'Asia/Dacca' ? 'bd' : 'us';
+          } catch (e) {
+            region = 'us';
+          }
+        }
+        root.dataset.region = region;
+      })(document.documentElement);
     </script>
-  <link rel="stylesheet" href="../assets/style.css?v=da4a2c17"></head>
+  <link rel="stylesheet" href="../assets/style.css?v=910d72e1"></head>
   <body>
     <a class="skip-link" href="#main">মূল অংশে যান</a>
     <div class="topbar" data-astro-cid-nen7h5rs>
@@ -28,12 +45,34 @@
       <svg width="12" height="12" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
   <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
 </svg>
-      যুক্তরাষ্ট্র ও বিশ্বের অন্যান্য দেশের পরিবারগুলোর জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা
+      যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিক্ষার্থীদের জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা
     </p>
     <div class="topbar__links" data-astro-cid-nen7h5rs>
+      <div class="region-switch region-switch--small" role="group" aria-label="আপনার অঞ্চল বেছে নিন" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>যুক্তরাষ্ট্র ও কানাডা</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>বাংলাদেশ</button>
+</div>
+
+<script type="module">// src/components/RegionSwitch.astro?astro&type=script&index=0&lang.ts
+var root = document.documentElement;
+var sync = () => {
+	document.querySelectorAll("[data-set-region]").forEach((button) => {
+		button.setAttribute("aria-pressed", String(button.dataset.setRegion === root.dataset.region));
+	});
+};
+document.addEventListener("click", (event) => {
+	const button = event.target.closest("[data-set-region]");
+	if (!button) return;
+	root.dataset.region = button.dataset.setRegion;
+	try {
+		window.localStorage.setItem("darul-arqam-region", button.dataset.setRegion ?? "us");
+	} catch {}
+	sync();
+});
+sync();</script>
       <a href="https://wa.me/15550100123" target="_blank" rel="noopener" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.5a8.3 8.3 0 0 1-12.3 7.3L3.5 20.5l1.7-4.6A8.3 8.3 0 1 1 20.5 11.5z"/></svg>
-            +1 (555) 010-0123
+            <span class="topbar__label" data-astro-cid-nen7h5rs>+1 (555) 010-0123</span>
           </a>
       <a href="../tuition.html" lang="en" hreflang="en" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
@@ -138,7 +177,7 @@
                 
               </li><li data-astro-cid-nen7h5rs>
                 <a href="../bn/tuition.html" aria-current="page" data-astro-cid-nen7h5rs>
-                  ফি
+                  ফি ও সময়সূচি
                   
                 </a>
                 
@@ -151,7 +190,7 @@
               </li>
       </ul>
       <a class="btn btn--saffron btn--sm nav__cta" href="../bn/free-trial.html" data-astro-cid-nen7h5rs>
-        ফ্রি ট্রায়াল ক্লাস
+        প্রথম সপ্তাহ ফ্রি
       </a>
     </nav>
   </div>
@@ -188,10 +227,10 @@ if (header && toggle) {
       <nav class="crumbs" aria-label="পথনির্দেশিকা" data-astro-cid-75ysl5lo>
         <a href="../bn/index.html" data-astro-cid-75ysl5lo>প্রথম পাতা</a>
         <span aria-hidden="true" data-astro-cid-75ysl5lo>/</span>
-        <span aria-current="page" data-astro-cid-75ysl5lo>ফি</span>
+        <span aria-current="page" data-astro-cid-75ysl5lo>ফি ও সময়সূচি</span>
       </nav>
-      <h1 class="page-hero__title" data-astro-cid-75ysl5lo>সহজ মাসিক ফি</h1>
-      <p class="lead" data-astro-cid-75ysl5lo>নাজেরা ও হিফজের জন্য ব্যক্তিগত ওয়ান-টু-ওয়ান পাঠ, আর আলিমিয়াহর জন্য সেমিস্টারভিত্তিক গ্রুপ ক্লাস। শুরু করুন একটি ফ্রি ট্রায়াল ক্লাস দিয়ে।</p>
+      <h1 class="page-hero__title" data-astro-cid-75ysl5lo>ফি ও ক্লাসের সময়</h1>
+      <p class="lead" data-astro-cid-75ysl5lo>যুক্তরাষ্ট্র ও কানাডা এবং বাংলাদেশের মাসিক ফি, গ্রুপ ব্যাচে বা ওয়ান-টু-ওয়ান, আর ক্লাসের সময়সূচি। প্রথম সপ্তাহ ফ্রি।</p>
       
     </div>
     <div class="page-hero__verse" data-astro-cid-75ysl5lo>
@@ -216,77 +255,842 @@ if (header && toggle) {
 
   <section class="section" data-astro-cid-f7swimbp>
     <div class="container" data-astro-cid-f7swimbp>
-      <ul class="plans" data-astro-cid-i7nfoaoc>
-  <li class="plan card" data-reveal style="--reveal-order: 0" data-astro-cid-i7nfoaoc>
-          
-          <h2 class="plan__name" data-astro-cid-i7nfoaoc>নিয়মিত</h2>
-          <p class="plan__frequency" data-astro-cid-i7nfoaoc>সপ্তাহে ২টি ক্লাস</p>
-          <p class="plan__price" data-astro-cid-i7nfoaoc>
-            <span class="plan__currency" data-astro-cid-i7nfoaoc>$</span>
-            <span class="plan__amount" data-astro-cid-i7nfoaoc>৪০</span>
-            <span class="plan__period" data-astro-cid-i7nfoaoc>প্রতি মাসে</span>
-          </p>
-          <p class="plan__text" data-astro-cid-i7nfoaoc>ছোট নতুন শিক্ষার্থী ও ব্যস্ত প্রাপ্তবয়স্কদের জন্য সহজ ছন্দ।</p>
-          <p class="plan__count" data-astro-cid-i7nfoaoc>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
-            মাসে ৮টি ক্লাস
-          </p>
-          <a class="btn btn--block btn--outline" href="../bn/free-trial.html" data-astro-cid-i7nfoaoc>
-            ফ্রি ট্রায়াল দিয়ে শুরু করুন
-          </a>
-        </li><li class="plan card plan--featured" data-reveal style="--reveal-order: 1" data-astro-cid-i7nfoaoc>
-          <span class="plan__flag" data-astro-cid-i7nfoaoc>আমাদের পরামর্শ</span>
-          <h2 class="plan__name" data-astro-cid-i7nfoaoc>নিবেদিত</h2>
-          <p class="plan__frequency" data-astro-cid-i7nfoaoc>সপ্তাহে ৩টি ক্লাস</p>
-          <p class="plan__price" data-astro-cid-i7nfoaoc>
-            <span class="plan__currency" data-astro-cid-i7nfoaoc>$</span>
-            <span class="plan__amount" data-astro-cid-i7nfoaoc>৫৫</span>
-            <span class="plan__period" data-astro-cid-i7nfoaoc>প্রতি মাসে</span>
-          </p>
-          <p class="plan__text" data-astro-cid-i7nfoaoc>পড়া ও তাজবীদে ধারাবাহিক অগ্রগতি।</p>
-          <p class="plan__count" data-astro-cid-i7nfoaoc>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
-            মাসে ১২টি ক্লাস
-          </p>
-          <a class="btn btn--block btn--saffron" href="../bn/free-trial.html" data-astro-cid-i7nfoaoc>
-            ফ্রি ট্রায়াল দিয়ে শুরু করুন
-          </a>
-        </li><li class="plan card" data-reveal style="--reveal-order: 2" data-astro-cid-i7nfoaoc>
-          
-          <h2 class="plan__name" data-astro-cid-i7nfoaoc>নিবিড়</h2>
-          <p class="plan__frequency" data-astro-cid-i7nfoaoc>সপ্তাহে ৫টি ক্লাস</p>
-          <p class="plan__price" data-astro-cid-i7nfoaoc>
-            <span class="plan__currency" data-astro-cid-i7nfoaoc>$</span>
-            <span class="plan__amount" data-astro-cid-i7nfoaoc>৮৫</span>
-            <span class="plan__period" data-astro-cid-i7nfoaoc>প্রতি মাসে</span>
-          </p>
-          <p class="plan__text" data-astro-cid-i7nfoaoc>হিফজ ও দ্রুত অগ্রগতির জন্য প্রতিদিনের পাঠ।</p>
-          <p class="plan__count" data-astro-cid-i7nfoaoc>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
-            মাসে ২০টি ক্লাস
-          </p>
-          <a class="btn btn--block btn--outline" href="../bn/free-trial.html" data-astro-cid-i7nfoaoc>
-            ফ্রি ট্রায়াল দিয়ে শুরু করুন
-          </a>
-        </li>
-</ul>
-
-<aside class="group card" data-reveal data-astro-cid-i7nfoaoc>
-  <span class="icon-tile icon-tile--navy" data-astro-cid-i7nfoaoc><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg></span>
-  <div data-astro-cid-i7nfoaoc>
-    <h2 class="group__title" data-astro-cid-i7nfoaoc>আলিমিয়াহ ও জুনিয়র ইসলামি শিক্ষা</h2>
-    <p class="group__text" data-astro-cid-i7nfoaoc>এই প্রোগ্রামগুলো সেমিস্টারভিত্তিক গ্রুপ ক্লাসে পড়ানো হয়। আগামী সেমিস্টারের ফি জানতে আমাদের জিজ্ঞেস করুন।</p>
-  </div>
-  <a class="btn btn--outline" href="../bn/free-trial.html" data-astro-cid-i7nfoaoc>গ্রুপ ক্লাস সম্পর্কে জানতে চান</a>
-</aside>
-
-<div class="included card" data-reveal data-astro-cid-i7nfoaoc>
-  <h2 class="included__title" data-astro-cid-i7nfoaoc>প্রতিটি প্ল্যানে যা থাকছে</h2>
-  <ul class="ticks included__list" data-astro-cid-i7nfoaoc>
-    <li data-astro-cid-i7nfoaoc>একান্ত ওয়ান-টু-ওয়ান ক্লাস</li><li data-astro-cid-i7nfoaoc>পছন্দমতো পুরুষ বা মহিলা শিক্ষক</li><li data-astro-cid-i7nfoaoc>আপনার টাইম জোনে নির্দিষ্ট ক্লাসের সময়</li><li data-astro-cid-i7nfoaoc>নিয়মিত অগ্রগতির রিপোর্ট</li><li data-astro-cid-i7nfoaoc>মাসভিত্তিক ফি, দীর্ঘমেয়াদি কোনো চুক্তি নেই</li>
-  </ul>
-  <p class="included__note" data-astro-cid-i7nfoaoc>ঘরে একাধিক শিক্ষার্থী? পরিবারের জন্য ফি সম্পর্কে আমাদের জিজ্ঞেস করুন।</p>
+      <div class="choose" data-reveal data-astro-cid-f7swimbp>
+        <div data-astro-cid-f7swimbp>
+          <p class="choose__label" data-astro-cid-f7swimbp>আপনার অঞ্চল বেছে নিন</p>
+          <div class="region-switch region-switch--large" role="group" aria-label="আপনার অঞ্চল বেছে নিন" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>যুক্তরাষ্ট্র ও কানাডা</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>বাংলাদেশ</button>
 </div>
+
+
+        </div>
+        <p class="choose__note" data-astro-cid-f7swimbp><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg><span data-astro-cid-f7swimbp>অন্যান্য দেশের শিক্ষার্থীরা যুক্তরাষ্ট্র ও কানাডার ফি মার্কিন ডলারে দেন, এবং নিজের সুবিধামতো যেকোনো সময়সূচিতে যোগ দেন।</span></p>
+      </div>
+
+      <aside class="free on-dark" data-reveal data-astro-cid-f7swimbp>
+        <span class="pattern pattern--corner" data-astro-cid-f7swimbp></span>
+        <span class="free__seven" aria-hidden="true" data-astro-cid-f7swimbp>৭</span>
+        <div class="free__copy" data-astro-cid-f7swimbp>
+          <h2 class="free__title" data-astro-cid-f7swimbp>প্রথম সপ্তাহ ফ্রি</h2>
+          <p data-astro-cid-f7swimbp>বাংলাদেশে হোক বা বিদেশে, প্রত্যেক নতুন শিক্ষার্থী প্রথম সপ্তাহের ক্লাস করেন কোনো ফি ছাড়াই।</p>
+        </div>
+        <a class="btn btn--saffron" href="../bn/free-trial.html" data-astro-cid-f7swimbp>
+          ফ্রি সপ্তাহ শুরু করুন
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </aside>
+
+      <header class="heading block" data-reveal data-astro-cid-f7swimbp>
+        <p class="kicker" data-astro-cid-f7swimbp><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
+</svg>ফি</p>
+        <h2 class="title" data-astro-cid-f7swimbp>মাসিক ফি</h2>
+        <p class="lead" data-astro-cid-f7swimbp>এক ঘণ্টার সরাসরি ক্লাস, সপ্তাহে দুই, তিন বা চার দিন। গ্রুপ ব্যাচ বা ওয়ান-টু-ওয়ান পাঠ বেছে নিন।</p>
+      </header>
+
+      <div class="fee-regions" data-astro-cid-f7swimbp>
+        <div class="fees" data-for-region="us" data-astro-cid-6rrxg2fb>
+  <p class="fees__region" data-astro-cid-6rrxg2fb>
+    <span class="fees__currency" data-astro-cid-6rrxg2fb>$</span>
+    ফি ও ক্লাসের সময়: <strong data-astro-cid-6rrxg2fb>যুক্তরাষ্ট্র ও কানাডা</strong>
+    <span class="fees__code" data-astro-cid-6rrxg2fb>· মার্কিন ডলার</span>
+  </p>
+
+  <ul class="fees__cards" data-astro-cid-6rrxg2fb>
+    <li class="fee card fee--featured" data-reveal style="--reveal-order: 0" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>সপ্তাহে ৪ দিন</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>সোম–বৃহঃ</p>
+
+            <ol class="week" aria-label="সপ্তাহের দিন" data-astro-cid-6rrxg2fb>
+              <li class="week__day is-on" title="সোমবার" data-astro-cid-6rrxg2fb>
+                  সোম
+                </li><li class="week__day is-on" title="মঙ্গলবার" data-astro-cid-6rrxg2fb>
+                  মঙ্গল
+                </li><li class="week__day is-on" title="বুধবার" data-astro-cid-6rrxg2fb>
+                  বুধ
+                </li><li class="week__day is-on" title="বৃহস্পতিবার" data-astro-cid-6rrxg2fb>
+                  বৃহঃ
+                </li><li class="week__day" title="শুক্রবার" data-astro-cid-6rrxg2fb>
+                  শুক্র
+                </li><li class="week__day" title="শনিবার" data-astro-cid-6rrxg2fb>
+                  শনি
+                </li><li class="week__day" title="রবিবার" data-astro-cid-6rrxg2fb>
+                  রবি
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    গ্রুপ ব্যাচ
+                    <small data-astro-cid-6rrxg2fb>অন্য শিক্ষার্থীদের সঙ্গে একসাথে শিখুন</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$৮৫</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    ওয়ান-টু-ওয়ান
+                    <small data-astro-cid-6rrxg2fb>শিক্ষকের সঙ্গে ব্যক্তিগত পাঠ</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$১২৫</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+            </dl>
+          </li><li class="fee card" data-reveal style="--reveal-order: 1" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>সপ্তাহে ৩ দিন</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>শুক্র–রবি</p>
+
+            <ol class="week" aria-label="সপ্তাহের দিন" data-astro-cid-6rrxg2fb>
+              <li class="week__day" title="সোমবার" data-astro-cid-6rrxg2fb>
+                  সোম
+                </li><li class="week__day" title="মঙ্গলবার" data-astro-cid-6rrxg2fb>
+                  মঙ্গল
+                </li><li class="week__day" title="বুধবার" data-astro-cid-6rrxg2fb>
+                  বুধ
+                </li><li class="week__day" title="বৃহস্পতিবার" data-astro-cid-6rrxg2fb>
+                  বৃহঃ
+                </li><li class="week__day is-on" title="শুক্রবার" data-astro-cid-6rrxg2fb>
+                  শুক্র
+                </li><li class="week__day is-on" title="শনিবার" data-astro-cid-6rrxg2fb>
+                  শনি
+                </li><li class="week__day is-on" title="রবিবার" data-astro-cid-6rrxg2fb>
+                  রবি
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    গ্রুপ ব্যাচ
+                    <small data-astro-cid-6rrxg2fb>অন্য শিক্ষার্থীদের সঙ্গে একসাথে শিখুন</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$৮০</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    ওয়ান-টু-ওয়ান
+                    <small data-astro-cid-6rrxg2fb>শিক্ষকের সঙ্গে ব্যক্তিগত পাঠ</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$১০০</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+            </dl>
+          </li><li class="fee card" data-reveal style="--reveal-order: 2" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>সপ্তাহে ২ দিন</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>শনি–রবি</p>
+
+            <ol class="week" aria-label="সপ্তাহের দিন" data-astro-cid-6rrxg2fb>
+              <li class="week__day" title="সোমবার" data-astro-cid-6rrxg2fb>
+                  সোম
+                </li><li class="week__day" title="মঙ্গলবার" data-astro-cid-6rrxg2fb>
+                  মঙ্গল
+                </li><li class="week__day" title="বুধবার" data-astro-cid-6rrxg2fb>
+                  বুধ
+                </li><li class="week__day" title="বৃহস্পতিবার" data-astro-cid-6rrxg2fb>
+                  বৃহঃ
+                </li><li class="week__day" title="শুক্রবার" data-astro-cid-6rrxg2fb>
+                  শুক্র
+                </li><li class="week__day is-on" title="শনিবার" data-astro-cid-6rrxg2fb>
+                  শনি
+                </li><li class="week__day is-on" title="রবিবার" data-astro-cid-6rrxg2fb>
+                  রবি
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    গ্রুপ ব্যাচ
+                    <small data-astro-cid-6rrxg2fb>অন্য শিক্ষার্থীদের সঙ্গে একসাথে শিখুন</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$৭৫</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    ওয়ান-টু-ওয়ান
+                    <small data-astro-cid-6rrxg2fb>শিক্ষকের সঙ্গে ব্যক্তিগত পাঠ</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$৮৫</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+            </dl>
+          </li>
+  </ul>
+</div><div class="fees" data-for-region="bd" data-astro-cid-6rrxg2fb>
+  <p class="fees__region" data-astro-cid-6rrxg2fb>
+    <span class="fees__currency" data-astro-cid-6rrxg2fb>৳</span>
+    ফি ও ক্লাসের সময়: <strong data-astro-cid-6rrxg2fb>বাংলাদেশ</strong>
+    <span class="fees__code" data-astro-cid-6rrxg2fb>· বাংলাদেশি টাকা</span>
+  </p>
+
+  <ul class="fees__cards" data-astro-cid-6rrxg2fb>
+    <li class="fee card fee--featured" data-reveal style="--reveal-order: 0" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>সপ্তাহে ৪ দিন</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>সোম–বৃহঃ</p>
+
+            <ol class="week" aria-label="সপ্তাহের দিন" data-astro-cid-6rrxg2fb>
+              <li class="week__day is-on" title="সোমবার" data-astro-cid-6rrxg2fb>
+                  সোম
+                </li><li class="week__day is-on" title="মঙ্গলবার" data-astro-cid-6rrxg2fb>
+                  মঙ্গল
+                </li><li class="week__day is-on" title="বুধবার" data-astro-cid-6rrxg2fb>
+                  বুধ
+                </li><li class="week__day is-on" title="বৃহস্পতিবার" data-astro-cid-6rrxg2fb>
+                  বৃহঃ
+                </li><li class="week__day" title="শুক্রবার" data-astro-cid-6rrxg2fb>
+                  শুক্র
+                </li><li class="week__day" title="শনিবার" data-astro-cid-6rrxg2fb>
+                  শনি
+                </li><li class="week__day" title="রবিবার" data-astro-cid-6rrxg2fb>
+                  রবি
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    গ্রুপ ব্যাচ
+                    <small data-astro-cid-6rrxg2fb>অন্য শিক্ষার্থীদের সঙ্গে একসাথে শিখুন</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳১,০০০</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    ওয়ান-টু-ওয়ান
+                    <small data-astro-cid-6rrxg2fb>শিক্ষকের সঙ্গে ব্যক্তিগত পাঠ</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳১,৫০০</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+            </dl>
+          </li><li class="fee card" data-reveal style="--reveal-order: 1" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>সপ্তাহে ৩ দিন</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>এই দিনগুলোর যেকোনো ৩ দিন বেছে নিন: সোম–বৃহঃ</p>
+
+            <ol class="week" aria-label="সপ্তাহের দিন" data-astro-cid-6rrxg2fb>
+              <li class="week__day is-choice" title="সোমবার" data-astro-cid-6rrxg2fb>
+                  সোম
+                </li><li class="week__day is-choice" title="মঙ্গলবার" data-astro-cid-6rrxg2fb>
+                  মঙ্গল
+                </li><li class="week__day is-choice" title="বুধবার" data-astro-cid-6rrxg2fb>
+                  বুধ
+                </li><li class="week__day is-choice" title="বৃহস্পতিবার" data-astro-cid-6rrxg2fb>
+                  বৃহঃ
+                </li><li class="week__day" title="শুক্রবার" data-astro-cid-6rrxg2fb>
+                  শুক্র
+                </li><li class="week__day" title="শনিবার" data-astro-cid-6rrxg2fb>
+                  শনি
+                </li><li class="week__day" title="রবিবার" data-astro-cid-6rrxg2fb>
+                  রবি
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    গ্রুপ ব্যাচ
+                    <small data-astro-cid-6rrxg2fb>অন্য শিক্ষার্থীদের সঙ্গে একসাথে শিখুন</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳৮০০</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    ওয়ান-টু-ওয়ান
+                    <small data-astro-cid-6rrxg2fb>শিক্ষকের সঙ্গে ব্যক্তিগত পাঠ</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳১,২০০</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+            </dl>
+          </li><li class="fee card" data-reveal style="--reveal-order: 2" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>সপ্তাহে ২ দিন</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>এই দিনগুলোর যেকোনো ২ দিন বেছে নিন: সোম–বৃহঃ</p>
+
+            <ol class="week" aria-label="সপ্তাহের দিন" data-astro-cid-6rrxg2fb>
+              <li class="week__day is-choice" title="সোমবার" data-astro-cid-6rrxg2fb>
+                  সোম
+                </li><li class="week__day is-choice" title="মঙ্গলবার" data-astro-cid-6rrxg2fb>
+                  মঙ্গল
+                </li><li class="week__day is-choice" title="বুধবার" data-astro-cid-6rrxg2fb>
+                  বুধ
+                </li><li class="week__day is-choice" title="বৃহস্পতিবার" data-astro-cid-6rrxg2fb>
+                  বৃহঃ
+                </li><li class="week__day" title="শুক্রবার" data-astro-cid-6rrxg2fb>
+                  শুক্র
+                </li><li class="week__day" title="শনিবার" data-astro-cid-6rrxg2fb>
+                  শনি
+                </li><li class="week__day" title="রবিবার" data-astro-cid-6rrxg2fb>
+                  রবি
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    গ্রুপ ব্যাচ
+                    <small data-astro-cid-6rrxg2fb>অন্য শিক্ষার্থীদের সঙ্গে একসাথে শিখুন</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳৭০০</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    ওয়ান-টু-ওয়ান
+                    <small data-astro-cid-6rrxg2fb>শিক্ষকের সঙ্গে ব্যক্তিগত পাঠ</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳১,০০০</strong>
+                  <span data-astro-cid-6rrxg2fb>প্রতি মাসে</span>
+                </dd>
+              </div>
+            </dl>
+          </li>
+  </ul>
+</div>
+      </div>
+
+      <div class="cols cols--2 block extras" data-astro-cid-f7swimbp>
+        <div class="card pad formats" data-reveal data-astro-cid-f7swimbp>
+          <span class="icon-tile" data-astro-cid-f7swimbp><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg></span>
+          <p data-astro-cid-f7swimbp>নাজেরা ও হিফজ গ্রুপ ব্যাচে বা ওয়ান-টু-ওয়ান পড়া যায়। আলিমিয়াহ পড়ানো হয় গ্রুপ ব্যাচে, গ্রুপের ফিতে।</p>
+          <a class="link" href="../bn/free-trial.html" data-astro-cid-f7swimbp>
+            ফ্রি সপ্তাহ শুরু করুন
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="card pad" data-reveal style="--reveal-order: 1" data-astro-cid-f7swimbp>
+          <h3 class="h3" data-astro-cid-f7swimbp>প্রতিটি প্ল্যানে থাকছে</h3>
+          <ul class="ticks" style="margin-top: 1rem" data-astro-cid-f7swimbp>
+            <li data-astro-cid-f7swimbp>যোগ্য শিক্ষকের সঙ্গে সরাসরি ক্লাস</li><li data-astro-cid-f7swimbp>পছন্দমতো পুরুষ বা মহিলা শিক্ষক</li><li data-astro-cid-f7swimbp>নাজেরা ও হিফজের সঙ্গে দ্বীনিয়াত</li><li data-astro-cid-f7swimbp>অভিভাবকদের জন্য নিয়মিত অগ্রগতির রিপোর্ট</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="timetable" data-astro-cid-f7swimbp>
+    <div class="container" data-astro-cid-f7swimbp>
+      <header class="heading" data-reveal data-astro-cid-f7swimbp>
+        <p class="kicker" data-astro-cid-f7swimbp><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
+</svg>সময়সূচি</p>
+        <h2 class="title" data-astro-cid-f7swimbp>ক্লাসের সময়সূচি</h2>
+        <p class="lead" data-astro-cid-f7swimbp>ক্লাস হয় সন্ধ্যায়, নির্দিষ্ট দিনে, এক ঘণ্টার সেশনে।</p>
+      </header>
+      <div class="block timetables" data-astro-cid-f7swimbp>
+        <div class="timetable" data-for-region="us" data-astro-cid-bdgzs6hm>
+  <div class="timetable__grid" data-astro-cid-bdgzs6hm>
+    <!-- The plans across a week -->
+    <div class="card plans" data-reveal data-astro-cid-bdgzs6hm>
+      <h3 class="plans__title" data-astro-cid-bdgzs6hm>যুক্তরাষ্ট্র ও কানাডা</h3>
+      <p class="plans__hours" data-astro-cid-bdgzs6hm>
+        ইস্টার্ন টাইম: শীতে সন্ধ্যা ৬:৩০ – রাত ৯:৩০, গ্রীষ্মে সন্ধ্যা ৭:৩০ – রাত ১০:৩০
+      </p>
+      <table class="plans__table" data-astro-cid-bdgzs6hm>
+        <thead data-astro-cid-bdgzs6hm>
+          <tr data-astro-cid-bdgzs6hm>
+            <th scope="col" data-astro-cid-bdgzs6hm><span class="sr-only" data-astro-cid-bdgzs6hm> দিনের প্ল্যান</span></th>
+            <th scope="col" title="সোমবার" data-astro-cid-bdgzs6hm>সোম</th><th scope="col" title="মঙ্গলবার" data-astro-cid-bdgzs6hm>মঙ্গল</th><th scope="col" title="বুধবার" data-astro-cid-bdgzs6hm>বুধ</th><th scope="col" title="বৃহস্পতিবার" data-astro-cid-bdgzs6hm>বৃহঃ</th><th scope="col" title="শুক্রবার" data-astro-cid-bdgzs6hm>শুক্র</th><th scope="col" title="শনিবার" data-astro-cid-bdgzs6hm>শনি</th><th scope="col" title="রবিবার" data-astro-cid-bdgzs6hm>রবি</th>
+          </tr>
+        </thead>
+        <tbody data-astro-cid-bdgzs6hm>
+          <tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  ৪ দিনের প্ল্যান
+                  
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>সোমবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>মঙ্গলবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>বুধবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>বৃহস্পতিবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td>
+              </tr><tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  ৩ দিনের প্ল্যান
+                  
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>শুক্রবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>শনিবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>রবিবার</span>
+                      </span>
+                    </td>
+              </tr><tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  ২ দিনের প্ল্যান
+                  
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>শনিবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>রবিবার</span>
+                      </span>
+                    </td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- In the reader's own time -->
+    <div class="card yours" hidden data-yours data-settings="{&quot;locale&quot;:&quot;bn-BD&quot;,&quot;startUtc&quot;:[23,30],&quot;hours&quot;:3,&quot;plans&quot;:[{&quot;days&quot;:4,&quot;on&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;thu&quot;],&quot;choose&quot;:0},{&quot;days&quot;:3,&quot;on&quot;:[&quot;fri&quot;,&quot;sat&quot;,&quot;sun&quot;],&quot;choose&quot;:0},{&quot;days&quot;:2,&quot;on&quot;:[&quot;sat&quot;,&quot;sun&quot;],&quot;choose&quot;:0}],&quot;labels&quot;:{&quot;plan&quot;:[&quot;৪ দিনের প্ল্যান&quot;,&quot;৩ দিনের প্ল্যান&quot;,&quot;২ দিনের প্ল্যান&quot;],&quot;choose&quot;:[&quot;&quot;,&quot;&quot;,&quot;&quot;],&quot;nextDay&quot;:&quot;পরের দিন&quot;,&quot;days&quot;:{&quot;mon&quot;:&quot;সোম&quot;,&quot;tue&quot;:&quot;মঙ্গল&quot;,&quot;wed&quot;:&quot;বুধ&quot;,&quot;thu&quot;:&quot;বৃহঃ&quot;,&quot;fri&quot;:&quot;শুক্র&quot;,&quot;sat&quot;:&quot;শনি&quot;,&quot;sun&quot;:&quot;রবি&quot;},&quot;zone&quot;:&quot;আপনার সময় অঞ্চল ({zone}) অনুযায়ী, সামনের সপ্তাহের হিসাবে।&quot;,&quot;to&quot;:&quot;–&quot;}}" data-astro-cid-bdgzs6hm>
+      <p class="kicker yours__kicker" data-astro-cid-bdgzs6hm>আপনার সময়ে</p>
+      <ul class="yours__list" data-yours-list data-astro-cid-bdgzs6hm></ul>
+      <p class="yours__zone" data-yours-zone data-astro-cid-bdgzs6hm></p>
+    </div>
+  </div>
+
+  <div class="card zones" data-reveal data-astro-cid-bdgzs6hm>
+        <h3 class="zones__title" data-astro-cid-bdgzs6hm>উত্তর আমেরিকা জুড়ে ক্লাসের সময়</h3>
+        <div class="zones__wrap" data-astro-cid-bdgzs6hm>
+          <table class="zones__table" data-astro-cid-bdgzs6hm>
+            <thead data-astro-cid-bdgzs6hm>
+              <tr data-astro-cid-bdgzs6hm>
+                <th scope="col" data-astro-cid-bdgzs6hm>টাইম জোন</th>
+                <th scope="col" data-astro-cid-bdgzs6hm>স্ট্যান্ডার্ড টাইম (মোটামুটি নভেম্বর–মার্চ)</th>
+                <th scope="col" data-astro-cid-bdgzs6hm>ডেলাইট সেভিং টাইম (মোটামুটি মার্চ–নভেম্বর)</th>
+              </tr>
+            </thead>
+            <tbody data-astro-cid-bdgzs6hm>
+              <tr data-iana="America/St_Johns" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>নিউফাউন্ডল্যান্ড</th>
+                  <td data-astro-cid-bdgzs6hm>রাত ৮:০০ – রাত ১১:০০</td>
+                  <td data-astro-cid-bdgzs6hm>রাত ৯:০০ – রাত ১২:০০</td>
+                </tr><tr data-iana="America/Halifax" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>আটলান্টিক</th>
+                  <td data-astro-cid-bdgzs6hm>সন্ধ্যা ৭:৩০ – রাত ১০:৩০</td>
+                  <td data-astro-cid-bdgzs6hm>রাত ৮:৩০ – রাত ১১:৩০</td>
+                </tr><tr data-iana="America/New_York" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>ইস্টার্ন</th>
+                  <td data-astro-cid-bdgzs6hm>সন্ধ্যা ৬:৩০ – রাত ৯:৩০</td>
+                  <td data-astro-cid-bdgzs6hm>সন্ধ্যা ৭:৩০ – রাত ১০:৩০</td>
+                </tr><tr data-iana="America/Chicago" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>সেন্ট্রাল</th>
+                  <td data-astro-cid-bdgzs6hm>বিকাল ৫:৩০ – রাত ৮:৩০</td>
+                  <td data-astro-cid-bdgzs6hm>সন্ধ্যা ৬:৩০ – রাত ৯:৩০</td>
+                </tr><tr data-iana="America/Denver" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>মাউন্টেন</th>
+                  <td data-astro-cid-bdgzs6hm>বিকাল ৪:৩০ – সন্ধ্যা ৭:৩০</td>
+                  <td data-astro-cid-bdgzs6hm>বিকাল ৫:৩০ – রাত ৮:৩০</td>
+                </tr><tr data-iana="America/Los_Angeles" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>প্যাসিফিক</th>
+                  <td data-astro-cid-bdgzs6hm>দুপুর ৩:৩০ – সন্ধ্যা ৬:৩০</td>
+                  <td data-astro-cid-bdgzs6hm>বিকাল ৪:৩০ – সন্ধ্যা ৭:৩০</td>
+                </tr><tr data-iana="America/Anchorage" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>আলাস্কা</th>
+                  <td data-astro-cid-bdgzs6hm>দুপুর ২:৩০ – বিকাল ৫:৩০</td>
+                  <td data-astro-cid-bdgzs6hm>দুপুর ৩:৩০ – সন্ধ্যা ৬:৩০</td>
+                </tr><tr data-iana="Pacific/Honolulu" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>হাওয়াই</th>
+                  <td data-astro-cid-bdgzs6hm>দুপুর ১:৩০ – বিকাল ৪:৩০</td>
+                  <td data-astro-cid-bdgzs6hm>দুপুর ১:৩০ – বিকাল ৪:৩০</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+  <ul class="notes" data-astro-cid-bdgzs6hm>
+    <li data-astro-cid-bdgzs6hm>প্রতিটি ক্লাস এক ঘণ্টার। সন্ধ্যার তিন ঘণ্টার সময়ের মধ্যে সর্বোচ্চ তিনটি গ্রুপ সেশন হয়; ভর্তির সময় আপনার নির্দিষ্ট ঘণ্টা ঠিক করা হয়।</li><li data-astro-cid-bdgzs6hm>ওয়ান-টু-ওয়ান পাঠও এই একই সময়ের মধ্যে ঠিক করা হয়।</li><li data-astro-cid-bdgzs6hm>ক্লাসের সময় বিশ্ব সময়ে নির্দিষ্ট (UTC রাত ১১:৩০ – ২:৩০), তাই ডেলাইট সেভিং টাইম শুরু বা শেষ হলে আপনার স্থানীয় ঘড়ির সময় এক ঘণ্টা সরে যায়। অ্যারিজোনার বেশিরভাগ অঞ্চল ও সাসকাচুয়ানের মতো কিছু জায়গায় ঘড়ি বদলানো হয় না।</li>
+  </ul>
+</div>
+
+<script type="module">// src/components/Timetable.astro?astro&type=script&index=0&lang.ts
+document.querySelectorAll("[data-yours]").forEach((panel) => {
+	try {
+		const s = JSON.parse(panel.dataset.settings ?? "{}");
+		const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+		const utcDays = [
+			"sun",
+			"mon",
+			"tue",
+			"wed",
+			"thu",
+			"fri",
+			"sat"
+		];
+		const bn = s.locale === "bn-BD";
+		const clock = new Intl.DateTimeFormat(s.locale, bn ? {
+			hour: "numeric",
+			minute: "2-digit",
+			dayPeriod: "short",
+			timeZone: zone
+		} : {
+			hour: "numeric",
+			minute: "2-digit",
+			timeZone: zone
+		});
+		/** "6:30 PM", or in Bangla "সন্ধ্যা ৬:৩০", with the part of the day first. */
+		const time = (date) => {
+			if (!bn) return clock.format(date);
+			const parts = clock.formatToParts(date);
+			const part = (type) => parts.find((entry) => entry.type === type)?.value ?? "";
+			return `${part("dayPeriod") === "রাত্রি" ? "রাত" : part("dayPeriod")} ${part("hour")}:${part("minute")}`;
+		};
+		const dayKey = new Intl.DateTimeFormat("en-US", {
+			weekday: "short",
+			timeZone: zone
+		});
+		const dateKey = new Intl.DateTimeFormat("en-CA", {
+			year: "numeric",
+			month: "2-digit",
+			day: "2-digit",
+			timeZone: zone
+		});
+		/** The next window that starts on a given UTC weekday. */
+		const next = (day) => {
+			const now = /* @__PURE__ */ new Date();
+			for (let ahead = 0; ahead < 8; ahead++) {
+				const date = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + ahead, s.startUtc[0], s.startUtc[1]));
+				if (utcDays[date.getUTCDay()] === day && date.getTime() + s.hours * 36e5 > now.getTime()) return date;
+			}
+			return /* @__PURE__ */ new Date();
+		};
+		const list = panel.querySelector("[data-yours-list]");
+		s.plans.forEach((plan, index) => {
+			const sessions = plan.on.map((day) => {
+				const start = next(day);
+				const end = new Date(start.getTime() + s.hours * 36e5);
+				return {
+					name: s.labels.days[dayKey.format(start).toLowerCase().slice(0, 3)],
+					hours: `${time(start)} ${s.labels.to} ${time(end)}`,
+					crosses: dateKey.format(start) !== dateKey.format(end)
+				};
+			});
+			const days = sessions.length > 1 ? `${sessions[0].name}–${sessions[sessions.length - 1].name}` : sessions[0].name;
+			const first = sessions[0];
+			const item = document.createElement("li");
+			const title = document.createElement("strong");
+			title.textContent = s.labels.plan[index];
+			const when = document.createElement("span");
+			when.textContent = `${plan.choose ? `${s.labels.choose[index]}: ` : ""}${days} · ${first.hours}${first.crosses ? ` (${s.labels.nextDay})` : ""}`;
+			item.append(title, when);
+			list.append(item);
+		});
+		const zoneName = new Intl.DateTimeFormat(s.locale, {
+			timeZoneName: "long",
+			timeZone: zone
+		}).formatToParts(/* @__PURE__ */ new Date()).find((part) => part.type === "timeZoneName")?.value ?? zone;
+		panel.querySelector("[data-yours-zone]").textContent = s.labels.zone.replace("{zone}", zoneName);
+		panel.hidden = false;
+		const at = (timeZone, date) => new Intl.DateTimeFormat("en-US", {
+			hour: "numeric",
+			minute: "2-digit",
+			timeZone
+		}).format(date);
+		const seasons = [new Date(Date.UTC(2026, 0, 12, 12)), new Date(Date.UTC(2026, 6, 13, 12))];
+		[...panel.closest(".timetable")?.querySelectorAll("[data-iana]") ?? []].find((row) => seasons.every((date) => at(zone, date) === at(row.dataset.iana, date)))?.classList.add("is-yours");
+	} catch {}
+});</script><div class="timetable" data-for-region="bd" data-astro-cid-bdgzs6hm>
+  <div class="timetable__grid" data-astro-cid-bdgzs6hm>
+    <!-- The plans across a week -->
+    <div class="card plans" data-reveal data-astro-cid-bdgzs6hm>
+      <h3 class="plans__title" data-astro-cid-bdgzs6hm>বাংলাদেশ</h3>
+      <p class="plans__hours" data-astro-cid-bdgzs6hm>
+        বাংলাদেশ সময় সন্ধ্যা ৬:০০ – রাত ১০:০০
+      </p>
+      <table class="plans__table" data-astro-cid-bdgzs6hm>
+        <thead data-astro-cid-bdgzs6hm>
+          <tr data-astro-cid-bdgzs6hm>
+            <th scope="col" data-astro-cid-bdgzs6hm><span class="sr-only" data-astro-cid-bdgzs6hm> দিনের প্ল্যান</span></th>
+            <th scope="col" title="সোমবার" data-astro-cid-bdgzs6hm>সোম</th><th scope="col" title="মঙ্গলবার" data-astro-cid-bdgzs6hm>মঙ্গল</th><th scope="col" title="বুধবার" data-astro-cid-bdgzs6hm>বুধ</th><th scope="col" title="বৃহস্পতিবার" data-astro-cid-bdgzs6hm>বৃহঃ</th><th scope="col" title="শুক্রবার" data-astro-cid-bdgzs6hm>শুক্র</th><th scope="col" title="শনিবার" data-astro-cid-bdgzs6hm>শনি</th><th scope="col" title="রবিবার" data-astro-cid-bdgzs6hm>রবি</th>
+          </tr>
+        </thead>
+        <tbody data-astro-cid-bdgzs6hm>
+          <tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  ৪ দিনের প্ল্যান
+                  
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>সোমবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>মঙ্গলবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>বুধবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>বৃহস্পতিবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td>
+              </tr><tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  ৩ দিনের প্ল্যান
+                  <small data-astro-cid-bdgzs6hm>যেকোনো ৩ দিন</small>
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>সোমবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>মঙ্গলবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>বুধবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>বৃহস্পতিবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td>
+              </tr><tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  ২ দিনের প্ল্যান
+                  <small data-astro-cid-bdgzs6hm>যেকোনো ২ দিন</small>
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>সোমবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>মঙ্গলবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>বুধবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>বৃহস্পতিবার</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- In the reader's own time -->
+    <div class="card yours" hidden data-yours data-settings="{&quot;locale&quot;:&quot;bn-BD&quot;,&quot;startUtc&quot;:[12,0],&quot;hours&quot;:4,&quot;plans&quot;:[{&quot;days&quot;:4,&quot;on&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;thu&quot;],&quot;choose&quot;:0},{&quot;days&quot;:3,&quot;on&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;thu&quot;],&quot;choose&quot;:3},{&quot;days&quot;:2,&quot;on&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;thu&quot;],&quot;choose&quot;:2}],&quot;labels&quot;:{&quot;plan&quot;:[&quot;৪ দিনের প্ল্যান&quot;,&quot;৩ দিনের প্ল্যান&quot;,&quot;২ দিনের প্ল্যান&quot;],&quot;choose&quot;:[&quot;&quot;,&quot;এই দিনগুলোর যেকোনো ৩ দিন বেছে নিন&quot;,&quot;এই দিনগুলোর যেকোনো ২ দিন বেছে নিন&quot;],&quot;nextDay&quot;:&quot;পরের দিন&quot;,&quot;days&quot;:{&quot;mon&quot;:&quot;সোম&quot;,&quot;tue&quot;:&quot;মঙ্গল&quot;,&quot;wed&quot;:&quot;বুধ&quot;,&quot;thu&quot;:&quot;বৃহঃ&quot;,&quot;fri&quot;:&quot;শুক্র&quot;,&quot;sat&quot;:&quot;শনি&quot;,&quot;sun&quot;:&quot;রবি&quot;},&quot;zone&quot;:&quot;আপনার সময় অঞ্চল ({zone}) অনুযায়ী, সামনের সপ্তাহের হিসাবে।&quot;,&quot;to&quot;:&quot;–&quot;}}" data-astro-cid-bdgzs6hm>
+      <p class="kicker yours__kicker" data-astro-cid-bdgzs6hm>আপনার সময়ে</p>
+      <ul class="yours__list" data-yours-list data-astro-cid-bdgzs6hm></ul>
+      <p class="yours__zone" data-yours-zone data-astro-cid-bdgzs6hm></p>
+    </div>
+  </div>
+
+  
+
+  <ul class="notes" data-astro-cid-bdgzs6hm>
+    <li data-astro-cid-bdgzs6hm>প্রতিটি ক্লাস এক ঘণ্টার। সন্ধ্যার চার ঘণ্টার সময়ের মধ্যে সর্বোচ্চ চারটি গ্রুপ সেশন হয়; ভর্তির সময় আপনার নির্দিষ্ট ঘণ্টা ঠিক করা হয়।</li><li data-astro-cid-bdgzs6hm>৩ দিন ও ২ দিনের প্ল্যানে সোমবার থেকে বৃহস্পতিবারের মধ্যে আপনি নিজের দিন বেছে নেন।</li><li data-astro-cid-bdgzs6hm>ওয়ান-টু-ওয়ান পাঠও এই একই সময়ের মধ্যে ঠিক করা হয়।</li>
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="admission" data-astro-cid-f7swimbp>
+    <div class="container cols cols--2 admission" data-astro-cid-f7swimbp>
+      <div data-reveal data-astro-cid-f7swimbp>
+        <p class="kicker" data-astro-cid-f7swimbp><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
+</svg>ভর্তি ও ফি পরিশোধ</p>
+        <ol class="steps-list" data-astro-cid-f7swimbp>
+          <li data-astro-cid-f7swimbp>
+                <span class="steps-list__badge" data-astro-cid-f7swimbp>১</span>
+                <div data-astro-cid-f7swimbp>
+                  <h3 class="h3" data-astro-cid-f7swimbp>ফ্রি প্রথম সপ্তাহ</h3>
+                  <p data-astro-cid-f7swimbp>এক সপ্তাহ বিনা খরচে ক্লাস করুন, আর দেখুন শিক্ষকের সঙ্গে পড়াশোনা কেমন চলছে।</p>
+                </div>
+              </li><li data-astro-cid-f7swimbp>
+                <span class="steps-list__badge" data-astro-cid-f7swimbp>২</span>
+                <div data-astro-cid-f7swimbp>
+                  <h3 class="h3" data-astro-cid-f7swimbp>ভর্তি নিশ্চিত করুন</h3>
+                  <p data-astro-cid-f7swimbp>চালিয়ে যেতে প্রথম মাসের ফি দিন। এতে ভর্তি নিশ্চিত হয় এবং প্রথম মাসের ফি পরিশোধ হয়ে যায়।</p>
+                </div>
+              </li><li data-astro-cid-f7swimbp>
+                <span class="steps-list__badge" data-astro-cid-f7swimbp>৩</span>
+                <div data-astro-cid-f7swimbp>
+                  <h3 class="h3" data-astro-cid-f7swimbp>এরপর থেকে প্রতি মাসে</h3>
+                  <p data-astro-cid-f7swimbp>ফি দিতে হয় মাসে মাসে, আপনার অঞ্চল, প্ল্যান ও ক্লাসের ধরন অনুযায়ী।</p>
+                </div>
+              </li>
+        </ol>
+      </div>
+      <div class="card pad" data-reveal style="--reveal-order: 1" data-astro-cid-f7swimbp>
+        <h3 class="h3" data-astro-cid-f7swimbp>জেনে রাখুন</h3>
+        <ul class="ticks" style="margin-top: 1rem" data-astro-cid-f7swimbp>
+          <li data-astro-cid-f7swimbp>সব ফি মাসিক</li><li data-astro-cid-f7swimbp>প্রত্যেক নতুন শিক্ষার্থীর জন্য প্রথম সপ্তাহ ফ্রি</li><li data-astro-cid-f7swimbp>ফ্রি সপ্তাহের পরে, ভর্তির সময় প্রথম মাসের ফি দিতে হয়</li><li data-astro-cid-f7swimbp>সপ্তাহে ২, ৩ বা ৪ দিন বেছে নিন</li><li data-astro-cid-f7swimbp>গ্রুপ ব্যাচ বা ওয়ান-টু-ওয়ান পাঠ বেছে নিন</li><li data-astro-cid-f7swimbp>ক্লাস চলে আপনার অঞ্চলের সময়সূচি অনুযায়ী</li><li data-astro-cid-f7swimbp>প্রতিটি ক্লাস এক ঘণ্টার</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -302,82 +1106,22 @@ if (header && toggle) {
         <ol class="steps" style="--columns: 4" data-astro-cid-5wfdsgz3>
   <li class="step" data-reveal style="--reveal-order: 0" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>১</span>
-        <h3 class="step__title" data-astro-cid-5wfdsgz3>ফ্রি ট্রায়ালের অনুরোধ করুন</h3>
-        <p class="step__text" data-astro-cid-5wfdsgz3>শিক্ষার্থী সম্পর্কে এবং আপনার সুবিধাজনক সময় আমাদের জানান। সময় লাগবে মাত্র দুই মিনিট।</p>
+        <h3 class="step__title" data-astro-cid-5wfdsgz3>ফ্রি সপ্তাহের অনুরোধ করুন</h3>
+        <p class="step__text" data-astro-cid-5wfdsgz3>শিক্ষার্থী, আপনার অঞ্চল এবং আপনার সুবিধাজনক সময় সম্পর্কে আমাদের জানান। সময় লাগবে মাত্র দুই মিনিট।</p>
       </li><li class="step" data-reveal style="--reveal-order: 1" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>২</span>
-        <h3 class="step__title" data-astro-cid-5wfdsgz3>শিক্ষকের সঙ্গে পরিচয়</h3>
-        <p class="step__text" data-astro-cid-5wfdsgz3>একটি ফ্রি প্রথম ক্লাসে শিক্ষক শিক্ষার্থীর সঙ্গে পরিচিত হন এবং তার স্তর যাচাই করেন, যাতে সে সঠিক জায়গা থেকে শুরু করতে পারে।</p>
+        <h3 class="step__title" data-astro-cid-5wfdsgz3>এক সপ্তাহ ফ্রি শিখুন</h3>
+        <p class="step__text" data-astro-cid-5wfdsgz3>ফ্রি প্রথম সপ্তাহে শিক্ষক শিক্ষার্থীর সঙ্গে পরিচিত হন এবং তার স্তর যাচাই করেন, যাতে সে সঠিক জায়গা থেকে শুরু করতে পারে।</p>
       </li><li class="step" data-reveal style="--reveal-order: 2" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>৩</span>
-        <h3 class="step__title" data-astro-cid-5wfdsgz3>সময়সূচি ঠিক করুন</h3>
-        <p class="step__text" data-astro-cid-5wfdsgz3>একটি প্রোগ্রাম এবং আপনার নিজের টাইম জোনে সাপ্তাহিক নির্দিষ্ট ক্লাসের সময় বেছে নিন।</p>
+        <h3 class="step__title" data-astro-cid-5wfdsgz3>ভর্তি নিশ্চিত করুন</h3>
+        <p class="step__text" data-astro-cid-5wfdsgz3>সপ্তাহে ২, ৩ বা ৪ দিন এবং গ্রুপ ব্যাচ বা ওয়ান-টু-ওয়ান বেছে নিন, তারপর প্রথম মাসের ফি দিয়ে ভর্তি নিশ্চিত করুন।</p>
       </li><li class="step" data-reveal style="--reveal-order: 3" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>৪</span>
         <h3 class="step__title" data-astro-cid-5wfdsgz3>শিখুন, এগিয়ে যান</h3>
         <p class="step__text" data-astro-cid-5wfdsgz3>ঘরে বসেই ভিডিও কলে প্রতিটি পাঠে যোগ দিন, এবং শিক্ষার্থীর অগ্রগতি নিয়ে নিয়মিত রিপোর্ট পান।</p>
       </li>
 </ol>
-      </div>
-      <div class="block" data-astro-cid-f7swimbp>
-        <div class="timeband on-dark" data-reveal data-clock data-locale="bn-BD" data-astro-cid-lo7mdono>
-  <span class="pattern pattern--corner" data-astro-cid-lo7mdono></span>
-  <div class="timeband__copy" data-astro-cid-lo7mdono>
-    <span class="icon-tile icon-tile--saffron" data-astro-cid-lo7mdono>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
-    </span>
-    <h3 class="timeband__title" data-astro-cid-lo7mdono>আমেরিকায় যখন সন্ধ্যা, বাংলাদেশে তখন সকাল</h3>
-    <p class="timeband__text" data-astro-cid-lo7mdono>যুক্তরাষ্ট্রে যখন স্কুল ও কাজ শেষ হয়, ঢাকায় তখন নতুন দিনের শুরু। তাই স্কুলের পর, সন্ধ্যায় কিংবা ছুটির দিনের ক্লাস সহজেই মিলে যায় — আমাদের শিক্ষকদের জন্যও, আপনার পরিবারের জন্যও।</p>
-    <p class="timeband__zones" data-astro-cid-lo7mdono>ইস্টার্ন · সেন্ট্রাল · মাউন্টেন · প্যাসিফিক · আলাস্কা · হাওয়াই</p>
-  </div>
-  <div class="timeband__clocks" aria-hidden="true" hidden data-clock-panel data-astro-cid-lo7mdono>
-    <div class="clock" data-astro-cid-lo7mdono>
-      <span class="clock__label" data-astro-cid-lo7mdono>আপনার সময়</span>
-      <span class="clock__time" data-clock-local data-astro-cid-lo7mdono>--:--</span>
-      <span class="clock__day" data-clock-zone data-astro-cid-lo7mdono></span>
-    </div>
-    <div class="clock clock--dhaka" data-astro-cid-lo7mdono>
-      <span class="clock__label" data-astro-cid-lo7mdono>ঢাকা, বাংলাদেশ</span>
-      <span class="clock__time" data-clock-dhaka data-astro-cid-lo7mdono>--:--</span>
-      <span class="clock__day" data-clock-day data-astro-cid-lo7mdono></span>
-    </div>
-  </div>
-</div>
-
-<script type="module">// src/components/TimeBand.astro?astro&type=script&index=0&lang.ts
-document.querySelectorAll("[data-clock]").forEach((band) => {
-	const panel = band.querySelector("[data-clock-panel]");
-	if (!panel) return;
-	try {
-		const locale = band.dataset.locale ?? "en-US";
-		const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-		const time = (timeZone) => new Intl.DateTimeFormat(locale, {
-			hour: "numeric",
-			minute: "2-digit",
-			timeZone
-		});
-		const day = (timeZone) => new Intl.DateTimeFormat(locale, {
-			weekday: "long",
-			timeZone
-		});
-		const formats = {
-			"[data-clock-local]": time(zone),
-			"[data-clock-dhaka]": time("Asia/Dhaka"),
-			"[data-clock-zone]": day(zone),
-			"[data-clock-day]": day("Asia/Dhaka")
-		};
-		const tick = () => {
-			const now = /* @__PURE__ */ new Date();
-			for (const [selector, format] of Object.entries(formats)) {
-				const element = panel.querySelector(selector);
-				if (element) element.textContent = format.format(now);
-			}
-		};
-		tick();
-		panel.hidden = false;
-		window.setInterval(tick, 15e3);
-	} catch {}
-});</script>
       </div>
     </div>
   </section>
@@ -394,11 +1138,11 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
       
 </svg>
       <div class="cta__copy" data-astro-cid-hwvj6ntz>
-        <h2 class="cta__title" data-astro-cid-hwvj6ntz>শুরু হোক একটি ফ্রি ক্লাস দিয়ে, ইনশাআল্লাহ</h2>
-        <p class="cta__text" data-astro-cid-hwvj6ntz>কোনো সিদ্ধান্ত নেওয়ার আগে একজন শিক্ষকের সঙ্গে পরিচিত হোন।</p>
+        <h2 class="cta__title" data-astro-cid-hwvj6ntz>শুরু হোক একটি ফ্রি সপ্তাহ দিয়ে, ইনশাআল্লাহ</h2>
+        <p class="cta__text" data-astro-cid-hwvj6ntz>কোনো সিদ্ধান্ত নেওয়ার আগে একজন শিক্ষকের সঙ্গে পুরো এক সপ্তাহ ক্লাস করে দেখুন।</p>
       </div>
       <a class="btn btn--saffron" href="../bn/free-trial.html" data-astro-cid-hwvj6ntz>
-        ফ্রি ট্রায়াল ক্লাস বুক করুন
+        ফ্রি সপ্তাহ শুরু করুন
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -436,7 +1180,7 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
           <span class="footer__tagline" data-astro-cid-jo6i4kqk>ইসলামিক ইনস্টিটিউট</span>
         </span>
       </a>
-      <p class="footer__about" data-astro-cid-jo6i4kqk>যুক্তরাষ্ট্রজুড়ে ও বিশ্বের অন্যান্য দেশের পরিবারগুলোর জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ।</p>
+      <p class="footer__about" data-astro-cid-jo6i4kqk>যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিক্ষার্থীদের জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ।</p>
       <p class="footer__arabic" lang="ar" dir="rtl" data-astro-cid-jo6i4kqk>دار الأرقم</p>
     </div>
 
@@ -456,11 +1200,11 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
             </li><li data-astro-cid-jo6i4kqk>
               <a href="../bn/reviews.html" data-astro-cid-jo6i4kqk>রিভিউ</a>
             </li><li data-astro-cid-jo6i4kqk>
-              <a href="../bn/tuition.html" data-astro-cid-jo6i4kqk>ফি</a>
+              <a href="../bn/tuition.html" data-astro-cid-jo6i4kqk>ফি ও সময়সূচি</a>
             </li><li data-astro-cid-jo6i4kqk>
               <a href="../bn/faq.html" data-astro-cid-jo6i4kqk>জিজ্ঞাসা</a>
             </li>
-        <li data-astro-cid-jo6i4kqk><a href="../bn/free-trial.html" data-astro-cid-jo6i4kqk>ফ্রি ট্রায়াল ক্লাস</a></li>
+        <li data-astro-cid-jo6i4kqk><a href="../bn/free-trial.html" data-astro-cid-jo6i4kqk>প্রথম সপ্তাহ ফ্রি</a></li>
       </ul>
     </nav>
 
@@ -505,7 +1249,7 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
 
   <div class="container footer__base" data-astro-cid-jo6i4kqk>
     <p data-astro-cid-jo6i4kqk>© ২০২৬ দারুল আরকাম. সর্বস্বত্ব সংরক্ষিত।</p>
-    <p data-astro-cid-jo6i4kqk>বাংলাদেশ থেকে পাঠদান · যুক্তরাষ্ট্র ও বিশ্বের নানা প্রান্তের পরিবারগুলোর সেবায়</p>
+    <p data-astro-cid-jo6i4kqk>পাঠদান বাংলাদেশ থেকে · যুক্তরাষ্ট্র, কানাডা, বাংলাদেশ ও বিশ্বের শিক্ষার্থীদের জন্য</p>
   </div>
 </footer>
 

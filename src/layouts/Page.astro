@@ -28,7 +28,7 @@ const schema = {
   name: site.name,
   alternateName: [site.nameBn, site.nameAr],
   description: t.pages.home.description,
-  areaServed: 'US',
+  areaServed: ['US', 'CA', 'BD'],
   ...(hasUrl ? { url: absolute(pageHref(lang, 'home')), logo: absolute(asset('/favicon.svg')) } : {}),
 };
 ---
@@ -62,7 +62,24 @@ const schema = {
 
     {page === 'home' && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
     <script is:inline>
-      document.documentElement.classList.replace('no-js', 'js');
+      // Marks that scripts run, and chooses the region whose fees and timetable to show:
+      // the reader's own choice if they made one, otherwise a guess from their time zone.
+      (function (root) {
+        root.classList.replace('no-js', 'js');
+        var region;
+        try {
+          region = localStorage.getItem('darul-arqam-region');
+        } catch (e) {}
+        if (region !== 'us' && region !== 'bd') {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            region = zone === 'Asia/Dhaka' || zone === 'Asia/Dacca' ? 'bd' : 'us';
+          } catch (e) {
+            region = 'us';
+          }
+        }
+        root.dataset.region = region;
+      })(document.documentElement);
     </script>
   </head>
   <body>

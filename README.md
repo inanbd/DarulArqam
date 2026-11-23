@@ -1,9 +1,10 @@
 # Darul Arqam
 
-The website of Darul Arqam, an online institute of Qur'an and Islamic studies: a **multi-page site** in English and Bangla.
+The website of Darul Arqam, an online institute of Qur'an and Islamic studies, for students in the USA, Canada and Bangladesh: a **multi-page site** in English and Bangla.
 
 - **Look:** lapis blue, turquoise and saffron on warm paper, with round forms and a lattice of overlapping circles. The header and footer carry the academy's logo (`src/components/Logo.astro` and `Wordmark.astro`).
-- **Pages:** thirteen, in English and in Bangla: home, about, programs, a page each for Nazirah, Hifz, Alimiyah and Deeniyat, academics, teachers, reviews, tuition, questions and the free-trial form.
+- **Pages:** thirteen, in English and in Bangla: home, about, programs, a page each for Nazirah, Hifz, Alimiyah and Deeniyat, academics, teachers, reviews, fees and timetable, questions and the free-week request form.
+- **Two regions:** fees in US dollars and class times for the USA & Canada, and fees in taka and class times for Bangladesh. The site picks the visitor's region from their time zone, and a switch in the top bar changes it.
 - **Verses:** every page opens with a Quranic verse related to its subject.
 
 Earlier design proposals (a classic single page and an animated book) were removed when this design was chosen; they remain in the repository history.
@@ -24,9 +25,9 @@ The finished site is in the [`html/`](html) folder, ready to use as it is:
 | `academics.html` | Philosophy, teaching, assessment, standards, welfare | from al-Mujadilah 58:11 |
 | `teachers.html` | Teachers | from al-'Ankabut 29:49 |
 | `reviews.html` | Reviews, and a form to send one | from Ibrahim 14:7 |
-| `tuition.html` | Tuition and how it works | from al-Muzzammil 73:20 |
+| `tuition.html` | Fees and timetable: monthly fees for each region, class times in the visitor's own time zone, admission | from al-Muzzammil 73:20 |
 | `faq.html` | Questions | from an-Nahl 16:43 |
-| `free-trial.html` | Free-trial request form | from Ta-Ha 20:114 |
+| `free-trial.html` | Free-week request form | from Ta-Ha 20:114 |
 | `404.html` | "Page not found" | none |
 
 The stylesheet and fonts are in `html/assets/`.
@@ -43,7 +44,17 @@ That content lives in one file, `src/content/academy.ts`, programs, stages, syll
 
 The site shows a curated version of the curriculum: the structure and outcomes are always visible, and the unit-by-unit detail opens on request ("What is covered"). Two editorial choices were made throughout: American spelling (program, memorize), and one spelling for each Arabic term (Tawheed, Zakat, Qur'an).
 
-One thing on the site comes from the academy directly rather than from the documents: Nazirah and Hifz are taught one-on-one, while Alimiyah and Junior Islamic Studies are taught in group classes by semester. Two things should still be confirmed: the certificate wording, which turns the documents' certification policy into a plain public statement that a certificate is not an accredited degree; and that the first class is free.
+The fees, the free first week and the class timetables come from the academy's fee schedule and timetable. Two things come from the academy directly: Nazirah and Hifz are taught in a group batch or one-to-one, while Alimiyah and Junior Islamic Studies are taught in group batches by semester; and students outside the USA, Canada and Bangladesh pay the US dollar fees and join either timetable.
+
+## Fees, timetables and regions
+
+The fees page shows one region at a time: **USA & Canada** (US dollars) or **Bangladesh** (taka).
+
+- **Which region a visitor sees.** A visitor whose device is set to Bangladesh time sees Bangladesh; everyone else sees USA & Canada. The switch in the top bar, and the larger one on the fees page, changes it, and the browser remembers the choice. The home page's "Fees from" line follows the same choice. Without JavaScript, both regions are shown.
+- **The fees** are in `src/config/fees.ts`: a group and a one-to-one fee for 4, 3 and 2 days a week, in each region. Change a number there and build again; the fees page, the home page and both languages follow.
+- **The timetables** are in `src/config/timetable.ts`. Each region's class window is stored in world time (UTC): the USA & Canada window starts at 23:30 UTC for three hours, which is 6:30–9:30 PM Eastern in winter and 7:30–10:30 PM in summer; the Bangladesh window starts at 12:00 UTC for four hours, 6–10 PM in Dhaka. The table of North American time zones is worked out from that when the site is built, and the "In your time" panel works out the class days and hours in each visitor's own time zone in the browser, so daylight saving time is always right.
+- **The days:** in the USA & Canada, the 4-day plan runs Monday to Thursday, the 3-day plan Friday to Sunday, and the 2-day plan Saturday and Sunday. In Bangladesh, the 4-day plan runs Monday to Thursday, and with the 3-day and 2-day plans students choose their days from Monday to Thursday.
+- Each class lasts one hour. As the timetable asks, the site does not publish exact sub-session slots: it says that a student's exact hour within the window is set when they join.
 
 ## Languages
 
@@ -51,8 +62,8 @@ The site is published in English and in Bangla. The Bangla pages have the same n
 
 - `src/i18n/bn.ts` holds the Bangla wording and `src/content/academy.bn.ts` the Bangla curriculum. Each has the same shape as its English file (`en.ts`, `academy.ts`): when you add or reword something in one, do the same in the other.
 - The meaning of each page's verse in Bangla is Muhiuddin Khan's translation, trimmed to the part quoted on the page.
-- Arabic terms use the forms common in Bangladesh (নাজেরা, হিফজ, আলিমিয়াহ, দ্বীনিয়াত, সবক, সাবকি, মানজিল).
-- The translation was machine-assisted. Have a native Bangla reader review it, especially the curriculum pages, before the site goes live.
+- Arabic terms use the forms common in Bangladesh (নাজেরা, হিফজ, আলিমিয়াহ, দ্বীনিয়াত, সবক, সাবকি, মানজিল). Times read the Bangla way, with the part of the day first (সন্ধ্যা ৬:০০ – রাত ১০:০০).
+- The translation was machine-assisted. Have a native Bangla reader review it, especially the curriculum pages and the fees page, before the site goes live.
 
 ## Run it
 
@@ -77,7 +88,9 @@ npm run build
 | To change | Edit |
 | --- | --- |
 | The curriculum: programs, stages, subjects, semesters, values | `src/content/academy.ts` |
-| Contact details, form destination, tuition prices, site address | `src/config/site.ts` |
+| Fees, in dollars and taka | `src/config/fees.ts` |
+| Class days and hours, and the North American time zones listed | `src/config/timetable.ts` |
+| Contact details, form destination, site address | `src/config/site.ts` |
 | Teacher profiles | `src/config/teachers.ts` |
 | Reviews | `src/config/reviews.ts` |
 | Page titles and headings, the meaning of each verse, questions, labels | `src/i18n/en.ts` |
@@ -98,26 +111,22 @@ To change a page's verse, replace all three parts together.
 `src/config/site.ts` holds stand-in values so the pages render. Replace each of these:
 
 - **`contact.email`, `contact.whatsappNumber`, `contact.whatsappDisplay`** are placeholders, not real contact details.
-- **`plans`** holds placeholder prices (40, 55 and 85 US dollars a month).
 - **`url`** is empty. Set it to the public address of the site so that canonical links, language alternates and the social-sharing image are written into the pages.
 - **`formEndpoint`** is empty. See the next section.
 
-`src/config/reviews.ts` holds the reviews shown on the home page and the Reviews page. **All six are invented examples** written in the voice of parents and students, and each carries an "Example review" tag. Publishing invented reviews as real ones misleads families and breaks US rules on testimonials, so replace them with reviews from real families, with their permission, before launch. The review form on the Reviews page sends new reviews to you the same way the trial form sends requests; nothing appears on the site until you add it to that file.
+`src/config/reviews.ts` holds the reviews shown on the home page and the Reviews page. **All six are invented examples** written in the voice of parents and students, and each carries an "Example review" tag. Publishing invented reviews as real ones misleads families and breaks US rules on testimonials, so replace them with reviews from real families, with their permission, before launch. The review form on the Reviews page sends new reviews to you the same way the free-week form sends requests; nothing appears on the site until you add it to that file.
 
 `src/config/teachers.ts` holds the teacher profiles. **All six are invented examples**, there to show the layout, and each card carries an "Example profile" tag. Replace them with your real teachers; the file explains how, including how to add a photo.
 
-The wording also states a few things about how the academy works. Check that each is true, and reword it in both language files if not:
+The wording also states a few things that do not come from the academy's documents. Check that each is true, and reword it in both language files if not:
 
-- Classes last 30 minutes.
-- The first class is free.
-- Students are taught from about five years old.
-- Tuition is month to month, with no long contract.
-- A missed class can be made up when the teacher is told in advance.
-- Parents receive regular progress updates.
+- Male and female teachers are available, and a family can ask for either.
+- Students in other countries pay in US dollars and may join either timetable.
+- The certificate wording, which turns the documents' certification policy into a plain public statement that a certificate is not an accredited degree.
 
-## The free-trial form
+## The free-week form
 
-The form works in one of three ways, chosen by `src/config/site.ts`:
+The form asks where the student lives, their time zone, the program, a group batch or one-to-one, and how many days a week, and preselects the country and time zone from the visitor's device. It works in one of three ways, chosen by `src/config/site.ts`:
 
 1. **`formEndpoint` is set.** The answers are posted to that address and the visitor sees a thank-you message without leaving the page. Any service that accepts a form post and answers with JSON will do, such as Formspree, Web3Forms or Basin, or an API of your own.
 2. **`formEndpoint` is empty and a WhatsApp number is set.** WhatsApp opens with the answers written out as a message to that number, and the visitor presses send.
@@ -136,4 +145,4 @@ Point the host's "not found" page at `404.html`. That one page uses links from t
 - **Palette:** night blue and lapis, turquoise, saffron and warm paper, defined as custom properties at the top of `src/styles/global.css`.
 - **Type:** El Messiri for headings, Figtree for text, Noto Naskh Arabic for verses, Reem Kufi for the Arabic name, Anek Bangla and Noto Sans Bengali for Bangla. The fonts are bundled with the site, so nothing is loaded from a third party.
 - **Ornament:** the twelve-pointed medallion (shamsa) of illuminated Quran manuscripts, and a lattice of overlapping circles.
-- The pages work without JavaScript. Scripts add the mobile menu, the scroll reveals, the two clocks and the form hand-off.
+- The pages work without JavaScript. Scripts add the mobile menu, the scroll reveals, the region switch, the class times in the visitor's own time zone, the two clocks and the form hand-off.

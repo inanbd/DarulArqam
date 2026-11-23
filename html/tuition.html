@@ -3,23 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tuition and How It Works | Darul Arqam</title>
-    <meta name="description" content="Simple monthly tuition for private one-on-one Qur’an classes, semester tuition for group programs, and the four steps from a free trial class to regular lessons.">
+    <title>Fees and Class Timetable | Darul Arqam</title>
+    <meta name="description" content="Monthly fees in US dollars and Bangladeshi taka for group batches and one-to-one lessons, the class timetables for the USA &amp; Canada and for Bangladesh, and the free first week.">
     <meta name="theme-color" content="#0b1a3b">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
     
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Darul Arqam">
-    <meta property="og:title" content="Tuition and How It Works | Darul Arqam">
-    <meta property="og:description" content="Simple monthly tuition for private one-on-one Qur’an classes, semester tuition for group programs, and the four steps from a free trial class to regular lessons.">
+    <meta property="og:title" content="Fees and Class Timetable | Darul Arqam">
+    <meta property="og:description" content="Monthly fees in US dollars and Bangladeshi taka for group batches and one-to-one lessons, the class timetables for the USA &amp; Canada and for Bangladesh, and the free first week.">
     <meta property="og:locale" content="en_US">
 
     
     <script>
-      document.documentElement.classList.replace('no-js', 'js');
+      // Marks that scripts run, and chooses the region whose fees and timetable to show:
+      // the reader's own choice if they made one, otherwise a guess from their time zone.
+      (function (root) {
+        root.classList.replace('no-js', 'js');
+        var region;
+        try {
+          region = localStorage.getItem('darul-arqam-region');
+        } catch (e) {}
+        if (region !== 'us' && region !== 'bd') {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            region = zone === 'Asia/Dhaka' || zone === 'Asia/Dacca' ? 'bd' : 'us';
+          } catch (e) {
+            region = 'us';
+          }
+        }
+        root.dataset.region = region;
+      })(document.documentElement);
     </script>
-  <link rel="stylesheet" href="./assets/style.css?v=da4a2c17"></head>
+  <link rel="stylesheet" href="./assets/style.css?v=910d72e1"></head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="topbar" data-astro-cid-nen7h5rs>
@@ -28,12 +45,34 @@
       <svg width="12" height="12" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
   <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
 </svg>
-      Live online Qur’an and Islamic education for families in the United States and beyond
+      Live online Qur’an and Islamic education for students in the USA, Canada and Bangladesh
     </p>
     <div class="topbar__links" data-astro-cid-nen7h5rs>
+      <div class="region-switch region-switch--small" role="group" aria-label="Choose your region" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>USA &amp; Canada</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>Bangladesh</button>
+</div>
+
+<script type="module">// src/components/RegionSwitch.astro?astro&type=script&index=0&lang.ts
+var root = document.documentElement;
+var sync = () => {
+	document.querySelectorAll("[data-set-region]").forEach((button) => {
+		button.setAttribute("aria-pressed", String(button.dataset.setRegion === root.dataset.region));
+	});
+};
+document.addEventListener("click", (event) => {
+	const button = event.target.closest("[data-set-region]");
+	if (!button) return;
+	root.dataset.region = button.dataset.setRegion;
+	try {
+		window.localStorage.setItem("darul-arqam-region", button.dataset.setRegion ?? "us");
+	} catch {}
+	sync();
+});
+sync();</script>
       <a href="https://wa.me/15550100123" target="_blank" rel="noopener" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.5a8.3 8.3 0 0 1-12.3 7.3L3.5 20.5l1.7-4.6A8.3 8.3 0 1 1 20.5 11.5z"/></svg>
-            +1 (555) 010-0123
+            <span class="topbar__label" data-astro-cid-nen7h5rs>+1 (555) 010-0123</span>
           </a>
       <a href="./bn/tuition.html" lang="bn" hreflang="bn" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
@@ -138,7 +177,7 @@
                 
               </li><li data-astro-cid-nen7h5rs>
                 <a href="./tuition.html" aria-current="page" data-astro-cid-nen7h5rs>
-                  Tuition
+                  Fees &amp; Timetable
                   
                 </a>
                 
@@ -151,7 +190,7 @@
               </li>
       </ul>
       <a class="btn btn--saffron btn--sm nav__cta" href="./free-trial.html" data-astro-cid-nen7h5rs>
-        Free trial class
+        Free first week
       </a>
     </nav>
   </div>
@@ -188,10 +227,10 @@ if (header && toggle) {
       <nav class="crumbs" aria-label="Breadcrumb" data-astro-cid-75ysl5lo>
         <a href="./index.html" data-astro-cid-75ysl5lo>Home</a>
         <span aria-hidden="true" data-astro-cid-75ysl5lo>/</span>
-        <span aria-current="page" data-astro-cid-75ysl5lo>Tuition</span>
+        <span aria-current="page" data-astro-cid-75ysl5lo>Fees &amp; Timetable</span>
       </nav>
-      <h1 class="page-hero__title" data-astro-cid-75ysl5lo>Simple monthly tuition</h1>
-      <p class="lead" data-astro-cid-75ysl5lo>Private one-on-one lessons for Nazirah and Hifz, and group classes by semester for Alimiyah. Start with a free trial class.</p>
+      <h1 class="page-hero__title" data-astro-cid-75ysl5lo>Fees and class times</h1>
+      <p class="lead" data-astro-cid-75ysl5lo>Monthly fees for the USA &amp; Canada and for Bangladesh, in a group batch or one-to-one, and the class timetables. The first week is free.</p>
       
     </div>
     <div class="page-hero__verse" data-astro-cid-75ysl5lo>
@@ -216,77 +255,842 @@ if (header && toggle) {
 
   <section class="section" data-astro-cid-f7swimbp>
     <div class="container" data-astro-cid-f7swimbp>
-      <ul class="plans" data-astro-cid-i7nfoaoc>
-  <li class="plan card" data-reveal style="--reveal-order: 0" data-astro-cid-i7nfoaoc>
-          
-          <h2 class="plan__name" data-astro-cid-i7nfoaoc>Steady</h2>
-          <p class="plan__frequency" data-astro-cid-i7nfoaoc>2 classes a week</p>
-          <p class="plan__price" data-astro-cid-i7nfoaoc>
-            <span class="plan__currency" data-astro-cid-i7nfoaoc>$</span>
-            <span class="plan__amount" data-astro-cid-i7nfoaoc>40</span>
-            <span class="plan__period" data-astro-cid-i7nfoaoc>per month</span>
-          </p>
-          <p class="plan__text" data-astro-cid-i7nfoaoc>A gentle rhythm for young beginners and busy adults.</p>
-          <p class="plan__count" data-astro-cid-i7nfoaoc>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
-            8 classes each month
-          </p>
-          <a class="btn btn--block btn--outline" href="./free-trial.html" data-astro-cid-i7nfoaoc>
-            Start with a free trial
-          </a>
-        </li><li class="plan card plan--featured" data-reveal style="--reveal-order: 1" data-astro-cid-i7nfoaoc>
-          <span class="plan__flag" data-astro-cid-i7nfoaoc>Recommended</span>
-          <h2 class="plan__name" data-astro-cid-i7nfoaoc>Devoted</h2>
-          <p class="plan__frequency" data-astro-cid-i7nfoaoc>3 classes a week</p>
-          <p class="plan__price" data-astro-cid-i7nfoaoc>
-            <span class="plan__currency" data-astro-cid-i7nfoaoc>$</span>
-            <span class="plan__amount" data-astro-cid-i7nfoaoc>55</span>
-            <span class="plan__period" data-astro-cid-i7nfoaoc>per month</span>
-          </p>
-          <p class="plan__text" data-astro-cid-i7nfoaoc>Consistent progress in reading and Tajweed.</p>
-          <p class="plan__count" data-astro-cid-i7nfoaoc>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
-            12 classes each month
-          </p>
-          <a class="btn btn--block btn--saffron" href="./free-trial.html" data-astro-cid-i7nfoaoc>
-            Start with a free trial
-          </a>
-        </li><li class="plan card" data-reveal style="--reveal-order: 2" data-astro-cid-i7nfoaoc>
-          
-          <h2 class="plan__name" data-astro-cid-i7nfoaoc>Intensive</h2>
-          <p class="plan__frequency" data-astro-cid-i7nfoaoc>5 classes a week</p>
-          <p class="plan__price" data-astro-cid-i7nfoaoc>
-            <span class="plan__currency" data-astro-cid-i7nfoaoc>$</span>
-            <span class="plan__amount" data-astro-cid-i7nfoaoc>85</span>
-            <span class="plan__period" data-astro-cid-i7nfoaoc>per month</span>
-          </p>
-          <p class="plan__text" data-astro-cid-i7nfoaoc>Daily lessons for Hifz and for faster progress.</p>
-          <p class="plan__count" data-astro-cid-i7nfoaoc>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
-            20 classes each month
-          </p>
-          <a class="btn btn--block btn--outline" href="./free-trial.html" data-astro-cid-i7nfoaoc>
-            Start with a free trial
-          </a>
-        </li>
-</ul>
-
-<aside class="group card" data-reveal data-astro-cid-i7nfoaoc>
-  <span class="icon-tile icon-tile--navy" data-astro-cid-i7nfoaoc><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg></span>
-  <div data-astro-cid-i7nfoaoc>
-    <h2 class="group__title" data-astro-cid-i7nfoaoc>Alimiyah and Junior Islamic Studies</h2>
-    <p class="group__text" data-astro-cid-i7nfoaoc>These programs are taught in group classes, semester by semester. Ask us for the tuition for the coming semester.</p>
-  </div>
-  <a class="btn btn--outline" href="./free-trial.html" data-astro-cid-i7nfoaoc>Ask about group classes</a>
-</aside>
-
-<div class="included card" data-reveal data-astro-cid-i7nfoaoc>
-  <h2 class="included__title" data-astro-cid-i7nfoaoc>Included with every plan</h2>
-  <ul class="ticks included__list" data-astro-cid-i7nfoaoc>
-    <li data-astro-cid-i7nfoaoc>Private one-on-one classes</li><li data-astro-cid-i7nfoaoc>Your choice of a male or female teacher</li><li data-astro-cid-i7nfoaoc>Fixed class times in your time zone</li><li data-astro-cid-i7nfoaoc>Regular progress reports</li><li data-astro-cid-i7nfoaoc>Month-to-month tuition, with no long contract</li>
-  </ul>
-  <p class="included__note" data-astro-cid-i7nfoaoc>More than one student at home? Ask us about tuition for families.</p>
+      <div class="choose" data-reveal data-astro-cid-f7swimbp>
+        <div data-astro-cid-f7swimbp>
+          <p class="choose__label" data-astro-cid-f7swimbp>Choose your region</p>
+          <div class="region-switch region-switch--large" role="group" aria-label="Choose your region" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>USA &amp; Canada</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>Bangladesh</button>
 </div>
+
+
+        </div>
+        <p class="choose__note" data-astro-cid-f7swimbp><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg><span data-astro-cid-f7swimbp>Students in other countries pay the USA &amp; Canada fees in US dollars, and join whichever timetable suits their hours.</span></p>
+      </div>
+
+      <aside class="free on-dark" data-reveal data-astro-cid-f7swimbp>
+        <span class="pattern pattern--corner" data-astro-cid-f7swimbp></span>
+        <span class="free__seven" aria-hidden="true" data-astro-cid-f7swimbp>7</span>
+        <div class="free__copy" data-astro-cid-f7swimbp>
+          <h2 class="free__title" data-astro-cid-f7swimbp>The first week is free</h2>
+          <p data-astro-cid-f7swimbp>Every new student, in Bangladesh and abroad, attends the first week of classes without paying anything.</p>
+        </div>
+        <a class="btn btn--saffron" href="./free-trial.html" data-astro-cid-f7swimbp>
+          Start your free week
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </aside>
+
+      <header class="heading block" data-reveal data-astro-cid-f7swimbp>
+        <p class="kicker" data-astro-cid-f7swimbp><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
+</svg>Fees</p>
+        <h2 class="title" data-astro-cid-f7swimbp>Monthly fees</h2>
+        <p class="lead" data-astro-cid-f7swimbp>Live one-hour classes, two, three or four days a week. Choose a group batch or one-to-one lessons.</p>
+      </header>
+
+      <div class="fee-regions" data-astro-cid-f7swimbp>
+        <div class="fees" data-for-region="us" data-astro-cid-6rrxg2fb>
+  <p class="fees__region" data-astro-cid-6rrxg2fb>
+    <span class="fees__currency" data-astro-cid-6rrxg2fb>$</span>
+    Fees and class times for <strong data-astro-cid-6rrxg2fb>USA &amp; Canada</strong>
+    <span class="fees__code" data-astro-cid-6rrxg2fb>· US dollars</span>
+  </p>
+
+  <ul class="fees__cards" data-astro-cid-6rrxg2fb>
+    <li class="fee card fee--featured" data-reveal style="--reveal-order: 0" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>4 days a week</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>Mon–Thu</p>
+
+            <ol class="week" aria-label="Days of the week" data-astro-cid-6rrxg2fb>
+              <li class="week__day is-on" title="Monday" data-astro-cid-6rrxg2fb>
+                  Mon
+                </li><li class="week__day is-on" title="Tuesday" data-astro-cid-6rrxg2fb>
+                  Tue
+                </li><li class="week__day is-on" title="Wednesday" data-astro-cid-6rrxg2fb>
+                  Wed
+                </li><li class="week__day is-on" title="Thursday" data-astro-cid-6rrxg2fb>
+                  Thu
+                </li><li class="week__day" title="Friday" data-astro-cid-6rrxg2fb>
+                  Fri
+                </li><li class="week__day" title="Saturday" data-astro-cid-6rrxg2fb>
+                  Sat
+                </li><li class="week__day" title="Sunday" data-astro-cid-6rrxg2fb>
+                  Sun
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    Group batch
+                    <small data-astro-cid-6rrxg2fb>Learn alongside other students</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$85</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    One-to-one
+                    <small data-astro-cid-6rrxg2fb>Private lessons with your teacher</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$125</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+            </dl>
+          </li><li class="fee card" data-reveal style="--reveal-order: 1" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>3 days a week</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>Fri–Sun</p>
+
+            <ol class="week" aria-label="Days of the week" data-astro-cid-6rrxg2fb>
+              <li class="week__day" title="Monday" data-astro-cid-6rrxg2fb>
+                  Mon
+                </li><li class="week__day" title="Tuesday" data-astro-cid-6rrxg2fb>
+                  Tue
+                </li><li class="week__day" title="Wednesday" data-astro-cid-6rrxg2fb>
+                  Wed
+                </li><li class="week__day" title="Thursday" data-astro-cid-6rrxg2fb>
+                  Thu
+                </li><li class="week__day is-on" title="Friday" data-astro-cid-6rrxg2fb>
+                  Fri
+                </li><li class="week__day is-on" title="Saturday" data-astro-cid-6rrxg2fb>
+                  Sat
+                </li><li class="week__day is-on" title="Sunday" data-astro-cid-6rrxg2fb>
+                  Sun
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    Group batch
+                    <small data-astro-cid-6rrxg2fb>Learn alongside other students</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$80</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    One-to-one
+                    <small data-astro-cid-6rrxg2fb>Private lessons with your teacher</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$100</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+            </dl>
+          </li><li class="fee card" data-reveal style="--reveal-order: 2" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>2 days a week</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>Sat–Sun</p>
+
+            <ol class="week" aria-label="Days of the week" data-astro-cid-6rrxg2fb>
+              <li class="week__day" title="Monday" data-astro-cid-6rrxg2fb>
+                  Mon
+                </li><li class="week__day" title="Tuesday" data-astro-cid-6rrxg2fb>
+                  Tue
+                </li><li class="week__day" title="Wednesday" data-astro-cid-6rrxg2fb>
+                  Wed
+                </li><li class="week__day" title="Thursday" data-astro-cid-6rrxg2fb>
+                  Thu
+                </li><li class="week__day" title="Friday" data-astro-cid-6rrxg2fb>
+                  Fri
+                </li><li class="week__day is-on" title="Saturday" data-astro-cid-6rrxg2fb>
+                  Sat
+                </li><li class="week__day is-on" title="Sunday" data-astro-cid-6rrxg2fb>
+                  Sun
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    Group batch
+                    <small data-astro-cid-6rrxg2fb>Learn alongside other students</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$75</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    One-to-one
+                    <small data-astro-cid-6rrxg2fb>Private lessons with your teacher</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>$85</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+            </dl>
+          </li>
+  </ul>
+</div><div class="fees" data-for-region="bd" data-astro-cid-6rrxg2fb>
+  <p class="fees__region" data-astro-cid-6rrxg2fb>
+    <span class="fees__currency" data-astro-cid-6rrxg2fb>৳</span>
+    Fees and class times for <strong data-astro-cid-6rrxg2fb>Bangladesh</strong>
+    <span class="fees__code" data-astro-cid-6rrxg2fb>· Bangladeshi taka</span>
+  </p>
+
+  <ul class="fees__cards" data-astro-cid-6rrxg2fb>
+    <li class="fee card fee--featured" data-reveal style="--reveal-order: 0" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>4 days a week</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>Mon–Thu</p>
+
+            <ol class="week" aria-label="Days of the week" data-astro-cid-6rrxg2fb>
+              <li class="week__day is-on" title="Monday" data-astro-cid-6rrxg2fb>
+                  Mon
+                </li><li class="week__day is-on" title="Tuesday" data-astro-cid-6rrxg2fb>
+                  Tue
+                </li><li class="week__day is-on" title="Wednesday" data-astro-cid-6rrxg2fb>
+                  Wed
+                </li><li class="week__day is-on" title="Thursday" data-astro-cid-6rrxg2fb>
+                  Thu
+                </li><li class="week__day" title="Friday" data-astro-cid-6rrxg2fb>
+                  Fri
+                </li><li class="week__day" title="Saturday" data-astro-cid-6rrxg2fb>
+                  Sat
+                </li><li class="week__day" title="Sunday" data-astro-cid-6rrxg2fb>
+                  Sun
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    Group batch
+                    <small data-astro-cid-6rrxg2fb>Learn alongside other students</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳1,000</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    One-to-one
+                    <small data-astro-cid-6rrxg2fb>Private lessons with your teacher</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳1,500</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+            </dl>
+          </li><li class="fee card" data-reveal style="--reveal-order: 1" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>3 days a week</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>Choose any 3 of these days: Mon–Thu</p>
+
+            <ol class="week" aria-label="Days of the week" data-astro-cid-6rrxg2fb>
+              <li class="week__day is-choice" title="Monday" data-astro-cid-6rrxg2fb>
+                  Mon
+                </li><li class="week__day is-choice" title="Tuesday" data-astro-cid-6rrxg2fb>
+                  Tue
+                </li><li class="week__day is-choice" title="Wednesday" data-astro-cid-6rrxg2fb>
+                  Wed
+                </li><li class="week__day is-choice" title="Thursday" data-astro-cid-6rrxg2fb>
+                  Thu
+                </li><li class="week__day" title="Friday" data-astro-cid-6rrxg2fb>
+                  Fri
+                </li><li class="week__day" title="Saturday" data-astro-cid-6rrxg2fb>
+                  Sat
+                </li><li class="week__day" title="Sunday" data-astro-cid-6rrxg2fb>
+                  Sun
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    Group batch
+                    <small data-astro-cid-6rrxg2fb>Learn alongside other students</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳800</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    One-to-one
+                    <small data-astro-cid-6rrxg2fb>Private lessons with your teacher</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳1,200</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+            </dl>
+          </li><li class="fee card" data-reveal style="--reveal-order: 2" data-astro-cid-6rrxg2fb>
+            <h3 class="fee__title" data-astro-cid-6rrxg2fb>2 days a week</h3>
+            <p class="fee__days" data-astro-cid-6rrxg2fb>Choose any 2 of these days: Mon–Thu</p>
+
+            <ol class="week" aria-label="Days of the week" data-astro-cid-6rrxg2fb>
+              <li class="week__day is-choice" title="Monday" data-astro-cid-6rrxg2fb>
+                  Mon
+                </li><li class="week__day is-choice" title="Tuesday" data-astro-cid-6rrxg2fb>
+                  Tue
+                </li><li class="week__day is-choice" title="Wednesday" data-astro-cid-6rrxg2fb>
+                  Wed
+                </li><li class="week__day is-choice" title="Thursday" data-astro-cid-6rrxg2fb>
+                  Thu
+                </li><li class="week__day" title="Friday" data-astro-cid-6rrxg2fb>
+                  Fri
+                </li><li class="week__day" title="Saturday" data-astro-cid-6rrxg2fb>
+                  Sat
+                </li><li class="week__day" title="Sunday" data-astro-cid-6rrxg2fb>
+                  Sun
+                </li>
+            </ol>
+
+            <dl class="fee__prices" data-astro-cid-6rrxg2fb>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    Group batch
+                    <small data-astro-cid-6rrxg2fb>Learn alongside other students</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳700</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+              <div class="fee__price" data-astro-cid-6rrxg2fb>
+                <dt data-astro-cid-6rrxg2fb>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
+                  <span data-astro-cid-6rrxg2fb>
+                    One-to-one
+                    <small data-astro-cid-6rrxg2fb>Private lessons with your teacher</small>
+                  </span>
+                </dt>
+                <dd data-astro-cid-6rrxg2fb>
+                  <strong data-astro-cid-6rrxg2fb>৳1,000</strong>
+                  <span data-astro-cid-6rrxg2fb>a month</span>
+                </dd>
+              </div>
+            </dl>
+          </li>
+  </ul>
+</div>
+      </div>
+
+      <div class="cols cols--2 block extras" data-astro-cid-f7swimbp>
+        <div class="card pad formats" data-reveal data-astro-cid-f7swimbp>
+          <span class="icon-tile" data-astro-cid-f7swimbp><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg></span>
+          <p data-astro-cid-f7swimbp>Nazirah and Hifz can be taken in a group batch or one-to-one. Alimiyah is taught in group batches, at the group fee.</p>
+          <a class="link" href="./free-trial.html" data-astro-cid-f7swimbp>
+            Start your free week
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="card pad" data-reveal style="--reveal-order: 1" data-astro-cid-f7swimbp>
+          <h3 class="h3" data-astro-cid-f7swimbp>With every plan</h3>
+          <ul class="ticks" style="margin-top: 1rem" data-astro-cid-f7swimbp>
+            <li data-astro-cid-f7swimbp>Live classes with a qualified teacher</li><li data-astro-cid-f7swimbp>Your choice of a male or female teacher</li><li data-astro-cid-f7swimbp>Deeniyat alongside Nazirah and Hifz</li><li data-astro-cid-f7swimbp>Regular progress reports for parents</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="timetable" data-astro-cid-f7swimbp>
+    <div class="container" data-astro-cid-f7swimbp>
+      <header class="heading" data-reveal data-astro-cid-f7swimbp>
+        <p class="kicker" data-astro-cid-f7swimbp><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
+</svg>Timetable</p>
+        <h2 class="title" data-astro-cid-f7swimbp>Class timetable</h2>
+        <p class="lead" data-astro-cid-f7swimbp>Classes run in the evening, on fixed days, in one-hour sessions.</p>
+      </header>
+      <div class="block timetables" data-astro-cid-f7swimbp>
+        <div class="timetable" data-for-region="us" data-astro-cid-bdgzs6hm>
+  <div class="timetable__grid" data-astro-cid-bdgzs6hm>
+    <!-- The plans across a week -->
+    <div class="card plans" data-reveal data-astro-cid-bdgzs6hm>
+      <h3 class="plans__title" data-astro-cid-bdgzs6hm>USA &amp; Canada</h3>
+      <p class="plans__hours" data-astro-cid-bdgzs6hm>
+        Eastern time: 6:30 PM – 9:30 PM in winter, 7:30 PM – 10:30 PM in summer
+      </p>
+      <table class="plans__table" data-astro-cid-bdgzs6hm>
+        <thead data-astro-cid-bdgzs6hm>
+          <tr data-astro-cid-bdgzs6hm>
+            <th scope="col" data-astro-cid-bdgzs6hm><span class="sr-only" data-astro-cid-bdgzs6hm>-day plan</span></th>
+            <th scope="col" title="Monday" data-astro-cid-bdgzs6hm>Mon</th><th scope="col" title="Tuesday" data-astro-cid-bdgzs6hm>Tue</th><th scope="col" title="Wednesday" data-astro-cid-bdgzs6hm>Wed</th><th scope="col" title="Thursday" data-astro-cid-bdgzs6hm>Thu</th><th scope="col" title="Friday" data-astro-cid-bdgzs6hm>Fri</th><th scope="col" title="Saturday" data-astro-cid-bdgzs6hm>Sat</th><th scope="col" title="Sunday" data-astro-cid-bdgzs6hm>Sun</th>
+          </tr>
+        </thead>
+        <tbody data-astro-cid-bdgzs6hm>
+          <tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  4-day plan
+                  
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Monday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Tuesday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Wednesday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Thursday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td>
+              </tr><tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  3-day plan
+                  
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Friday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Saturday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Sunday</span>
+                      </span>
+                    </td>
+              </tr><tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  2-day plan
+                  
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Saturday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Sunday</span>
+                      </span>
+                    </td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- In the reader's own time -->
+    <div class="card yours" hidden data-yours data-settings="{&quot;locale&quot;:&quot;en-US&quot;,&quot;startUtc&quot;:[23,30],&quot;hours&quot;:3,&quot;plans&quot;:[{&quot;days&quot;:4,&quot;on&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;thu&quot;],&quot;choose&quot;:0},{&quot;days&quot;:3,&quot;on&quot;:[&quot;fri&quot;,&quot;sat&quot;,&quot;sun&quot;],&quot;choose&quot;:0},{&quot;days&quot;:2,&quot;on&quot;:[&quot;sat&quot;,&quot;sun&quot;],&quot;choose&quot;:0}],&quot;labels&quot;:{&quot;plan&quot;:[&quot;4-day plan&quot;,&quot;3-day plan&quot;,&quot;2-day plan&quot;],&quot;choose&quot;:[&quot;&quot;,&quot;&quot;,&quot;&quot;],&quot;nextDay&quot;:&quot;next day&quot;,&quot;days&quot;:{&quot;mon&quot;:&quot;Mon&quot;,&quot;tue&quot;:&quot;Tue&quot;,&quot;wed&quot;:&quot;Wed&quot;,&quot;thu&quot;:&quot;Thu&quot;,&quot;fri&quot;:&quot;Fri&quot;,&quot;sat&quot;:&quot;Sat&quot;,&quot;sun&quot;:&quot;Sun&quot;},&quot;zone&quot;:&quot;Worked out for your time zone, {zone}, for the coming week.&quot;,&quot;to&quot;:&quot;–&quot;}}" data-astro-cid-bdgzs6hm>
+      <p class="kicker yours__kicker" data-astro-cid-bdgzs6hm>In your time</p>
+      <ul class="yours__list" data-yours-list data-astro-cid-bdgzs6hm></ul>
+      <p class="yours__zone" data-yours-zone data-astro-cid-bdgzs6hm></p>
+    </div>
+  </div>
+
+  <div class="card zones" data-reveal data-astro-cid-bdgzs6hm>
+        <h3 class="zones__title" data-astro-cid-bdgzs6hm>Class hours across North America</h3>
+        <div class="zones__wrap" data-astro-cid-bdgzs6hm>
+          <table class="zones__table" data-astro-cid-bdgzs6hm>
+            <thead data-astro-cid-bdgzs6hm>
+              <tr data-astro-cid-bdgzs6hm>
+                <th scope="col" data-astro-cid-bdgzs6hm>Time zone</th>
+                <th scope="col" data-astro-cid-bdgzs6hm>Standard time (about Nov–Mar)</th>
+                <th scope="col" data-astro-cid-bdgzs6hm>Daylight saving time (about Mar–Nov)</th>
+              </tr>
+            </thead>
+            <tbody data-astro-cid-bdgzs6hm>
+              <tr data-iana="America/St_Johns" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>Newfoundland</th>
+                  <td data-astro-cid-bdgzs6hm>8:00 PM – 11:00 PM</td>
+                  <td data-astro-cid-bdgzs6hm>9:00 PM – 12:00 AM</td>
+                </tr><tr data-iana="America/Halifax" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>Atlantic</th>
+                  <td data-astro-cid-bdgzs6hm>7:30 PM – 10:30 PM</td>
+                  <td data-astro-cid-bdgzs6hm>8:30 PM – 11:30 PM</td>
+                </tr><tr data-iana="America/New_York" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>Eastern</th>
+                  <td data-astro-cid-bdgzs6hm>6:30 PM – 9:30 PM</td>
+                  <td data-astro-cid-bdgzs6hm>7:30 PM – 10:30 PM</td>
+                </tr><tr data-iana="America/Chicago" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>Central</th>
+                  <td data-astro-cid-bdgzs6hm>5:30 PM – 8:30 PM</td>
+                  <td data-astro-cid-bdgzs6hm>6:30 PM – 9:30 PM</td>
+                </tr><tr data-iana="America/Denver" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>Mountain</th>
+                  <td data-astro-cid-bdgzs6hm>4:30 PM – 7:30 PM</td>
+                  <td data-astro-cid-bdgzs6hm>5:30 PM – 8:30 PM</td>
+                </tr><tr data-iana="America/Los_Angeles" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>Pacific</th>
+                  <td data-astro-cid-bdgzs6hm>3:30 PM – 6:30 PM</td>
+                  <td data-astro-cid-bdgzs6hm>4:30 PM – 7:30 PM</td>
+                </tr><tr data-iana="America/Anchorage" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>Alaska</th>
+                  <td data-astro-cid-bdgzs6hm>2:30 PM – 5:30 PM</td>
+                  <td data-astro-cid-bdgzs6hm>3:30 PM – 6:30 PM</td>
+                </tr><tr data-iana="Pacific/Honolulu" data-astro-cid-bdgzs6hm>
+                  <th scope="row" data-astro-cid-bdgzs6hm>Hawaii</th>
+                  <td data-astro-cid-bdgzs6hm>1:30 PM – 4:30 PM</td>
+                  <td data-astro-cid-bdgzs6hm>1:30 PM – 4:30 PM</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+  <ul class="notes" data-astro-cid-bdgzs6hm>
+    <li data-astro-cid-bdgzs6hm>Each class lasts one hour. Up to three group sessions run in each three-hour evening window; your exact hour is set when you join.</li><li data-astro-cid-bdgzs6hm>One-to-one lessons are arranged within the same window.</li><li data-astro-cid-bdgzs6hm>The window is fixed in world time (11:30 PM – 2:30 AM UTC), so your local clock time moves by an hour when Daylight Saving Time begins or ends. Some places, such as most of Arizona and Saskatchewan, do not change their clocks.</li>
+  </ul>
+</div>
+
+<script type="module">// src/components/Timetable.astro?astro&type=script&index=0&lang.ts
+document.querySelectorAll("[data-yours]").forEach((panel) => {
+	try {
+		const s = JSON.parse(panel.dataset.settings ?? "{}");
+		const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+		const utcDays = [
+			"sun",
+			"mon",
+			"tue",
+			"wed",
+			"thu",
+			"fri",
+			"sat"
+		];
+		const bn = s.locale === "bn-BD";
+		const clock = new Intl.DateTimeFormat(s.locale, bn ? {
+			hour: "numeric",
+			minute: "2-digit",
+			dayPeriod: "short",
+			timeZone: zone
+		} : {
+			hour: "numeric",
+			minute: "2-digit",
+			timeZone: zone
+		});
+		/** "6:30 PM", or in Bangla "সন্ধ্যা ৬:৩০", with the part of the day first. */
+		const time = (date) => {
+			if (!bn) return clock.format(date);
+			const parts = clock.formatToParts(date);
+			const part = (type) => parts.find((entry) => entry.type === type)?.value ?? "";
+			return `${part("dayPeriod") === "রাত্রি" ? "রাত" : part("dayPeriod")} ${part("hour")}:${part("minute")}`;
+		};
+		const dayKey = new Intl.DateTimeFormat("en-US", {
+			weekday: "short",
+			timeZone: zone
+		});
+		const dateKey = new Intl.DateTimeFormat("en-CA", {
+			year: "numeric",
+			month: "2-digit",
+			day: "2-digit",
+			timeZone: zone
+		});
+		/** The next window that starts on a given UTC weekday. */
+		const next = (day) => {
+			const now = /* @__PURE__ */ new Date();
+			for (let ahead = 0; ahead < 8; ahead++) {
+				const date = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + ahead, s.startUtc[0], s.startUtc[1]));
+				if (utcDays[date.getUTCDay()] === day && date.getTime() + s.hours * 36e5 > now.getTime()) return date;
+			}
+			return /* @__PURE__ */ new Date();
+		};
+		const list = panel.querySelector("[data-yours-list]");
+		s.plans.forEach((plan, index) => {
+			const sessions = plan.on.map((day) => {
+				const start = next(day);
+				const end = new Date(start.getTime() + s.hours * 36e5);
+				return {
+					name: s.labels.days[dayKey.format(start).toLowerCase().slice(0, 3)],
+					hours: `${time(start)} ${s.labels.to} ${time(end)}`,
+					crosses: dateKey.format(start) !== dateKey.format(end)
+				};
+			});
+			const days = sessions.length > 1 ? `${sessions[0].name}–${sessions[sessions.length - 1].name}` : sessions[0].name;
+			const first = sessions[0];
+			const item = document.createElement("li");
+			const title = document.createElement("strong");
+			title.textContent = s.labels.plan[index];
+			const when = document.createElement("span");
+			when.textContent = `${plan.choose ? `${s.labels.choose[index]}: ` : ""}${days} · ${first.hours}${first.crosses ? ` (${s.labels.nextDay})` : ""}`;
+			item.append(title, when);
+			list.append(item);
+		});
+		const zoneName = new Intl.DateTimeFormat(s.locale, {
+			timeZoneName: "long",
+			timeZone: zone
+		}).formatToParts(/* @__PURE__ */ new Date()).find((part) => part.type === "timeZoneName")?.value ?? zone;
+		panel.querySelector("[data-yours-zone]").textContent = s.labels.zone.replace("{zone}", zoneName);
+		panel.hidden = false;
+		const at = (timeZone, date) => new Intl.DateTimeFormat("en-US", {
+			hour: "numeric",
+			minute: "2-digit",
+			timeZone
+		}).format(date);
+		const seasons = [new Date(Date.UTC(2026, 0, 12, 12)), new Date(Date.UTC(2026, 6, 13, 12))];
+		[...panel.closest(".timetable")?.querySelectorAll("[data-iana]") ?? []].find((row) => seasons.every((date) => at(zone, date) === at(row.dataset.iana, date)))?.classList.add("is-yours");
+	} catch {}
+});</script><div class="timetable" data-for-region="bd" data-astro-cid-bdgzs6hm>
+  <div class="timetable__grid" data-astro-cid-bdgzs6hm>
+    <!-- The plans across a week -->
+    <div class="card plans" data-reveal data-astro-cid-bdgzs6hm>
+      <h3 class="plans__title" data-astro-cid-bdgzs6hm>Bangladesh</h3>
+      <p class="plans__hours" data-astro-cid-bdgzs6hm>
+        6:00 PM – 10:00 PM, Bangladesh time (BST, UTC+6)
+      </p>
+      <table class="plans__table" data-astro-cid-bdgzs6hm>
+        <thead data-astro-cid-bdgzs6hm>
+          <tr data-astro-cid-bdgzs6hm>
+            <th scope="col" data-astro-cid-bdgzs6hm><span class="sr-only" data-astro-cid-bdgzs6hm>-day plan</span></th>
+            <th scope="col" title="Monday" data-astro-cid-bdgzs6hm>Mon</th><th scope="col" title="Tuesday" data-astro-cid-bdgzs6hm>Tue</th><th scope="col" title="Wednesday" data-astro-cid-bdgzs6hm>Wed</th><th scope="col" title="Thursday" data-astro-cid-bdgzs6hm>Thu</th><th scope="col" title="Friday" data-astro-cid-bdgzs6hm>Fri</th><th scope="col" title="Saturday" data-astro-cid-bdgzs6hm>Sat</th><th scope="col" title="Sunday" data-astro-cid-bdgzs6hm>Sun</th>
+          </tr>
+        </thead>
+        <tbody data-astro-cid-bdgzs6hm>
+          <tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  4-day plan
+                  
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Monday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Tuesday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Wednesday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-on" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Thursday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td>
+              </tr><tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  3-day plan
+                  <small data-astro-cid-bdgzs6hm>Any 3 days</small>
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Monday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Tuesday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Wednesday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Thursday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td>
+              </tr><tr data-astro-cid-bdgzs6hm>
+                <th scope="row" data-astro-cid-bdgzs6hm>
+                  2-day plan
+                  <small data-astro-cid-bdgzs6hm>Any 2 days</small>
+                </th>
+                <td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Monday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Tuesday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Wednesday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot is-choice" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm>Thursday</span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td><td data-astro-cid-bdgzs6hm>
+                      <span class="slot" data-astro-cid-bdgzs6hm>
+                        <span class="sr-only" data-astro-cid-bdgzs6hm></span>
+                      </span>
+                    </td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- In the reader's own time -->
+    <div class="card yours" hidden data-yours data-settings="{&quot;locale&quot;:&quot;en-US&quot;,&quot;startUtc&quot;:[12,0],&quot;hours&quot;:4,&quot;plans&quot;:[{&quot;days&quot;:4,&quot;on&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;thu&quot;],&quot;choose&quot;:0},{&quot;days&quot;:3,&quot;on&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;thu&quot;],&quot;choose&quot;:3},{&quot;days&quot;:2,&quot;on&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;thu&quot;],&quot;choose&quot;:2}],&quot;labels&quot;:{&quot;plan&quot;:[&quot;4-day plan&quot;,&quot;3-day plan&quot;,&quot;2-day plan&quot;],&quot;choose&quot;:[&quot;&quot;,&quot;Choose any 3 of these days&quot;,&quot;Choose any 2 of these days&quot;],&quot;nextDay&quot;:&quot;next day&quot;,&quot;days&quot;:{&quot;mon&quot;:&quot;Mon&quot;,&quot;tue&quot;:&quot;Tue&quot;,&quot;wed&quot;:&quot;Wed&quot;,&quot;thu&quot;:&quot;Thu&quot;,&quot;fri&quot;:&quot;Fri&quot;,&quot;sat&quot;:&quot;Sat&quot;,&quot;sun&quot;:&quot;Sun&quot;},&quot;zone&quot;:&quot;Worked out for your time zone, {zone}, for the coming week.&quot;,&quot;to&quot;:&quot;–&quot;}}" data-astro-cid-bdgzs6hm>
+      <p class="kicker yours__kicker" data-astro-cid-bdgzs6hm>In your time</p>
+      <ul class="yours__list" data-yours-list data-astro-cid-bdgzs6hm></ul>
+      <p class="yours__zone" data-yours-zone data-astro-cid-bdgzs6hm></p>
+    </div>
+  </div>
+
+  
+
+  <ul class="notes" data-astro-cid-bdgzs6hm>
+    <li data-astro-cid-bdgzs6hm>Each class lasts one hour. Up to four group sessions run in the four-hour evening window; your exact hour is set when you join.</li><li data-astro-cid-bdgzs6hm>With the 3-day and 2-day plans, you choose your days from Monday to Thursday.</li><li data-astro-cid-bdgzs6hm>One-to-one lessons are arranged within the same window.</li>
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="admission" data-astro-cid-f7swimbp>
+    <div class="container cols cols--2 admission" data-astro-cid-f7swimbp>
+      <div data-reveal data-astro-cid-f7swimbp>
+        <p class="kicker" data-astro-cid-f7swimbp><svg width="14" height="14" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
+</svg>Admission and payment</p>
+        <ol class="steps-list" data-astro-cid-f7swimbp>
+          <li data-astro-cid-f7swimbp>
+                <span class="steps-list__badge" data-astro-cid-f7swimbp>1</span>
+                <div data-astro-cid-f7swimbp>
+                  <h3 class="h3" data-astro-cid-f7swimbp>A free first week</h3>
+                  <p data-astro-cid-f7swimbp>Join your classes for a week, free of charge, and see how you get on with your teacher.</p>
+                </div>
+              </li><li data-astro-cid-f7swimbp>
+                <span class="steps-list__badge" data-astro-cid-f7swimbp>2</span>
+                <div data-astro-cid-f7swimbp>
+                  <h3 class="h3" data-astro-cid-f7swimbp>Confirm your place</h3>
+                  <p data-astro-cid-f7swimbp>To continue, pay the first month’s fee. It confirms admission and covers your first month.</p>
+                </div>
+              </li><li data-astro-cid-f7swimbp>
+                <span class="steps-list__badge" data-astro-cid-f7swimbp>3</span>
+                <div data-astro-cid-f7swimbp>
+                  <h3 class="h3" data-astro-cid-f7swimbp>Monthly from then on</h3>
+                  <p data-astro-cid-f7swimbp>Fees are paid month by month, at the rate for your region, plan and class format.</p>
+                </div>
+              </li>
+        </ol>
+      </div>
+      <div class="card pad" data-reveal style="--reveal-order: 1" data-astro-cid-f7swimbp>
+        <h3 class="h3" data-astro-cid-f7swimbp>Good to know</h3>
+        <ul class="ticks" style="margin-top: 1rem" data-astro-cid-f7swimbp>
+          <li data-astro-cid-f7swimbp>All fees are monthly</li><li data-astro-cid-f7swimbp>The first week is free for every new student</li><li data-astro-cid-f7swimbp>The first month’s fee is paid on admission, after the free week</li><li data-astro-cid-f7swimbp>Choose 2, 3 or 4 days a week</li><li data-astro-cid-f7swimbp>Choose a group batch or one-to-one lessons</li><li data-astro-cid-f7swimbp>Classes follow the timetable of your region</li><li data-astro-cid-f7swimbp>Each class lasts one hour</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -302,82 +1106,22 @@ if (header && toggle) {
         <ol class="steps" style="--columns: 4" data-astro-cid-5wfdsgz3>
   <li class="step" data-reveal style="--reveal-order: 0" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>1</span>
-        <h3 class="step__title" data-astro-cid-5wfdsgz3>Request a free trial</h3>
-        <p class="step__text" data-astro-cid-5wfdsgz3>Tell us about the student and the times that suit you. It takes two minutes.</p>
+        <h3 class="step__title" data-astro-cid-5wfdsgz3>Request your free week</h3>
+        <p class="step__text" data-astro-cid-5wfdsgz3>Tell us about the student, your region and the times that suit you. It takes two minutes.</p>
       </li><li class="step" data-reveal style="--reveal-order: 1" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>2</span>
-        <h3 class="step__title" data-astro-cid-5wfdsgz3>Meet your teacher</h3>
-        <p class="step__text" data-astro-cid-5wfdsgz3>In a free first class the teacher gets to know the student and assesses their level, so they start in the right place.</p>
+        <h3 class="step__title" data-astro-cid-5wfdsgz3>Learn free for a week</h3>
+        <p class="step__text" data-astro-cid-5wfdsgz3>In the free first week the teacher gets to know the student and assesses their level, so they start in the right place.</p>
       </li><li class="step" data-reveal style="--reveal-order: 2" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>3</span>
-        <h3 class="step__title" data-astro-cid-5wfdsgz3>Choose your schedule</h3>
-        <p class="step__text" data-astro-cid-5wfdsgz3>Pick a program and fixed weekly class times in your own time zone.</p>
+        <h3 class="step__title" data-astro-cid-5wfdsgz3>Confirm your place</h3>
+        <p class="step__text" data-astro-cid-5wfdsgz3>Choose 2, 3 or 4 days a week and a group batch or one-to-one, then pay the first month’s fee to confirm admission.</p>
       </li><li class="step" data-reveal style="--reveal-order: 3" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>4</span>
         <h3 class="step__title" data-astro-cid-5wfdsgz3>Learn and grow</h3>
         <p class="step__text" data-astro-cid-5wfdsgz3>Join each lesson by video call from home, and receive regular reports on the student’s progress.</p>
       </li>
 </ol>
-      </div>
-      <div class="block" data-astro-cid-f7swimbp>
-        <div class="timeband on-dark" data-reveal data-clock data-locale="en-US" data-astro-cid-lo7mdono>
-  <span class="pattern pattern--corner" data-astro-cid-lo7mdono></span>
-  <div class="timeband__copy" data-astro-cid-lo7mdono>
-    <span class="icon-tile icon-tile--saffron" data-astro-cid-lo7mdono>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
-    </span>
-    <h3 class="timeband__title" data-astro-cid-lo7mdono>Evening in America is morning in Bangladesh</h3>
-    <p class="timeband__text" data-astro-cid-lo7mdono>When school and work are finishing in the United States, a new day is beginning in Dhaka. After-school, evening and weekend lessons fit naturally — for our teachers and for your family.</p>
-    <p class="timeband__zones" data-astro-cid-lo7mdono>Eastern · Central · Mountain · Pacific · Alaska · Hawaii</p>
-  </div>
-  <div class="timeband__clocks" aria-hidden="true" hidden data-clock-panel data-astro-cid-lo7mdono>
-    <div class="clock" data-astro-cid-lo7mdono>
-      <span class="clock__label" data-astro-cid-lo7mdono>Your time</span>
-      <span class="clock__time" data-clock-local data-astro-cid-lo7mdono>--:--</span>
-      <span class="clock__day" data-clock-zone data-astro-cid-lo7mdono></span>
-    </div>
-    <div class="clock clock--dhaka" data-astro-cid-lo7mdono>
-      <span class="clock__label" data-astro-cid-lo7mdono>Dhaka, Bangladesh</span>
-      <span class="clock__time" data-clock-dhaka data-astro-cid-lo7mdono>--:--</span>
-      <span class="clock__day" data-clock-day data-astro-cid-lo7mdono></span>
-    </div>
-  </div>
-</div>
-
-<script type="module">// src/components/TimeBand.astro?astro&type=script&index=0&lang.ts
-document.querySelectorAll("[data-clock]").forEach((band) => {
-	const panel = band.querySelector("[data-clock-panel]");
-	if (!panel) return;
-	try {
-		const locale = band.dataset.locale ?? "en-US";
-		const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-		const time = (timeZone) => new Intl.DateTimeFormat(locale, {
-			hour: "numeric",
-			minute: "2-digit",
-			timeZone
-		});
-		const day = (timeZone) => new Intl.DateTimeFormat(locale, {
-			weekday: "long",
-			timeZone
-		});
-		const formats = {
-			"[data-clock-local]": time(zone),
-			"[data-clock-dhaka]": time("Asia/Dhaka"),
-			"[data-clock-zone]": day(zone),
-			"[data-clock-day]": day("Asia/Dhaka")
-		};
-		const tick = () => {
-			const now = /* @__PURE__ */ new Date();
-			for (const [selector, format] of Object.entries(formats)) {
-				const element = panel.querySelector(selector);
-				if (element) element.textContent = format.format(now);
-			}
-		};
-		tick();
-		panel.hidden = false;
-		window.setInterval(tick, 15e3);
-	} catch {}
-});</script>
       </div>
     </div>
   </section>
@@ -394,11 +1138,11 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
       
 </svg>
       <div class="cta__copy" data-astro-cid-hwvj6ntz>
-        <h2 class="cta__title" data-astro-cid-hwvj6ntz>Begin with a free class, in sha Allah</h2>
-        <p class="cta__text" data-astro-cid-hwvj6ntz>Meet a teacher before you decide anything.</p>
+        <h2 class="cta__title" data-astro-cid-hwvj6ntz>Begin with a free week, in sha Allah</h2>
+        <p class="cta__text" data-astro-cid-hwvj6ntz>Try a full week of classes with a teacher before you decide anything.</p>
       </div>
       <a class="btn btn--saffron" href="./free-trial.html" data-astro-cid-hwvj6ntz>
-        Book a free trial class
+        Start your free week
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -436,7 +1180,7 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
           <span class="footer__tagline" data-astro-cid-jo6i4kqk>Islamic Institute</span>
         </span>
       </a>
-      <p class="footer__about" data-astro-cid-jo6i4kqk>Live online Qur’an and Islamic education for families across the United States and beyond, taught by qualified imams and huffaz from Bangladesh.</p>
+      <p class="footer__about" data-astro-cid-jo6i4kqk>Live online Qur’an and Islamic education for students in the USA, Canada and Bangladesh, taught by qualified imams and huffaz from Bangladesh.</p>
       <p class="footer__arabic" lang="ar" dir="rtl" data-astro-cid-jo6i4kqk>دار الأرقم</p>
     </div>
 
@@ -456,11 +1200,11 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
             </li><li data-astro-cid-jo6i4kqk>
               <a href="./reviews.html" data-astro-cid-jo6i4kqk>Reviews</a>
             </li><li data-astro-cid-jo6i4kqk>
-              <a href="./tuition.html" data-astro-cid-jo6i4kqk>Tuition</a>
+              <a href="./tuition.html" data-astro-cid-jo6i4kqk>Fees &amp; Timetable</a>
             </li><li data-astro-cid-jo6i4kqk>
               <a href="./faq.html" data-astro-cid-jo6i4kqk>FAQ</a>
             </li>
-        <li data-astro-cid-jo6i4kqk><a href="./free-trial.html" data-astro-cid-jo6i4kqk>Free trial class</a></li>
+        <li data-astro-cid-jo6i4kqk><a href="./free-trial.html" data-astro-cid-jo6i4kqk>Free first week</a></li>
       </ul>
     </nav>
 
@@ -505,7 +1249,7 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
 
   <div class="container footer__base" data-astro-cid-jo6i4kqk>
     <p data-astro-cid-jo6i4kqk>© 2026 Darul Arqam. All rights reserved.</p>
-    <p data-astro-cid-jo6i4kqk>Teaching from Bangladesh · Serving families in the United States and beyond</p>
+    <p data-astro-cid-jo6i4kqk>Teaching from Bangladesh · For students in the USA, Canada, Bangladesh and beyond</p>
   </div>
 </footer>
 

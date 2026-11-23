@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Questions and Answers | Darul Arqam</title>
-    <meta name="description" content="Answers to common questions about Darul Arqam: programs, Deeniyat, ages, female teachers, language, progress reports, certificates and time zones.">
+    <meta name="description" content="Answers to common questions about Darul Arqam: programs, Deeniyat, fees, the free first week, ages, female teachers, language, timetables and certificates.">
     <meta name="theme-color" content="#0b1a3b">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
@@ -12,14 +12,31 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Darul Arqam">
     <meta property="og:title" content="Questions and Answers | Darul Arqam">
-    <meta property="og:description" content="Answers to common questions about Darul Arqam: programs, Deeniyat, ages, female teachers, language, progress reports, certificates and time zones.">
+    <meta property="og:description" content="Answers to common questions about Darul Arqam: programs, Deeniyat, fees, the free first week, ages, female teachers, language, timetables and certificates.">
     <meta property="og:locale" content="en_US">
 
     
     <script>
-      document.documentElement.classList.replace('no-js', 'js');
+      // Marks that scripts run, and chooses the region whose fees and timetable to show:
+      // the reader's own choice if they made one, otherwise a guess from their time zone.
+      (function (root) {
+        root.classList.replace('no-js', 'js');
+        var region;
+        try {
+          region = localStorage.getItem('darul-arqam-region');
+        } catch (e) {}
+        if (region !== 'us' && region !== 'bd') {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            region = zone === 'Asia/Dhaka' || zone === 'Asia/Dacca' ? 'bd' : 'us';
+          } catch (e) {
+            region = 'us';
+          }
+        }
+        root.dataset.region = region;
+      })(document.documentElement);
     </script>
-  <link rel="stylesheet" href="./assets/style.css?v=da4a2c17"></head>
+  <link rel="stylesheet" href="./assets/style.css?v=910d72e1"></head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="topbar" data-astro-cid-nen7h5rs>
@@ -28,12 +45,34 @@
       <svg width="12" height="12" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
   <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
 </svg>
-      Live online Qur’an and Islamic education for families in the United States and beyond
+      Live online Qur’an and Islamic education for students in the USA, Canada and Bangladesh
     </p>
     <div class="topbar__links" data-astro-cid-nen7h5rs>
+      <div class="region-switch region-switch--small" role="group" aria-label="Choose your region" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>USA &amp; Canada</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>Bangladesh</button>
+</div>
+
+<script type="module">// src/components/RegionSwitch.astro?astro&type=script&index=0&lang.ts
+var root = document.documentElement;
+var sync = () => {
+	document.querySelectorAll("[data-set-region]").forEach((button) => {
+		button.setAttribute("aria-pressed", String(button.dataset.setRegion === root.dataset.region));
+	});
+};
+document.addEventListener("click", (event) => {
+	const button = event.target.closest("[data-set-region]");
+	if (!button) return;
+	root.dataset.region = button.dataset.setRegion;
+	try {
+		window.localStorage.setItem("darul-arqam-region", button.dataset.setRegion ?? "us");
+	} catch {}
+	sync();
+});
+sync();</script>
       <a href="https://wa.me/15550100123" target="_blank" rel="noopener" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.5a8.3 8.3 0 0 1-12.3 7.3L3.5 20.5l1.7-4.6A8.3 8.3 0 1 1 20.5 11.5z"/></svg>
-            +1 (555) 010-0123
+            <span class="topbar__label" data-astro-cid-nen7h5rs>+1 (555) 010-0123</span>
           </a>
       <a href="./bn/faq.html" lang="bn" hreflang="bn" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
@@ -138,7 +177,7 @@
                 
               </li><li data-astro-cid-nen7h5rs>
                 <a href="./tuition.html" data-astro-cid-nen7h5rs>
-                  Tuition
+                  Fees &amp; Timetable
                   
                 </a>
                 
@@ -151,7 +190,7 @@
               </li>
       </ul>
       <a class="btn btn--saffron btn--sm nav__cta" href="./free-trial.html" data-astro-cid-nen7h5rs>
-        Free trial class
+        Free first week
       </a>
     </nav>
   </div>
@@ -228,7 +267,7 @@ if (header && toggle) {
           <span data-astro-cid-bppbuphv>How do the online classes work?</span>
           <span class="faq__icon" aria-hidden="true" data-astro-cid-bppbuphv></span>
         </summary>
-        <p data-astro-cid-bppbuphv>Nazirah and Hifz are live, private video lessons between one student and one teacher, who listens to the student recite and corrects gently as they go. Alimiyah and Junior Islamic Studies are taught in group classes, semester by semester. You can join from a laptop, tablet or phone.</p>
+        <p data-astro-cid-bppbuphv>Every class is a live, one-hour video lesson. Nazirah and Hifz are taught in a small group batch or one-to-one, as you prefer; Alimiyah and Junior Islamic Studies are taught in group batches, semester by semester. The teacher listens to each student recite and corrects gently as they go. You can join from a laptop, tablet or phone.</p>
       </details><details class="faq__item card" data-reveal style="--reveal-order: 2" data-astro-cid-bppbuphv>
         <summary data-astro-cid-bppbuphv>
           <span data-astro-cid-bppbuphv>What is Deeniyat?</span>
@@ -246,7 +285,7 @@ if (header && toggle) {
           <span data-astro-cid-bppbuphv>Can my daughter or I learn with a female teacher?</span>
           <span class="faq__icon" aria-hidden="true" data-astro-cid-bppbuphv></span>
         </summary>
-        <p data-astro-cid-bppbuphv>Yes. Qualified female teachers are available for sisters and girls. Simply choose “Female teacher” when you request your trial class.</p>
+        <p data-astro-cid-bppbuphv>Yes. Qualified female teachers are available for sisters and girls. Simply choose “Female teacher” when you request your free week.</p>
       </details><details class="faq__item card" data-reveal style="--reveal-order: 4" data-astro-cid-bppbuphv>
         <summary data-astro-cid-bppbuphv>
           <span data-astro-cid-bppbuphv>What language are classes taught in?</span>
@@ -261,16 +300,28 @@ if (header && toggle) {
         <p data-astro-cid-bppbuphv>Parents receive periodic progress reports covering reading or memorization, revision, recitation quality, Deeniyat, attendance, the teacher’s feedback and the areas that need more work.</p>
       </details><details class="faq__item card" data-reveal style="--reveal-order: 4" data-astro-cid-bppbuphv>
         <summary data-astro-cid-bppbuphv>
+          <span data-astro-cid-bppbuphv>Is the first week really free?</span>
+          <span class="faq__icon" aria-hidden="true" data-astro-cid-bppbuphv></span>
+        </summary>
+        <p data-astro-cid-bppbuphv>Yes. Every new student, in Bangladesh and abroad, attends the first week of classes without paying anything. If you decide not to continue, you owe nothing.</p>
+      </details><details class="faq__item card" data-reveal style="--reveal-order: 4" data-astro-cid-bppbuphv>
+        <summary data-astro-cid-bppbuphv>
           <span data-astro-cid-bppbuphv>Do students receive a certificate?</span>
           <span class="faq__icon" aria-hidden="true" data-astro-cid-bppbuphv></span>
         </summary>
         <p data-astro-cid-bppbuphv>Yes, on completing a program or stage and passing its assessment. A certificate states the program and level actually completed. It is a certificate of completion from Darul Arqam, not an accredited degree or a government-recognized qualification.</p>
       </details><details class="faq__item card" data-reveal style="--reveal-order: 4" data-astro-cid-bppbuphv>
         <summary data-astro-cid-bppbuphv>
-          <span data-astro-cid-bppbuphv>Will the class times suit my time zone?</span>
+          <span data-astro-cid-bppbuphv>When are the classes, and will they suit my time zone?</span>
           <span class="faq__icon" aria-hidden="true" data-astro-cid-bppbuphv></span>
         </summary>
-        <p data-astro-cid-bppbuphv>Yes. Classes are scheduled in your local time, anywhere in the United States, and students in other countries are welcome too. Because evening in America is morning in Bangladesh, after-school and evening slots work especially well.</p>
+        <p data-astro-cid-bppbuphv>In the USA and Canada, classes run in the evening: 6:30–9:30 PM Eastern in winter and 7:30–10:30 PM in summer, at the same moment across North America. In Bangladesh, classes run 6–10 PM. The Fees &amp; Timetable page shows the times in your own time zone, and students in other countries can join either timetable.</p>
+      </details><details class="faq__item card" data-reveal style="--reveal-order: 4" data-astro-cid-bppbuphv>
+        <summary data-astro-cid-bppbuphv>
+          <span data-astro-cid-bppbuphv>How much are the fees, and how do I pay?</span>
+          <span class="faq__icon" aria-hidden="true" data-astro-cid-bppbuphv></span>
+        </summary>
+        <p data-astro-cid-bppbuphv>Fees are monthly. They depend on your region, on how many days a week you choose (2, 3 or 4), and on whether you learn in a group batch or one-to-one. Students in the USA, Canada and other countries pay in US dollars; students in Bangladesh pay in taka. After the free first week, paying the first month’s fee confirms admission.</p>
       </details><details class="faq__item card" data-reveal style="--reveal-order: 4" data-astro-cid-bppbuphv>
         <summary data-astro-cid-bppbuphv>
           <span data-astro-cid-bppbuphv>What do we need for a class?</span>
@@ -329,11 +380,11 @@ if (header && toggle) {
       
 </svg>
       <div class="cta__copy" data-astro-cid-hwvj6ntz>
-        <h2 class="cta__title" data-astro-cid-hwvj6ntz>Begin with a free class, in sha Allah</h2>
-        <p class="cta__text" data-astro-cid-hwvj6ntz>Meet a teacher before you decide anything.</p>
+        <h2 class="cta__title" data-astro-cid-hwvj6ntz>Begin with a free week, in sha Allah</h2>
+        <p class="cta__text" data-astro-cid-hwvj6ntz>Try a full week of classes with a teacher before you decide anything.</p>
       </div>
       <a class="btn btn--saffron" href="./free-trial.html" data-astro-cid-hwvj6ntz>
-        Book a free trial class
+        Start your free week
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -371,7 +422,7 @@ if (header && toggle) {
           <span class="footer__tagline" data-astro-cid-jo6i4kqk>Islamic Institute</span>
         </span>
       </a>
-      <p class="footer__about" data-astro-cid-jo6i4kqk>Live online Qur’an and Islamic education for families across the United States and beyond, taught by qualified imams and huffaz from Bangladesh.</p>
+      <p class="footer__about" data-astro-cid-jo6i4kqk>Live online Qur’an and Islamic education for students in the USA, Canada and Bangladesh, taught by qualified imams and huffaz from Bangladesh.</p>
       <p class="footer__arabic" lang="ar" dir="rtl" data-astro-cid-jo6i4kqk>دار الأرقم</p>
     </div>
 
@@ -391,11 +442,11 @@ if (header && toggle) {
             </li><li data-astro-cid-jo6i4kqk>
               <a href="./reviews.html" data-astro-cid-jo6i4kqk>Reviews</a>
             </li><li data-astro-cid-jo6i4kqk>
-              <a href="./tuition.html" data-astro-cid-jo6i4kqk>Tuition</a>
+              <a href="./tuition.html" data-astro-cid-jo6i4kqk>Fees &amp; Timetable</a>
             </li><li data-astro-cid-jo6i4kqk>
               <a href="./faq.html" data-astro-cid-jo6i4kqk>FAQ</a>
             </li>
-        <li data-astro-cid-jo6i4kqk><a href="./free-trial.html" data-astro-cid-jo6i4kqk>Free trial class</a></li>
+        <li data-astro-cid-jo6i4kqk><a href="./free-trial.html" data-astro-cid-jo6i4kqk>Free first week</a></li>
       </ul>
     </nav>
 
@@ -440,7 +491,7 @@ if (header && toggle) {
 
   <div class="container footer__base" data-astro-cid-jo6i4kqk>
     <p data-astro-cid-jo6i4kqk>© 2026 Darul Arqam. All rights reserved.</p>
-    <p data-astro-cid-jo6i4kqk>Teaching from Bangladesh · Serving families in the United States and beyond</p>
+    <p data-astro-cid-jo6i4kqk>Teaching from Bangladesh · For students in the USA, Canada, Bangladesh and beyond</p>
   </div>
 </footer>
 

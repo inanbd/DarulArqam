@@ -34,15 +34,5 @@ export const site = {
    * message to `contact.whatsappNumber` (or an email draft if that is empty too).
    */
   formEndpoint: '',
-
-  /**
-   * PLACEHOLDER tuition, in US dollars per month. `featured` marks the highlighted plan.
-   */
-  plans: [
-    { id: 'two', classesPerWeek: 2, classesPerMonth: 8, monthlyUsd: 40, featured: false },
-    { id: 'three', classesPerWeek: 3, classesPerMonth: 12, monthlyUsd: 55, featured: true },
-    { id: 'five', classesPerWeek: 5, classesPerMonth: 20, monthlyUsd: 85, featured: false },
-  ],
 } as const;
 
-export type PlanId = (typeof site.plans)[number]['id'];

@@ -64,6 +64,20 @@ const messages = {
     </div>
 
     <div class="field">
+      <label for="trial-country">{f.country}</label>
+      <select id="trial-country" name="country" data-label={f.country} data-country>
+        {f.countryOptions.map((option) => <option>{option}</option>)}
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="trial-timezone">{f.timezone}</label>
+      <select id="trial-timezone" name="timezone" data-label={f.timezone} data-timezone>
+        {f.timezones.map((zone) => <option value={zone.value}>{zone.label}</option>)}
+      </select>
+    </div>
+
+    <div class="field">
       <label for="trial-learner">{f.learner}</label>
       <select id="trial-learner" name="learner" data-label={f.learnerShort}>
         {f.learnerOptions.map((option) => <option>{option}</option>)}
@@ -76,6 +90,13 @@ const messages = {
     </div>
 
     <div class="field">
+      <label for="trial-teacher">{f.teacher}</label>
+      <select id="trial-teacher" name="teacher" data-label={f.teacher}>
+        {f.teacherOptions.map((option) => <option>{option}</option>)}
+      </select>
+    </div>
+
+    <div class="field field--wide">
       <label for="trial-program">{f.program}</label>
       <select id="trial-program" name="program" data-label={f.program}>
         <option>{f.programUnsure}</option>
@@ -84,16 +105,16 @@ const messages = {
     </div>
 
     <div class="field">
-      <label for="trial-teacher">{f.teacher}</label>
-      <select id="trial-teacher" name="teacher" data-label={f.teacher}>
-        {f.teacherOptions.map((option) => <option>{option}</option>)}
+      <label for="trial-format">{f.format}</label>
+      <select id="trial-format" name="format" data-label={f.format}>
+        {f.formatOptions.map((option) => <option>{option}</option>)}
       </select>
     </div>
 
     <div class="field">
-      <label for="trial-timezone">{f.timezone}</label>
-      <select id="trial-timezone" name="timezone" data-label={f.timezone} data-timezone>
-        {f.timezones.map((zone) => <option value={zone.value}>{zone.label}</option>)}
+      <label for="trial-days">{f.days}</label>
+      <select id="trial-days" name="days" data-label={f.days}>
+        {f.daysOptions.map((option) => <option>{option}</option>)}
       </select>
     </div>
 
@@ -133,14 +154,17 @@ const messages = {
     const text = JSON.parse(form.dataset.messages ?? '{}') as Record<string, string>;
     const { endpoint = '', whatsapp = '', email = '' } = form.dataset;
 
-    // Pre-select the visitor's US time zone.
+    // Pre-select the visitor's country and time zone, from the time zone their device reports.
     const zoneSelect = form.querySelector<HTMLSelectElement>('[data-timezone]');
+    const countrySelect = form.querySelector<HTMLSelectElement>('[data-country]');
     try {
       const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       // Compare against January, when no daylight saving applies, to read the standard offset.
       const winter = new Date(new Date().getFullYear(), 0, 15, 12);
       const hours = -winter.getTimezoneOffset() / 60;
       const byOffset: Record<string, string> = {
+        '-3.5': 'Newfoundland (NT)',
+        '-4': 'Atlantic (AT)',
         '-5': 'Eastern (ET)',
         '-6': 'Central (CT)',
         '-7': 'Mountain (MT)',
@@ -148,10 +172,24 @@ const messages = {
         '-9': 'Alaska (AKT)',
         '-10': 'Hawaii (HT)',
       };
-      const inAmericas = /^(America|US|Pacific\/Honolulu)/.test(zone);
-      if (zoneSelect) zoneSelect.value = (inAmericas && byOffset[String(hours)]) || 'Other';
+      const canada =
+        /^America\/(Toronto|Montreal|Vancouver|Edmonton|Calgary|Winnipeg|Regina|Swift_Current|Halifax|Glace_Bay|Moncton|Goose_Bay|St_Johns|Whitehorse|Dawson|Dawson_Creek|Fort_Nelson|Creston|Yellowknife|Inuvik|Cambridge_Bay|Rankin_Inlet|Resolute|Iqaluit|Atikokan|Blanc-Sablon|Nipigon|Thunder_Bay|Rainy_River|Pangnirtung)$|^Canada\//.test(
+          zone,
+        );
+      const usa =
+        !canada &&
+        /^America\/(New_York|Detroit|Chicago|Denver|Phoenix|Boise|Los_Angeles|Anchorage|Juneau|Sitka|Yakutat|Nome|Metlakatla|Adak|Menominee|Indiana\/.+|Kentucky\/.+|North_Dakota\/.+)$|^Pacific\/Honolulu$|^US\//.test(
+          zone,
+        );
+      const bangladesh = zone === 'Asia/Dhaka';
+
+      if (zoneSelect) {
+        zoneSelect.value = bangladesh ? 'Bangladesh (BST)' : ((usa || canada) && byOffset[String(hours)]) || 'Other';
+      }
+      // The country options run: USA, Canada, Bangladesh, another country.
+      if (countrySelect) countrySelect.selectedIndex = usa ? 0 : canada ? 1 : bangladesh ? 2 : 3;
     } catch {
-      // Keep the first option.
+      // Keep the first options.
     }
 
     /** The answers as "Label: value" lines, skipping anything left blank. */

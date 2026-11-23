@@ -17,9 +17,26 @@
 
     
     <script>
-      document.documentElement.classList.replace('no-js', 'js');
+      // Marks that scripts run, and chooses the region whose fees and timetable to show:
+      // the reader's own choice if they made one, otherwise a guess from their time zone.
+      (function (root) {
+        root.classList.replace('no-js', 'js');
+        var region;
+        try {
+          region = localStorage.getItem('darul-arqam-region');
+        } catch (e) {}
+        if (region !== 'us' && region !== 'bd') {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            region = zone === 'Asia/Dhaka' || zone === 'Asia/Dacca' ? 'bd' : 'us';
+          } catch (e) {
+            region = 'us';
+          }
+        }
+        root.dataset.region = region;
+      })(document.documentElement);
     </script>
-  <link rel="stylesheet" href="./assets/style.css?v=da4a2c17"></head>
+  <link rel="stylesheet" href="./assets/style.css?v=910d72e1"></head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="topbar" data-astro-cid-nen7h5rs>
@@ -28,12 +45,34 @@
       <svg width="12" height="12" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
   <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
 </svg>
-      Live online Qur’an and Islamic education for families in the United States and beyond
+      Live online Qur’an and Islamic education for students in the USA, Canada and Bangladesh
     </p>
     <div class="topbar__links" data-astro-cid-nen7h5rs>
+      <div class="region-switch region-switch--small" role="group" aria-label="Choose your region" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>USA &amp; Canada</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>Bangladesh</button>
+</div>
+
+<script type="module">// src/components/RegionSwitch.astro?astro&type=script&index=0&lang.ts
+var root = document.documentElement;
+var sync = () => {
+	document.querySelectorAll("[data-set-region]").forEach((button) => {
+		button.setAttribute("aria-pressed", String(button.dataset.setRegion === root.dataset.region));
+	});
+};
+document.addEventListener("click", (event) => {
+	const button = event.target.closest("[data-set-region]");
+	if (!button) return;
+	root.dataset.region = button.dataset.setRegion;
+	try {
+		window.localStorage.setItem("darul-arqam-region", button.dataset.setRegion ?? "us");
+	} catch {}
+	sync();
+});
+sync();</script>
       <a href="https://wa.me/15550100123" target="_blank" rel="noopener" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.5a8.3 8.3 0 0 1-12.3 7.3L3.5 20.5l1.7-4.6A8.3 8.3 0 1 1 20.5 11.5z"/></svg>
-            +1 (555) 010-0123
+            <span class="topbar__label" data-astro-cid-nen7h5rs>+1 (555) 010-0123</span>
           </a>
       <a href="./bn/programs.html" lang="bn" hreflang="bn" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
@@ -138,7 +177,7 @@
                 
               </li><li data-astro-cid-nen7h5rs>
                 <a href="./tuition.html" data-astro-cid-nen7h5rs>
-                  Tuition
+                  Fees &amp; Timetable
                   
                 </a>
                 
@@ -151,7 +190,7 @@
               </li>
       </ul>
       <a class="btn btn--saffron btn--sm nav__cta" href="./free-trial.html" data-astro-cid-nen7h5rs>
-        Free trial class
+        Free first week
       </a>
     </nav>
   </div>
@@ -229,7 +268,7 @@ if (header && toggle) {
                 <p class="program__tagline" data-astro-cid-7nae7f54>Learn to read the Qur’an correctly</p>
                 <p class="program__text" data-astro-cid-7nae7f54>The Nazirah program focuses on developing students’ ability to read the Holy Qur’an accurately and confidently. The program is structured according to each student’s current reading ability and progress.</p>
                 <ul class="chips" style="margin: 1.1rem 0 1.6rem" data-astro-cid-7nae7f54>
-                  <li class="chip" data-astro-cid-7nae7f54><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>One-on-one lessons</li>
+                  <li class="chip" data-astro-cid-7nae7f54><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>Group batch or one-to-one</li>
                   <li class="chip chip--saffron" data-astro-cid-7nae7f54>Children, teenagers and adults</li>
                 </ul>
                 <a class="btn btn--navy" href="./nazirah.html" data-astro-cid-7nae7f54>
@@ -256,7 +295,7 @@ if (header && toggle) {
                 <p class="program__tagline" data-astro-cid-7nae7f54>Memorize the Qur’an and keep it</p>
                 <p class="program__text" data-astro-cid-7nae7f54>The Hifz program is designed for students who wish to memorize the Holy Qur’an. Our aim is to help students establish a strong and lasting relationship with the Qur’an.</p>
                 <ul class="chips" style="margin: 1.1rem 0 1.6rem" data-astro-cid-7nae7f54>
-                  <li class="chip" data-astro-cid-7nae7f54><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>One-on-one lessons</li>
+                  <li class="chip" data-astro-cid-7nae7f54><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>Group batch or one-to-one</li>
                   <li class="chip chip--saffron" data-astro-cid-7nae7f54>Children, teenagers and adults</li>
                 </ul>
                 <a class="btn btn--navy" href="./hifz.html" data-astro-cid-7nae7f54>
@@ -283,7 +322,7 @@ if (header && toggle) {
                 <p class="program__tagline" data-astro-cid-7nae7f54>Structured Islamic knowledge for every stage of life</p>
                 <p class="program__text" data-astro-cid-7nae7f54>The Alimiyah program is designed for students seeking a structured and broader understanding of Islamic knowledge. The program aims to develop a sound foundation in Islamic scholarship, understanding and academic study.</p>
                 <ul class="chips" style="margin: 1.1rem 0 1.6rem" data-astro-cid-7nae7f54>
-                  <li class="chip" data-astro-cid-7nae7f54><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>Group classes by semester</li>
+                  <li class="chip" data-astro-cid-7nae7f54><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg>Group batches, by semester</li>
                   <li class="chip chip--saffron" data-astro-cid-7nae7f54>Ages 3 to adult, in three divisions</li>
                 </ul>
                 <a class="btn btn--navy" href="./alimiyah.html" data-astro-cid-7nae7f54>
@@ -451,11 +490,11 @@ if (header && toggle) {
       
 </svg>
       <div class="cta__copy" data-astro-cid-hwvj6ntz>
-        <h2 class="cta__title" data-astro-cid-hwvj6ntz>Begin with a free class, in sha Allah</h2>
-        <p class="cta__text" data-astro-cid-hwvj6ntz>Meet a teacher before you decide anything.</p>
+        <h2 class="cta__title" data-astro-cid-hwvj6ntz>Begin with a free week, in sha Allah</h2>
+        <p class="cta__text" data-astro-cid-hwvj6ntz>Try a full week of classes with a teacher before you decide anything.</p>
       </div>
       <a class="btn btn--saffron" href="./free-trial.html" data-astro-cid-hwvj6ntz>
-        Book a free trial class
+        Start your free week
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -493,7 +532,7 @@ if (header && toggle) {
           <span class="footer__tagline" data-astro-cid-jo6i4kqk>Islamic Institute</span>
         </span>
       </a>
-      <p class="footer__about" data-astro-cid-jo6i4kqk>Live online Qur’an and Islamic education for families across the United States and beyond, taught by qualified imams and huffaz from Bangladesh.</p>
+      <p class="footer__about" data-astro-cid-jo6i4kqk>Live online Qur’an and Islamic education for students in the USA, Canada and Bangladesh, taught by qualified imams and huffaz from Bangladesh.</p>
       <p class="footer__arabic" lang="ar" dir="rtl" data-astro-cid-jo6i4kqk>دار الأرقم</p>
     </div>
 
@@ -513,11 +552,11 @@ if (header && toggle) {
             </li><li data-astro-cid-jo6i4kqk>
               <a href="./reviews.html" data-astro-cid-jo6i4kqk>Reviews</a>
             </li><li data-astro-cid-jo6i4kqk>
-              <a href="./tuition.html" data-astro-cid-jo6i4kqk>Tuition</a>
+              <a href="./tuition.html" data-astro-cid-jo6i4kqk>Fees &amp; Timetable</a>
             </li><li data-astro-cid-jo6i4kqk>
               <a href="./faq.html" data-astro-cid-jo6i4kqk>FAQ</a>
             </li>
-        <li data-astro-cid-jo6i4kqk><a href="./free-trial.html" data-astro-cid-jo6i4kqk>Free trial class</a></li>
+        <li data-astro-cid-jo6i4kqk><a href="./free-trial.html" data-astro-cid-jo6i4kqk>Free first week</a></li>
       </ul>
     </nav>
 
@@ -562,7 +601,7 @@ if (header && toggle) {
 
   <div class="container footer__base" data-astro-cid-jo6i4kqk>
     <p data-astro-cid-jo6i4kqk>© 2026 Darul Arqam. All rights reserved.</p>
-    <p data-astro-cid-jo6i4kqk>Teaching from Bangladesh · Serving families in the United States and beyond</p>
+    <p data-astro-cid-jo6i4kqk>Teaching from Bangladesh · For students in the USA, Canada, Bangladesh and beyond</p>
   </div>
 </footer>
 

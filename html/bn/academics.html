@@ -17,9 +17,26 @@
 
     
     <script>
-      document.documentElement.classList.replace('no-js', 'js');
+      // Marks that scripts run, and chooses the region whose fees and timetable to show:
+      // the reader's own choice if they made one, otherwise a guess from their time zone.
+      (function (root) {
+        root.classList.replace('no-js', 'js');
+        var region;
+        try {
+          region = localStorage.getItem('darul-arqam-region');
+        } catch (e) {}
+        if (region !== 'us' && region !== 'bd') {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            region = zone === 'Asia/Dhaka' || zone === 'Asia/Dacca' ? 'bd' : 'us';
+          } catch (e) {
+            region = 'us';
+          }
+        }
+        root.dataset.region = region;
+      })(document.documentElement);
     </script>
-  <link rel="stylesheet" href="../assets/style.css?v=da4a2c17"></head>
+  <link rel="stylesheet" href="../assets/style.css?v=910d72e1"></head>
   <body>
     <a class="skip-link" href="#main">মূল অংশে যান</a>
     <div class="topbar" data-astro-cid-nen7h5rs>
@@ -28,12 +45,34 @@
       <svg width="12" height="12" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
   <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
 </svg>
-      যুক্তরাষ্ট্র ও বিশ্বের অন্যান্য দেশের পরিবারগুলোর জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা
+      যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিক্ষার্থীদের জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা
     </p>
     <div class="topbar__links" data-astro-cid-nen7h5rs>
+      <div class="region-switch region-switch--small" role="group" aria-label="আপনার অঞ্চল বেছে নিন" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>যুক্তরাষ্ট্র ও কানাডা</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>বাংলাদেশ</button>
+</div>
+
+<script type="module">// src/components/RegionSwitch.astro?astro&type=script&index=0&lang.ts
+var root = document.documentElement;
+var sync = () => {
+	document.querySelectorAll("[data-set-region]").forEach((button) => {
+		button.setAttribute("aria-pressed", String(button.dataset.setRegion === root.dataset.region));
+	});
+};
+document.addEventListener("click", (event) => {
+	const button = event.target.closest("[data-set-region]");
+	if (!button) return;
+	root.dataset.region = button.dataset.setRegion;
+	try {
+		window.localStorage.setItem("darul-arqam-region", button.dataset.setRegion ?? "us");
+	} catch {}
+	sync();
+});
+sync();</script>
       <a href="https://wa.me/15550100123" target="_blank" rel="noopener" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.5a8.3 8.3 0 0 1-12.3 7.3L3.5 20.5l1.7-4.6A8.3 8.3 0 1 1 20.5 11.5z"/></svg>
-            +1 (555) 010-0123
+            <span class="topbar__label" data-astro-cid-nen7h5rs>+1 (555) 010-0123</span>
           </a>
       <a href="../academics.html" lang="en" hreflang="en" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
@@ -138,7 +177,7 @@
                 
               </li><li data-astro-cid-nen7h5rs>
                 <a href="../bn/tuition.html" data-astro-cid-nen7h5rs>
-                  ফি
+                  ফি ও সময়সূচি
                   
                 </a>
                 
@@ -151,7 +190,7 @@
               </li>
       </ul>
       <a class="btn btn--saffron btn--sm nav__cta" href="../bn/free-trial.html" data-astro-cid-nen7h5rs>
-        ফ্রি ট্রায়াল ক্লাস
+        প্রথম সপ্তাহ ফ্রি
       </a>
     </nav>
   </div>
@@ -387,11 +426,11 @@ if (header && toggle) {
       
 </svg>
       <div class="cta__copy" data-astro-cid-hwvj6ntz>
-        <h2 class="cta__title" data-astro-cid-hwvj6ntz>শুরু হোক একটি ফ্রি ক্লাস দিয়ে, ইনশাআল্লাহ</h2>
-        <p class="cta__text" data-astro-cid-hwvj6ntz>কোনো সিদ্ধান্ত নেওয়ার আগে একজন শিক্ষকের সঙ্গে পরিচিত হোন।</p>
+        <h2 class="cta__title" data-astro-cid-hwvj6ntz>শুরু হোক একটি ফ্রি সপ্তাহ দিয়ে, ইনশাআল্লাহ</h2>
+        <p class="cta__text" data-astro-cid-hwvj6ntz>কোনো সিদ্ধান্ত নেওয়ার আগে একজন শিক্ষকের সঙ্গে পুরো এক সপ্তাহ ক্লাস করে দেখুন।</p>
       </div>
       <a class="btn btn--saffron" href="../bn/free-trial.html" data-astro-cid-hwvj6ntz>
-        ফ্রি ট্রায়াল ক্লাস বুক করুন
+        ফ্রি সপ্তাহ শুরু করুন
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -429,7 +468,7 @@ if (header && toggle) {
           <span class="footer__tagline" data-astro-cid-jo6i4kqk>ইসলামিক ইনস্টিটিউট</span>
         </span>
       </a>
-      <p class="footer__about" data-astro-cid-jo6i4kqk>যুক্তরাষ্ট্রজুড়ে ও বিশ্বের অন্যান্য দেশের পরিবারগুলোর জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ।</p>
+      <p class="footer__about" data-astro-cid-jo6i4kqk>যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিক্ষার্থীদের জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ।</p>
       <p class="footer__arabic" lang="ar" dir="rtl" data-astro-cid-jo6i4kqk>دار الأرقم</p>
     </div>
 
@@ -449,11 +488,11 @@ if (header && toggle) {
             </li><li data-astro-cid-jo6i4kqk>
               <a href="../bn/reviews.html" data-astro-cid-jo6i4kqk>রিভিউ</a>
             </li><li data-astro-cid-jo6i4kqk>
-              <a href="../bn/tuition.html" data-astro-cid-jo6i4kqk>ফি</a>
+              <a href="../bn/tuition.html" data-astro-cid-jo6i4kqk>ফি ও সময়সূচি</a>
             </li><li data-astro-cid-jo6i4kqk>
               <a href="../bn/faq.html" data-astro-cid-jo6i4kqk>জিজ্ঞাসা</a>
             </li>
-        <li data-astro-cid-jo6i4kqk><a href="../bn/free-trial.html" data-astro-cid-jo6i4kqk>ফ্রি ট্রায়াল ক্লাস</a></li>
+        <li data-astro-cid-jo6i4kqk><a href="../bn/free-trial.html" data-astro-cid-jo6i4kqk>প্রথম সপ্তাহ ফ্রি</a></li>
       </ul>
     </nav>
 
@@ -498,7 +537,7 @@ if (header && toggle) {
 
   <div class="container footer__base" data-astro-cid-jo6i4kqk>
     <p data-astro-cid-jo6i4kqk>© ২০২৬ দারুল আরকাম. সর্বস্বত্ব সংরক্ষিত।</p>
-    <p data-astro-cid-jo6i4kqk>বাংলাদেশ থেকে পাঠদান · যুক্তরাষ্ট্র ও বিশ্বের নানা প্রান্তের পরিবারগুলোর সেবায়</p>
+    <p data-astro-cid-jo6i4kqk>পাঠদান বাংলাদেশ থেকে · যুক্তরাষ্ট্র, কানাডা, বাংলাদেশ ও বিশ্বের শিক্ষার্থীদের জন্য</p>
   </div>
 </footer>
 

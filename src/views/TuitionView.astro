@@ -1,18 +1,26 @@
 ---
 import Page from '../layouts/Page.astro';
+import FeeCards from '../components/FeeCards.astro';
+import Icon from '../components/Icon.astro';
 import PageHero from '../components/PageHero.astro';
-import Plans from '../components/Plans.astro';
+import RegionSwitch from '../components/RegionSwitch.astro';
 import Shamsa from '../components/Shamsa.astro';
 import Steps from '../components/Steps.astro';
-import TimeBand from '../components/TimeBand.astro';
+import Timetable from '../components/Timetable.astro';
+import { regions } from '../config/fees';
 import { getDict, type Lang } from '../i18n';
+import { num } from '../lib/format';
+import { pageHref } from '../lib/routes';
 
+/** Fees and timetable: the region switch, the free week, the fees, the class times, and admission. */
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
 const t = getDict(lang);
+const f = t.tuition;
+const tt = t.timetable;
 ---
 
 <Page lang={lang} page="tuition">
@@ -20,7 +28,93 @@ const t = getDict(lang);
 
   <section class="section">
     <div class="container">
-      <Plans lang={lang} />
+      <div class="choose" data-reveal>
+        <div>
+          <p class="choose__label">{t.region.label}</p>
+          <RegionSwitch lang={lang} />
+        </div>
+        <p class="choose__note"><Icon name="globe" size={18} /><span>{f.otherCountries}</span></p>
+      </div>
+
+      <aside class="free on-dark" data-reveal>
+        <span class="pattern pattern--corner"></span>
+        <span class="free__seven" aria-hidden="true">{num(7, lang)}</span>
+        <div class="free__copy">
+          <h2 class="free__title">{f.freeWeek.title}</h2>
+          <p>{f.freeWeek.text}</p>
+        </div>
+        <a class="btn btn--saffron" href={pageHref(lang, 'trial')}>
+          {f.freeWeek.cta}
+          <Icon name="arrow" size={18} />
+        </a>
+      </aside>
+
+      <header class="heading block" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{f.eyebrow}</p>
+        <h2 class="title">{f.title}</h2>
+        <p class="lead">{f.lead}</p>
+      </header>
+
+      <div class="fee-regions">
+        {regions.map((region) => <FeeCards lang={lang} region={region} />)}
+      </div>
+
+      <div class="cols cols--2 block extras">
+        <div class="card pad formats" data-reveal>
+          <span class="icon-tile"><Icon name="people" size={22} /></span>
+          <p>{f.formatsNote}</p>
+          <a class="link" href={pageHref(lang, 'trial')}>
+            {t.common.startTrial}
+            <Icon name="arrow" size={17} />
+          </a>
+        </div>
+        <div class="card pad" data-reveal style="--reveal-order: 1">
+          <h3 class="h3">{f.includedTitle}</h3>
+          <ul class="ticks" style="margin-top: 1rem">
+            {f.included.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="timetable">
+    <div class="container">
+      <header class="heading" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{tt.eyebrow}</p>
+        <h2 class="title">{tt.title}</h2>
+        <p class="lead">{tt.lead}</p>
+      </header>
+      <div class="block timetables">
+        {regions.map((region) => <Timetable lang={lang} region={region} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="admission">
+    <div class="container cols cols--2 admission">
+      <div data-reveal>
+        <p class="kicker"><Shamsa size={14} />{f.admissionTitle}</p>
+        <ol class="steps-list">
+          {
+            f.admission.map((step, index) => (
+              <li>
+                <span class="steps-list__badge">{num(index + 1, lang)}</span>
+                <div>
+                  <h3 class="h3">{step.title}</h3>
+                  <p>{step.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <div class="card pad" data-reveal style="--reveal-order: 1">
+        <h3 class="h3">{f.importantTitle}</h3>
+        <ul class="ticks" style="margin-top: 1rem">
+          {f.important.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -33,15 +127,157 @@ const t = getDict(lang);
       <div class="block">
         <Steps lang={lang} />
       </div>
-      <div class="block">
-        <TimeBand lang={lang} />
-      </div>
     </div>
   </section>
 </Page>
 
 <style>
-  .block {
-    margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
+  /* ----- Choose a region ----- */
+
+  .choose {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 2.5rem;
+  }
+
+  .choose__label {
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+    color: var(--navy-900);
+  }
+
+  :global(.no-js) .choose__label {
+    display: none;
+  }
+
+  .choose__note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    max-width: 30rem;
+    font-size: 0.97rem;
+    color: var(--ink-soft);
+  }
+
+  .choose__note :global(svg) {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    color: var(--teal-600);
+  }
+
+  /* ----- The free first week ----- */
+
+  .free {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem 2rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(70% 90% at 0% 0%, rgba(42, 157, 143, 0.45), transparent 70%),
+      linear-gradient(120deg, var(--navy-900), var(--navy-950));
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* A large seven: seven days, free. */
+  .free__seven {
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 5.25rem;
+    height: 5.25rem;
+    border-radius: 50%;
+    background: var(--saffron-500);
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--navy-950);
+    box-shadow: 0 0 0 0.45rem rgba(255, 255, 255, 0.12);
+  }
+
+  .free__copy {
+    position: relative;
+    flex: 1 1 22rem;
+  }
+
+  .free__title {
+    font-size: calc(clamp(1.6rem, 1.5vw + 1.05rem, 2.2rem) * var(--display-scale));
+    color: #fff;
+  }
+
+  .free__copy p {
+    margin-top: 0.4rem;
+    color: var(--on-dark-soft);
+  }
+
+  .free .btn {
+    position: relative;
+  }
+
+  /* ----- Fees ----- */
+
+  .fee-regions {
+    margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+
+  .extras {
+    align-items: stretch;
+  }
+
+  .formats {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+  }
+
+  .formats p {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--navy-900);
+  }
+
+  /* ----- Admission ----- */
+
+  .admission {
+    align-items: start;
+  }
+
+  .steps-list {
+    display: grid;
+    gap: 1.4rem;
+    margin-top: 1.5rem;
+    counter-reset: none;
+  }
+
+  .steps-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .steps-list__badge {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: var(--navy-900);
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--saffron-400);
+  }
+
+  .steps-list p {
+    margin-top: 0.3rem;
+    color: var(--ink-soft);
   }
 </style>

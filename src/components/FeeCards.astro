@@ -1,0 +1,246 @@
+---
+import Icon from './Icon.astro';
+import { currency, fees, formatFee, type Region } from '../config/fees';
+import { timetable, week } from '../config/timetable';
+import { getDict, type Lang } from '../i18n';
+import { dayRange } from '../lib/clock';
+import { num } from '../lib/format';
+
+/** The monthly fees of one region: a card for each plan, with its days and both class formats. */
+interface Props {
+  lang: Lang;
+  region: Region;
+}
+
+const { lang, region } = Astro.props;
+const t = getDict(lang);
+const f = t.tuition;
+const tt = t.timetable;
+const plans = timetable[region].plans;
+---
+
+<div class="fees" data-for-region={region}>
+  <p class="fees__region">
+    <span class="fees__currency">{currency[region].symbol}</span>
+    {t.region.showing} <strong>{t.region[region]}</strong>
+    <span class="fees__code">· {region === 'us' ? t.region.usCurrency : t.region.bdCurrency}</span>
+  </p>
+
+  <ul class="fees__cards">
+    {
+      fees[region].map((fee, index) => {
+        const plan = plans.find((entry) => entry.days === fee.days)!;
+        const daysText = dayRange(plan.on, tt.days);
+        return (
+          <li class:list={['fee card', { 'fee--featured': index === 0 }]} data-reveal style={`--reveal-order: ${index}`}>
+            <h3 class="fee__title">{f.daysAWeek(num(fee.days, lang))}</h3>
+            <p class="fee__days">{plan.choose ? `${tt.choose(num(plan.choose, lang))}: ${daysText}` : daysText}</p>
+
+            <ol class="week" aria-label={tt.weekLabel}>
+              {week.map((day) => (
+                <li class:list={['week__day', { 'is-on': plan.on.includes(day) && !plan.choose, 'is-choice': plan.on.includes(day) && plan.choose }]} title={tt.daysLong[day]}>
+                  {tt.days[day]}
+                </li>
+              ))}
+            </ol>
+
+            <dl class="fee__prices">
+              <div class="fee__price">
+                <dt>
+                  <Icon name="people" size={18} />
+                  <span>
+                    {f.group}
+                    <small>{f.groupText}</small>
+                  </span>
+                </dt>
+                <dd>
+                  <strong>{formatFee(region, fee.group, lang)}</strong>
+                  <span>{f.perMonth}</span>
+                </dd>
+              </div>
+              <div class="fee__price">
+                <dt>
+                  <Icon name="video" size={18} />
+                  <span>
+                    {f.oneToOne}
+                    <small>{f.oneToOneText}</small>
+                  </span>
+                </dt>
+                <dd>
+                  <strong>{formatFee(region, fee.oneToOne, lang)}</strong>
+                  <span>{f.perMonth}</span>
+                </dd>
+              </div>
+            </dl>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>
+
+<style>
+  .fees + .fees {
+    margin-top: 3rem;
+  }
+
+  .fees__region {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.6rem;
+    margin-bottom: 1.25rem;
+    color: var(--ink-soft);
+  }
+
+  .fees__region strong {
+    color: var(--navy-900);
+  }
+
+  .fees__currency {
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    background: var(--saffron-100);
+    font-weight: 700;
+    color: var(--saffron-ink);
+  }
+
+  .fees__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 1.75rem);
+  }
+
+  .fee {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 3vw, 2.1rem);
+  }
+
+  .fee--featured {
+    border-color: var(--navy-900);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .fee__title {
+    font-size: calc(1.7rem * var(--display-scale));
+  }
+
+  .fee__days {
+    margin-top: 0.15rem;
+    font-weight: 600;
+    color: var(--teal-700);
+  }
+
+  /* ----- A week, with the plan's days lit ----- */
+
+  .week {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.3rem;
+    margin: 1.1rem 0 1.4rem;
+  }
+
+  .week__day {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    border-radius: 0.6rem;
+    background: var(--sand-100);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  :global(html[lang='bn']) .week__day {
+    font-size: 0.82rem;
+  }
+
+  .week__day.is-on {
+    background: var(--navy-900);
+    color: var(--saffron-400);
+  }
+
+  /* Days the student chooses from: striped, to say "some of these". */
+  .week__day.is-choice {
+    background: repeating-linear-gradient(135deg, var(--teal-100) 0 6px, var(--teal-200) 6px 12px);
+    color: var(--teal-800);
+  }
+
+  /* ----- Prices ----- */
+
+  .fee__prices {
+    display: grid;
+    gap: 0.75rem;
+    margin: auto 0 0;
+  }
+
+  .fee__price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius-sm);
+    background: var(--sand-50);
+    border: 1px solid var(--sand-200);
+  }
+
+  .fee__price:last-child {
+    background: var(--teal-50);
+    border-color: var(--teal-200);
+  }
+
+  .fee__price dt {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--navy-900);
+  }
+
+  .fee__price dt :global(svg) {
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    color: var(--teal-600);
+  }
+
+  .fee__price small {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+
+  .fee__price dd {
+    display: grid;
+    justify-items: end;
+    text-align: right;
+  }
+
+  .fee__price strong {
+    font-family: var(--font-display);
+    font-size: calc(1.9rem * var(--display-scale));
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--navy-900);
+    white-space: nowrap;
+  }
+
+  .fee__price dd span {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 62rem) {
+    .fees__cards {
+      grid-template-columns: 1fr;
+      max-width: 30rem;
+    }
+  }
+</style>

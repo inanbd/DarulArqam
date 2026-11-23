@@ -847,3 +847,13 @@ html[lang='bn'] :is(.label, .table tbody th, .teaser__audience span, .program__a
   letter-spacing: 0;
   text-transform: none;
 }
+
+/* ---------- Region: USA & Canada or Bangladesh ----------
+   Parts of a page that differ by region carry data-for-region="us" or "bd".
+   The script in the page head sets data-region on <html>; the other region's
+   parts are then hidden. Without scripts both regions show, each with its name. */
+
+html[data-region='us'] [data-for-region='bd'],
+html[data-region='bd'] [data-for-region='us'] {
+  display: none !important;
+}

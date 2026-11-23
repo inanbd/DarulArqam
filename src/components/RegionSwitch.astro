@@ -1,0 +1,107 @@
+---
+import { getDict, type Lang } from '../i18n';
+
+/**
+ * Two buttons, "USA & Canada" and "Bangladesh", that choose whose fees and
+ * timetable the pages show. Every switch on a page stays in step, and the
+ * choice is remembered on this device. Hidden when scripts do not run,
+ * since both regions then show anyway.
+ */
+interface Props {
+  lang: Lang;
+  /** 'large' for the top of the fees page; 'small' for the top bar. */
+  size?: 'large' | 'small';
+}
+
+const { lang, size = 'large' } = Astro.props;
+const t = getDict(lang);
+---
+
+<div class:list={['region-switch', `region-switch--${size}`]} role="group" aria-label={t.region.label} data-region-switch>
+  <button type="button" data-set-region="us">{t.region.us}</button>
+  <button type="button" data-set-region="bd">{t.region.bd}</button>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const sync = () => {
+    document.querySelectorAll<HTMLButtonElement>('[data-set-region]').forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.setRegion === root.dataset.region));
+    });
+  };
+  document.addEventListener('click', (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-set-region]');
+    if (!button) return;
+    root.dataset.region = button.dataset.setRegion;
+    try {
+      window.localStorage.setItem('darul-arqam-region', button.dataset.setRegion ?? 'us');
+    } catch {
+      // The choice holds for this page only.
+    }
+    sync();
+  });
+  sync();
+</script>
+
+<style>
+  .region-switch {
+    display: inline-flex;
+    padding: 0.3rem;
+    border-radius: 999px;
+    background: var(--sand-100);
+    border: 1px solid var(--sand-200);
+  }
+
+  :global(.no-js) .region-switch {
+    display: none;
+  }
+
+  .region-switch button {
+    padding: 0.6rem 1.25rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition:
+      background-color 0.2s var(--ease),
+      color 0.2s var(--ease),
+      box-shadow 0.2s var(--ease);
+  }
+
+  .region-switch button:hover {
+    color: var(--navy-900);
+  }
+
+  .region-switch button[aria-pressed='true'] {
+    background: var(--navy-900);
+    color: #fff;
+    box-shadow: 0 6px 14px -8px rgba(11, 26, 59, 0.8);
+  }
+
+  /* In the top bar: smaller, on the dark background. */
+  .region-switch--small {
+    padding: 0.15rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .region-switch--small button {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--on-dark-soft);
+  }
+
+  .region-switch--small button:hover {
+    color: #fff;
+  }
+
+  .region-switch--small button[aria-pressed='true'] {
+    background: var(--saffron-500);
+    color: var(--navy-950);
+    box-shadow: none;
+  }
+</style>

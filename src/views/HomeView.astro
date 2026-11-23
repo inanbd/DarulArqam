@@ -11,11 +11,10 @@ import Shamsa from '../components/Shamsa.astro';
 import Steps from '../components/Steps.astro';
 import TeacherCard from '../components/TeacherCard.astro';
 import TimeBand from '../components/TimeBand.astro';
-import { site } from '../config/site';
+import { formatFee, lowestFee, regions } from '../config/fees';
 import { teachers } from '../config/teachers';
 import { academy } from '../content';
 import { arabic, getDict, type Lang } from '../i18n';
-import { num } from '../lib/format';
 import { pageHref } from '../lib/routes';
 
 interface Props {
@@ -31,7 +30,6 @@ const featured = [
   ...teachers.filter((teacher) => teacher.gender === 'male').slice(0, 2),
   ...teachers.filter((teacher) => teacher.gender === 'female').slice(0, 2),
 ];
-const lowestPrice = Math.min(...site.plans.map((plan) => plan.monthlyUsd));
 ---
 
 <Page lang={lang} page="home">
@@ -171,7 +169,7 @@ const lowestPrice = Math.min(...site.plans.map((plan) => plan.monthlyUsd));
       <p class="home-price" data-reveal>
         <span class="chip">
           <Icon name="spark" size={16} />
-          {t.common.plansFrom(`$${num(lowestPrice, lang)}`)}
+          {regions.map((region) => <span data-for-region={region}>{t.common.plansFrom(formatFee(region, lowestFee(region), lang))}</span>)}
         </span>
         <a class="link" href={pageHref(lang, 'faq')}>
           {t.common.allQuestions}
@@ -387,6 +385,11 @@ const lowestPrice = Math.min(...site.plans.map((plan) => plan.monthlyUsd));
     background: var(--saffron-100);
     font-size: 0.98rem;
     color: var(--saffron-ink);
+  }
+
+  /* Without scripts both regions show: separate the two prices. */
+  :global(html:not([data-region])) .home-price [data-for-region='bd']::before {
+    content: ' · ';
   }
 
   @media (max-width: 62rem) {

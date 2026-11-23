@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>দারুল আরকাম — যোগ্য ইমামদের কাছে অনলাইনে কুরআন ক্লাস</title>
-    <meta name="description" content="শিশু, কিশোর ও প্রাপ্তবয়স্কদের জন্য অনলাইন কুরআন ও ইসলামি শিক্ষা: নাজেরা, হিফজ ও আলিমিয়াহ প্রোগ্রাম, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ, যুক্তরাষ্ট্রের টাইম জোন অনুযায়ী। ফ্রি ট্রায়াল ক্লাস বুক করুন।">
+    <meta name="description" content="যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিশু, কিশোর ও প্রাপ্তবয়স্কদের জন্য অনলাইন কুরআন ও ইসলামি শিক্ষা: নাজেরা, হিফজ ও আলিমিয়াহ প্রোগ্রাম, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ। প্রথম সপ্তাহ ফ্রি।">
     <meta name="theme-color" content="#0b1a3b">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 
@@ -12,14 +12,31 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Darul Arqam">
     <meta property="og:title" content="দারুল আরকাম — যোগ্য ইমামদের কাছে অনলাইনে কুরআন ক্লাস">
-    <meta property="og:description" content="শিশু, কিশোর ও প্রাপ্তবয়স্কদের জন্য অনলাইন কুরআন ও ইসলামি শিক্ষা: নাজেরা, হিফজ ও আলিমিয়াহ প্রোগ্রাম, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ, যুক্তরাষ্ট্রের টাইম জোন অনুযায়ী। ফ্রি ট্রায়াল ক্লাস বুক করুন।">
+    <meta property="og:description" content="যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিশু, কিশোর ও প্রাপ্তবয়স্কদের জন্য অনলাইন কুরআন ও ইসলামি শিক্ষা: নাজেরা, হিফজ ও আলিমিয়াহ প্রোগ্রাম, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ। প্রথম সপ্তাহ ফ্রি।">
     <meta property="og:locale" content="bn_BD">
 
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"Darul Arqam","alternateName":["দারুল আরকাম","دار الأرقم"],"description":"শিশু, কিশোর ও প্রাপ্তবয়স্কদের জন্য অনলাইন কুরআন ও ইসলামি শিক্ষা: নাজেরা, হিফজ ও আলিমিয়াহ প্রোগ্রাম, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ, যুক্তরাষ্ট্রের টাইম জোন অনুযায়ী। ফ্রি ট্রায়াল ক্লাস বুক করুন।","areaServed":"US"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"Darul Arqam","alternateName":["দারুল আরকাম","دار الأرقم"],"description":"যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিশু, কিশোর ও প্রাপ্তবয়স্কদের জন্য অনলাইন কুরআন ও ইসলামি শিক্ষা: নাজেরা, হিফজ ও আলিমিয়াহ প্রোগ্রাম, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ। প্রথম সপ্তাহ ফ্রি।","areaServed":["US","CA","BD"]}</script>
     <script>
-      document.documentElement.classList.replace('no-js', 'js');
+      // Marks that scripts run, and chooses the region whose fees and timetable to show:
+      // the reader's own choice if they made one, otherwise a guess from their time zone.
+      (function (root) {
+        root.classList.replace('no-js', 'js');
+        var region;
+        try {
+          region = localStorage.getItem('darul-arqam-region');
+        } catch (e) {}
+        if (region !== 'us' && region !== 'bd') {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            region = zone === 'Asia/Dhaka' || zone === 'Asia/Dacca' ? 'bd' : 'us';
+          } catch (e) {
+            region = 'us';
+          }
+        }
+        root.dataset.region = region;
+      })(document.documentElement);
     </script>
-  <link rel="stylesheet" href="../assets/style.css?v=da4a2c17"></head>
+  <link rel="stylesheet" href="../assets/style.css?v=910d72e1"></head>
   <body>
     <a class="skip-link" href="#main">মূল অংশে যান</a>
     <div class="topbar" data-astro-cid-nen7h5rs>
@@ -28,12 +45,34 @@
       <svg width="12" height="12" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
   <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
 </svg>
-      যুক্তরাষ্ট্র ও বিশ্বের অন্যান্য দেশের পরিবারগুলোর জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা
+      যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিক্ষার্থীদের জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা
     </p>
     <div class="topbar__links" data-astro-cid-nen7h5rs>
+      <div class="region-switch region-switch--small" role="group" aria-label="আপনার অঞ্চল বেছে নিন" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>যুক্তরাষ্ট্র ও কানাডা</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>বাংলাদেশ</button>
+</div>
+
+<script type="module">// src/components/RegionSwitch.astro?astro&type=script&index=0&lang.ts
+var root = document.documentElement;
+var sync = () => {
+	document.querySelectorAll("[data-set-region]").forEach((button) => {
+		button.setAttribute("aria-pressed", String(button.dataset.setRegion === root.dataset.region));
+	});
+};
+document.addEventListener("click", (event) => {
+	const button = event.target.closest("[data-set-region]");
+	if (!button) return;
+	root.dataset.region = button.dataset.setRegion;
+	try {
+		window.localStorage.setItem("darul-arqam-region", button.dataset.setRegion ?? "us");
+	} catch {}
+	sync();
+});
+sync();</script>
       <a href="https://wa.me/15550100123" target="_blank" rel="noopener" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.5a8.3 8.3 0 0 1-12.3 7.3L3.5 20.5l1.7-4.6A8.3 8.3 0 1 1 20.5 11.5z"/></svg>
-            +1 (555) 010-0123
+            <span class="topbar__label" data-astro-cid-nen7h5rs>+1 (555) 010-0123</span>
           </a>
       <a href="../index.html" lang="en" hreflang="en" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
@@ -138,7 +177,7 @@
                 
               </li><li data-astro-cid-nen7h5rs>
                 <a href="../bn/tuition.html" data-astro-cid-nen7h5rs>
-                  ফি
+                  ফি ও সময়সূচি
                   
                 </a>
                 
@@ -151,7 +190,7 @@
               </li>
       </ul>
       <a class="btn btn--saffron btn--sm nav__cta" href="../bn/free-trial.html" data-astro-cid-nen7h5rs>
-        ফ্রি ট্রায়াল ক্লাস
+        প্রথম সপ্তাহ ফ্রি
       </a>
     </nav>
   </div>
@@ -192,10 +231,10 @@ if (header && toggle) {
         <h1 class="hero__title" data-astro-cid-6voplrxj>
           কুরআন শিখুন ঠিক সেভাবে, যেভাবে তা চিরকাল শেখানো হয়ে আসছে — <span class="hero__accent" data-astro-cid-6voplrxj>উস্তাদের কাছে, সরাসরি</span>।
         </h1>
-        <p class="hero__lead" data-astro-cid-6voplrxj>দারুল আরকাম বাংলাদেশের যোগ্য ইমাম ও হাফেজগণকে পৌঁছে দেয় আপনার ঘরে — শিশু, কিশোর ও প্রাপ্তবয়স্কদের জন্য কুরআন পড়া, মুখস্থ করা ও ইসলামি শিক্ষার সরাসরি অনলাইন প্রোগ্রাম, যুক্তরাষ্ট্রে আপনার টাইম জোন অনুযায়ী সময়সূচিতে।</p>
+        <p class="hero__lead" data-astro-cid-6voplrxj>দারুল আরকাম বাংলাদেশের যোগ্য ইমাম ও হাফেজগণকে পৌঁছে দেয় আপনার ঘরে — যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিশু, কিশোর ও প্রাপ্তবয়স্কদের জন্য কুরআন পড়া, মুখস্থ করা ও ইসলামি শিক্ষার সরাসরি অনলাইন প্রোগ্রাম, আপনার নিজের টাইম জোনে সন্ধ্যার সময়ে।</p>
         <div class="hero__actions" data-astro-cid-6voplrxj>
           <a class="btn btn--saffron" href="../bn/free-trial.html" data-astro-cid-6voplrxj>
-            ফ্রি ট্রায়াল ক্লাস বুক করুন
+            ফ্রি সপ্তাহ শুরু করুন
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
           <a class="btn btn--outline" href="../bn/programs.html" data-astro-cid-6voplrxj>প্রোগ্রামগুলো দেখুন</a>
@@ -203,13 +242,13 @@ if (header && toggle) {
         <ul class="hero__points" data-astro-cid-6voplrxj>
           <li data-astro-cid-6voplrxj>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-                প্রথম ক্লাস ফ্রি
+                প্রথম সপ্তাহ ফ্রি
               </li><li data-astro-cid-6voplrxj>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
                 পুরুষ ও মহিলা শিক্ষক
               </li><li data-astro-cid-6voplrxj>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-                যুক্তরাষ্ট্রের সব টাইম জোন
+                যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশ
               </li>
         </ul>
       </div>
@@ -234,7 +273,7 @@ if (header && toggle) {
 </figure>
         <p class="hero__note hero__note--top card" data-astro-cid-6voplrxj>
           <span class="icon-tile" data-astro-cid-6voplrxj><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg></span>
-          ওয়ান-টু-ওয়ান কুরআন পাঠ
+          গ্রুপ ব্যাচ বা ওয়ান-টু-ওয়ান
         </p>
         <p class="hero__note hero__note--bottom card" data-astro-cid-6voplrxj>
           <span class="icon-tile icon-tile--saffron" data-astro-cid-6voplrxj><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.3-3.1 2.8-5.2 6-5.2s5.7 2.1 6 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M16.8 14.1c2.3.2 3.9 1.9 4.2 4.4"/></svg></span>
@@ -251,8 +290,8 @@ if (header && toggle) {
         <span class="icon-tile" data-astro-cid-qjj4u7yg>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></svg>
         </span>
-        <h3 class="pillar__title" data-astro-cid-qjj4u7yg>ওয়ান-টু-ওয়ান কুরআন পাঠ</h3>
-        <p class="pillar__text" data-astro-cid-qjj4u7yg>নাজেরা ও হিফজ পড়ানো হয় একজন প্রকৃত শিক্ষকের সঙ্গে ব্যক্তিগত, সরাসরি পাঠে — কখনোই রেকর্ড করা ভিডিওতে নয়।</p>
+        <h3 class="pillar__title" data-astro-cid-qjj4u7yg>গ্রুপ ব্যাচ বা ওয়ান-টু-ওয়ান</h3>
+        <p class="pillar__text" data-astro-cid-qjj4u7yg>ছোট গ্রুপে বা ব্যক্তিগত পাঠে শিখুন, সবসময় একজন প্রকৃত শিক্ষকের সঙ্গে সরাসরি — কখনোই রেকর্ড করা ভিডিওতে নয়।</p>
       </li><li class="pillar card" data-reveal style="--reveal-order: 1" data-astro-cid-qjj4u7yg>
         <span class="icon-tile icon-tile--saffron" data-astro-cid-qjj4u7yg>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.5 9.5L12 5l9.5 4.5L12 14z"/><path d="M6.5 11.7V16c1.5 1.4 3.4 2 5.5 2s4-.6 5.5-2v-4.3M21.5 9.5v5"/></svg>
@@ -269,8 +308,8 @@ if (header && toggle) {
         <span class="icon-tile icon-tile--saffron" data-astro-cid-qjj4u7yg>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
         </span>
-        <h3 class="pillar__title" data-astro-cid-qjj4u7yg>যুক্তরাষ্ট্রের পরিবারগুলোর জন্য তৈরি, সবার জন্য উন্মুক্ত</h3>
-        <p class="pillar__text" data-astro-cid-qjj4u7yg>ক্লাসের সময় ইস্টার্ন, সেন্ট্রাল, মাউন্টেন ও প্যাসিফিক সময়সূচির সঙ্গে মানানসই, আর অন্যান্য দেশের শিক্ষার্থীদেরও স্বাগত জানাই।</p>
+        <h3 class="pillar__title" data-astro-cid-qjj4u7yg>যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশ</h3>
+        <p class="pillar__text" data-astro-cid-qjj4u7yg>দুটি সময়সূচিতে সন্ধ্যার ক্লাস, দেখানো হয় আপনার নিজের টাইম জোনে। অন্যান্য দেশের শিক্ষার্থীদেরও স্বাগত জানাই।</p>
       </li>
 </ul>
     </div>
@@ -305,7 +344,7 @@ if (header && toggle) {
         <h3 class="teaser__name" data-astro-cid-5n52gf3n>নাজেরা আল-কুরআন</h3>
         <p class="teaser__tagline" data-astro-cid-5n52gf3n>সঠিকভাবে কুরআন পড়তে শিখুন</p>
         <p class="teaser__audience" data-astro-cid-5n52gf3n>
-          <span data-astro-cid-5n52gf3n>ওয়ান-টু-ওয়ান ক্লাস</span>
+          <span data-astro-cid-5n52gf3n>গ্রুপ ব্যাচ বা ওয়ান-টু-ওয়ান</span>
           শিশু, কিশোর-কিশোরী ও প্রাপ্তবয়স্ক
         </p>
         <a class="link teaser__link" href="../bn/nazirah.html" data-astro-cid-5n52gf3n>
@@ -325,7 +364,7 @@ if (header && toggle) {
         <h3 class="teaser__name" data-astro-cid-5n52gf3n>হিফজুল কুরআন</h3>
         <p class="teaser__tagline" data-astro-cid-5n52gf3n>কুরআন মুখস্থ করুন, হৃদয়ে ধরে রাখুন</p>
         <p class="teaser__audience" data-astro-cid-5n52gf3n>
-          <span data-astro-cid-5n52gf3n>ওয়ান-টু-ওয়ান ক্লাস</span>
+          <span data-astro-cid-5n52gf3n>গ্রুপ ব্যাচ বা ওয়ান-টু-ওয়ান</span>
           শিশু, কিশোর-কিশোরী ও প্রাপ্তবয়স্ক
         </p>
         <a class="link teaser__link" href="../bn/hifz.html" data-astro-cid-5n52gf3n>
@@ -345,7 +384,7 @@ if (header && toggle) {
         <h3 class="teaser__name" data-astro-cid-5n52gf3n>আলিমিয়াহ ও ইসলামি শিক্ষা</h3>
         <p class="teaser__tagline" data-astro-cid-5n52gf3n>জীবনের প্রতিটি ধাপের জন্য সুবিন্যস্ত ইসলামি জ্ঞান</p>
         <p class="teaser__audience" data-astro-cid-5n52gf3n>
-          <span data-astro-cid-5n52gf3n>সেমিস্টারভিত্তিক গ্রুপ ক্লাস</span>
+          <span data-astro-cid-5n52gf3n>সেমিস্টারভিত্তিক গ্রুপ ব্যাচ</span>
           ৩ বছর বয়স থেকে প্রাপ্তবয়স্ক পর্যন্ত, তিনটি বিভাগে
         </p>
         <a class="link teaser__link" href="../bn/alimiyah.html" data-astro-cid-5n52gf3n>
@@ -724,7 +763,7 @@ document.querySelectorAll("[data-strip]").forEach((strip) => {
           <h2 class="title" data-astro-cid-6voplrxj>প্রথম যোগাযোগ থেকে প্রথম ক্লাস — মাত্র চার ধাপে</h2>
         </header>
         <a class="link" href="../bn/tuition.html" data-astro-cid-6voplrxj>
-          ফি ও প্ল্যান দেখুন
+          ফি ও ক্লাসের সময় দেখুন
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -732,16 +771,16 @@ document.querySelectorAll("[data-strip]").forEach((strip) => {
         <ol class="steps" style="--columns: 4" data-astro-cid-5wfdsgz3>
   <li class="step" data-reveal style="--reveal-order: 0" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>১</span>
-        <h3 class="step__title" data-astro-cid-5wfdsgz3>ফ্রি ট্রায়ালের অনুরোধ করুন</h3>
-        <p class="step__text" data-astro-cid-5wfdsgz3>শিক্ষার্থী সম্পর্কে এবং আপনার সুবিধাজনক সময় আমাদের জানান। সময় লাগবে মাত্র দুই মিনিট।</p>
+        <h3 class="step__title" data-astro-cid-5wfdsgz3>ফ্রি সপ্তাহের অনুরোধ করুন</h3>
+        <p class="step__text" data-astro-cid-5wfdsgz3>শিক্ষার্থী, আপনার অঞ্চল এবং আপনার সুবিধাজনক সময় সম্পর্কে আমাদের জানান। সময় লাগবে মাত্র দুই মিনিট।</p>
       </li><li class="step" data-reveal style="--reveal-order: 1" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>২</span>
-        <h3 class="step__title" data-astro-cid-5wfdsgz3>শিক্ষকের সঙ্গে পরিচয়</h3>
-        <p class="step__text" data-astro-cid-5wfdsgz3>একটি ফ্রি প্রথম ক্লাসে শিক্ষক শিক্ষার্থীর সঙ্গে পরিচিত হন এবং তার স্তর যাচাই করেন, যাতে সে সঠিক জায়গা থেকে শুরু করতে পারে।</p>
+        <h3 class="step__title" data-astro-cid-5wfdsgz3>এক সপ্তাহ ফ্রি শিখুন</h3>
+        <p class="step__text" data-astro-cid-5wfdsgz3>ফ্রি প্রথম সপ্তাহে শিক্ষক শিক্ষার্থীর সঙ্গে পরিচিত হন এবং তার স্তর যাচাই করেন, যাতে সে সঠিক জায়গা থেকে শুরু করতে পারে।</p>
       </li><li class="step" data-reveal style="--reveal-order: 2" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>৩</span>
-        <h3 class="step__title" data-astro-cid-5wfdsgz3>সময়সূচি ঠিক করুন</h3>
-        <p class="step__text" data-astro-cid-5wfdsgz3>একটি প্রোগ্রাম এবং আপনার নিজের টাইম জোনে সাপ্তাহিক নির্দিষ্ট ক্লাসের সময় বেছে নিন।</p>
+        <h3 class="step__title" data-astro-cid-5wfdsgz3>ভর্তি নিশ্চিত করুন</h3>
+        <p class="step__text" data-astro-cid-5wfdsgz3>সপ্তাহে ২, ৩ বা ৪ দিন এবং গ্রুপ ব্যাচ বা ওয়ান-টু-ওয়ান বেছে নিন, তারপর প্রথম মাসের ফি দিয়ে ভর্তি নিশ্চিত করুন।</p>
       </li><li class="step" data-reveal style="--reveal-order: 3" data-astro-cid-5wfdsgz3>
         <span class="step__number" data-astro-cid-5wfdsgz3>৪</span>
         <h3 class="step__title" data-astro-cid-5wfdsgz3>শিখুন, এগিয়ে যান</h3>
@@ -756,9 +795,9 @@ document.querySelectorAll("[data-strip]").forEach((strip) => {
     <span class="icon-tile icon-tile--saffron" data-astro-cid-lo7mdono>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
     </span>
-    <h3 class="timeband__title" data-astro-cid-lo7mdono>আমেরিকায় যখন সন্ধ্যা, বাংলাদেশে তখন সকাল</h3>
-    <p class="timeband__text" data-astro-cid-lo7mdono>যুক্তরাষ্ট্রে যখন স্কুল ও কাজ শেষ হয়, ঢাকায় তখন নতুন দিনের শুরু। তাই স্কুলের পর, সন্ধ্যায় কিংবা ছুটির দিনের ক্লাস সহজেই মিলে যায় — আমাদের শিক্ষকদের জন্যও, আপনার পরিবারের জন্যও।</p>
-    <p class="timeband__zones" data-astro-cid-lo7mdono>ইস্টার্ন · সেন্ট্রাল · মাউন্টেন · প্যাসিফিক · আলাস্কা · হাওয়াই</p>
+    <h3 class="timeband__title" data-astro-cid-lo7mdono>পৃথিবীর দুই প্রান্তে, সন্ধ্যার ক্লাস</h3>
+    <p class="timeband__text" data-astro-cid-lo7mdono>বাংলাদেশের শিক্ষার্থীরা পড়ে সন্ধ্যা ৬টা থেকে রাত ১০টার মধ্যে। যুক্তরাষ্ট্র ও কানাডায় ক্লাস শুরু হয় স্কুল ও কাজের পরে — ঢাকায় তখন ভোর, আর আমাদের শিক্ষকেরা ততক্ষণে প্রস্তুত।</p>
+    <p class="timeband__zones" data-astro-cid-lo7mdono>যুক্তরাষ্ট্র ও কানাডা · বাংলাদেশ · বিশ্বের যেকোনো দেশের শিক্ষার্থী</p>
   </div>
   <div class="timeband__clocks" aria-hidden="true" hidden data-clock-panel data-astro-cid-lo7mdono>
     <div class="clock" data-astro-cid-lo7mdono>
@@ -781,11 +820,24 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
 	try {
 		const locale = band.dataset.locale ?? "en-US";
 		const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-		const time = (timeZone) => new Intl.DateTimeFormat(locale, {
-			hour: "numeric",
-			minute: "2-digit",
-			timeZone
-		});
+		const time = (timeZone) => {
+			if (locale !== "bn-BD") return new Intl.DateTimeFormat(locale, {
+				hour: "numeric",
+				minute: "2-digit",
+				timeZone
+			});
+			const clock = new Intl.DateTimeFormat(locale, {
+				hour: "numeric",
+				minute: "2-digit",
+				dayPeriod: "short",
+				timeZone
+			});
+			return { format: (date) => {
+				const parts = clock.formatToParts(date);
+				const part = (type) => parts.find((entry) => entry.type === type)?.value ?? "";
+				return `${part("dayPeriod") === "রাত্রি" ? "রাত" : part("dayPeriod")} ${part("hour")}:${part("minute")}`;
+			} };
+		};
 		const day = (timeZone) => new Intl.DateTimeFormat(locale, {
 			weekday: "long",
 			timeZone
@@ -812,7 +864,7 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
       <p class="home-price" data-reveal data-astro-cid-6voplrxj>
         <span class="chip" data-astro-cid-6voplrxj>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9-1.9 5.1-1.9-5.1-5.1-1.9 5.1-1.9z"/></svg>
-          প্ল্যান শুরু মাসে $৪০ থেকে
+          <span data-for-region="us" data-astro-cid-6voplrxj>ফি মাসে $৭৫ থেকে</span><span data-for-region="bd" data-astro-cid-6voplrxj>ফি মাসে ৳৭০০ থেকে</span>
         </span>
         <a class="link" href="../bn/faq.html" data-astro-cid-6voplrxj>
           সব প্রশ্নোত্তর দেখুন
@@ -834,11 +886,11 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
       
 </svg>
       <div class="cta__copy" data-astro-cid-hwvj6ntz>
-        <h2 class="cta__title" data-astro-cid-hwvj6ntz>শুরু হোক একটি ফ্রি ক্লাস দিয়ে, ইনশাআল্লাহ</h2>
-        <p class="cta__text" data-astro-cid-hwvj6ntz>কোনো সিদ্ধান্ত নেওয়ার আগে একজন শিক্ষকের সঙ্গে পরিচিত হোন।</p>
+        <h2 class="cta__title" data-astro-cid-hwvj6ntz>শুরু হোক একটি ফ্রি সপ্তাহ দিয়ে, ইনশাআল্লাহ</h2>
+        <p class="cta__text" data-astro-cid-hwvj6ntz>কোনো সিদ্ধান্ত নেওয়ার আগে একজন শিক্ষকের সঙ্গে পুরো এক সপ্তাহ ক্লাস করে দেখুন।</p>
       </div>
       <a class="btn btn--saffron" href="../bn/free-trial.html" data-astro-cid-hwvj6ntz>
-        ফ্রি ট্রায়াল ক্লাস বুক করুন
+        ফ্রি সপ্তাহ শুরু করুন
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -876,7 +928,7 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
           <span class="footer__tagline" data-astro-cid-jo6i4kqk>ইসলামিক ইনস্টিটিউট</span>
         </span>
       </a>
-      <p class="footer__about" data-astro-cid-jo6i4kqk>যুক্তরাষ্ট্রজুড়ে ও বিশ্বের অন্যান্য দেশের পরিবারগুলোর জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ।</p>
+      <p class="footer__about" data-astro-cid-jo6i4kqk>যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিক্ষার্থীদের জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ।</p>
       <p class="footer__arabic" lang="ar" dir="rtl" data-astro-cid-jo6i4kqk>دار الأرقم</p>
     </div>
 
@@ -896,11 +948,11 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
             </li><li data-astro-cid-jo6i4kqk>
               <a href="../bn/reviews.html" data-astro-cid-jo6i4kqk>রিভিউ</a>
             </li><li data-astro-cid-jo6i4kqk>
-              <a href="../bn/tuition.html" data-astro-cid-jo6i4kqk>ফি</a>
+              <a href="../bn/tuition.html" data-astro-cid-jo6i4kqk>ফি ও সময়সূচি</a>
             </li><li data-astro-cid-jo6i4kqk>
               <a href="../bn/faq.html" data-astro-cid-jo6i4kqk>জিজ্ঞাসা</a>
             </li>
-        <li data-astro-cid-jo6i4kqk><a href="../bn/free-trial.html" data-astro-cid-jo6i4kqk>ফ্রি ট্রায়াল ক্লাস</a></li>
+        <li data-astro-cid-jo6i4kqk><a href="../bn/free-trial.html" data-astro-cid-jo6i4kqk>প্রথম সপ্তাহ ফ্রি</a></li>
       </ul>
     </nav>
 
@@ -945,7 +997,7 @@ document.querySelectorAll("[data-clock]").forEach((band) => {
 
   <div class="container footer__base" data-astro-cid-jo6i4kqk>
     <p data-astro-cid-jo6i4kqk>© ২০২৬ দারুল আরকাম. সর্বস্বত্ব সংরক্ষিত।</p>
-    <p data-astro-cid-jo6i4kqk>বাংলাদেশ থেকে পাঠদান · যুক্তরাষ্ট্র ও বিশ্বের নানা প্রান্তের পরিবারগুলোর সেবায়</p>
+    <p data-astro-cid-jo6i4kqk>পাঠদান বাংলাদেশ থেকে · যুক্তরাষ্ট্র, কানাডা, বাংলাদেশ ও বিশ্বের শিক্ষার্থীদের জন্য</p>
   </div>
 </footer>
 

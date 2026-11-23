@@ -3,23 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ফ্রি ট্রায়াল ক্লাস বুক করুন | দারুল আরকাম</title>
-    <meta name="description" content="একজন যোগ্য শিক্ষকের সঙ্গে একটি ফ্রি ক্লাসের অনুরোধ করুন। শিক্ষার্থী সম্পর্কে আমাদের জানান, আমরা আপনার টাইম জোনে একটি সময় ঠিক করে দেব।">
+    <title>আপনার ফ্রি সপ্তাহ শুরু করুন | দারুল আরকাম</title>
+    <meta name="description" content="একজন যোগ্য শিক্ষকের সঙ্গে প্রথম সপ্তাহের ক্লাস ফ্রি করুন। শিক্ষার্থী সম্পর্কে আমাদের জানান, আমরা আপনার টাইম জোন অনুযায়ী ব্যবস্থা করে দেব।">
     <meta name="theme-color" content="#0b1a3b">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 
     
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Darul Arqam">
-    <meta property="og:title" content="ফ্রি ট্রায়াল ক্লাস বুক করুন | দারুল আরকাম">
-    <meta property="og:description" content="একজন যোগ্য শিক্ষকের সঙ্গে একটি ফ্রি ক্লাসের অনুরোধ করুন। শিক্ষার্থী সম্পর্কে আমাদের জানান, আমরা আপনার টাইম জোনে একটি সময় ঠিক করে দেব।">
+    <meta property="og:title" content="আপনার ফ্রি সপ্তাহ শুরু করুন | দারুল আরকাম">
+    <meta property="og:description" content="একজন যোগ্য শিক্ষকের সঙ্গে প্রথম সপ্তাহের ক্লাস ফ্রি করুন। শিক্ষার্থী সম্পর্কে আমাদের জানান, আমরা আপনার টাইম জোন অনুযায়ী ব্যবস্থা করে দেব।">
     <meta property="og:locale" content="bn_BD">
 
     
     <script>
-      document.documentElement.classList.replace('no-js', 'js');
+      // Marks that scripts run, and chooses the region whose fees and timetable to show:
+      // the reader's own choice if they made one, otherwise a guess from their time zone.
+      (function (root) {
+        root.classList.replace('no-js', 'js');
+        var region;
+        try {
+          region = localStorage.getItem('darul-arqam-region');
+        } catch (e) {}
+        if (region !== 'us' && region !== 'bd') {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            region = zone === 'Asia/Dhaka' || zone === 'Asia/Dacca' ? 'bd' : 'us';
+          } catch (e) {
+            region = 'us';
+          }
+        }
+        root.dataset.region = region;
+      })(document.documentElement);
     </script>
-  <link rel="stylesheet" href="../assets/style.css?v=da4a2c17"></head>
+  <link rel="stylesheet" href="../assets/style.css?v=910d72e1"></head>
   <body>
     <a class="skip-link" href="#main">মূল অংশে যান</a>
     <div class="topbar" data-astro-cid-nen7h5rs>
@@ -28,12 +45,34 @@
       <svg width="12" height="12" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
   <polygon points="24,1 28.53,7.1 35.5,4.08 36.37,11.63 43.92,12.5 40.9,19.47 47,24 40.9,28.53 43.92,35.5 36.37,36.37 35.5,43.92 28.53,40.9 24,47 19.47,40.9 12.5,43.92 11.63,36.37 4.08,35.5 7.1,28.53 1,24 7.1,19.47 4.08,12.5 11.63,11.63 12.5,4.08 19.47,7.1" fill="currentColor"></polygon>
 </svg>
-      যুক্তরাষ্ট্র ও বিশ্বের অন্যান্য দেশের পরিবারগুলোর জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা
+      যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিক্ষার্থীদের জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা
     </p>
     <div class="topbar__links" data-astro-cid-nen7h5rs>
+      <div class="region-switch region-switch--small" role="group" aria-label="আপনার অঞ্চল বেছে নিন" data-region-switch data-astro-cid-cu5a546l>
+  <button type="button" data-set-region="us" data-astro-cid-cu5a546l>যুক্তরাষ্ট্র ও কানাডা</button>
+  <button type="button" data-set-region="bd" data-astro-cid-cu5a546l>বাংলাদেশ</button>
+</div>
+
+<script type="module">// src/components/RegionSwitch.astro?astro&type=script&index=0&lang.ts
+var root = document.documentElement;
+var sync = () => {
+	document.querySelectorAll("[data-set-region]").forEach((button) => {
+		button.setAttribute("aria-pressed", String(button.dataset.setRegion === root.dataset.region));
+	});
+};
+document.addEventListener("click", (event) => {
+	const button = event.target.closest("[data-set-region]");
+	if (!button) return;
+	root.dataset.region = button.dataset.setRegion;
+	try {
+		window.localStorage.setItem("darul-arqam-region", button.dataset.setRegion ?? "us");
+	} catch {}
+	sync();
+});
+sync();</script>
       <a href="https://wa.me/15550100123" target="_blank" rel="noopener" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.5a8.3 8.3 0 0 1-12.3 7.3L3.5 20.5l1.7-4.6A8.3 8.3 0 1 1 20.5 11.5z"/></svg>
-            +1 (555) 010-0123
+            <span class="topbar__label" data-astro-cid-nen7h5rs>+1 (555) 010-0123</span>
           </a>
       <a href="../free-trial.html" lang="en" hreflang="en" data-astro-cid-nen7h5rs>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>
@@ -138,7 +177,7 @@
                 
               </li><li data-astro-cid-nen7h5rs>
                 <a href="../bn/tuition.html" data-astro-cid-nen7h5rs>
-                  ফি
+                  ফি ও সময়সূচি
                   
                 </a>
                 
@@ -151,7 +190,7 @@
               </li>
       </ul>
       <a class="btn btn--saffron btn--sm nav__cta" href="../bn/free-trial.html" aria-current="page" data-astro-cid-nen7h5rs>
-        ফ্রি ট্রায়াল ক্লাস
+        প্রথম সপ্তাহ ফ্রি
       </a>
     </nav>
   </div>
@@ -188,10 +227,10 @@ if (header && toggle) {
       <nav class="crumbs" aria-label="পথনির্দেশিকা" data-astro-cid-75ysl5lo>
         <a href="../bn/index.html" data-astro-cid-75ysl5lo>প্রথম পাতা</a>
         <span aria-hidden="true" data-astro-cid-75ysl5lo>/</span>
-        <span aria-current="page" data-astro-cid-75ysl5lo>ফ্রি ট্রায়াল</span>
+        <span aria-current="page" data-astro-cid-75ysl5lo>প্রথম সপ্তাহ ফ্রি</span>
       </nav>
-      <h1 class="page-hero__title" data-astro-cid-75ysl5lo>শুরু হোক একটি ফ্রি ক্লাস দিয়ে, ইনশাআল্লাহ</h1>
-      <p class="lead" data-astro-cid-75ysl5lo>শিক্ষার্থী সম্পর্কে আমাদের একটু জানান, আমাদের কোনো একজন শিক্ষকের সঙ্গে একটি ফ্রি ক্লাসের ব্যবস্থা করতে আমরা আপনার সঙ্গে যোগাযোগ করব।</p>
+      <h1 class="page-hero__title" data-astro-cid-75ysl5lo>শুরু হোক একটি ফ্রি সপ্তাহ দিয়ে, ইনশাআল্লাহ</h1>
+      <p class="lead" data-astro-cid-75ysl5lo>শিক্ষার্থী সম্পর্কে আমাদের একটু জানান, আমাদের কোনো একজন শিক্ষকের সঙ্গে প্রথম সপ্তাহের ফ্রি ক্লাসের ব্যবস্থা করতে আমরা আপনার সঙ্গে যোগাযোগ করব।</p>
       
     </div>
     <div class="page-hero__verse" data-astro-cid-75ysl5lo>
@@ -218,7 +257,7 @@ if (header && toggle) {
     <div class="container columns" data-astro-cid-opi5ki5c>
       <div data-reveal data-astro-cid-opi5ki5c>
         <div class="trial-card card" data-astro-cid-uczwokaa>
-  <form class="form" method="post" data-trial-form data-endpoint data-whatsapp="15550100123" data-email="salam@darularqam.example" data-messages="{&quot;sending&quot;:&quot;পাঠানো হচ্ছে…&quot;,&quot;submit&quot;:&quot;ফ্রি ট্রায়ালের অনুরোধ পাঠান&quot;,&quot;successTitle&quot;:&quot;জাযাকুমুল্লাহু খাইরান!&quot;,&quot;success&quot;:&quot;আপনার অনুরোধ আমরা পেয়েছি। ফ্রি ক্লাসের ব্যবস্থা করতে শিগগিরই আপনার সঙ্গে যোগাযোগ করব, ইনশাআল্লাহ।&quot;,&quot;whatsappTitle&quot;:&quot;আর একটি মাত্র ধাপ&quot;,&quot;whatsappNote&quot;:&quot;আপনার অনুরোধ লেখা অবস্থায় হোয়াটসঅ্যাপ খুলে গেছে। সেখানে সেন্ড চাপুন — ফ্রি ক্লাসের ব্যবস্থা করতে আমরা উত্তর দেব।&quot;,&quot;whatsappAgain&quot;:&quot;আবার হোয়াটসঅ্যাপ খুলুন&quot;,&quot;emailNote&quot;:&quot;আপনার অনুরোধ লেখা অবস্থায় ইমেইল অ্যাপ খুলে গেছে। সেখানে সেন্ড চাপুন — ফ্রি ক্লাসের ব্যবস্থা করতে আমরা উত্তর দেব।&quot;,&quot;greeting&quot;:&quot;আসসালামু আলাইকুম। আমি একটি ফ্রি ট্রায়াল ক্লাসের অনুরোধ করতে চাই।&quot;,&quot;subject&quot;:&quot;ফ্রি ট্রায়াল ক্লাসের অনুরোধ&quot;}" data-astro-cid-uczwokaa>
+  <form class="form" method="post" data-trial-form data-endpoint data-whatsapp="15550100123" data-email="salam@darularqam.example" data-messages="{&quot;sending&quot;:&quot;পাঠানো হচ্ছে…&quot;,&quot;submit&quot;:&quot;আমার ফ্রি সপ্তাহের অনুরোধ পাঠান&quot;,&quot;successTitle&quot;:&quot;জাযাকুমুল্লাহু খাইরান!&quot;,&quot;success&quot;:&quot;আপনার অনুরোধ আমরা পেয়েছি। আপনার ফ্রি সপ্তাহ শুরু করতে শিগগিরই আপনার সঙ্গে যোগাযোগ করব, ইনশাআল্লাহ।&quot;,&quot;whatsappTitle&quot;:&quot;আর একটি মাত্র ধাপ&quot;,&quot;whatsappNote&quot;:&quot;হোয়াটসঅ্যাপে আপনার অনুরোধ লেখা অবস্থায় খুলেছে। সেখানে সেন্ড চাপুন, আপনার ফ্রি সপ্তাহ শুরু করতে আমরা উত্তর দেব।&quot;,&quot;whatsappAgain&quot;:&quot;আবার হোয়াটসঅ্যাপ খুলুন&quot;,&quot;emailNote&quot;:&quot;আপনার ইমেইল অ্যাপে অনুরোধটি লেখা অবস্থায় খুলেছে। সেখানে সেন্ড চাপুন, আপনার ফ্রি সপ্তাহ শুরু করতে আমরা উত্তর দেব।&quot;,&quot;greeting&quot;:&quot;আসসালামু আলাইকুম। আমি প্রথম সপ্তাহের ফ্রি ক্লাস শুরু করতে চাই।&quot;,&quot;subject&quot;:&quot;ফ্রি প্রথম সপ্তাহের অনুরোধ&quot;}" data-astro-cid-uczwokaa>
     <div class="field" data-astro-cid-uczwokaa>
       <label for="trial-name" data-astro-cid-uczwokaa>আপনার নাম</label>
       <input id="trial-name" name="name" type="text" autocomplete="name" required data-label="আপনার নাম" data-astro-cid-uczwokaa>
@@ -235,6 +274,20 @@ if (header && toggle) {
     </div>
 
     <div class="field" data-astro-cid-uczwokaa>
+      <label for="trial-country" data-astro-cid-uczwokaa>আপনি কোথায় থাকেন?</label>
+      <select id="trial-country" name="country" data-label="আপনি কোথায় থাকেন?" data-country data-astro-cid-uczwokaa>
+        <option data-astro-cid-uczwokaa>যুক্তরাষ্ট্র</option><option data-astro-cid-uczwokaa>কানাডা</option><option data-astro-cid-uczwokaa>বাংলাদেশ</option><option data-astro-cid-uczwokaa>অন্য কোনো দেশ</option>
+      </select>
+    </div>
+
+    <div class="field" data-astro-cid-uczwokaa>
+      <label for="trial-timezone" data-astro-cid-uczwokaa>আপনার টাইম জোন</label>
+      <select id="trial-timezone" name="timezone" data-label="আপনার টাইম জোন" data-timezone data-astro-cid-uczwokaa>
+        <option value="Bangladesh (BST)" data-astro-cid-uczwokaa>বাংলাদেশ সময়</option><option value="Newfoundland (NT)" data-astro-cid-uczwokaa>নিউফাউন্ডল্যান্ড (NT)</option><option value="Atlantic (AT)" data-astro-cid-uczwokaa>আটলান্টিক (AT)</option><option value="Eastern (ET)" data-astro-cid-uczwokaa>ইস্টার্ন (ET)</option><option value="Central (CT)" data-astro-cid-uczwokaa>সেন্ট্রাল (CT)</option><option value="Mountain (MT)" data-astro-cid-uczwokaa>মাউন্টেন (MT)</option><option value="Pacific (PT)" data-astro-cid-uczwokaa>প্যাসিফিক (PT)</option><option value="Alaska (AKT)" data-astro-cid-uczwokaa>আলাস্কা (AKT)</option><option value="Hawaii (HT)" data-astro-cid-uczwokaa>হাওয়াই (HT)</option><option value="Other" data-astro-cid-uczwokaa>অন্যান্য</option>
+      </select>
+    </div>
+
+    <div class="field" data-astro-cid-uczwokaa>
       <label for="trial-learner" data-astro-cid-uczwokaa>ক্লাসটি কার জন্য?</label>
       <select id="trial-learner" name="learner" data-label="ক্লাস যার জন্য" data-astro-cid-uczwokaa>
         <option data-astro-cid-uczwokaa>আমার সন্তান</option><option data-astro-cid-uczwokaa>আমি নিজে</option><option data-astro-cid-uczwokaa>পরিবারের একাধিক সদস্য</option>
@@ -247,24 +300,31 @@ if (header && toggle) {
     </div>
 
     <div class="field" data-astro-cid-uczwokaa>
-      <label for="trial-program" data-astro-cid-uczwokaa>প্রোগ্রাম</label>
-      <select id="trial-program" name="program" data-label="প্রোগ্রাম" data-astro-cid-uczwokaa>
-        <option data-astro-cid-uczwokaa>এখনো ঠিক করিনি</option>
-        <option data-astro-cid-uczwokaa>নাজেরা আল-কুরআন</option><option data-astro-cid-uczwokaa>হিফজুল কুরআন: পূর্ণ হিফজ</option><option data-astro-cid-uczwokaa>হিফজুল কুরআন: নির্বাচিত সূরা হিফজ</option><option data-astro-cid-uczwokaa>জুনিয়র ইসলামি শিক্ষা (গ্রুপ ক্লাস)</option><option data-astro-cid-uczwokaa>কিশোর ও তরুণদের আলিমিয়াহ (গ্রুপ ক্লাস)</option><option data-astro-cid-uczwokaa>প্রাপ্তবয়স্কদের আলিমিয়াহ (গ্রুপ ক্লাস)</option>
-      </select>
-    </div>
-
-    <div class="field" data-astro-cid-uczwokaa>
       <label for="trial-teacher" data-astro-cid-uczwokaa>পছন্দের শিক্ষক</label>
       <select id="trial-teacher" name="teacher" data-label="পছন্দের শিক্ষক" data-astro-cid-uczwokaa>
         <option data-astro-cid-uczwokaa>যেকোনো</option><option data-astro-cid-uczwokaa>পুরুষ শিক্ষক</option><option data-astro-cid-uczwokaa>মহিলা শিক্ষক</option>
       </select>
     </div>
 
+    <div class="field field--wide" data-astro-cid-uczwokaa>
+      <label for="trial-program" data-astro-cid-uczwokaa>প্রোগ্রাম</label>
+      <select id="trial-program" name="program" data-label="প্রোগ্রাম" data-astro-cid-uczwokaa>
+        <option data-astro-cid-uczwokaa>এখনো ঠিক করিনি</option>
+        <option data-astro-cid-uczwokaa>নাজেরা আল-কুরআন</option><option data-astro-cid-uczwokaa>হিফজুল কুরআন: পূর্ণ হিফজ</option><option data-astro-cid-uczwokaa>হিফজুল কুরআন: নির্বাচিত সূরা হিফজ</option><option data-astro-cid-uczwokaa>জুনিয়র ইসলামি শিক্ষা (গ্রুপ ব্যাচ)</option><option data-astro-cid-uczwokaa>কিশোর ও তরুণদের আলিমিয়াহ (গ্রুপ ব্যাচ)</option><option data-astro-cid-uczwokaa>প্রাপ্তবয়স্কদের আলিমিয়াহ (গ্রুপ ব্যাচ)</option>
+      </select>
+    </div>
+
     <div class="field" data-astro-cid-uczwokaa>
-      <label for="trial-timezone" data-astro-cid-uczwokaa>আপনার টাইম জোন</label>
-      <select id="trial-timezone" name="timezone" data-label="আপনার টাইম জোন" data-timezone data-astro-cid-uczwokaa>
-        <option value="Eastern (ET)" data-astro-cid-uczwokaa>Eastern (ET)</option><option value="Central (CT)" data-astro-cid-uczwokaa>Central (CT)</option><option value="Mountain (MT)" data-astro-cid-uczwokaa>Mountain (MT)</option><option value="Pacific (PT)" data-astro-cid-uczwokaa>Pacific (PT)</option><option value="Alaska (AKT)" data-astro-cid-uczwokaa>Alaska (AKT)</option><option value="Hawaii (HT)" data-astro-cid-uczwokaa>Hawaii (HT)</option><option value="Other" data-astro-cid-uczwokaa>Other</option>
+      <label for="trial-format" data-astro-cid-uczwokaa>ক্লাসের ধরন</label>
+      <select id="trial-format" name="format" data-label="ক্লাসের ধরন" data-astro-cid-uczwokaa>
+        <option data-astro-cid-uczwokaa>এখনো ঠিক করিনি</option><option data-astro-cid-uczwokaa>গ্রুপ ব্যাচ</option><option data-astro-cid-uczwokaa>ওয়ান-টু-ওয়ান</option>
+      </select>
+    </div>
+
+    <div class="field" data-astro-cid-uczwokaa>
+      <label for="trial-days" data-astro-cid-uczwokaa>সপ্তাহে কত দিন</label>
+      <select id="trial-days" name="days" data-label="সপ্তাহে কত দিন" data-astro-cid-uczwokaa>
+        <option data-astro-cid-uczwokaa>এখনো ঠিক করিনি</option><option data-astro-cid-uczwokaa>৪ দিন</option><option data-astro-cid-uczwokaa>৩ দিন</option><option data-astro-cid-uczwokaa>২ দিন</option>
       </select>
     </div>
 
@@ -280,7 +340,7 @@ if (header && toggle) {
     </div>
 
     <div class="field field--wide form__footer" data-astro-cid-uczwokaa>
-      <button class="btn btn--saffron btn--block" type="submit" data-submit data-astro-cid-uczwokaa>ফ্রি ট্রায়ালের অনুরোধ পাঠান</button>
+      <button class="btn btn--saffron btn--block" type="submit" data-submit data-astro-cid-uczwokaa>আমার ফ্রি সপ্তাহের অনুরোধ পাঠান</button>
       <p class="form__error" role="alert" hidden data-error data-astro-cid-uczwokaa>দুঃখিত, কোনো সমস্যার কারণে আপনার অনুরোধ পাঠানো যায়নি। আবার চেষ্টা করুন, অথবা সরাসরি আমাদের মেসেজ করুন।</p>
       <p class="form__privacy" data-astro-cid-uczwokaa>আপনার তথ্য শুধু ক্লাসের ব্যবস্থা করতেই ব্যবহার করা হবে; কারও সঙ্গে শেয়ার করা হবে না।</p>
     </div>
@@ -309,10 +369,13 @@ if (form) {
 	const text = JSON.parse(form.dataset.messages ?? "{}");
 	const { endpoint = "", whatsapp = "", email = "" } = form.dataset;
 	const zoneSelect = form.querySelector("[data-timezone]");
+	const countrySelect = form.querySelector("[data-country]");
 	try {
 		const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 		const hours = -new Date((/* @__PURE__ */ new Date()).getFullYear(), 0, 15, 12).getTimezoneOffset() / 60;
 		const byOffset = {
+			"-3.5": "Newfoundland (NT)",
+			"-4": "Atlantic (AT)",
 			"-5": "Eastern (ET)",
 			"-6": "Central (CT)",
 			"-7": "Mountain (MT)",
@@ -320,8 +383,11 @@ if (form) {
 			"-9": "Alaska (AKT)",
 			"-10": "Hawaii (HT)"
 		};
-		const inAmericas = /^(America|US|Pacific\/Honolulu)/.test(zone);
-		if (zoneSelect) zoneSelect.value = inAmericas && byOffset[String(hours)] || "Other";
+		const canada = /^America\/(Toronto|Montreal|Vancouver|Edmonton|Calgary|Winnipeg|Regina|Swift_Current|Halifax|Glace_Bay|Moncton|Goose_Bay|St_Johns|Whitehorse|Dawson|Dawson_Creek|Fort_Nelson|Creston|Yellowknife|Inuvik|Cambridge_Bay|Rankin_Inlet|Resolute|Iqaluit|Atikokan|Blanc-Sablon|Nipigon|Thunder_Bay|Rainy_River|Pangnirtung)$|^Canada\//.test(zone);
+		const usa = !canada && /^America\/(New_York|Detroit|Chicago|Denver|Phoenix|Boise|Los_Angeles|Anchorage|Juneau|Sitka|Yakutat|Nome|Metlakatla|Adak|Menominee|Indiana\/.+|Kentucky\/.+|North_Dakota\/.+)$|^Pacific\/Honolulu$|^US\//.test(zone);
+		const bangladesh = zone === "Asia/Dhaka";
+		if (zoneSelect) zoneSelect.value = bangladesh ? "Bangladesh (BST)" : (usa || canada) && byOffset[String(hours)] || "Other";
+		if (countrySelect) countrySelect.selectedIndex = usa ? 0 : canada ? 1 : bangladesh ? 2 : 3;
 	} catch {}
 	/** The answers as "Label: value" lines, skipping anything left blank. */
 	const summary = () => {
@@ -393,14 +459,14 @@ if (form) {
             <li data-astro-cid-opi5ki5c>
                   <span class="next__number" data-astro-cid-opi5ki5c>১</span>
                   <div data-astro-cid-opi5ki5c>
-                    <h3 data-astro-cid-opi5ki5c>শিক্ষকের সঙ্গে পরিচয়</h3>
-                    <p data-astro-cid-opi5ki5c>একটি ফ্রি প্রথম ক্লাসে শিক্ষক শিক্ষার্থীর সঙ্গে পরিচিত হন এবং তার স্তর যাচাই করেন, যাতে সে সঠিক জায়গা থেকে শুরু করতে পারে।</p>
+                    <h3 data-astro-cid-opi5ki5c>এক সপ্তাহ ফ্রি শিখুন</h3>
+                    <p data-astro-cid-opi5ki5c>ফ্রি প্রথম সপ্তাহে শিক্ষক শিক্ষার্থীর সঙ্গে পরিচিত হন এবং তার স্তর যাচাই করেন, যাতে সে সঠিক জায়গা থেকে শুরু করতে পারে।</p>
                   </div>
                 </li><li data-astro-cid-opi5ki5c>
                   <span class="next__number" data-astro-cid-opi5ki5c>২</span>
                   <div data-astro-cid-opi5ki5c>
-                    <h3 data-astro-cid-opi5ki5c>সময়সূচি ঠিক করুন</h3>
-                    <p data-astro-cid-opi5ki5c>একটি প্রোগ্রাম এবং আপনার নিজের টাইম জোনে সাপ্তাহিক নির্দিষ্ট ক্লাসের সময় বেছে নিন।</p>
+                    <h3 data-astro-cid-opi5ki5c>ভর্তি নিশ্চিত করুন</h3>
+                    <p data-astro-cid-opi5ki5c>সপ্তাহে ২, ৩ বা ৪ দিন এবং গ্রুপ ব্যাচ বা ওয়ান-টু-ওয়ান বেছে নিন, তারপর প্রথম মাসের ফি দিয়ে ভর্তি নিশ্চিত করুন।</p>
                   </div>
                 </li><li data-astro-cid-opi5ki5c>
                   <span class="next__number" data-astro-cid-opi5ki5c>৩</span>
@@ -475,7 +541,7 @@ if (form) {
           <span class="footer__tagline" data-astro-cid-jo6i4kqk>ইসলামিক ইনস্টিটিউট</span>
         </span>
       </a>
-      <p class="footer__about" data-astro-cid-jo6i4kqk>যুক্তরাষ্ট্রজুড়ে ও বিশ্বের অন্যান্য দেশের পরিবারগুলোর জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ।</p>
+      <p class="footer__about" data-astro-cid-jo6i4kqk>যুক্তরাষ্ট্র, কানাডা ও বাংলাদেশের শিক্ষার্থীদের জন্য সরাসরি অনলাইন কুরআন ও ইসলামি শিক্ষা, পড়াচ্ছেন বাংলাদেশের যোগ্য ইমাম ও হাফেজগণ।</p>
       <p class="footer__arabic" lang="ar" dir="rtl" data-astro-cid-jo6i4kqk>دار الأرقم</p>
     </div>
 
@@ -495,11 +561,11 @@ if (form) {
             </li><li data-astro-cid-jo6i4kqk>
               <a href="../bn/reviews.html" data-astro-cid-jo6i4kqk>রিভিউ</a>
             </li><li data-astro-cid-jo6i4kqk>
-              <a href="../bn/tuition.html" data-astro-cid-jo6i4kqk>ফি</a>
+              <a href="../bn/tuition.html" data-astro-cid-jo6i4kqk>ফি ও সময়সূচি</a>
             </li><li data-astro-cid-jo6i4kqk>
               <a href="../bn/faq.html" data-astro-cid-jo6i4kqk>জিজ্ঞাসা</a>
             </li>
-        <li data-astro-cid-jo6i4kqk><a href="../bn/free-trial.html" data-astro-cid-jo6i4kqk>ফ্রি ট্রায়াল ক্লাস</a></li>
+        <li data-astro-cid-jo6i4kqk><a href="../bn/free-trial.html" data-astro-cid-jo6i4kqk>প্রথম সপ্তাহ ফ্রি</a></li>
       </ul>
     </nav>
 
@@ -544,7 +610,7 @@ if (form) {
 
   <div class="container footer__base" data-astro-cid-jo6i4kqk>
     <p data-astro-cid-jo6i4kqk>© ২০২৬ দারুল আরকাম. সর্বস্বত্ব সংরক্ষিত।</p>
-    <p data-astro-cid-jo6i4kqk>বাংলাদেশ থেকে পাঠদান · যুক্তরাষ্ট্র ও বিশ্বের নানা প্রান্তের পরিবারগুলোর সেবায়</p>
+    <p data-astro-cid-jo6i4kqk>পাঠদান বাংলাদেশ থেকে · যুক্তরাষ্ট্র, কানাডা, বাংলাদেশ ও বিশ্বের শিক্ষার্থীদের জন্য</p>
   </div>
 </footer>
 
