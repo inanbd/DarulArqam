@@ -1,19 +1,16 @@
 import { en, type Dict } from './en';
+import { bn } from './bn';
 
 export type Lang = 'en' | 'bn';
 export type { Dict };
 
-/**
- * The languages the site is published in. Bangla is switched off until its
- * translation of the new content is ready: to bring it back, add `bn.ts` with
- * the same shape as `en.ts`, list it here and add the pages under `src/pages/bn/`.
- */
-export const published: Lang[] = ['en'];
+/** The languages the site is published in. The language switch appears when there is more than one. */
+export const published: Lang[] = ['en', 'bn'];
 
-const dictionaries: Partial<Record<Lang, Dict>> = { en };
+const dictionaries: Record<Lang, Dict> = { en, bn };
 
 export function getDict(lang: Lang): Dict {
-  return dictionaries[lang] ?? en;
+  return dictionaries[lang];
 }
 
 /**
@@ -21,17 +18,13 @@ export function getDict(lang: Lang): Dict {
  *
  * The verses are written in the simple (imla'i) script with full vowel marks and were
  * checked against the Tanzil text of the Quran. Where a page quotes part of a verse,
- * the reference in the language file says "From Surah ...".
+ * the reference in the language files says "From Surah ...".
  */
 export const arabic = {
   bismillah: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
-  name: 'دَارُ الْأَرْقَم',
+  name: 'دار الأرقم',
   /** Sahih al-Bukhari 5027 */
   hadith: 'خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ',
-  /** Al-Qamar 54:17 */
-  ayah: 'وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِنْ مُدَّكِرٍ',
-  /** Ta-Ha 20:114 */
-  dua: 'رَبِّ زِدْنِي عِلْمًا',
   /** One verse per page, keyed by page id. */
   verses: {
     /** Al-'Alaq 96:1 */
@@ -56,6 +49,8 @@ export const arabic = {
     academics: 'يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنْكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ',
     /** From al-Muzzammil 73:20 */
     tuition: 'فَاقْرَءُوا مَا تَيَسَّرَ مِنَ الْقُرْآنِ',
+    /** From Ibrahim 14:7 */
+    reviews: 'لَئِنْ شَكَرْتُمْ لَأَزِيدَنَّكُمْ',
     /** From an-Nahl 16:43 */
     faq: 'فَاسْأَلُوا أَهْلَ الذِّكْرِ إِنْ كُنْتُمْ لَا تَعْلَمُونَ',
     /** From Ta-Ha 20:114 */

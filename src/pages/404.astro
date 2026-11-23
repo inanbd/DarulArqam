@@ -1,35 +1,56 @@
 ---
-import Base from '../layouts/Base.astro';
-import Logo from '../components/Logo.astro';
-import { arabic, getDict } from '../i18n';
-import { href } from '../lib/format';
+import '../styles/fonts.css';
+import '../styles/global.css';
+
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Icon from '../components/Icon.astro';
+import Shamsa from '../components/Shamsa.astro';
+import { getDict } from '../i18n';
+import { asset } from '../lib/format';
+import { pageHref } from '../lib/routes';
 
 const t = getDict('en');
 ---
 
-<Base lang="en" title={`${t.notFound.title} — ${t.brand.name}`} noindex>
-  <main id="main" class="lost on-dark">
-    <div class="pattern pattern--fade-center"></div>
-    <div class="lost__inner">
-      <span class="lost__mark"><Logo size={72} /></span>
-      <p class="lost__arabic" lang="ar" dir="rtl">{arabic.name}</p>
-      <h1>{t.notFound.title}</h1>
-      <p>{t.notFound.text}</p>
-      <a class="btn btn--gold" href={href('/index.html')}>{t.notFound.home}</a>
-    </div>
-  </main>
-</Base>
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.notFound.title} | {t.brand.name}</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0b1a3b" />
+    <link rel="icon" type="image/svg+xml" href={asset('/favicon.svg')} />
+    <script is:inline>
+      document.documentElement.classList.replace('no-js', 'js');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.nav.skip}</a>
+    <Header lang="en" />
+    <main id="main" class="lost">
+      <span class="pattern pattern--fade-down"></span>
+      <div class="container lost__inner">
+        <span class="lost__mark"><Shamsa variant="ring" size={88} /></span>
+        <h1>{t.notFound.title}</h1>
+        <p class="lead">{t.notFound.text}</p>
+        <a class="btn btn--navy" href={pageHref('en', 'home')}>
+          {t.notFound.home}
+          <Icon name="arrow" size={18} />
+        </a>
+      </div>
+    </main>
+    <Footer lang="en" />
+  </body>
+</html>
 
 <style>
   .lost {
     position: relative;
     isolation: isolate;
-    display: grid;
-    place-items: center;
-    min-height: 100dvh;
-    padding: 3rem var(--gutter);
-    background: linear-gradient(180deg, var(--emerald-900), var(--emerald-950));
-    color: var(--on-dark);
+    padding-block: clamp(5rem, 12vw, 9rem);
+    background: linear-gradient(180deg, var(--sand-100), var(--paper));
     text-align: center;
   }
 
@@ -41,25 +62,14 @@ const t = getDict('en');
     display: grid;
     justify-items: center;
     gap: 1.1rem;
-    max-width: 34rem;
   }
 
-  .lost__mark,
-  .lost__arabic {
-    color: var(--gold-400);
-  }
-
-  .lost__arabic {
-    font-size: 1.8rem;
+  .lost__mark {
+    color: var(--saffron-500);
   }
 
   h1 {
     font-size: clamp(2.2rem, 5vw, 3.4rem);
-    color: #ffffff;
-  }
-
-  p {
-    color: var(--on-dark-soft);
   }
 
   .btn {

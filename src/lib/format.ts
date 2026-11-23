@@ -13,8 +13,8 @@ export function counter(index: number, lang: Lang): string {
   return num(String(index + 1).padStart(2, '0'), lang);
 }
 
-/** Prefixes a site path with the configured base, so the site also works from a sub-folder. */
-export function href(path: string): string {
+/** Prefixes a file in `public/` with the configured base path. */
+export function asset(path: string): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   return `${base}${path}`;
 }

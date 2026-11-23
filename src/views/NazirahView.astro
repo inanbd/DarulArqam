@@ -1,8 +1,12 @@
 ---
+import Page from '../layouts/Page.astro';
 import DeeniyatBand from '../components/DeeniyatBand.astro';
-import Sub from '../components/Sub.astro';
+import Facts from '../components/Facts.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import Shamsa from '../components/Shamsa.astro';
 import Syllabus from '../components/Syllabus.astro';
-import { nazirah, programs } from '../content/academy';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
 
@@ -11,51 +15,54 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { nazirah, programs } = academy(lang);
 const t = getDict(lang);
 const c = t.common;
 const card = programs.find((program) => program.id === 'nazirah')!;
+// The letters a beginner meets first, growing into a word: a picture of the five stages.
+const marks = ['ا', 'بَ', 'مَدّ', 'رَتِّلِ', 'اقْرَأْ'];
 ---
 
-<Sub lang={lang} page="nazirah">
-  <ul class="tags" slot="facts">
-    <li class="tag">{c.online} · {c.oneOnOne}</li>
-    <li class="tag">{card.ages}</li>
-    <li class="tag">{num(nazirah.stages.length, lang)} stages</li>
-  </ul>
+<Page lang={lang} page="nazirah">
+  <PageHero lang={lang} page="nazirah">
+    <Facts facts={[{ icon: 'video', text: `${c.online} · ${c.oneOnOne}` }, { icon: 'people', text: card.ages }, { icon: 'layers', text: c.stagesCount(num(nazirah.stages.length, lang)) }]} />
+  </PageHero>
 
   <section class="section">
-    <div class="container cols cols--2">
+    <div class="container split">
       <div class="prose" data-reveal>
-        <p class="eyebrow">{c.overview}</p>
+        <p class="kicker"><Shamsa size={14} />{c.overview}</p>
         {nazirah.overview.map((paragraph) => <p>{paragraph}</p>)}
       </div>
-      <aside class="panel panel--framed" data-reveal style="--reveal-order: 1">
-        <h2 class="panel__title">{card.lead.replace(':', '')}</h2>
-        <ul class="diamonds">
+      <aside class="card pad" data-reveal style="--reveal-order: 1">
+        <h2 class="h3">{card.lead.replace(':', '')}</h2>
+        <ul class="ticks" style="margin-top: 1rem">
           {card.points.map((point) => <li>{point}</li>)}
         </ul>
       </aside>
     </div>
   </section>
 
-  <section class="section section--parchment">
+  <section class="section section--sand">
     <div class="container">
       <header class="heading" data-reveal>
-        <p class="eyebrow">{c.stages}</p>
-        <h2 class="title">From the first letter to independent recitation</h2>
-        <p class="lead">Students move on when they are ready, not by the calendar.</p>
+        <p class="kicker"><Shamsa size={14} />{c.stages}</p>
+        <h2 class="title">{c.heads.nazirahStages}</h2>
+        <p class="lead">{c.heads.nazirahStagesLead}</p>
       </header>
-      <ol class="trail block">
+
+      <ol class="path block">
         {
-          nazirah.stages.map((stage) => (
-            <li class="trail__step" data-reveal>
-              <span class="star-badge">{num(stage.number, lang)}</span>
-              <div class="panel">
-                <p class="label">{c.stage} {num(stage.number, lang)}</p>
-                <h3 class="panel__title">{stage.title}</h3>
-                <p class="panel__text">{stage.objective}</p>
-                <p class="trail__outcome">{stage.outcome}</p>
-                {stage.note && <p class="panel__text">{stage.note}</p>}
+          nazirah.stages.map((stage, index) => (
+            <li class="path__step" data-reveal>
+              <span class="path__badge">{num(stage.number, lang)}</span>
+              <div class="card pad stage">
+                <span class="stage__mark" lang="ar" dir="rtl" aria-hidden="true">{marks[index]}</span>
+                <span class="label">{c.stage} {num(stage.number, lang)}</span>
+                <h3 class="path__title">{stage.title}</h3>
+                <p class="path__text">{stage.objective}</p>
+                <p class="path__outcome"><strong>{c.outcome}:</strong> {stage.outcome}</p>
+                {stage.note && <p class="path__text">{stage.note}</p>}
                 <Syllabus label={c.whatIsCovered} units={stage.units} />
               </div>
             </li>
@@ -67,16 +74,17 @@ const card = programs.find((program) => program.id === 'nazirah')!;
 
   <section class="section">
     <div class="container">
-      <header class="heading heading--center" data-reveal>
-        <p class="eyebrow">{c.alongside}</p>
-        <h2 class="title">More than reading</h2>
+      <header class="heading" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{c.alongside}</p>
+        <h2 class="title">{c.heads.moreThanReading}</h2>
       </header>
       <ul class="cols cols--3 block">
         {
           nazirah.extras.map((extra, index) => (
-            <li class="panel" data-reveal style={`--reveal-order: ${index}`}>
-              <h3 class="panel__title">{extra.title}</h3>
-              <ul class="diamonds">
+            <li class="card pad" data-reveal style={`--reveal-order: ${index}`}>
+              <span class:list={['icon-tile', { 'icon-tile--saffron': index === 1 }]}><Icon name={(['heart', 'book', 'spark'] as const)[index]} size={24} /></span>
+              <h3 class="h3" style="margin-top: 1rem">{extra.title}</h3>
+              <ul class="ticks" style="margin-top: 0.9rem">
                 {extra.items.map((item) => <li>{item}</li>)}
               </ul>
             </li>
@@ -89,18 +97,18 @@ const card = programs.find((program) => program.id === 'nazirah')!;
     </div>
   </section>
 
-  <section class="section section--parchment">
+  <section class="section section--tint">
     <div class="container">
       <header class="heading heading--center" data-reveal>
-        <p class="eyebrow">{c.byAge}</p>
-        <h2 class="title">The same path, at every age</h2>
+        <p class="kicker"><Shamsa size={14} />{c.byAge}</p>
+        <h2 class="title">{c.heads.everyAge}</h2>
       </header>
       <ul class="cols cols--3 block">
         {
           nazirah.ages.map((group, index) => (
-            <li class="panel" data-reveal style={`--reveal-order: ${index}`}>
-              <h3 class="panel__title">{group.title}</h3>
-              <ul class="diamonds">
+            <li class="card pad" data-reveal style={`--reveal-order: ${index}`}>
+              <h3 class="h3">{group.title}</h3>
+              <ul class="ticks" style="margin-top: 0.9rem">
                 {group.items.map((item) => <li>{item}</li>)}
               </ul>
             </li>
@@ -111,31 +119,99 @@ const card = programs.find((program) => program.id === 'nazirah')!;
   </section>
 
   <section class="section">
-    <div class="container cols cols--2">
+    <div class="container split">
       <div data-reveal>
-        <p class="eyebrow">{c.outcomes}</p>
-        <h2 class="title">On completing the program</h2>
-        <ul class="diamonds" style="margin-top: 1.75rem">
-          {nazirah.outcomes.map((outcome) => <li>{outcome}</li>)}
-        </ul>
+        <p class="kicker"><Shamsa size={14} />{c.outcomes}</p>
+        <h2 class="title">{c.heads.completing}</h2>
+        <ol class="results">
+          {nazirah.outcomes.map((outcome, index) => <li><span>{num(index + 1, lang)}</span>{outcome}</li>)}
+        </ol>
       </div>
-      <div class="cols" data-reveal style="--reveal-order: 1">
-        <aside class="panel">
-          <h3 class="panel__title">{c.reports}</h3>
-          <p class="panel__text">{c.reportsLead}</p>
-          <ul class="tags">
-            {nazirah.assessment.reporting.map((item) => <li class="tag">{item}</li>)}
+      <div class="stack" data-reveal style="--reveal-order: 1">
+        <aside class="card pad">
+          <span class="icon-tile"><Icon name="check" size={24} /></span>
+          <h3 class="h3" style="margin-top: 1rem">{c.assessment}</h3>
+          <ul class="chips" style="margin-top: 0.9rem">
+            {nazirah.assessment.nazirah.map((item) => <li class="chip chip--plain">{item}</li>)}
           </ul>
         </aside>
-        <aside class="panel panel--framed">
-          <h3 class="panel__title">{c.certification}</h3>
-          <p class="panel__text">{nazirah.certification.intro}</p>
-          <ul class="tags">
-            {nazirah.certification.criteria.map((item) => <li class="tag tag--gold">{item}</li>)}
+        <aside class="card pad">
+          <span class="icon-tile icon-tile--saffron"><Icon name="mail" size={24} /></span>
+          <h3 class="h3" style="margin-top: 1rem">{c.reports}</h3>
+          <p style="margin-top: 0.4rem; color: var(--ink-soft)">{c.reportsLead}</p>
+          <ul class="ticks" style="margin-top: 0.9rem">
+            {nazirah.assessment.reporting.map((item) => <li>{item}</li>)}
           </ul>
-          <p class="panel__text">{nazirah.certification.note}</p>
+        </aside>
+        <aside class="card pad certificate">
+          <span class="icon-tile icon-tile--navy"><Icon name="certificate" size={24} /></span>
+          <h3 class="h3" style="margin-top: 1rem">{c.certification}</h3>
+          <p style="margin-top: 0.4rem">{nazirah.certification.intro}</p>
+          <ul class="chips" style="margin-top: 0.9rem">
+            {nazirah.certification.criteria.map((item) => <li class="chip">{item}</li>)}
+          </ul>
+          <p style="margin-top: 0.9rem; color: var(--ink-soft)">{nazirah.certification.note}</p>
         </aside>
       </div>
     </div>
   </section>
-</Sub>
+</Page>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: start;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .stack {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .stage {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* An Arabic mark in the corner of each stage: a letter that grows into a word. */
+  .stage__mark {
+    position: absolute;
+    right: 1.5rem;
+    top: 0.4rem;
+    font-size: 2.6rem;
+    line-height: 1.8;
+    color: var(--teal-200);
+    pointer-events: none;
+  }
+
+  .results {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .results li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--sand-200);
+  }
+
+  .results span {
+    flex-shrink: 0;
+    width: 1.75rem;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--teal-600);
+  }
+
+  @media (max-width: 58rem) {
+    .split {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

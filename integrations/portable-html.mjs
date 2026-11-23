@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { readdir, readFile, unlink, writeFile } from 'node:fs/promises';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -8,14 +8,10 @@ import { fileURLToPath } from 'node:url';
  * from disk, uploaded to any folder of any web server, or served from a domain root.
  *
  * After each build it:
- *   1. rewrites links that start at the site root ("/assets/site.css") so they are
- *      relative to the page ("./assets/site.css" or "../assets/site.css");
- *   2. drops the legacy .woff copies of the fonts and keeps the .woff2 files,
- *      which every current browser reads;
- *   3. adds a version tag to stylesheet links, so browsers fetch a changed
- *      stylesheet instead of reusing an old copy;
- *   4. writes the page scripts into the pages themselves, because browsers refuse
- *      to load a script module from a separate file when a page is opened from disk.
+ *   1. rewrites links that start at the site root ("/about.html", "/assets/style.css")
+ *      so they are relative to the page ("./about.html" or "../about.html");
+ *   2. adds a version tag to stylesheet links, so browsers fetch a changed
+ *      stylesheet instead of reusing an old copy.
  *
  * 404.html is left with root-based links, because a server may show it for an
  * address at any depth.
@@ -34,50 +30,22 @@ export default function portableHtml() {
           return up === '' ? './' : `${up}/`;
         };
 
-        // Stylesheets: keep only woff2, and point at fonts relative to the stylesheet.
+        // Stylesheets: point at fonts relative to the stylesheet.
         const versions = new Map();
         for (const file of files.filter((name) => name.endsWith('.css'))) {
           const prefix = prefixFor(file);
-          const css = (await readFile(file, 'utf8'))
-            .replace(/,\s*url\([^)]*\.woff["']?\)\s*format\(["']woff["']\)/g, '')
-            .replace(/url\((["']?)\/(?!\/)/g, (_, quote) => `url(${quote}${prefix}`);
+          const css = (await readFile(file, 'utf8')).replace(/url\((["']?)\/(?!\/)/g, (_, quote) => `url(${quote}${prefix}`);
           await writeFile(file, css);
           versions.set(toPosix(path.relative(root, file)), createHash('sha256').update(css).digest('hex').slice(0, 8));
         }
-
-        let removed = 0;
-        for (const file of files.filter((name) => name.endsWith('.woff'))) {
-          await unlink(file);
-          removed++;
-        }
-
-        // Scripts, keyed by their path from the site root, to be written into the pages.
-        // Browsers refuse to load a script module from a separate file when a page is opened from disk.
-        const scripts = new Map();
-        for (const file of files.filter((name) => name.endsWith('.js'))) {
-          const code = await readFile(file, 'utf8');
-          if (/^\s*(import|export)\s/m.test(code)) continue;
-          scripts.set(toPosix(path.relative(root, file)), { file, code: code.replace(/<\/script/gi, '<\\/script') });
-        }
-        const inlined = new Set();
 
         let pages = 0;
         for (const file of files.filter((name) => name.endsWith('.html'))) {
           let html = await readFile(file, 'utf8');
 
-          html = html.replace(/<script type="module" src="([^"]+)"><\/script>/g, (match, src) => {
-            const target = src.startsWith('/') ? src.slice(1) : toPosix(path.relative(root, path.resolve(path.dirname(file), src)));
-            const script = scripts.get(target);
-            if (!script) return match;
-            inlined.add(script.file);
-            return `<script type="module">\n${script.code}</script>`;
-          });
-          const isNotFoundPage = path.basename(file) === '404.html';
-
-          if (!isNotFoundPage) {
+          if (path.basename(file) !== '404.html') {
             const prefix = prefixFor(file);
-            html = html
-              .replace(/(\s(?:href|src|action|poster)=")\/(?!\/)/g, (_, attribute) => `${attribute}${prefix}`);
+            html = html.replace(/(\s(?:href|src|action|poster)=")\/(?!\/)/g, (_, attribute) => `${attribute}${prefix}`);
             pages++;
           }
 
@@ -93,9 +61,7 @@ export default function portableHtml() {
           await writeFile(file, html);
         }
 
-        for (const file of inlined) await unlink(file);
-
-        logger.info(`${pages} page(s) made portable; ${removed} legacy font file(s) dropped.`);
+        logger.info(`${pages} page(s) made portable.`);
       },
     },
   };

@@ -1,5 +1,5 @@
 ---
-/** A detailed syllabus behind a "What is covered" fold: units, each with its topics. */
+/** A detailed syllabus behind a "What is covered" disclosure: units, each with its topics. */
 interface Props {
   label: string;
   units: { title?: string; name?: string; topics: string[] }[];
@@ -8,9 +8,9 @@ interface Props {
 const { label, units } = Astro.props;
 ---
 
-<details class="fold">
+<details class="more">
   <summary>{label}</summary>
-  <div class="units">
+  <div class="more__body units">
     {
       units.map((unit) => (
         <div class="unit">

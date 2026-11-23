@@ -1,5 +1,6 @@
 ---
-import { deeniyat } from '../content/academy';
+import Icon from './Icon.astro';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { pageHref } from '../lib/routes';
 
@@ -10,59 +11,75 @@ interface Props {
 }
 
 const { lang, note } = Astro.props;
+const { deeniyat } = academy(lang);
 const t = getDict(lang);
 const band = t.common.deeniyatBand;
 ---
 
-<aside class="panel panel--dark band" data-reveal>
+<aside class="band" data-reveal>
   <span class="band__emblem" lang="ar" dir="rtl" aria-hidden="true">{deeniyat.emblem}</span>
   <div class="band__copy">
-    <h3 class="panel__title">{band.title}</h3>
-    <p class="panel__text">{band.text}</p>
+    <h2 class="band__title">{band.title}</h2>
+    <p>{band.text}</p>
     {note && <p class="band__note">{note}</p>}
-    <ul class="tags">
-      {deeniyat.subjects.map((subject) => <li class="tag">{subject.name}</li>)}
+    <ul class="chips band__chips">
+      {deeniyat.subjects.map((subject) => <li class="chip chip--saffron">{subject.name}</li>)}
     </ul>
   </div>
-  <a class="btn btn--gold" href={pageHref(lang, 'deeniyat')}>{band.link}</a>
+  <a class="btn btn--navy" href={pageHref(lang, 'deeniyat')}>
+    {band.link}
+    <Icon name="arrow" size={18} />
+  </a>
 </aside>
 
 <style>
   .band {
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1.5rem 2.5rem;
-    overflow: hidden;
+    padding: clamp(1.75rem, 4vw, 3rem);
+    border: 1px solid var(--saffron-400);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(120deg, var(--saffron-100), var(--sand-50));
   }
 
   .band__emblem {
     position: absolute;
-    right: 2rem;
-    top: -1rem;
-    font-size: 7rem;
-    line-height: 1.6;
-    color: rgba(214, 182, 109, 0.12);
+    right: 1.5rem;
+    top: -0.75rem;
+    font-family: var(--font-kufi);
+    font-size: 6.5rem;
+    line-height: 1.4;
+    color: rgba(209, 143, 28, 0.2);
     pointer-events: none;
   }
 
   .band__copy {
     position: relative;
     flex: 1 1 26rem;
+    color: var(--ink-soft);
+  }
+
+  .band__title {
+    margin-bottom: 0.5rem;
+    font-size: calc(1.7rem * var(--display-scale));
   }
 
   .band__note {
-    margin-top: 0.5rem;
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-style: italic;
-    color: var(--gold-300);
+    margin-top: 0.4rem;
+    font-weight: 700;
+    color: var(--saffron-ink);
   }
 
-  .band .tag {
-    border-color: rgba(214, 182, 109, 0.45);
-    background: rgba(214, 182, 109, 0.08);
-    color: var(--gold-300);
+  .band__chips {
+    margin-top: 1rem;
+  }
+
+  .band .chip {
+    background: #fff;
   }
 
   .band .btn {

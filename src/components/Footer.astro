@@ -1,27 +1,32 @@
 ---
+import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import Wordmark from './Wordmark.astro';
 import { site } from '../config/site';
-import { arabic, getDict, type Lang } from '../i18n';
+import { academy } from '../content';
+import { arabic, getDict, published, type Lang } from '../i18n';
 import { num } from '../lib/format';
-import { pageHref, programPages, sectionHref, type PageId } from '../lib/routes';
+import { menu, pageHref, programPage } from '../lib/routes';
 
 interface Props {
   lang: Lang;
-  page?: PageId;
 }
 
-const { lang, page = 'home' } = Astro.props;
+const { lang } = Astro.props;
+const { programs } = academy(lang);
 const t = getDict(lang);
+const other = published.find((code) => code !== lang);
+const otherLabel: Record<Lang, string> = { en: 'English', bn: 'বাংলা' };
 const { email, whatsappNumber, whatsappDisplay } = site.contact;
 const year = num(new Date().getFullYear(), lang);
 ---
 
 <footer class="footer on-dark">
+  <span class="pattern pattern--corner"></span>
   <div class="container footer__grid">
     <div class="footer__brand">
       <a class="footer__logo" href={pageHref(lang, 'home')}>
-        <span class="footer__mark"><Logo size={52} /></span>
+        <Logo size={54} />
         <span>
           <span class="footer__name"><Wordmark height={22} /></span>
           <span class="footer__tagline">{t.brand.tagline}</span>
@@ -31,20 +36,31 @@ const year = num(new Date().getFullYear(), lang);
       <p class="footer__arabic" lang="ar" dir="rtl">{arabic.name}</p>
     </div>
 
-    <nav class="footer__column" aria-label={t.footer.explore}>
-      <h2 class="footer__heading">{t.footer.explore}</h2>
+    <nav class="footer__column" aria-label={t.common.footerPages}>
+      <h2 class="footer__heading">{t.common.footerPages}</h2>
       <ul>
         {
-          programPages.map((id) => (
+          menu.map((entry) => (
             <li>
-              <a href={pageHref(lang, id)}>{t.pages[id].nav}</a>
+              <a href={pageHref(lang, entry.page)}>{t.pages[entry.page].nav}</a>
             </li>
           ))
         }
-        <li><a href={pageHref(lang, 'academics')}>{t.nav.academics}</a></li>
-        <li><a href={sectionHref(lang, page, 'teachers')}>{t.nav.teachers}</a></li>
-        <li><a href={sectionHref(lang, page, 'tuition')}>{t.nav.tuition}</a></li>
-        <li><a href={sectionHref(lang, page, 'trial')}>{t.nav.cta}</a></li>
+        <li><a href={pageHref(lang, 'trial')}>{t.nav.cta}</a></li>
+      </ul>
+    </nav>
+
+    <nav class="footer__column" aria-label={t.common.footerPrograms}>
+      <h2 class="footer__heading">{t.common.footerPrograms}</h2>
+      <ul>
+        {
+          programs.map((program) => (
+            <li>
+              <a href={pageHref(lang, programPage[program.id])}>{program.name}</a>
+            </li>
+          ))
+        }
+        <li><a href={pageHref(lang, 'deeniyat')}>{t.pages.deeniyat.nav}</a></li>
       </ul>
     </nav>
 
@@ -54,8 +70,9 @@ const year = num(new Date().getFullYear(), lang);
         {
           whatsappNumber && (
             <li>
-              <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener">
-                {t.trial.whatsapp}: {whatsappDisplay}
+              <a class="footer__contact" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener">
+                <Icon name="chat" size={18} />
+                {whatsappDisplay}
               </a>
             </li>
           )
@@ -63,7 +80,20 @@ const year = num(new Date().getFullYear(), lang);
         {
           email && (
             <li>
-              <a href={`mailto:${email}`}>{email}</a>
+              <a class="footer__contact" href={`mailto:${email}`}>
+                <Icon name="mail" size={18} />
+                {email}
+              </a>
+            </li>
+          )
+        }
+        {
+          other && (
+            <li>
+              <a class="footer__contact" href={pageHref(other, 'home')} lang={other} hreflang={other}>
+                <Icon name="globe" size={18} />
+                {otherLabel[other]}
+              </a>
             </li>
           )
         }
@@ -79,76 +109,82 @@ const year = num(new Date().getFullYear(), lang);
 
 <style>
   .footer {
-    background: var(--emerald-950);
+    position: relative;
+    isolation: isolate;
+    background: var(--navy-950);
     color: var(--on-dark-soft);
-    border-top: 1px solid rgba(214, 182, 109, 0.18);
+  }
+
+  .footer .pattern {
+    z-index: -1;
+    --pattern-color: #6d8ee0;
+    --pattern-opacity: 0.2;
   }
 
   .footer__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.7fr) minmax(0, 1fr);
-    gap: clamp(2rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.7fr) minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 4.5vw, 4rem);
     padding-block: clamp(3.5rem, 7vw, 5.5rem);
   }
 
   .footer__logo {
+    color: var(--on-dark);
     display: inline-flex;
     align-items: center;
     gap: 0.9rem;
-    color: var(--on-dark);
-  }
-
-  .footer__mark {
-    color: var(--on-dark); /* the single-colour logo, as on the logo sheet */
   }
 
   .footer__name {
     display: block;
     font-family: var(--font-display);
-    font-size: calc(1.9rem * (var(--display-scale) + 0.1));
-    font-weight: 600;
+    font-size: 1.7rem;
+    font-weight: 700;
     line-height: 1.1;
+    color: #fff;
   }
 
   .footer__tagline {
     display: block;
     margin-top: 0.3rem;
-    font-size: 0.66rem;
-    letter-spacing: 0.26em;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold-400);
+    color: var(--saffron-400);
   }
 
   :global(html[lang='bn']) .footer__tagline {
-    font-size: 0.85rem;
-    letter-spacing: 0.02em;
+    font-size: 0.86rem;
+    letter-spacing: 0;
   }
 
   .footer__about {
-    max-width: 26rem;
+    max-width: 24rem;
     margin-top: 1.4rem;
   }
 
   .footer__arabic {
-    margin-top: 1.25rem;
+    margin-top: 1.1rem;
+    font-family: var(--font-kufi);
     font-size: 1.9rem;
-    color: var(--gold-400);
+    line-height: 1.5;
+    color: var(--teal-500);
     text-align: left;
-    opacity: 0.9;
   }
 
   .footer__heading {
     font-family: var(--font-body);
-    font-size: 0.74rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold-400);
+    color: var(--saffron-400);
   }
 
   :global(html[lang='bn']) .footer__heading {
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
+    font-size: 0.98rem;
+    letter-spacing: 0;
   }
 
   .footer__column ul {
@@ -159,16 +195,24 @@ const year = num(new Date().getFullYear(), lang);
 
   .footer__column a {
     color: var(--on-dark);
-    opacity: 0.85;
     overflow-wrap: anywhere;
-    transition:
-      opacity 0.2s var(--ease),
-      color 0.2s var(--ease);
+    transition: color 0.2s var(--ease);
   }
 
   .footer__column a:hover {
-    opacity: 1;
-    color: var(--gold-300);
+    color: var(--saffron-400);
+  }
+
+  .footer__contact {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .footer__contact :global(svg) {
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+    color: var(--teal-500);
   }
 
   .footer__base {
@@ -177,13 +221,13 @@ const year = num(new Date().getFullYear(), lang);
     justify-content: space-between;
     gap: 0.5rem 2rem;
     padding-block: 1.5rem 2rem;
-    border-top: 1px solid rgba(214, 182, 109, 0.14);
+    border-top: 1px solid rgba(180, 192, 220, 0.18);
     font-size: 0.9rem;
   }
 
-  @media (max-width: 52rem) {
+  @media (max-width: 62rem) {
     .footer__grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .footer__brand {
@@ -191,9 +235,13 @@ const year = num(new Date().getFullYear(), lang);
     }
   }
 
-  @media (max-width: 30rem) {
+  @media (max-width: 38rem) {
     .footer__grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer__column:last-child {
+      grid-column: 1 / -1;
     }
   }
 </style>

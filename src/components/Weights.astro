@@ -1,13 +1,21 @@
 ---
-import { alimiyah } from '../content/academy';
+import { academy } from '../content';
+
+import type { Lang } from '../i18n';
 
 /** The assessment model of the Youth and Adult divisions, as one bar split by weight. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const { alimiyah } = academy(lang);
 const { intro, rows, note } = alimiyah.policies.grading;
-const tones = ['#ecdcb0', '#d6b66d', '#087c59', '#075040', '#042a21'];
+const tones = ['#b9e6e0', '#1aa6a0', '#f3c063', '#2247a4', '#0b1a3b'];
 ---
 
 <figure class="weights">
-  <figcaption class="panel__text" style="margin-top: 0">{intro}</figcaption>
+  <figcaption class="weights__intro">{intro}</figcaption>
   <div class="weights__bar" role="img" aria-label={rows.map((row) => `${row.component} ${row.weight}%`).join(', ')}>
     {rows.map((row, index) => <span style={`flex: ${row.weight}; background: ${tones[index]}`}>{row.weight}%</span>)}
   </div>
@@ -22,16 +30,20 @@ const tones = ['#ecdcb0', '#d6b66d', '#087c59', '#075040', '#042a21'];
       ))
     }
   </ul>
-  <p class="panel__text">{note}</p>
+  <p class="weights__note">{note}</p>
 </figure>
 
 <style>
+  .weights__intro {
+    color: var(--ink-soft);
+  }
+
   .weights__bar {
     display: flex;
-    gap: 2px;
-    margin-top: 1.25rem;
-    border: 1px solid var(--gold-500);
-    padding: 3px;
+    gap: 3px;
+    margin-top: 1.1rem;
+    overflow: hidden;
+    border-radius: 0.9rem;
   }
 
   .weights__bar span {
@@ -39,37 +51,44 @@ const tones = ['#ecdcb0', '#d6b66d', '#087c59', '#075040', '#042a21'];
     place-items: center;
     min-height: 3.25rem;
     font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--gold-300);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
   }
 
-  /* Dark figures on the two gold segments. */
-  .weights__bar span:nth-child(-n + 2) {
-    color: var(--emerald-950);
+  /* Dark figures on the light segments. */
+  .weights__bar span:nth-child(1),
+  .weights__bar span:nth-child(3) {
+    color: var(--navy-950);
   }
 
   .weights__legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 2rem;
+    gap: 0.5rem 1.75rem;
     margin-top: 1.1rem;
+    font-size: 0.96rem;
   }
 
   .weights__legend li {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.5rem;
   }
 
   .weights__legend strong {
-    font-weight: 500;
-    color: var(--emerald-800);
+    color: var(--navy-900);
   }
 
   .weights__dot {
-    width: 0.7rem;
-    height: 0.7rem;
-    transform: rotate(45deg);
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+  }
+
+  .weights__note {
+    margin-top: 1.1rem;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
   }
 </style>

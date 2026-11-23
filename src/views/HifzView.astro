@@ -1,7 +1,11 @@
 ---
+import Page from '../layouts/Page.astro';
 import DeeniyatBand from '../components/DeeniyatBand.astro';
-import Sub from '../components/Sub.astro';
-import { hifz, programs } from '../content/academy';
+import Facts from '../components/Facts.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import Shamsa from '../components/Shamsa.astro';
+import { academy } from '../content';
 import { getDict, type Lang } from '../i18n';
 import { num } from '../lib/format';
 
@@ -10,32 +14,34 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const { hifz, programs } = academy(lang);
 const t = getDict(lang);
 const c = t.common;
 const card = programs.find((program) => program.id === 'hifz')!;
 ---
 
-<Sub lang={lang} page="hifz">
-  <ul class="tags" slot="facts">
-    <li class="tag">{c.online} · {c.oneOnOne}</li>
-    <li class="tag">{card.ages}</li>
-    <li class="tag">{c.tracks}</li>
-  </ul>
+<Page lang={lang} page="hifz">
+  <PageHero lang={lang} page="hifz">
+    <Facts facts={[{ icon: 'video', text: `${c.online} · ${c.oneOnOne}` }, { icon: 'people', text: card.ages }, { icon: 'layers', text: c.tracks }]} />
+  </PageHero>
 
   <section class="section">
     <div class="container">
       <div class="prose" data-reveal>
-        <p class="eyebrow">{c.overview}</p>
+        <p class="kicker"><Shamsa size={14} />{c.overview}</p>
         {hifz.overview.map((paragraph) => <p>{paragraph}</p>)}
       </div>
+
       <ul class="cols cols--2 block">
         {
           hifz.tracks.map((track, index) => (
-            <li class:list={['panel', index === 0 ? 'panel--dark' : 'panel--framed']} data-reveal style={`--reveal-order: ${index}`}>
-              <p class="label">{c.track} {track.letter} · {track.scope}</p>
-              <h2 class="panel__title">{track.name}</h2>
-              <p class="panel__text">{track.objective}</p>
-              <ul class="diamonds">
+            <li class:list={['card', 'pad', 'track', { 'track--dark': index === 0 }]} data-reveal style={`--reveal-order: ${index}`}>
+              <span class="track__letter">{track.letter}</span>
+              <span class="label">{c.track} {track.letter}</span>
+              <h2 class="track__name">{track.name}</h2>
+              <p class="track__scope">{track.scope}</p>
+              <p class="track__text">{track.objective}</p>
+              <ul class="ticks" style="margin-top: 1.1rem">
                 {track.points.map((point) => <li>{point}</li>)}
               </ul>
             </li>
@@ -45,65 +51,64 @@ const card = programs.find((program) => program.id === 'hifz')!;
     </div>
   </section>
 
-  <section class="section section--dark cycle">
-    <div class="pattern pattern--fade-up"></div>
+  <section class="section section--sand">
     <div class="container">
       <header class="heading heading--center" data-reveal>
-        <p class="eyebrow">{c.method}</p>
-        <h2 class="title" style="color: #ffffff">{c.cycle}</h2>
+        <p class="kicker"><Shamsa size={14} />{c.method}</p>
+        <h2 class="title">{c.cycle}</h2>
         <p class="lead">{c.cycleLead}</p>
       </header>
-      <!-- Three niches: the new lesson, the recent revision, the long revision. -->
-      <ol class="cycle__grid">
+
+      <ol class="cycle block">
         {
           hifz.cycle.map((part, index) => (
-            <li class="arch" data-reveal style={`--reveal-order: ${index}`}>
-              <span class="arch__number">{num(String(index + 1).padStart(2, '0'), lang)}</span>
-              <h3 class="arch__term">{part.term}</h3>
-              <p class="arch__name">{part.name}</p>
-              <ul class="diamonds arch__items">
+            <li class="cycle__part" data-reveal style={`--reveal-order: ${index}`}>
+              <div class="cycle__ring">
+                <span class="cycle__number">{num(index + 1, lang)}</span>
+                <span class="cycle__term">{part.term}</span>
+                <span class="cycle__name">{part.name}</span>
+              </div>
+              <ul class="ticks cycle__items">
                 {part.items.map((item) => <li>{item}</li>)}
               </ul>
             </li>
           ))
         }
       </ol>
-      <p class="cycle__note" data-reveal>{hifz.cycle[0].note}</p>
+      <p class="cycle__note" data-reveal><Icon name="repeat" size={18} />{hifz.cycle[0].note}</p>
+
+      <div class="cols cols--2 block">
+        <aside class="card pad" data-reveal>
+          <h3 class="h3">{c.tajweed}</h3>
+          <ol class="rules">
+            {hifz.tajweed.rules.map((rule, index) => <li><span>{num(index + 1, lang)}</span>{rule}</li>)}
+          </ol>
+          <p style="margin-top: 1rem; color: var(--ink-soft)">{hifz.tajweed.note}</p>
+        </aside>
+        <aside class="card pad" data-reveal style="--reveal-order: 1">
+          <h3 class="h3">{c.accuracy}</h3>
+          <ul class="ticks" style="margin-top: 1rem">
+            {hifz.accuracy.map((item) => <li>{item}</li>)}
+          </ul>
+        </aside>
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container cols cols--2">
-      <aside class="panel panel--framed" data-reveal>
-        <h3 class="panel__title">{c.tajweed}</h3>
-        <ol class="diamonds diamonds--2">
-          {hifz.tajweed.rules.map((rule) => <li>{rule}</li>)}
-        </ol>
-        <p class="panel__text">{hifz.tajweed.note}</p>
-      </aside>
-      <aside class="panel" data-reveal style="--reveal-order: 1">
-        <h3 class="panel__title">{c.accuracy}</h3>
-        <ul class="diamonds">
-          {hifz.accuracy.map((item) => <li>{item}</li>)}
-        </ul>
-      </aside>
-    </div>
-  </section>
-
-  <section class="section section--parchment">
     <div class="container">
       <header class="heading" data-reveal>
-        <p class="eyebrow">{c.track} A · {hifz.tracks[0].name}</p>
-        <h2 class="title">Four stages to the whole Qur’an</h2>
+        <p class="kicker"><Shamsa size={14} />{c.track} A · {hifz.tracks[0].name}</p>
+        <h2 class="title">{c.heads.hifzStages}</h2>
         <p class="lead">{hifz.stagesNote}</p>
       </header>
-      <ol class="cols cols--4 block">
+      <ol class="cols cols--4 block milestones">
         {
           hifz.stages.map((stage, index) => (
-            <li class="panel" data-reveal style={`--reveal-order: ${index}`}>
-              <span class="star-badge">{num(stage.number, lang)}</span>
-              <h3 class="panel__title" style="margin-top: 1.1rem">{stage.title}</h3>
-              <ul class="diamonds">
+            <li class="card pad milestone" data-reveal style={`--reveal-order: ${index}`}>
+              <span class="path__badge">{num(stage.number, lang)}</span>
+              <h3 class="h3" style="margin-top: 1.1rem">{stage.title}</h3>
+              <ul class="ticks" style="margin-top: 0.9rem">
                 {stage.items.map((item) => <li>{item}</li>)}
               </ul>
             </li>
@@ -113,26 +118,26 @@ const card = programs.find((program) => program.id === 'hifz')!;
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--tint">
     <div class="container">
       <header class="heading" data-reveal>
-        <p class="eyebrow">{c.track} B · {hifz.tracks[1].name}</p>
-        <h2 class="title">Begin with the Surahs you recite most</h2>
+        <p class="kicker"><Shamsa size={14} />{c.track} B · {hifz.tracks[1].name}</p>
+        <h2 class="title">{c.heads.surahs}</h2>
         <p class="lead">{hifz.selected.approach}</p>
       </header>
       <div class="cols cols--2 block">
-        <aside class="panel" data-reveal>
-          <h3 class="panel__title">{c.essentialSurahs}</h3>
-          <ul class="tags">
-            {hifz.selected.essential.map((surah) => <li class="tag">{surah}</li>)}
+        <aside class="card pad" data-reveal>
+          <h3 class="h3">{c.essentialSurahs}</h3>
+          <ul class="chips" style="margin-top: 1rem">
+            {hifz.selected.essential.map((surah) => <li class="chip">{surah}</li>)}
           </ul>
         </aside>
-        <aside class="panel" data-reveal style="--reveal-order: 1">
-          <h3 class="panel__title">{c.longerSurahs}</h3>
-          <ul class="tags">
-            {hifz.selected.longer.map((surah) => <li class="tag tag--gold">{surah}</li>)}
+        <aside class="card pad" data-reveal style="--reveal-order: 1">
+          <h3 class="h3">{c.longerSurahs}</h3>
+          <ul class="chips" style="margin-top: 1rem">
+            {hifz.selected.longer.map((surah) => <li class="chip chip--saffron">{surah}</li>)}
           </ul>
-          <p class="panel__text">{hifz.selected.longerNote} {hifz.selected.portions}</p>
+          <p style="margin-top: 1rem; color: var(--ink-soft)">{hifz.selected.longerNote} {hifz.selected.portions}</p>
         </aside>
       </div>
       <div class="block">
@@ -141,114 +146,225 @@ const card = programs.find((program) => program.id === 'hifz')!;
     </div>
   </section>
 
-  <section class="section section--parchment">
-    <div class="container cols cols--3">
-      <aside class="panel" data-reveal>
-        <h3 class="panel__title">{c.assessment}</h3>
-        <ul class="diamonds">
-          {hifz.assessment.hifz.map((item) => <li>{item}</li>)}
-        </ul>
-      </aside>
-      <aside class="panel" data-reveal style="--reveal-order: 1">
-        <h3 class="panel__title">{c.reports}</h3>
-        <ul class="diamonds">
-          {hifz.assessment.reporting.map((item) => <li>{item}</li>)}
-        </ul>
-      </aside>
-      <aside class="panel panel--framed" data-reveal style="--reveal-order: 2">
-        <h3 class="panel__title">{c.certification}</h3>
-        <p class="panel__text">{hifz.certification.completeIntro}</p>
-        <ul class="diamonds">
-          {hifz.certification.complete.map((item) => <li>{item}</li>)}
-        </ul>
-        <p class="panel__text">{hifz.certification.selected}</p>
-      </aside>
+  <section class="section">
+    <div class="container">
+      <header class="heading" data-reveal>
+        <p class="kicker"><Shamsa size={14} />{c.outcomes}</p>
+        <h2 class="title">{c.heads.progress}</h2>
+      </header>
+      <div class="cols cols--3 block">
+        <aside class="card pad" data-reveal>
+          <span class="icon-tile"><Icon name="check" size={24} /></span>
+          <h3 class="h3" style="margin-top: 1rem">{c.assessment}</h3>
+          <ul class="ticks" style="margin-top: 0.9rem">
+            {hifz.assessment.hifz.map((item) => <li>{item}</li>)}
+          </ul>
+        </aside>
+        <aside class="card pad" data-reveal style="--reveal-order: 1">
+          <span class="icon-tile icon-tile--saffron"><Icon name="mail" size={24} /></span>
+          <h3 class="h3" style="margin-top: 1rem">{c.reports}</h3>
+          <ul class="ticks" style="margin-top: 0.9rem">
+            {hifz.assessment.reporting.map((item) => <li>{item}</li>)}
+          </ul>
+        </aside>
+        <aside class="card pad" data-reveal style="--reveal-order: 2">
+          <span class="icon-tile icon-tile--navy"><Icon name="certificate" size={24} /></span>
+          <h3 class="h3" style="margin-top: 1rem">{c.certification}</h3>
+          <p style="margin-top: 0.5rem; color: var(--ink-soft)">{hifz.certification.completeIntro}</p>
+          <ul class="ticks" style="margin-top: 0.7rem">
+            {hifz.certification.complete.map((item) => <li>{item}</li>)}
+          </ul>
+          <p style="margin-top: 0.9rem; color: var(--ink-soft)">{hifz.certification.selected}</p>
+        </aside>
+      </div>
     </div>
   </section>
-</Sub>
+</Page>
 
 <style>
-  .cycle {
-    isolation: isolate;
-    background: linear-gradient(180deg, var(--emerald-900), var(--emerald-950));
-  }
-
-  .cycle .pattern {
-    z-index: -1;
-    --pattern-opacity: 0.1;
-  }
-
-  .cycle__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1.25rem, 3vw, 2.5rem);
-    margin-top: clamp(3rem, 6vw, 4.5rem);
-  }
-
-  /* A rounded arch with a second gold line inside it, as on the home page. */
-  .arch {
+  .track {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 4.25rem clamp(1.5rem, 2.6vw, 2.25rem) 2.5rem;
-    border: 1px solid rgba(214, 182, 109, 0.55);
-    border-radius: 14rem 14rem 1rem 1rem;
-    background: linear-gradient(180deg, rgba(8, 124, 89, 0.5) 0%, rgba(7, 80, 64, 0.35) 100%);
+    overflow: hidden;
   }
 
-  .arch::before {
-    content: '';
+  .track__letter {
     position: absolute;
-    inset: 0.6rem;
-    border: 1px solid rgba(214, 182, 109, 0.22);
-    border-radius: 13.4rem 13.4rem 0.6rem 0.6rem;
+    right: 1.25rem;
+    top: -0.5rem;
+    font-family: var(--font-display);
+    font-size: 7rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--teal-100);
     pointer-events: none;
   }
 
-  .arch__number {
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    color: var(--gold-400);
-  }
-
-  .arch__term {
-    margin-top: 0.2rem;
-    font-size: calc(2.6rem * var(--display-scale));
-    font-style: italic;
-    color: #ffffff;
-  }
-
-  .arch__name {
-    font-size: 0.74rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold-400);
-  }
-
-  .arch__items {
+  .track__name {
     position: relative;
-    align-self: stretch;
-    margin-top: 1.5rem;
+    margin-top: 0.3rem;
+    font-size: calc(1.9rem * var(--display-scale));
+  }
+
+  .track__scope {
+    font-weight: 700;
+    color: var(--teal-700);
+  }
+
+  .track__text {
+    margin-top: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .track--dark {
+    border-color: var(--navy-900);
+    background:
+      radial-gradient(90% 60% at 100% 0%, rgba(34, 71, 164, 0.8), transparent 70%),
+      linear-gradient(160deg, var(--navy-800), var(--navy-950));
+    color: var(--on-dark);
+  }
+
+  .track--dark .track__letter {
+    color: rgba(255, 255, 255, 0.1);
+  }
+
+  .track--dark .track__name {
+    color: #fff;
+  }
+
+  .track--dark :is(.label, .track__scope) {
+    color: var(--saffron-400);
+  }
+
+  .track--dark .track__text {
     color: var(--on-dark-soft);
   }
 
-  .cycle__note {
-    margin-top: 2.5rem;
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-style: italic;
-    color: var(--gold-300);
+  /* ----- The daily cycle: three rings joined by arrows ----- */
+
+  .cycle {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  .cycle__part {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+  }
+
+  /* The arrow from one ring to the next. */
+  .cycle__part:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 5.5rem;
+    left: calc(50% + 6.25rem);
+    right: calc(-50% + 6.25rem - clamp(1.5rem, 4vw, 3.5rem));
+    border-top: 2px dashed var(--saffron-500);
+  }
+
+  .cycle__ring {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    width: 11rem;
+    height: 11rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--teal-500);
+    box-shadow:
+      0 0 0 0.6rem var(--teal-100),
+      var(--shadow-card);
     text-align: center;
   }
 
+  .cycle__part:nth-child(2) .cycle__ring {
+    border-color: var(--saffron-500);
+    box-shadow:
+      0 0 0 0.6rem var(--saffron-100),
+      var(--shadow-card);
+  }
+
+  .cycle__part:nth-child(3) .cycle__ring {
+    border-color: var(--lapis);
+    box-shadow:
+      0 0 0 0.6rem #dfe7fa,
+      var(--shadow-card);
+  }
+
+  .cycle__number {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  .cycle__term {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--navy-900);
+  }
+
+  .cycle__name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--teal-700);
+  }
+
+  .cycle__items {
+    width: 100%;
+  }
+
+  .cycle__note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    font-weight: 600;
+    color: var(--teal-800);
+    text-align: center;
+  }
+
+  .rules {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .rules li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    line-height: 1.4;
+  }
+
+  .rules span {
+    flex-shrink: 0;
+    width: 1.4rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--saffron-600);
+  }
+
   @media (max-width: 56rem) {
-    .cycle__grid {
+    .cycle {
       grid-template-columns: 1fr;
       max-width: 26rem;
       margin-inline: auto;
+    }
+
+    .cycle__part:not(:last-child)::after {
+      display: none;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .rules {
+      grid-template-columns: 1fr;
     }
   }
 </style>

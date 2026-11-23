@@ -1,42 +1,35 @@
 # Darul Arqam
 
-The website of Darul Arqam, an online Quran academy: live one-on-one classes for families in the United States, taught by imams and huffaz from Bangladesh.
+The website of Darul Arqam, an online institute of Qur'an and Islamic studies: a **multi-page site** in English and Bangla.
 
-This repository holds **three designs** of the site, with the same content, so that one can be chosen:
+- **Look:** lapis blue, turquoise and saffron on warm paper, with round forms and a lattice of overlapping circles. The header and footer carry the academy's logo (`src/components/Logo.astro` and `Wordmark.astro`).
+- **Pages:** thirteen, in English and in Bangla: home, about, programs, a page each for Nazirah, Hifz, Alimiyah and Deeniyat, academics, teachers, reviews, tuition, questions and the free-trial form.
+- **Verses:** every page opens with a Quranic verse related to its subject.
 
-| | Design 1, classic | Design 2, modern | Design 3, the book |
-| --- | --- | --- | --- |
-| Layout | A long home page, with a page for each program | Thirteen pages, in English and Bangla, with reviews | A book of 64 pages that opens and turns as you scroll |
-| Look | The academy's logo and colours: emerald, soft gold and off-white; pointed arches and a star lattice | The academy's logo; lapis blue, turquoise and saffron on warm paper; round forms | Burgundy leather, gold leaf and cream paper; illuminated verse plates |
-| Sources | This folder (`src/`) | [`version-2/`](version-2) | [`version-3/`](version-3) |
-| HTML files | [`html/`](html) | [`version-2/html/`](version-2/html) | [`version-3/html/`](version-3/html) |
-| Guide | This file | [`version-2/README.md`](version-2/README.md) | [`version-3/README.md`](version-3/README.md) |
-
-Open [`designs.html`](designs.html) in a browser to see all three side by side and click through each one.
-
-The designs are separate projects that share nothing. Contact details, prices and teacher profiles are therefore kept in each one's own `src/config/` folder; once a design is chosen, delete the others. The rest of this file describes design 1.
-
-## Design 1
-
-It is a static site: plain HTML, CSS and a little JavaScript, with no server and no database.
-
-- **Home** is one long page: introduction, the story of the name, vision and mission, programs, who we teach, the educational philosophy, teachers and their profiles, how it works, tuition, questions, and the free-trial request form.
-- **Five more pages** go into detail: Nazirah, Hifz, Alimiyah, Deeniyat and Academics. Each opens with a related Quranic verse in an arch.
+Earlier design proposals (a classic single page and an animated book) were removed when this design was chosen; they remain in the repository history.
 
 ## The HTML files
 
 The finished site is in the [`html/`](html) folder, ready to use as it is:
 
-| File | What it is |
-| --- | --- |
-| `html/index.html` | The home page |
-| `html/nazirah.html` | Nazirah al-Qur'an: reading, in five stages |
-| `html/hifz.html` | Hifz al-Qur'an: memorization, in two tracks |
-| `html/alimiyah.html` | Alimiyah and Islamic Studies: three divisions |
-| `html/deeniyat.html` | Deeniyat: the eight subjects every Qur'an student takes |
-| `html/academics.html` | Philosophy, teaching, assessment, standards and welfare |
-| `html/404.html` | The "page not found" page |
-| `html/assets/` | The stylesheet and the fonts |
+| File | Page | Verse |
+| --- | --- | --- |
+| `index.html` | Home | al-'Alaq 96:1 |
+| `about.html` | About: the name, vision, mission, values | al-Jumu'ah 62:2 |
+| `programs.html` | Programs: overview, and where to begin by age | al-Qamar 54:17 |
+| `nazirah.html` | Nazirah al-Qur'an: reading, in five stages | from al-Muzzammil 73:4 |
+| `hifz.html` | Hifz al-Qur'an: memorization, in two tracks | al-Hijr 15:9 |
+| `alimiyah.html` | Alimiyah and Islamic Studies: three divisions | from at-Tawbah 9:122 |
+| `deeniyat.html` | Deeniyat: eight subjects | al-Bayyinah 98:5 |
+| `academics.html` | Philosophy, teaching, assessment, standards, welfare | from al-Mujadilah 58:11 |
+| `teachers.html` | Teachers | from al-'Ankabut 29:49 |
+| `reviews.html` | Reviews, and a form to send one | from Ibrahim 14:7 |
+| `tuition.html` | Tuition and how it works | from al-Muzzammil 73:20 |
+| `faq.html` | Questions | from an-Nahl 16:43 |
+| `free-trial.html` | Free-trial request form | from Ta-Ha 20:114 |
+| `404.html` | "Page not found" | none |
+
+The stylesheet and fonts are in `html/assets/`.
 
 Double-click `html/index.html` to view the site in a browser, or upload everything inside `html/` to a web host. The pages use relative links, so they work from disk, from the root of a domain, or from any sub-folder.
 
@@ -46,7 +39,7 @@ The files in `html/` are generated from the sources in `src/` with [Astro](https
 
 What Darul Arqam teaches, and how, is taken from the academy's four documents: the Public Academic Framework, the Nazirah al-Qur'an & Deeniyat Program, the Master Hifz & Deeniyat Curriculum, and the Alimiyah & Islamic Studies Program.
 
-That content lives in one file, `src/content/academy.ts`, which is identical in all three designs: programs, stages, syllabus units, semesters, outcomes, assessment, certification, vision, mission and values. Each design only decides how to show it. When the curriculum changes, change that file and copy it to the other designs.
+That content lives in one file, `src/content/academy.ts`, programs, stages, syllabus units, semesters, outcomes, assessment, certification, vision, mission and values. The pages only decide how to show it. When the curriculum changes, change that file, and `academy.bn.ts` to match.
 
 The site shows a curated version of the curriculum: the structure and outcomes are always visible, and the unit-by-unit detail opens on request ("What is covered"). Two editorial choices were made throughout: American spelling (program, memorize), and one spelling for each Arabic term (Tawheed, Zakat, Qur'an).
 
@@ -54,9 +47,12 @@ One thing on the site comes from the academy directly rather than from the docum
 
 ## Languages
 
-The site is published in English. A Bangla version existed for the earlier content and is switched off until the new content has been translated, so that the two languages never disagree.
+The site is published in English and in Bangla. The Bangla pages have the same names inside `html/bn/`, and the language switch in the top bar keeps the reader on the same page.
 
-To bring Bangla back: add `src/i18n/bn.ts` with the same shape as `en.ts`, add `'bn'` to `published` in `src/i18n/index.ts`, and add the pages under `src/pages/bn/`. The language switch then reappears by itself. The earlier Bangla wording is in the repository history (`src/i18n/bn.ts` before the commit "restructure around the academy's curriculum documents") and is a useful starting point for the parts that did not change. The Bangla fonts and type settings are still in place.
+- `src/i18n/bn.ts` holds the Bangla wording and `src/content/academy.bn.ts` the Bangla curriculum. Each has the same shape as its English file (`en.ts`, `academy.ts`): when you add or reword something in one, do the same in the other.
+- The meaning of each page's verse in Bangla is Muhiuddin Khan's translation, trimmed to the part quoted on the page.
+- Arabic terms use the forms common in Bangladesh (নাজেরা, হিফজ, আলিমিয়াহ, দ্বীনিয়াত, সবক, সাবকি, মানজিল).
+- The translation was machine-assisted. Have a native Bangla reader review it, especially the curriculum pages, before the site goes live.
 
 ## Run it
 
@@ -83,12 +79,19 @@ npm run build
 | The curriculum: programs, stages, subjects, semesters, values | `src/content/academy.ts` |
 | Contact details, form destination, tuition prices, site address | `src/config/site.ts` |
 | Teacher profiles | `src/config/teachers.ts` |
-| Headings, page titles, questions, form labels and other wording | `src/i18n/en.ts` |
+| Reviews | `src/config/reviews.ts` |
+| Page titles and headings, the meaning of each verse, questions, labels | `src/i18n/en.ts` |
 | Arabic texts: the verses, the hadith | `src/i18n/index.ts` |
-| Which pages exist and their file names | `src/lib/routes.ts` |
+| Which pages exist, their file names and the menu | `src/lib/routes.ts` |
 | Colours, fonts, spacing, shared pieces | `src/styles/global.css` |
-| A section of the home page | `src/components/<Section>.astro` |
-| A program or academics page | `src/views/<Page>View.astro` |
+| What a page contains | `src/views/<Page>View.astro` |
+| How one block looks | `src/components/<Block>.astro` |
+
+### The verses
+
+Each page's verse has three parts: the Arabic in `src/i18n/index.ts` (under `verses`), and its meaning and reference in `src/i18n/en.ts` (under `pages`). The Arabic is in the simple script with full vowel marks and was checked against the Tanzil text of the Quran. Where a page quotes part of a verse, its reference begins with "From". The meanings are plain renderings written for this site; have someone qualified review them before the site goes live.
+
+To change a page's verse, replace all three parts together.
 
 ## Before going live
 
@@ -99,7 +102,9 @@ npm run build
 - **`url`** is empty. Set it to the public address of the site so that canonical links, language alternates and the social-sharing image are written into the pages.
 - **`formEndpoint`** is empty. See the next section.
 
-`src/config/teachers.ts` holds the teacher profiles. **All six are invented examples**, there to show the layout, and each card carries an "Example profile" tag. Replace them with your real teachers; the file explains how, including how to add a photo. Delete every entry to hide the profiles altogether.
+`src/config/reviews.ts` holds the reviews shown on the home page and the Reviews page. **All six are invented examples** written in the voice of parents and students, and each carries an "Example review" tag. Publishing invented reviews as real ones misleads families and breaks US rules on testimonials, so replace them with reviews from real families, with their permission, before launch. The review form on the Reviews page sends new reviews to you the same way the trial form sends requests; nothing appears on the site until you add it to that file.
+
+`src/config/teachers.ts` holds the teacher profiles. **All six are invented examples**, there to show the layout, and each card carries an "Example profile" tag. Replace them with your real teachers; the file explains how, including how to add a photo.
 
 The wording also states a few things about how the academy works. Check that each is true, and reword it in both language files if not:
 
@@ -128,8 +133,7 @@ Point the host's "not found" page at `404.html`. That one page uses links from t
 
 ## Design notes
 
-- **Logo:** the academy's own mark and lettering, taken as vector shapes from its logo sheet (`src/components/Logo.astro`, `Wordmark.astro`; a standalone copy is in `public/logo-mark.svg`). The tagline under it is set in type, because the artwork on the sheet spells it "Islamic Institue".
-- **Palette:** the five colours of the logo sheet: Deep Emerald `#063D30`, Islamic Green `#087C59`, Soft Gold `#D6B66D`, Off White `#F7F8F4` and Dark Text `#172923`, with shades between them, defined as custom properties at the top of `src/styles/global.css`.
-- **Type:** Cormorant Garamond for headings, Jost for text, Amiri for Arabic, Noto Serif Bengali and Hind Siliguri for Bangla. The fonts are bundled with the site, so nothing is loaded from a third party.
-- **Ornament:** the eight-pointed star (khatam) lattice, the rosette and the pointed arch are drawn in SVG. `src/lib/geometry.ts` computes their points.
+- **Palette:** night blue and lapis, turquoise, saffron and warm paper, defined as custom properties at the top of `src/styles/global.css`.
+- **Type:** El Messiri for headings, Figtree for text, Noto Naskh Arabic for verses, Reem Kufi for the Arabic name, Anek Bangla and Noto Sans Bengali for Bangla. The fonts are bundled with the site, so nothing is loaded from a third party.
+- **Ornament:** the twelve-pointed medallion (shamsa) of illuminated Quran manuscripts, and a lattice of overlapping circles.
 - The pages work without JavaScript. Scripts add the mobile menu, the scroll reveals, the two clocks and the form hand-off.

@@ -4,10 +4,11 @@
  */
 export const en = {
   lang: 'en',
+
   meta: {
     title: 'Darul Arqam — Online Qur’an Classes with Qualified Imams',
     description:
-      'Online Qur’an and Islamic education for children, teenagers and adults: Nazirah, Hifz and Alimiyah programs taught by qualified imams and huffaz from Bangladesh, on US time zones. Book a free trial class.',
+      'Live one-on-one Qur’an classes for children, adults and sisters in the USA, taught by qualified imams and huffaz from Bangladesh. Qur’an reading, Tajweed, Hifz and Islamic studies. Book a free trial class.',
   },
 
   brand: { name: 'Darul Arqam', tagline: 'Islamic Institute' },
@@ -16,13 +17,6 @@ export const en = {
     label: 'Main',
     menu: 'Menu',
     skip: 'Skip to content',
-    home: 'Home',
-    about: 'About',
-    programs: 'Programs',
-    academics: 'Academics',
-    teachers: 'Teachers',
-    tuition: 'Tuition',
-    faq: 'FAQ',
     cta: 'Free trial class',
   },
 
@@ -133,6 +127,14 @@ export const en = {
         text: 'Rather, the Qur’an is clear verses within the hearts of those who have been given knowledge.',
         reference: 'From Surah al-‘Ankabut 29:49',
       },
+    },
+    reviews: {
+      nav: 'Reviews',
+      title: 'Reviews from Families and Students | Darul Arqam',
+      description: 'What parents and students say about learning the Qur’an and Islamic studies with Darul Arqam, and a form to share your own review.',
+      heading: 'In the words of our families',
+      lead: 'Parents and students on learning with Darul Arqam. Studying with us? We would love to hear from you.',
+      verse: { text: 'If you are grateful, I will surely increase you.', reference: 'From Surah Ibrahim 14:7' },
     },
     tuition: {
       nav: 'Tuition',
@@ -255,6 +257,29 @@ export const en = {
     programsFor: 'Programs for this age',
     findProgram: 'Find the right program',
     findProgramLead: 'Placement follows a student’s readiness and previous learning, not age alone. As a guide:',
+
+    // Section headings on the program and academics pages.
+    heads: {
+      values: 'What we hold to',
+      principles: 'Four principles behind every lesson',
+      curriculum: 'What the curriculum covers',
+      studentLevel: 'Taught at the student’s level',
+      hifzStages: 'Four stages to the whole Qur’an',
+      surahs: 'Begin with the Surahs you recite most',
+      progress: 'Progress you can see',
+      nazirahStages: 'From the first letter to independent recitation',
+      nazirahStagesLead: 'Students move on when they are ready, not by the calendar.',
+      moreThanReading: 'More than reading',
+      everyAge: 'The same path, at every age',
+      completing: 'On completing the program',
+      whereToBegin: 'Where to begin, by age',
+    },
+    agesAll: 'Ages 3 to adult',
+    stagesCount: (n: string) => `${n} stages`,
+    subjectsCount: (n: string) => `${n} subjects`,
+    breadcrumb: 'Breadcrumb',
+    deeniyatFormat: 'With Nazirah and Hifz',
+    deeniyatAges: 'Every Qur’an student',
   },
 
   hero: {
@@ -288,15 +313,10 @@ export const en = {
     medallionCaption: 'Dar al-Arqam · The House of al-Arqam',
   },
 
-  ayah: {
-    text: 'And We have certainly made the Qur’an easy to remember — so is there anyone who will take heed?',
-    reference: 'Surah al-Qamar 54:17',
-  },
-
   programs: {
     eyebrow: 'Programs',
     title: 'Three programs, one path',
-    lead: 'Read the Qur’an, memorize it, and study the knowledge of Islam. Every Qur’an student also takes Deeniyat.',
+    lead: 'Read the Qur’an, memorize it, and study the knowledge of Islam.',
     forLabel: 'For',
   },
 
@@ -392,6 +412,46 @@ export const en = {
     note: 'More than one student at home? Ask us about tuition for families.',
   },
 
+  reviews: {
+    eyebrow: 'Reviews',
+    title: 'What families say',
+    lead: 'Parents and students on learning the Qur’an and their Deen with us.',
+    all: 'Read all reviews',
+    example: 'Example review',
+    roles: { parent: 'Parent', student: 'Student' } as Record<string, string>,
+    rating: (n: number) => `${n} out of 5 stars`,
+    filterLabel: 'Show reviews about',
+    filterAll: 'All programs',
+    previous: 'Previous review',
+    next: 'Next review',
+    form: {
+      title: 'Share your review',
+      lead: 'Tell other families about your experience. We read every review, and publish it on the site only with your permission.',
+      name: 'Name to show',
+      nameHint: 'For example, your first name and the first letter of your surname',
+      place: 'City and state',
+      role: 'You are',
+      roleOptions: ['A parent of a student', 'A student'],
+      program: 'Program',
+      rating: 'Your rating',
+      ratingLegend: 'Your rating, out of 5 stars',
+      stars: (n: number) => `${n} star${n === 1 ? '' : 's'}`,
+      text: 'Your review',
+      consent: 'I agree that Darul Arqam may publish this review on its website with the name I gave above.',
+      submit: 'Send my review',
+      sending: 'Sending…',
+      successTitle: 'Jazakum Allahu khayran!',
+      success: 'Thank you for your review. We will read it and add it to the site soon, in sha Allah.',
+      whatsappTitle: 'One last step',
+      whatsappNote: 'WhatsApp has opened with your review written out. Press send there and it will reach us.',
+      whatsappAgain: 'Open WhatsApp again',
+      emailNote: 'Your email app has opened with your review written out. Press send there and it will reach us.',
+      error: 'Something went wrong and your review was not sent. Please try again, or message us directly.',
+      greeting: 'Assalamu alaikum. I would like to share a review of Darul Arqam.',
+      subject: 'A review of Darul Arqam',
+    },
+  },
+
   faq: {
     eyebrow: 'Questions',
     title: 'Answers for parents and students',
@@ -447,7 +507,7 @@ export const en = {
 
   trial: {
     eyebrow: 'Free trial class',
-    title: 'Begin with a free class, in shā’ Allāh',
+    title: 'Begin with a free class, in sha Allah',
     lead: 'Tell us a little about the student and we will be in touch to arrange a free one-on-one lesson with one of our teachers.',
     contactTitle: 'Prefer to talk first?',
     whatsapp: 'WhatsApp',
@@ -483,8 +543,8 @@ export const en = {
       submit: 'Request my free trial',
       sending: 'Sending…',
       privacy: 'We use your details only to arrange your class, and never share them.',
-      successTitle: 'Jazākum Allāhu khayran!',
-      success: 'Your request has reached us. We will contact you soon to arrange your free class, in shā’ Allāh.',
+      successTitle: 'Jazakum Allahu khayran!',
+      success: 'Your request has reached us. We will contact you soon to arrange your free class, in sha Allah.',
       whatsappTitle: 'One last step',
       whatsappNote: 'WhatsApp has opened with your request written out. Press send there and we will reply to arrange your free class.',
       whatsappAgain: 'Open WhatsApp again',

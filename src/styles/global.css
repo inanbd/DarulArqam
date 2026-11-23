@@ -1,64 +1,77 @@
 /* ------------------------------------------------------------------
-   Darul Arqam — design tokens, base styles and shared pieces.
+   Darul Arqam, second design: design tokens, base styles, shared pieces.
+   Lapis blue, turquoise and saffron on warm paper, with round forms.
    Section-specific styles live beside each component.
 ------------------------------------------------------------------- */
 
 :root {
-  /* The colours of the academy's logo sheet: Deep Emerald, Islamic Green, Soft Gold, Off White, Dark Text. */
-  /* Emerald, from near-black to mist */
-  --emerald-950: #042a21;
-  --emerald-900: #063d30; /* Deep Emerald */
-  --emerald-800: #075040;
-  --emerald-700: #08664b;
-  --emerald-600: #087c59; /* Islamic Green */
-  --emerald-100: #dcebe3;
+  /* Lapis and night blue */
+  --navy-950: #071126;
+  --navy-900: #0b1a3b;
+  --navy-800: #122658;
+  --navy-700: #1a3478;
+  --lapis: #2247a4;
 
-  /* Antique gold */
-  --gold-600: #b8964a;
-  --gold-500: #d6b66d; /* Soft Gold */
-  --gold-400: #dfc689;
-  --gold-300: #ecdcb0;
-  --gold-ink: #7a5d1f; /* gold that stays readable as small text on ivory */
+  /* Turquoise */
+  --teal-800: #085a60;
+  --teal-700: #0b7078;
+  --teal-600: #0f8a8c;
+  --teal-500: #1aa6a0;
+  --teal-200: #b9e6e0;
+  --teal-100: #dbf2ee;
+  --teal-50: #eef9f6;
+
+  /* Saffron */
+  --saffron-600: #d18f1c;
+  --saffron-500: #eaa93b;
+  --saffron-400: #f3c063;
+  --saffron-100: #fbedcf;
+  --saffron-ink: #8a5a06; /* saffron that stays readable as small text on paper */
 
   /* Paper */
-  --ivory: #f7f8f4; /* Off White */
-  --parchment: #eef0e8;
-  --sand: #dde1d4;
-  --sand-deep: #c8cfbf;
+  --paper: #fffdf8;
+  --sand-50: #fbf7ee;
+  --sand-100: #f6eedd;
+  --sand-200: #ece0c6;
+  --sand-300: #dccba6;
 
   /* Text */
-  --ink: #172923; /* Dark Text */
-  --ink-soft: #4d5c54;
-  --on-dark: #f7f8f4;
-  --on-dark-soft: #b9c8bf;
+  --ink: #0f1b38;
+  --ink-soft: #4a5775;
+  --on-dark: #f4f6fb;
+  --on-dark-soft: #b4c0dc;
 
-  --font-display: 'Cormorant Garamond', 'Noto Serif Bengali Variable', 'Amiri', Georgia, 'Times New Roman', serif;
-  --font-body: 'Jost Variable', 'Hind Siliguri', 'Amiri', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-arabic: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+  --font-display: 'El Messiri Variable', 'Anek Bangla Variable', 'Noto Naskh Arabic Variable', system-ui, sans-serif;
+  --font-body: 'Figtree Variable', 'Noto Sans Bengali Variable', 'Noto Naskh Arabic Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-arabic: 'Noto Naskh Arabic Variable', 'Scheherazade New', 'Traditional Arabic', serif;
+  --font-kufi: 'Reem Kufi Variable', 'Noto Naskh Arabic Variable', sans-serif;
 
-  /* Bangla letterforms run larger than Cormorant, so Bangla pages scale display type down. */
+  /* Bangla letterforms sit differently from the Latin display face. */
   --display-scale: 1;
-  --display-leading: 1.08;
-  --display-weight: 500;
-  --body-leading: 1.7;
+  --display-leading: 1.14;
+  --display-weight: 600;
+  --body-leading: 1.65;
 
-  --container: 73.75rem;
+  --container: 75rem;
   --gutter: clamp(1.25rem, 4vw, 2.5rem);
-  --section: clamp(4.5rem, 9vw, 8rem);
+  --section: clamp(4rem, 8vw, 7rem);
 
+  --radius-sm: 0.75rem;
   --radius: 1.25rem;
-  --shadow-soft: 0 24px 60px -32px rgba(4, 42, 33, 0.35);
+  --radius-lg: 2rem;
+  --shadow-card: 0 1px 2px rgba(15, 27, 56, 0.04), 0 12px 32px -18px rgba(15, 27, 56, 0.22);
+  --shadow-lift: 0 2px 4px rgba(15, 27, 56, 0.05), 0 28px 50px -24px rgba(15, 27, 56, 0.35);
   --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
 
-  /* Eight-pointed star lattice, used as a mask so it can take any colour. */
-  --khatam: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22 viewBox=%220 0 96 96%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221%22%3E%3Cpolygon points=%2248.0,0.0 62.1,14.1 81.9,14.1 81.9,33.9 96.0,48.0 81.9,62.1 81.9,81.9 62.1,81.9 48.0,96.0 33.9,81.9 14.1,81.9 14.1,62.1 0.0,48.0 14.1,33.9 14.1,14.1 33.9,14.1%22/%3E%3Cpolygon points=%2255.3,30.4 58.3,37.7 65.6,40.7 62.5,48.0 65.6,55.3 58.3,58.3 55.3,65.6 48.0,62.5 40.7,65.6 37.7,58.3 30.4,55.3 33.5,48.0 30.4,40.7 37.7,37.7 40.7,30.4 48.0,33.5%22/%3E%3Ccircle cx=%220%22 cy=%220%22 r=%225%22/%3E%3Ccircle cx=%2296%22 cy=%220%22 r=%225%22/%3E%3Ccircle cx=%220%22 cy=%2296%22 r=%225%22/%3E%3Ccircle cx=%2296%22 cy=%2296%22 r=%225%22/%3E%3C/svg%3E");
+  /* A lattice of overlapping circles, used as a mask so it can take any colour. */
+  --lattice: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56' fill='none' stroke='%23000' stroke-width='1'%3E%3Cpath d='M56 0A56 56 0 0 1 0 56M56 0A56 56 0 0 0 0 56M0 0A56 56 0 0 1 56 56M0 0A56 56 0 0 0 56 56'/%3E%3C/svg%3E");
 }
 
 html[lang='bn'] {
-  --display-scale: 0.74;
-  --display-leading: 1.38;
+  --display-scale: 0.9;
+  --display-leading: 1.4;
   --display-weight: 600;
-  --body-leading: 1.85;
+  --body-leading: 1.8;
 }
 
 /* ---------- Base ---------- */
@@ -71,20 +84,19 @@ html[lang='bn'] {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 6.5rem;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  background: var(--ivory);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.0625rem;
   line-height: var(--body-leading);
   font-weight: 400;
-  font-variant-numeric: lining-nums;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -95,6 +107,7 @@ h1,
 h2,
 h3,
 h4,
+h5,
 p,
 ul,
 ol,
@@ -132,11 +145,13 @@ textarea {
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5 {
   font-family: var(--font-display);
   font-weight: var(--display-weight);
   line-height: var(--display-leading);
-  letter-spacing: -0.005em;
+  color: var(--navy-900);
   text-wrap: balance;
 }
 
@@ -145,17 +160,23 @@ p {
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold-500);
+  outline: 3px solid var(--teal-500);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 ::selection {
-  background: var(--gold-300);
-  color: var(--emerald-950);
+  background: var(--teal-200);
+  color: var(--navy-950);
 }
 
-/* ---------- Helpers ---------- */
+[lang='ar'] {
+  font-family: var(--font-arabic);
+  line-height: 2;
+  letter-spacing: 0;
+}
+
+/* ---------- Layout helpers ---------- */
 
 .container {
   width: min(100% - var(--gutter) * 2, var(--container));
@@ -167,13 +188,12 @@ p {
   padding-block: var(--section);
 }
 
-.section--parchment {
-  background: var(--parchment);
+.section--sand {
+  background: var(--sand-50);
 }
 
-.section--dark {
-  background: var(--emerald-900);
-  color: var(--on-dark);
+.section--tint {
+  background: var(--teal-50);
 }
 
 .sr-only {
@@ -191,13 +211,13 @@ p {
 .skip-link {
   position: absolute;
   left: 1rem;
-  top: -4rem;
+  top: -5rem;
   z-index: 100;
   padding: 0.7rem 1.1rem;
-  border-radius: 999px;
-  background: var(--gold-400);
-  color: var(--emerald-950);
-  font-weight: 500;
+  border-radius: var(--radius-sm);
+  background: var(--navy-900);
+  color: #fff;
+  font-weight: 600;
   transition: top 0.2s var(--ease);
 }
 
@@ -205,62 +225,51 @@ p {
   top: 1rem;
 }
 
-[lang='ar'] {
-  font-family: var(--font-arabic);
-  line-height: 1.9;
-  letter-spacing: 0;
-}
-
 /* ---------- Type pieces ---------- */
 
-.eyebrow {
+.kicker {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold-ink);
+  color: var(--teal-700);
 }
 
-.eyebrow::before {
-  content: '';
-  width: 2rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.7;
+.kicker svg {
+  flex-shrink: 0;
+  color: var(--saffron-500);
 }
 
-.section--dark .eyebrow,
-.on-dark .eyebrow {
-  color: var(--gold-400);
+.on-dark .kicker {
+  color: var(--saffron-400);
 }
 
-html[lang='bn'] .eyebrow {
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
+html[lang='bn'] .kicker {
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
   text-transform: none;
 }
 
 .title {
-  font-size: calc(clamp(2.15rem, 2.9vw + 1.1rem, 3.3rem) * var(--display-scale));
-  margin-top: 1rem;
+  margin-top: 0.9rem;
+  font-size: calc(clamp(1.95rem, 2.4vw + 1.1rem, 3rem) * var(--display-scale));
 }
 
 .lead {
   font-size: 1.15rem;
   color: var(--ink-soft);
-  max-width: 38rem;
-}
-
-.section--dark .lead {
-  color: var(--on-dark-soft);
+  max-width: 40rem;
 }
 
 .heading {
-  max-width: 44rem;
+  max-width: 46rem;
+}
+
+.heading .lead {
+  margin-top: 1rem;
 }
 
 .heading--center {
@@ -268,102 +277,104 @@ html[lang='bn'] .eyebrow {
   text-align: center;
 }
 
-.heading--center .eyebrow::after {
-  content: '';
-  width: 2rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.7;
-}
-
 .heading--center .lead {
   margin-inline: auto;
 }
 
-.heading .lead {
-  margin-top: 1.1rem;
+/* A heading with a link pushed to the far side. */
+.heading-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons and links ---------- */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  padding: 0.95rem 1.75rem;
-  border: 1px solid transparent;
-  border-radius: 999px;
+  padding: 0.9rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 0.9rem;
   font-family: var(--font-body);
-  font-size: 0.98rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.2;
   text-align: center;
   cursor: pointer;
   transition:
-    transform 0.25s var(--ease),
-    box-shadow 0.25s var(--ease),
-    background-color 0.25s var(--ease),
-    border-color 0.25s var(--ease),
-    color 0.25s var(--ease);
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    background-color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+
+.btn svg {
+  flex-shrink: 0;
+  transition: transform 0.2s var(--ease);
 }
 
 .btn:hover {
   transform: translateY(-2px);
 }
 
+.btn:hover svg {
+  transform: translateX(3px);
+}
+
 .btn:active {
   transform: translateY(0);
 }
 
-.btn--gold {
-  background: linear-gradient(180deg, #e6d19c 0%, #cdab5f 100%);
-  color: var(--emerald-950);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    0 14px 30px -14px rgba(198, 161, 91, 0.75);
+.btn--saffron {
+  background: var(--saffron-500);
+  color: var(--navy-950);
+  box-shadow: 0 10px 24px -12px rgba(209, 143, 28, 0.9);
 }
 
-.btn--gold:hover {
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    0 18px 36px -14px rgba(198, 161, 91, 0.9);
+.btn--saffron:hover {
+  background: var(--saffron-400);
 }
 
-.btn--ghost {
-  border-color: rgba(236, 220, 176, 0.45);
-  color: var(--on-dark);
+.btn--navy {
+  background: var(--navy-900);
+  color: #fff;
+  box-shadow: 0 10px 24px -14px rgba(11, 26, 59, 0.9);
 }
 
-.btn--ghost:hover {
-  border-color: var(--gold-400);
-  background: rgba(236, 220, 176, 0.08);
-}
-
-.btn--emerald {
-  background: var(--emerald-800);
-  color: var(--ivory);
-  box-shadow: 0 14px 30px -16px rgba(4, 42, 33, 0.7);
-}
-
-.btn--emerald:hover {
-  background: var(--emerald-700);
+.btn--navy:hover {
+  background: var(--navy-800);
 }
 
 .btn--outline {
-  border-color: var(--sand-deep);
-  color: var(--emerald-800);
+  border-color: var(--sand-300);
+  background: var(--paper);
+  color: var(--navy-900);
 }
 
 .btn--outline:hover {
-  border-color: var(--emerald-700);
-  background: rgba(7, 80, 64, 0.04);
+  border-color: var(--navy-900);
+}
+
+.btn--ghost {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.btn--ghost:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .btn--sm {
-  padding: 0.65rem 1.25rem;
-  font-size: 0.9rem;
+  padding: 0.6rem 1.05rem;
+  border-radius: 0.75rem;
+  font-size: 0.93rem;
 }
 
 .btn--block {
@@ -376,7 +387,106 @@ html[lang='bn'] .eyebrow {
   transform: none;
 }
 
-/* ---------- Pattern + ornaments ---------- */
+/* Text link with an arrow that slides on hover. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  color: var(--teal-700);
+  transition: color 0.2s var(--ease);
+}
+
+.link svg {
+  transition: transform 0.2s var(--ease);
+}
+
+.link:hover {
+  color: var(--navy-900);
+}
+
+.link:hover svg {
+  transform: translateX(4px);
+}
+
+/* ---------- Cards and chips ---------- */
+
+.card {
+  background: #fff;
+  border: 1px solid var(--sand-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: var(--teal-100);
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--teal-800);
+}
+
+/* Round tile that holds an icon. */
+.icon-tile {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 1rem;
+  background: var(--teal-100);
+  color: var(--teal-700);
+}
+
+.icon-tile--saffron {
+  background: var(--saffron-100);
+  color: var(--saffron-ink);
+}
+
+.icon-tile--navy {
+  background: var(--navy-900);
+  color: var(--saffron-400);
+}
+
+/* List with turquoise ticks. */
+.ticks {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.ticks li {
+  position: relative;
+  padding-left: 2.1rem;
+  line-height: 1.5;
+}
+
+.ticks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.08em;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--teal-100)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b7078' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E")
+    center / 0.85rem no-repeat;
+}
+
+html[lang='bn'] .ticks li {
+  line-height: 1.7;
+}
+
+html[lang='bn'] .ticks li::before {
+  top: 0.2em;
+}
+
+/* ---------- Pattern ---------- */
 
 .pattern {
   position: absolute;
@@ -389,57 +499,36 @@ html[lang='bn'] .eyebrow {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: var(--pattern-color, var(--gold-400));
-  opacity: var(--pattern-opacity, 0.09);
-  -webkit-mask: var(--khatam) center top / 96px 96px repeat;
-  mask: var(--khatam) center top / 96px 96px repeat;
+  background-color: var(--pattern-color, var(--teal-600));
+  opacity: var(--pattern-opacity, 0.12);
+  -webkit-mask: var(--lattice) center top / 56px 56px repeat;
+  mask: var(--lattice) center top / 56px 56px repeat;
 }
 
-/* Soft falloff so the lattice never competes with the text. */
-.pattern--fade-left {
-  -webkit-mask-image: linear-gradient(100deg, transparent 12%, #000 78%);
-  mask-image: linear-gradient(100deg, transparent 12%, #000 78%);
+.pattern--fade-down {
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 92%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 92%);
 }
 
-.pattern--fade-center {
-  -webkit-mask-image: radial-gradient(ellipse at center, transparent 20%, #000 95%);
-  mask-image: radial-gradient(ellipse at center, transparent 20%, #000 95%);
+.pattern--fade-side {
+  -webkit-mask-image: linear-gradient(90deg, transparent 5%, #000 90%);
+  mask-image: linear-gradient(90deg, transparent 5%, #000 90%);
 }
 
-.pattern--fade-up {
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 100%);
-}
-
-.ornament {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  color: var(--gold-500);
-}
-
-.ornament::before,
-.ornament::after {
-  content: '';
-  width: min(22vw, 7rem);
-  height: 1px;
-  background: linear-gradient(90deg, transparent, currentColor);
-}
-
-.ornament::after {
-  transform: scaleX(-1);
+.pattern--corner {
+  -webkit-mask-image: radial-gradient(120% 120% at 100% 0%, #000 0%, transparent 60%);
+  mask-image: radial-gradient(120% 120% at 100% 0%, #000 0%, transparent 60%);
 }
 
 /* ---------- Scroll reveal (only when scripts run) ---------- */
 
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(1.25rem);
+  transform: translateY(1rem);
   transition:
-    opacity 0.9s var(--ease),
-    transform 0.9s var(--ease);
-  transition-delay: calc(var(--reveal-order, 0) * 90ms);
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  transition-delay: calc(var(--reveal-order, 0) * 80ms);
 }
 
 .js [data-reveal].is-visible {
@@ -472,12 +561,12 @@ html[lang='bn'] .eyebrow {
 ------------------------------------------------------------------- */
 
 .block {
-  margin-top: clamp(2.5rem, 5vw, 4rem);
+  margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
 }
 
 .cols {
   display: grid;
-  gap: clamp(1.25rem, 2.5vw, 2rem);
+  gap: clamp(1rem, 2vw, 1.5rem);
 }
 
 .cols--2 {
@@ -499,7 +588,7 @@ html[lang='bn'] .eyebrow {
   }
 }
 
-@media (max-width: 42rem) {
+@media (max-width: 40rem) {
   .cols--2,
   .cols--3,
   .cols--4 {
@@ -507,318 +596,216 @@ html[lang='bn'] .eyebrow {
   }
 }
 
-/* A sheet of ivory with a fine sand rule. */
-.panel {
-  position: relative;
-  padding: clamp(1.6rem, 3vw, 2.4rem);
-  background: #ffffff;
-  border: 1px solid var(--sand);
-  border-radius: var(--radius);
-}
-
-/* A panel with gold brackets at two corners, like the frame of a manuscript page. */
-.panel--framed {
-  border-color: var(--sand-deep);
-  border-radius: 0;
-  background: var(--parchment);
-}
-
-.section--parchment .panel--framed {
-  background: var(--ivory);
-}
-
-.panel--framed::before,
-.panel--framed::after {
-  content: '';
-  position: absolute;
-  width: 1.6rem;
-  height: 1.6rem;
-  border: 2px solid var(--gold-500);
-  pointer-events: none;
-}
-
-.panel--framed::before {
-  top: -6px;
-  left: -6px;
-  border-right: 0;
-  border-bottom: 0;
-}
-
-.panel--framed::after {
-  right: -6px;
-  bottom: -6px;
-  border-left: 0;
-  border-top: 0;
-}
-
-.panel--dark {
-  background: linear-gradient(180deg, var(--emerald-800), var(--emerald-950));
-  border-color: var(--gold-500);
-  color: var(--on-dark);
-}
-
-.panel__title {
-  font-size: calc(1.8rem * var(--display-scale));
-  color: var(--emerald-800);
-}
-
-.panel--dark .panel__title {
-  color: #ffffff;
-}
-
-.panel__text {
-  margin-top: 0.7rem;
-  color: var(--ink-soft);
-}
-
-.panel--dark .panel__text {
-  color: var(--on-dark-soft);
-}
-
-.label {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold-ink);
-}
-
-.panel--dark .label,
-.section--dark .label {
-  color: var(--gold-400);
+.pad {
+  padding: clamp(1.4rem, 3vw, 2.1rem);
 }
 
 .prose {
-  max-width: 46rem;
+  max-width: 48rem;
   color: var(--ink-soft);
 }
 
 .prose p + p {
-  margin-top: 1.1rem;
+  margin-top: 1rem;
 }
 
-.prose p:first-of-type {
+.prose p:first-child {
   font-size: 1.14rem;
   color: var(--ink);
 }
 
-/* A list marked with small gold diamonds. */
-.diamonds {
-  display: grid;
-  gap: 0.55rem;
-  margin-top: 1.1rem;
+.h3 {
+  font-size: calc(1.4rem * var(--display-scale));
 }
 
-.diamonds li {
-  position: relative;
-  padding-left: 1.5rem;
-  line-height: 1.5;
+/* Small saffron label above a value or a list. */
+.label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--saffron-ink);
 }
 
-.diamonds li::before {
-  content: '';
-  position: absolute;
-  left: 0.1rem;
-  top: 0.5em;
-  width: 0.45rem;
-  height: 0.45rem;
-  background: var(--gold-500);
-  transform: rotate(45deg);
-}
-
-.diamonds--2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 2.5rem;
-}
-
-@media (max-width: 42rem) {
-  .diamonds--2 {
-    grid-template-columns: 1fr;
-  }
-}
-
-.tags {
+.chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1.1rem;
 }
 
-.tag {
-  padding: 0.3rem 0.9rem;
-  border: 1px solid var(--sand-deep);
-  border-radius: 999px;
-  background: var(--parchment);
-  font-size: 0.92rem;
-  line-height: 1.4;
-  color: var(--emerald-800);
+.chip--plain {
+  background: var(--sand-100);
+  color: var(--navy-900);
 }
 
-.tag--gold {
-  border-color: var(--gold-500);
-  background: transparent;
-  color: var(--gold-ink);
+.chip--saffron {
+  background: var(--saffron-100);
+  color: var(--saffron-ink);
 }
 
-.on-dark .tag,
-.section--dark .tag {
-  border-color: rgba(214, 182, 109, 0.45);
-  background: rgba(214, 182, 109, 0.08);
-  color: var(--gold-300);
+.ticks--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2rem;
 }
 
-/* An eight-pointed star holding a number or a letter. */
-.star-badge {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 3.5rem;
-  height: 3.5rem;
-  background: var(--emerald-800);
-  color: var(--gold-300);
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  clip-path: polygon(50% 0%, 64.6% 14.6%, 85.4% 14.6%, 85.4% 35.4%, 100% 50%, 85.4% 64.6%, 85.4% 85.4%, 64.6% 85.4%, 50% 100%, 35.4% 85.4%, 14.6% 85.4%, 14.6% 64.6%, 0% 50%, 14.6% 35.4%, 14.6% 14.6%, 35.4% 14.6%);
-}
-
-.star-badge--gold {
-  background: var(--gold-500);
-  color: var(--emerald-950);
-}
-
-/* A trail: starred steps down a dashed gold thread. */
-.trail {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.trail__step {
-  position: relative;
-  display: grid;
-  grid-template-columns: 3.5rem minmax(0, 1fr);
-  gap: clamp(1rem, 2.5vw, 1.75rem);
-}
-
-.trail__step:not(:last-child)::before {
-  content: '';
-  position: absolute;
-  left: 1.75rem;
-  top: 3.9rem;
-  bottom: -1.5rem;
-  border-left: 1px dashed var(--gold-600);
-}
-
-.trail__outcome {
-  margin-top: 1rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--gold-500);
-  font-family: var(--font-display);
-  font-size: calc(1.22rem * (var(--display-scale) + 0.04));
-  font-style: italic;
-  line-height: 1.4;
-  color: var(--gold-ink);
-}
-
-@media (max-width: 36rem) {
-  .trail__step {
+@media (max-width: 40rem) {
+  .ticks--2 {
     grid-template-columns: 1fr;
   }
-
-  .trail__step:not(:last-child)::before {
-    display: none;
-  }
 }
 
-/* "What is covered": opens the detailed syllabus. */
-.fold {
-  margin-top: 1.25rem;
-  border-top: 1px solid var(--sand-deep);
+/* "What is covered": a disclosure that opens the detailed syllabus. */
+.more {
+  margin-top: 1.1rem;
+  border-top: 1px dashed var(--sand-300);
 }
 
-.fold > summary {
+.more > summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding-top: 1rem;
-  font-family: var(--font-display);
-  font-size: calc(1.3rem * var(--display-scale));
-  font-weight: 600;
-  color: var(--emerald-800);
+  padding-top: 0.9rem;
+  font-weight: 700;
+  color: var(--teal-700);
   cursor: pointer;
   list-style: none;
 }
 
-.fold > summary::-webkit-details-marker {
+.more > summary::-webkit-details-marker {
   display: none;
 }
 
-.fold > summary::after {
+.more > summary::after {
   content: '+';
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid var(--gold-500);
-  border-radius: 50%;
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  font-weight: 400;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.55rem;
+  background: var(--teal-100);
+  font-size: 1.15rem;
   line-height: 1;
-  color: var(--gold-ink);
+  color: var(--teal-800);
 }
 
-.fold[open] > summary::after {
+.more[open] > summary::after {
   content: '–';
-  background: var(--emerald-800);
-  border-color: var(--emerald-800);
-  color: var(--gold-300);
+  background: var(--saffron-500);
+  color: var(--navy-950);
 }
 
+.more__body {
+  padding-top: 1.1rem;
+}
+
+/* Units of a syllabus, each a titled list of topics. */
 .units {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 1.4rem 2.25rem;
-  padding-top: 1.25rem;
+  gap: 1.25rem 2rem;
 }
 
 .unit__title {
-  font-family: var(--font-display);
-  font-size: calc(1.22rem * (var(--display-scale) + 0.04));
-  font-weight: 600;
-  line-height: 1.3;
-  color: var(--emerald-800);
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--navy-900);
 }
 
 .unit ul {
   display: grid;
   gap: 0.3rem;
-  margin-top: 0.45rem;
-  font-size: 0.97rem;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
   line-height: 1.45;
   color: var(--ink-soft);
 }
 
 .unit li {
   position: relative;
-  padding-left: 1.1rem;
+  padding-left: 1rem;
 }
 
 .unit li::before {
   content: '';
   position: absolute;
-  left: 0.1rem;
-  top: 0.58em;
-  width: 0.32rem;
-  height: 0.32rem;
-  background: var(--gold-500);
-  transform: rotate(45deg);
+  left: 0;
+  top: 0.6em;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--teal-500);
 }
 
+/* A path: numbered steps joined by a dashed line. */
+.path {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.path__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+}
+
+.path__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 1.6rem;
+  top: 3.6rem;
+  bottom: -1.25rem;
+  border-left: 2px dashed var(--sand-300);
+}
+
+.path__badge {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: var(--navy-900);
+  color: var(--saffron-400);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  box-shadow: 0 0 0 5px var(--saffron-100);
+}
+
+.path__title {
+  font-size: calc(1.5rem * var(--display-scale));
+}
+
+.path__text {
+  margin-top: 0.5rem;
+  color: var(--ink-soft);
+}
+
+.path__outcome {
+  margin-top: 0.9rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--teal-50);
+  font-size: 0.97rem;
+  color: var(--teal-800);
+}
+
+@media (max-width: 34rem) {
+  .path__step {
+    grid-template-columns: 1fr;
+  }
+
+  .path__step:not(:last-child)::before {
+    display: none;
+  }
+}
+
+/* Comparison table */
 .table-wrap {
   overflow-x: auto;
 }
@@ -827,40 +814,36 @@ html[lang='bn'] .eyebrow {
   width: 100%;
   min-width: 40rem;
   border-collapse: collapse;
+  font-size: 0.98rem;
 }
 
 .table th,
 .table td {
-  padding: 0.9rem 1.1rem;
-  border-bottom: 1px solid var(--sand);
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--sand-200);
   text-align: left;
   vertical-align: top;
 }
 
 .table thead th {
   font-family: var(--font-display);
-  font-size: calc(1.3rem * var(--display-scale));
-  font-weight: 600;
-  color: var(--emerald-800);
-  border-bottom: 2px solid var(--gold-500);
+  font-size: 1.05rem;
+  color: var(--navy-900);
+  background: var(--teal-50);
 }
 
 .table tbody th {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-ink);
+  color: var(--saffron-ink);
   white-space: nowrap;
 }
 
-.note {
-  margin-top: 1.5rem;
-  max-width: 50rem;
-  color: var(--ink-soft);
-}
-
-.note strong {
-  font-weight: 500;
-  color: var(--emerald-800);
+/* Bangla letters are not spaced out or set in capitals: small labels keep their normal spacing. */
+html[lang='bn'] :is(.label, .table tbody th, .teaser__audience span, .program__audience span, .clock__label, .unit__title) {
+  font-size: 0.92rem;
+  letter-spacing: 0;
+  text-transform: none;
 }
